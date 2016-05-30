@@ -28,7 +28,8 @@ rake serve
 ### webhooks.danger.systems
 
 This is a semi-perpetual web service, whose job is to listen out for webhook notificatiosn for new tags on any danger-plugin.
-This will trigger a call to generate the new version of danger.systems, and deploy that on gh-pages.
+This will trigger a call to generate the new version of danger.systems, and deploy that on gh-pages. It does this by triggering
+new builds on this repo from Travis CI.
 
 You can run a copy of the static site via:
 
@@ -37,3 +38,4 @@ cd webhooks
 bundle
 rake serve
 ```
+1
