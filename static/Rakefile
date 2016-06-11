@@ -1,0 +1,6 @@
+desc "Runs the site locally"
+task :serve do
+  puts 'Running locally at http://localhost:4567'
+  sh "open http://localhost:4567"
+  sh "bundle exec middleman server"
+end

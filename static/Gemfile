@@ -1,4 +1,8 @@
-# A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-# gem "rails"
+gem 'middleman'
+gem 'slim'
+# gem 'middleman-gh-pages', git: 'https://github.com/orta/middleman-gh-pages.git'
+gem 'middleman-livereload'
+gem 'github-markup'
+gem 'rake'
