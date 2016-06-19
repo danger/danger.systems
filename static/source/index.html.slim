@@ -2,6 +2,9 @@
 title: Welcome to Danger
 ---
 
+ruby:
+  require 'json'
+
 code.byline a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.
 
 header.title
@@ -51,9 +54,9 @@ section
 
   article
     h3 Supports
-    p Can be run on: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone.
-    p Can chat back on: GitHub
-    p Can handle diffs from: Git
+    p <strong>Can be run on</strong>: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone.
+    p <strong>Can chat back on</strong>: GitHub
+    p <strong>Can handle diffs from</strong>: Git
 
     h3 Danger DSL
     markdown:
@@ -71,6 +74,13 @@ section
     article
       p Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.
     .clearfix
+
+    - for plugin in JSON.parse(File.read("json_data/plugins.json"))
+      h3 == plugin["name"].gsub("Danger", "")
+      == markdown_h(plugin["body_md"])
+      - for example in plugin["example_code"]
+        code
+          blockquote  == example
 
 
   section

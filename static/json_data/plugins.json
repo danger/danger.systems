@@ -1,0 +1,69 @@
+[
+  {
+    "name": "DangerProselint",
+    "body_md": "Lint markdown files inside your projects.\nThis is done using the [proselint](http://proselint.com) python egg.\nResults are passed out as a table in markdown.\n\n@see: artsy/artsy.github.io\n@tags: blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express",
+    "example_code": [
+      "\n# Runs a linter with comma style disabled\nproselint.disable_linters = [\"misc.scare_quotes\", \"misc.tense_present\"\"]\nproselint.lint_files \"_posts/*.md\n\n# Runs a linter with all styles, on modified and added markpown files in this PR\nproselint.lint_files"
+    ],
+    "attributes": [
+      {
+        "disable_linters": {
+          "read": null,
+          "write": {
+            "name": "disable_linters=",
+            "body_md": "Allows you to disable a collection of linters from being ran.\nYou can get a list of [them here](https://github.com/amperser/proselint#checks)",
+            "tags": [
+
+            ]
+          }
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "disable_linters=",
+        "body_md": "Allows you to disable a collection of linters from being ran.\nYou can get a list of [them here](https://github.com/amperser/proselint#checks)",
+        "tags": [
+
+        ]
+      },
+      {
+        "name": "lint_files",
+        "body_md": "Lints the globbed files, which can fail your build if",
+        "tags": [
+          {
+            "name": "param",
+            "types": [
+              "String"
+            ]
+          },
+          {
+            "name": "return",
+            "types": [
+              "void"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "proselint_installed?",
+        "body_md": "Determine if proselint is currently installed in the system paths.",
+        "tags": [
+          {
+            "name": "return",
+            "types": [
+              "Bool"
+            ]
+          }
+        ]
+      }
+    ],
+    "tags": [
+        "one", "two", "three"
+    ],
+    "see": [
+
+    ],
+    "file": "/Users/orta/dev/ruby/libs/danger/spec/fixtures/plugins/example_fully_documented.rb"
+  }
+]

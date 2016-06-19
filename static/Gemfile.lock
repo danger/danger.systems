@@ -94,6 +94,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redcarpet (3.3.4)
     sass (3.4.22)
     servolux (0.12.0)
     slim (3.0.7)
@@ -116,6 +117,7 @@ DEPENDENCIES
   middleman
   middleman-livereload
   rake
+  redcarpet
   sass
   slim
 
