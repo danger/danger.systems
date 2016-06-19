@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+
+    > header {
+        p { display: none }
+        background-size: 268px 100%;
+        height: 268px;
+        background-image: url("/images/title-background.png");
+        text-align: center;
+
+        > img {
+            width: 490px;
+            height: 118px;
+            margin: 75px auto;
+        }
+    }
+
+    p {
+        font-family: "Avenir Book";
+        font-size: 17px;
+    }
+
+    code {
+        font-family: "Monaco";
+        font-size: 14px;
+
+        &.byline {
+            text-align: right;
+            display: block;
+            margin-right: 20px;
+            margin-top: 24px;
+            margin-bottom: 24px;
+        }
+    }
+
+    > section {
+        h2 {
+            margin-top: 80px;
+            font-family: "Prodotto In Cina";
+            font-size: 48px;
+            text-transform: uppercase;
+            padding-left: 80px;
+            background-color: #FFEC00;
+            min-height: 48px;
+
+            > span {
+                padding-left: 10px;
+                padding-right: 20px;
+                padding-top: 4px;
+                background-color: white;
+                display: inline-block;
+            }
+        }
+
+        h3 {
+            font-family: "Prodotto In Cina";
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+    }
+}

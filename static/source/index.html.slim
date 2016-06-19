@@ -1,9 +1,45 @@
 ---
-title: Welcome to Middleman
+title: Welcome to Danger
 ---
 
-p.byline a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.
+code.byline a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.
 
 header.title
   p Danger
   = image_tag "title.png", class: "retina", alt: "Danger title image"
+
+section
+  h2
+    span What is Danger?
+  article
+    p Danger runs after your CI, and gives teams the chance to automate common code review chores.
+    p This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.
+    p You can use Danger to codify your teams norms. Leaving humans to think about harder problems.
+
+section
+  h2
+   span What magic is this?
+
+  article
+    h3 How
+    p Danger is ruby gem that runs a Dangerfile, you set up a Dangerfile per-project. The Dangerfile contains a collection of home-grown rules specific to your project.
+    p Danger should be installed via a Gemfile. Add `gem “danger”` to your Gemfile, then run `bundle`.
+    p You can integrate Danger into your own project on any available CI service. She will run through the process with you if you run  `danger init` after installation.
+
+  article
+    h3 Supports
+    p Can be run on: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone.
+    p Can chat back on: GitHub
+    p Can handle diffs from: Git
+
+    h3 Danger DSL
+    code
+      message(“message”) - Declares a CI message
+      warn(“message”) - Declares a CI warning
+      fail(“message”) - Declares a CI blocking error
+      markdown(“message”) - Outputs markdown into an issue
+
+  article
+    h3
+      span Plugins
+    p Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.
