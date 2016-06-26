@@ -15,7 +15,7 @@ begin
   desc 'Build and push the guides to GitHub Pages'
   task :deploy do
     Rake::Task['generate'].invoke
-    system("bundle exec rake publish PROJECT_ROOT='static'")
+    system("rake publish PROJECT_ROOT='static'")
   end
 rescue LoadError
   $stderr.puts "[!] Disabled the middleman publish task, run `bundle exec` first."
