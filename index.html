@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <title>Welcome to Danger</title>
+
+    <link href="/stylesheets/style-d7589191.css" rel="stylesheet" />
+    <script src="/javascripts/all-cc830994.js"></script>
+  </head>
+
+  <body class="index">
+    <code class="byline">a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.</code><header class="title"><p>Danger</p><img src="/images/title-704b3238.png" class="retina" alt="Danger title image" width="980" height="236" /></header><section><h2><span>What is Danger?</span></h2><article><p>Danger runs after your CI, and gives teams the chance to automate common code review chores.</p><p>This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.</p><p>You can use Danger to codify your teams norms. Leaving humans to think about harder problems.</p></article><div class="clearfix"></div></section><section><h2><span>For Example</span></h2><ul><li>Enforce Changelogs</li><li>Dont Focus Tests</li><li>Lint Blog Post Prose</li><li>Ensure no Merges</li><li>Check for Existing Issues</li><li>Alert File Owners</li><li>Check Build Times</li></ul><code><blockquote><def>something()
+puts “OK”</def><end></end></blockquote></code></section><section><h2><span>What magic is this?</span></h2><article><h3>How</h3><p>Danger is ruby gem that runs a <code>Dangerfile</code>, you set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
+
+<p>Danger should be installed via a Gemfile. Add <code>gem "danger"</code> to your Gemfile, then run <code>bundle</code>.</p>
+
+<p>You can integrate Danger into your own project on any available CI service. She will run through the process with you if you run  <code>danger init</code> after installation.</p>
+</article><article><h3>Supports</h3><p><strong>Can be run on</strong>: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone.</p><p><strong>Can chat back on</strong>: GitHub</p><p><strong>Can handle diffs from</strong>: Git</p><h3>Danger DSL</h3><p><code>
+message("message") - Declares a CI message
+warn("message") - Declares a CI warning
+fail("message") - Declares a CI blocking error
+markdown("message") - Outputs markdown
+</code></p>
+</article><div class="clearfix"></div><section><h2><span>Plugins</span></h2><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.</p></article><div class="clearfix"></div><article><h3>Proselint <span>1.3.4</span></h3><p>Lint markdown files inside your projects.
+This is done using the <a href="http://proselint.com">proselint</a> python egg.
+Results are passed out as a table in markdown.</p>
+
+<p>@see: artsy/artsy.github.io
+@tags: blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</p>
+<h3>Reference</h3><h4>Attributes</h4><div class="fake_code"><p>Allows you to disable a collection of linters from being ran.
+You can get a list of <a href="https://github.com/amperser/proselint#checks">them here</a></p>
+</div><code>disable_linters</code><h4>Methods</h4><div class="fake_code"><p>Lints the globbed files, which can fail your build if</p>
+</div><code>lint_files</code><div class="fake_code"><p>Determine if proselint is currently installed in the system paths.</p>
+</div><code>proselint_installed?</code></article><article><h3>Examples</h3><code><blockquote>
+<br># Runs a linter with comma style disabled
+<br>proselint.disable_linters = ["misc.scare_quotes", "misc.tense_present""]
+<br>proselint.lint_files "_posts/*.md
+<br>
+<br># Runs a linter with all styles, on modified and added markpown files in this PR
+<br>proselint.lint_files</blockquote></code><h3>How to Install</h3><p>Include <code>gem "danger-proselint"</code> in your project’s Gemfile. Then run <code>bundle</code>.</p>
+
+<p>Then inside your Dangerfile, you can access the plugin's API via <code>proselint</code>.</p>
+<h3>Tags</h3><code>one two three</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><section><h2><span>Meta</span></h2><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.</p></article><div class="clearfix"></div></section></section>
+  </body>
+</html>
