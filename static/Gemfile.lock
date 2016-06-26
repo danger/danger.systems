@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/orta/middleman-gh-pages.git
+  revision: 87ce11bd60627aeaaea9af2c70a0a1f94be7b6b4
+  specs:
+    middleman-gh-pages (0.0.3)
+      rake (> 0.9.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -115,6 +122,7 @@ PLATFORMS
 DEPENDENCIES
   github-markup
   middleman
+  middleman-gh-pages!
   middleman-livereload
   rake
   redcarpet

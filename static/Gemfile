@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'middleman'
 gem 'slim'
-# gem 'middleman-gh-pages', git: 'https://github.com/orta/middleman-gh-pages.git'
+gem 'middleman-gh-pages', git: 'https://github.com/orta/middleman-gh-pages.git'
 gem 'middleman-livereload'
 gem 'redcarpet'
 gem 'github-markup'

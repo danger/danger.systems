@@ -4,3 +4,16 @@ task :serve do
   sh "open http://localhost:4567"
   sh "bundle exec middleman server"
 end
+
+task :generate do
+  puts "TODO"
+end
+
+desc "Ship to github pages"
+begin
+  require 'middleman-gh-pages'
+  desc 'Build and push the guides to GitHub Pages'
+  task :deploy => ['generate', :publish]
+rescue LoadError
+  $stderr.puts "[!] Disabled the middleman publish task, run `bundle exec` first."
+end
