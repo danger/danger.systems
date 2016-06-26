@@ -77,7 +77,9 @@ section
 
     - for plugin in JSON.parse(File.read("json_data/plugins.json"))
       article 
-        h3 == plugin["name"].gsub("Danger", "") + " <span>#{plugin["gem"]["version"]}</span>"
+        /  TODO: Name + version in metadata
+        / h3 == plugin["gem"].gsub("danger-", "") + " <span>#{plugin["gem"]["version"]}</span>"
+        h3 == plugin["name"]
         == markdown_h(plugin["body_md"])
 
         h3 Reference
@@ -99,11 +101,12 @@ section
           code
             blockquote == example.lines.join("<br>") 
         
-        h3 How to Install
-        markdown: 
-          Include `gem "#{plugin["gem"]["name"]}"` in your project’s Gemfile. Then run `bundle`.
+        / TODO: Gem name
+        / h3 How to Install
+        / markdown: 
+        /   Include `gem "#{plugin["gem"]["name"]}"` in your project’s Gemfile. Then run `bundle`.
 
-          Then inside your Dangerfile, you can access the plugin's API via `#{plugin["instance_name"]}`.
+        /   Then inside your Dangerfile, you can access the plugin's API via `#{plugin["instance_name"]}`.
 
         h3 Tags
         code == plugin["tags"].join(" ")

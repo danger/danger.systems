@@ -2,11 +2,16 @@ desc "Runs the site locally"
 task :serve do
   puts 'Running locally at http://localhost:4567'
   sh "open http://localhost:4567"
-  sh "bundle exec middleman server"
+  Dir.chdir 'static' do
+    sh "bundle exec middleman server"
+  end
 end
 
 task :generate do
-  puts "TODO"
+  require 'json'
+  plugins = JSON.parse(File.read "plugins.json")
+  output = `bundle exec danger plugin lint #{plugins.join(" ")}`
+  File.write("static/json_data/plugins.json", output)
 end
 
 desc "Ship to github pages"

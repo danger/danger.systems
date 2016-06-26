@@ -1,5 +1,5 @@
 # danger.systems
-The website generator for danger.systems, which is staticly generated on gh-pages
+The website generator for danger.systems, which is staticly generated to gh-pages
 
 # Key Components
 
@@ -25,6 +25,11 @@ rake generate
 rake serve
 ```
 
+#### plugins.json
+
+The master list of all plugins to show in Danger, right now it is just the name of your plugin on rubygems. 
+We'll be checking for whether it pass when you run `danger plugin lint` in the dir, so please take the time to add all the extra metadata.  
+
 ### webhooks.danger.systems
 
 This is a semi-perpetual web service, whose job is to listen out for webhook notificatiosn for new tags on any danger-plugin.
@@ -38,4 +43,3 @@ cd webhooks
 bundle
 rake serve
 ```
-1
