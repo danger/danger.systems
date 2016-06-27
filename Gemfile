@@ -7,4 +7,6 @@ gem 'rake', '~> 10.0'
 gem 'pry', '~> 0.10'
 gem 'yard', '~> 0.8'
 
+
+gem 'middleman'
 gem 'middleman-gh-pages'
