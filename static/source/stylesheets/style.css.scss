@@ -7,6 +7,15 @@
     font-style: normal;
 }
 
+@mixin code-text {
+    font-family: "Monaco";
+}
+
+@mixin punk-text {
+    font-family: "prodotto_in_cina";
+    text-transform: uppercase;
+}
+
 body {
     margin: 0;
 
@@ -30,7 +39,7 @@ body {
     }
 
     code {
-        font-family: "Monaco";
+        @include code-text;
         font-size: 14px;
 
         &.byline {
@@ -43,11 +52,13 @@ body {
     }
 
     > section {
+        clear:left;
+
         h2 {
+            @include punk-text;
+
             margin-top: 80px;
-            font-family: "prodotto_in_cina";
             font-size: 48px;
-            text-transform: uppercase;
             padding-left: 80px;
             background-color: #FFEC00;
             min-height: 48px;
@@ -63,7 +74,8 @@ body {
         }
 
         h3 {
-            font-family: "prodotto_in_cina";
+            @include punk-text;
+
             font-size: 20px;
             text-transform: uppercase;
         }
@@ -84,7 +96,7 @@ body {
             }
 
             div.fake_code > p {
-                font-family: "Monaco";
+                @include code-text;
                 font-size: 12px;
                 color: #848684;
             }
@@ -98,6 +110,8 @@ body {
     > section.examples {
         ul {
             padding-left: 88px;
+            float:left;
+            margin-bottom: 60px;
 
             a {
                 text-decoration: none;
@@ -108,7 +122,7 @@ body {
             }
 
             > li {
-                font-family: "prodotto_in_cina";
+                @include punk-text;
                 font-size: 20px;
                 text-transform: uppercase;
                 padding-top: 6px;
@@ -126,5 +140,25 @@ body {
             }
         }
 
+        div {
+            margin-left: 30px;
+            width: 30%;
+            float:left;
+        }
+
+        code {
+            border: 1px solid #D4D4D4;
+
+            figure {
+                margin:0;
+                padding-bottom: 16px;
+                white-space: pre;
+                word-wrap: break-word;
+                line-height: 1.5;
+            }
+        }
+        ref {
+            @include code-text;
+        }
     }
 }
