@@ -8,13 +8,22 @@
 
     <title>Welcome to Danger</title>
 
-    <link href="/stylesheets/style-d7589191.css" rel="stylesheet" />
-    <script src="/javascripts/all-cc830994.js"></script>
+    <link href="/stylesheets/style-20aab6dd.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.0.0.slim.min.js"></script>
   </head>
 
   <body class="index">
-    <code class="byline">a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.</code><header class="title"><p>Danger</p><img src="/images/title-704b3238.png" class="retina" alt="Danger title image" width="980" height="236" /></header><section><h2><span>What is Danger?</span></h2><article><p>Danger runs after your CI, and gives teams the chance to automate common code review chores.</p><p>This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.</p><p>You can use Danger to codify your teams norms. Leaving humans to think about harder problems.</p></article><div class="clearfix"></div></section><section><h2><span>For Example</span></h2><ul><li>Enforce Changelogs</li><li>Dont Focus Tests</li><li>Lint Blog Post Prose</li><li>Ensure no Merges</li><li>Check for Existing Issues</li><li>Alert File Owners</li><li>Check Build Times</li></ul><code><blockquote><def>something()
-puts “OK”</def><end></end></blockquote></code></section><section><h2><span>What magic is this?</span></h2><article><h3>How</h3><p>Danger is ruby gem that runs a <code>Dangerfile</code>, you set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
+    <code class="byline">a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.</code><header class="title"><p>Danger</p><img src="/images/title-704b3238.png" class="retina" alt="Danger title image" width="980" height="236" /></header><section><h2><span>What is Danger?</span></h2><article><p>Danger runs after your CI, and gives teams the chance to automate common code review chores.</p><p>This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.</p><p>You can use Danger to codify your teams norms. Leaving humans to think about harder problems.</p></article><div class="clearfix"></div></section><section class="examples"><h2><span>For Example</span></h2><ul><li class="changelog" data-prs="CocoaPods/CocoaPods/pull/5413" data-repos="artsy/eigen, cocoapods/cocoapods"><a>Enforce Changelogs</a></li><li class="focus"><a>Dont Focus Tests</a></li><li class="prose" data-prs="ashfurrow/blog/pull/218"><a>Lint Blog Post Prose</a></li><li class="merges"><a>Ensure no Merges</a></li><li class="existing"><a>Check for Existing Issues</a></li><li class="alert"><a>Alert File Owners</a></li><li class="build_times"><a>Check Build Times</a></li></ul><div><code><figure class="changelog">
+  def something()
+    puts “OK”
+  end
+</figure>
+<figure class="focus" style="display:none;">
+  def something()
+    puts “OK”
+  end
+</figure>
+</code><ref># See artsy/eigen</ref></div><div class="clearfix"></div></section><section><h2><span>What magic is this?</span></h2><article><h3>How</h3><p>Danger is ruby gem that runs a <code>Dangerfile</code>, you set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
 
 <p>Danger should be installed via a Gemfile. Add <code>gem "danger"</code> to your Gemfile, then run <code>bundle</code>.</p>
 
@@ -25,25 +34,47 @@ warn("message") - Declares a CI warning
 fail("message") - Declares a CI blocking error
 markdown("message") - Outputs markdown
 </code></p>
-</article><div class="clearfix"></div><section><h2><span>Plugins</span></h2><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.</p></article><div class="clearfix"></div><article><h3>Proselint <span>1.3.4</span></h3><p>Lint markdown files inside your projects.
+</article><div class="clearfix"></div><section><h2><span>Plugins</span></h2><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.</p></article><div class="clearfix"></div><article><h3>DangerProse</h3><p>Lint markdown files inside your projects.
 This is done using the <a href="http://proselint.com">proselint</a> python egg.
 Results are passed out as a table in markdown.</p>
-
-<p>@see: artsy/artsy.github.io
-@tags: blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</p>
 <h3>Reference</h3><h4>Attributes</h4><div class="fake_code"><p>Allows you to disable a collection of linters from being ran.
 You can get a list of <a href="https://github.com/amperser/proselint#checks">them here</a></p>
-</div><code>disable_linters</code><h4>Methods</h4><div class="fake_code"><p>Lints the globbed files, which can fail your build if</p>
+</div><code>disable_linters</code><h4>Methods</h4><div class="fake_code"><p>Lints the globbed files, will only fail if <code>proselint</code> cannot be installed correctly.
+Generates a <code>markdown</code> list of warnings for the prose in a corpus of .markdown and .md files.</p>
 </div><code>lint_files</code><div class="fake_code"><p>Determine if proselint is currently installed in the system paths.</p>
 </div><code>proselint_installed?</code></article><article><h3>Examples</h3><code><blockquote>
 <br># Runs a linter with comma style disabled
-<br>proselint.disable_linters = ["misc.scare_quotes", "misc.tense_present""]
-<br>proselint.lint_files "_posts/*.md
+<br>proselint.disable_linters = [“misc.scare_quotes”, "misc.tense_present"]
+<br>proselint.lint_files “_posts/*.md”
 <br>
 <br># Runs a linter with all styles, on modified and added markpown files in this PR
-<br>proselint.lint_files</blockquote></code><h3>How to Install</h3><p>Include <code>gem "danger-proselint"</code> in your project’s Gemfile. Then run <code>bundle</code>.</p>
+<br>proselint.lint_files</blockquote></code><h3>Tags</h3><code></code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><section><h2><span>Meta</span></h2><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.</p></article><div class="clearfix"></div></section></section><script>$(function() {
+  $("section.examples ul li").hover(function(event) {
+    event.preventDefault()
 
-<p>Then inside your Dangerfile, you can access the plugin's API via <code>proselint</code>.</p>
-<h3>Tags</h3><code>one two three</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><section><h2><span>Meta</span></h2><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.</p></article><div class="clearfix"></div></section></section>
+    // Set selection
+    $("section.examples ul li").removeClass("highlighted")
+    $(this).addClass("highlighted")
+
+    // Set the corresponding code
+    var klass = $(this).attr("class")
+    $("section.examples code figure").css("display", "hidden")
+    $("section.examples code figure." + klass).css("display", "block")
+
+    // Figure out the reference text
+    var urls = $(this).data("repos")
+    var prs = $(this).data("prs")
+    var toGithubLink = function(ref) {
+      return "<a href='https://github.com/" + ref + ">" + ref + "</a>"
+    }
+
+    // Set the reference text under the code fot people to inspect
+    var text = "@see " + urls.map(toGithubLink).join(", ") + prs.map(toGithubLink).join(", ")
+    $("section.examples ref").text(text)
+  })
+
+  // Set the selection to be the first
+  $("section.examples ul li:first-child").trigger('mouseenter')
+});</script>
   </body>
 </html>
