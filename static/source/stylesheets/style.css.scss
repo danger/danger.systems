@@ -72,7 +72,6 @@ body {
             font-family: "Avenir-Heavy";
             font-size: 20px;
             text-transform: uppercase;
-
         }
 
         article {
@@ -94,5 +93,38 @@ body {
         .clearfix {
             clear: both;
         }
+    }
+
+    > section.examples {
+        ul {
+            padding-left: 88px;
+
+            a {
+                text-decoration: none;
+                color: black;
+                &:hover {
+                    color: #FFEC00;
+                }
+            }
+
+            > li {
+                font-family: "prodotto_in_cina";
+                font-size: 20px;
+                text-transform: uppercase;
+                padding-top: 6px;
+                padding-bottom: 6px;
+                list-style-type: none;
+            }
+
+            > li.highlighted, > li.highlighted a  {
+                color: #FFC54D;
+                list-style-type: disc;
+
+                &:hover {
+                    cursor: default;
+                }
+            }
+        }
+
     }
 }

@@ -20,24 +20,38 @@ section
     p You can use Danger to codify your teams norms. Leaving humans to think about harder problems.
   .clearfix
 
-section
+section.examples
   h2
    span For Example
 
   ul
-    li Enforce Changelogs
-    li Dont Focus Tests
-    li Lint Blog Post Prose
-    li Ensure no Merges
-    li Check for Existing Issues
-    li Alert File Owners
-    li Check Build Times
+    li.changelog.highlighted
+      a href="#" Enforce Changelogs
+    li.focus
+      a href="#" Dont Focus Tests
+    li
+      a href="#" Lint Blog Post Prose
+    li
+      a href="#" Ensure no Merges
+    li
+      a href="#" Check for Existing Issues
+    li
+      a href="#" Alert File Owners
+    li
+      a href="#" Check Build Times
 
   code
-    blockquote
-      def something()
-        puts “OK”
-      end
+    markdown:
+      <pre class="changelog">
+        def something()
+          puts “OK”
+        end
+      </pre>
+      <pre class="focus">
+        def something()
+          puts “OK”
+        end
+      </pre>
 
 section
   h2
@@ -76,7 +90,7 @@ section
     .clearfix
 
     - for plugin in JSON.parse(File.read("json_data/plugins.json"))
-      article 
+      article
         /  TODO: Name + version in metadata
         / h3 == plugin["gem"].gsub("danger-", "") + " <span>#{plugin["gem"]["version"]}</span>"
         h3 == plugin["name"]
@@ -94,16 +108,16 @@ section
           .fake_code
              == markdown_h(method["body_md"])
           code == method["name"]
-      
+
       article
         h3 Examples
         - for example in plugin["example_code"]
           code
-            blockquote == example.lines.join("<br>") 
-        
+            blockquote == example.lines.join("<br>")
+
         / TODO: Gem name
         / h3 How to Install
-        / markdown: 
+        / markdown:
         /   Include `gem "#{plugin["gem"]["name"]}"` in your project’s Gemfile. Then run `bundle`.
 
         /   Then inside your Dangerfile, you can access the plugin's API via `#{plugin["instance_name"]}`.
@@ -115,7 +129,7 @@ section
           h3 See in Action
           ul
             - for link in plugin["see"]
-              li 
+              li
                 a href="https://github.com/#{link}" == link
       .clearfix
 
