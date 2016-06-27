@@ -1,3 +1,12 @@
+
+@font-face {
+    font-family: 'prodotto_in_cina';
+    src: url('/fonts/prodotto_in_cina-webfont.woff2') format('woff2'),
+         url('/fonts/prodotto_in_cina-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
 
@@ -36,7 +45,7 @@ body {
     > section {
         h2 {
             margin-top: 80px;
-            font-family: "Prodotto In Cina";
+            font-family: "prodotto_in_cina";
             font-size: 48px;
             text-transform: uppercase;
             padding-left: 80px;
@@ -47,13 +56,14 @@ body {
                 padding-left: 10px;
                 padding-right: 20px;
                 padding-top: 6px;
+                padding-bottom: 4px;
                 background-color: white;
                 display: inline-block;
             }
         }
 
         h3 {
-            font-family: "Prodotto In Cina";
+            font-family: "prodotto_in_cina";
             font-size: 20px;
             text-transform: uppercase;
         }
@@ -62,7 +72,7 @@ body {
             font-family: "Avenir-Heavy";
             font-size: 20px;
             text-transform: uppercase;
-            
+
         }
 
         article {
