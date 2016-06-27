@@ -4,9 +4,7 @@ desc "Runs the site locally"
 task :serve do
   puts 'Running locally at http://localhost:4567'
   sh "open http://localhost:4567"
-  Dir.chdir 'static' do
-    sh "bundle exec middleman server"
-  end
+sh "bundle exec middleman server"
 end
 
 desc "Ship to github pages"
