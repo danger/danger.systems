@@ -1,5 +1,3 @@
-require 'middleman-gh-pages'
-
 task :generate do
   require 'json'
   plugins = JSON.parse(File.read 'plugins.json')
