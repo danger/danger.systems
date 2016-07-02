@@ -25,9 +25,9 @@ section.examples
    span For Example
 
   ul
-    li.changelog data-repos="artsy/eigen, cocoapods/cocoapods" data-prs="CocoaPods/CocoaPods/pull/5413"
+    li.changelog data-repos="artsy/eigen, cocoapods/cocoapods, realm/jazzy" data-prs="CocoaPods/CocoaPods/pull/5413"
       a Enforce Changelogs
-    li.focus  data-repos="artsy/eigen, cocoapods/cocoapods" data-prs="CocoaPods/CocoaPods/pull/5413"
+    li.focus  data-repos="artsy/eigen, moya/moya" data-prs="Moya/Moya/pull/521"
       a Dont Focus Tests
     li.prose data-repos="" data-prs="ashfurrow/blog/pull/218"
       a Lint Blog Post Prose
@@ -44,15 +44,18 @@ section.examples
     code
       markdown:
         <figure class="changelog">
-          def something()
-            puts “OK”
+          # Add a CHANGELOG entry for app changes
+          if !modified_files.include?("CHANGELOG.md") && has_app_changes
+            fail("Please include a CHANGELOG entry. \nYou can find it at [CHANGELOG.md](https://github.com/realm/jazzy/blob/master/CHANGELOG.md).")
+            message "Note, we hard-wrap at 80 chars and use 2 spaces after the last line."
           end
         </figure>
+
         <figure class="focus" style="display:none;">
-          def something()
-            puts “OK”
-          end
+          # Don't let testing shortcuts get into master by accident
+          fail("fit left in tests") if `grep -r "fit Demo/Tests/ `.length > 1
         </figure>
+
         <figure class="prose" style="display:none;">
           def something()
             puts “OK”
@@ -169,7 +172,6 @@ section
     article
       p Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.
     .clearfix
-
 
 javascript:
     $(function() {

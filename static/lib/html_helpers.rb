@@ -28,7 +28,7 @@ module HTMLHelpers
     (input.slice(0,1).capitalize || '') + (input.slice(1..-1) || '')
   end
 
-  # Highlights with Pigments the give string.
+  # Highlights the given string with Pygments.
   #
   # @return [String]
   # @option [String] :language
