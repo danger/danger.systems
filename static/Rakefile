@@ -1,13 +1,13 @@
 require 'middleman-gh-pages'
 
-desc "Runs the site locally"
+desc 'Runs the site locally'
 task :serve do
   puts 'Running locally at http://localhost:4567'
-  sh "open http://localhost:4567"
-sh "bundle exec middleman server"
+  sh 'open http://localhost:4567'
+  sh 'bundle exec middleman server'
 end
 
-desc "Ship to github pages"
+desc 'Ship to github pages'
 desc 'Build and push the guides to GitHub Pages'
 task :deploy do
   system("rake publish PROJECT_ROOT='.' BUILD_DIR='./build'")
