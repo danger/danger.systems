@@ -70,7 +70,7 @@ You can get a list of <a href="https://github.com/amperser/proselint#checks">the
 </div><code>disable_linters</code><h4>Methods</h4><div class="fake_code"><p>Lints the globbed files, will only fail if <code>proselint</code> cannot be installed correctly.
 Generates a <code>markdown</code> list of warnings for the prose in a corpus of .markdown and .md files.</p>
 </div><code>lint_files</code><div class="fake_code"><p>Determine if proselint is currently installed in the system paths.</p>
-</div><code>proselint_installed?</code></article><article><h3>Examples</h3><code><blockquote>
+</div><code>proselint_installed?</code></article><article><h3>Examples</h3><h4>Specifying custom CocoaPods installation options</h4><code><blockquote>
 <br># Runs a linter with comma style disabled
 <br>proselint.disable_linters = [“misc.scare_quotes”, "misc.tense_present"]
 <br>proselint.lint_files “_posts/*.md”
