@@ -9,7 +9,7 @@ task :generate do
   output = `bundle exec danger plugin lint #{plugins.join(' ')}`
   Dir.mkdir('static/json_data') unless Dir.exist?('static/json_data')
   File.write('static/json_data/plugins.json', output)
-  puts "Generated plugin metadata"
+  puts 'Generated plugin metadata'
 
   # Generate the search query stuff
   Bundler.with_clean_env do
@@ -42,7 +42,7 @@ task :generate do
         end
 
         plugin_json = { plugins: plugin_metadata }
-        plugins_file_path = File.join File.dirname(__FILE__), "plugins-search-generated.json"
+        plugins_file_path = File.join File.dirname(__FILE__), 'plugins-search-generated.json'
         File.write(plugins_file_path, plugin_json.to_json)
         puts 'Generated search metadata'
       end
