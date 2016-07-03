@@ -2,6 +2,10 @@ require 'sinatra'
 require 'json'
 
 class App < Sinatra::Base
+  get '/' do
+    'Hello world, please see the README for danger/Danger.Systems to find out how this works.'
+  end
+
   post '/gem/update' do
     # Grab our list of plugins
     plugin_json = File.read('../plugins-search-generated.json')
