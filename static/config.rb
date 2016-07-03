@@ -19,7 +19,7 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
 
-require "lib/html_helpers.rb"
+require 'lib/html_helpers.rb'
 helpers HTMLHelpers
 
 # Build-specific configuration

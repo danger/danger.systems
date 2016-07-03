@@ -145,8 +145,9 @@ section
       article
         h3 Examples
         - for example in plugin["example_code"]
+          h4 == example["title"]
           code
-            blockquote == example.lines.join("<br>")
+            blockquote == example["text"].lines.join("<br>")
 
         / TODO: Gem name
         / h3 How to Install

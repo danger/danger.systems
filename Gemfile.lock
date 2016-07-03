@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/danger/danger.git
-  revision: 37ba70ab8d249d38657a407f1011eb660c5c6446
-  branch: lint
+  revision: 0b9daeb33e33366c63c19795f334b133e1003e84
+  branch: master
   specs:
-    danger (0.8.3)
+    danger (0.8.4)
       claide (~> 1.0)
       colored (~> 1.2)
       cork (~> 0.1)
@@ -123,6 +123,8 @@ GEM
     rack (1.6.4)
     rack-livereload (0.3.16)
       rack
+    rack-protection (1.5.3)
+      rack
     rake (11.2.2)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
@@ -133,6 +135,10 @@ GEM
       addressable (>= 2.3.5, < 2.5)
       faraday (~> 0.8, < 0.10)
     servolux (0.12.0)
+    sinatra (1.4.7)
+      rack (~> 1.5)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     slim (3.0.7)
       temple (~> 0.7.6)
       tilt (>= 1.3.3, < 2.1)
@@ -161,6 +167,7 @@ DEPENDENCIES
   rake
   redcarpet
   sass
+  sinatra
   slim
   yard (~> 0.8)
 

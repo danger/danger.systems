@@ -2,7 +2,6 @@
 # from the CocoaPods Guides website.
 
 module HTMLHelpers
-
   # Converts a markdown string to HTML.
   #
   # @param [String] input
@@ -13,9 +12,9 @@ module HTMLHelpers
     @markdown_instance ||= Redcarpet::Markdown.new(Class.new(Redcarpet::Render::HTML) do
       def block_code(code, lang)
         lang ||= 'ruby'
-        HTMLHelpers.syntax_highlight(code, :language => lang)
+        HTMLHelpers.syntax_highlight(code, language: lang)
       end
-    end, :autolink => true, :space_after_headers => true, :no_intra_emphasis => true)
+    end, autolink: true, space_after_headers: true, no_intra_emphasis: true)
     # TODO: experimental
     @markdown_instance.render(capitalize_first_letter(input))
   end
@@ -25,7 +24,7 @@ module HTMLHelpers
   # @return [String]
   #
   def capitalize_first_letter(input)
-    (input.slice(0,1).capitalize || '') + (input.slice(1..-1) || '')
+    (input.slice(0, 1).capitalize || '') + (input.slice(1..-1) || '')
   end
 
   # Highlights the given string with Pygments.
@@ -41,14 +40,13 @@ module HTMLHelpers
 
   def self.syntax_highlight(code, opts = {})
     lexer = opts[:language] || 'ruby'
-    py_options = { :encoding => 'utf-8' }
+    py_options = { encoding: 'utf-8' }
 
     if line = opts[:line]
       py_options[:linenos] = 'inline'
       py_options[:linenostart] = line
     end
 
-    Pygments.highlight(code, :lexer => lexer, :options => py_options)
+    Pygments.highlight(code, lexer: lexer, options: py_options)
   end
-
 end
