@@ -1,4 +1,3 @@
-require 'middleman-gh-pages'
 
 desc 'Runs the site locally'
 task :serve do
@@ -7,8 +6,3 @@ task :serve do
   sh 'bundle exec middleman server'
 end
 
-desc 'Ship to github pages'
-desc 'Build and push the guides to GitHub Pages'
-task :deploy do
-  system("rake publish PROJECT_ROOT='.' BUILD_DIR='./build'")
-end

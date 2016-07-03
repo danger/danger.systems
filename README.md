@@ -19,9 +19,9 @@ This data is then used to generate the web page.
 You can run a copy of the static site via:
 
 ``` sh
-cd static
-bundle
+bundle install
 rake generate
+cd static
 rake serve
 ```
 
