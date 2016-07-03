@@ -14,6 +14,7 @@ install:
 
 script:
   - git remote set-url origin "https://${GH_TOKEN}@github.com/danger/danger.systems.git"
-  - rake generate
-  - cd ..
-  - rake deploy
+  - bundle exec rake generate
+  - cd static
+  - bundle install
+  - bundle exec rake deploy
