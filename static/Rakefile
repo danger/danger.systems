@@ -5,4 +5,3 @@ task :serve do
   sh 'open http://localhost:4567'
   sh 'bundle exec middleman server'
 end
-

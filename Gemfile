@@ -26,3 +26,5 @@ gem 'github-markup'
 
 # For the webhook service
 gem 'sinatra'
+gem 'foreman'
+gem 'rack'
