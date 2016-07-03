@@ -16,5 +16,5 @@ script:
   - git remote set-url origin "https://${GH_TOKEN}@github.com/danger/danger.systems.git"
   - bundle exec rake generate
   - bundle install
-  - bundle exec rake publish PROJECT_ROOT='static' BUILD_DIR='./build' ALLOW_DIRTY=true
+  - bundle exec rake publish PROJECT_ROOT='static' BUILD_DIR='static/build' ALLOW_DIRTY=true
 
