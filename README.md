@@ -20,7 +20,7 @@ The master list of all plugins to show in Danger.Systems, right now it is just t
 
 If you'd like to add a new plugin (**awesome**) this is where you want to put it.
 
-We'll be checking for whether you get useful metadata when you run `danger plugin lint` in the dir, so please take the time to add all the extra metadata. You can see a reference [plugin here](https://github.com/dbgrandi/danger-prose) (and [a class](https://github.com/dbgrandi/danger-prose/blob/master/lib/danger_plugin.rb)). This is considered the central source of truth with respect to public plugins for Danger.
+We'll be checking for whether you get useful metadata when you run `danger plugin lint [gem_name]` for your plugin, so please take the time to add all the extra metadata. You can see a reference [plugin here](https://github.com/dbgrandi/danger-prose) (and [a class](https://github.com/dbgrandi/danger-prose/blob/master/lib/danger_plugin.rb)). This is considered the central source of truth with respect to public plugins for Danger.
 
 ### danger.systems
 
