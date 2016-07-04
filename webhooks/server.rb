@@ -12,9 +12,15 @@ class App < Sinatra::Base
     plugins = JSON.parse(plugin_json)
     plugin_urls = plugins['plugins'].map { |plugin| plugin['url'] }
 
+    # Allow new tags on Danger/Danger to trigger updates
+    plugin_urls << "https://github.com/danger/danger/"
+
     request.body.rewind
     payload_body = request.body.read
     hook = JSON.parse(payload_body)
+
+    # 403 if it's not a tag create
+    halt 403 unless hook['ref_type'] == 'tag'
 
     # 403 if the webhook's repo isn't in the plugins search JSON
     source = hook['html_url']
