@@ -6,6 +6,6 @@ title: Danger - Reference
 section
   h2
     span Reference
-  article
-    p Sorry Nothing Here yet
-  .clearfix
+ 
+  - for plugin in JSON.parse(File.read("json_data/core.json"))
+     == partial(:plugin_doc, locals: { plugin: plugin, external: false })

@@ -72,49 +72,8 @@ section
     .clearfix
 
     - for plugin in JSON.parse(File.read("json_data/plugins.json"))
-      article
-        /  TODO: Name + version in metadata
-        / h3 == plugin["gem"].gsub("danger-", "") + " <span>#{plugin["gem"]["version"]}</span>"
-        h3 == plugin["name"]
-        == markdown_h(plugin["body_md"])
+     == partial(:plugin_doc, locals: { plugin: plugin, external: true })
 
-        h3 Reference
-        h4 Attributes
-        - for attribute in plugin["attributes"]
-          .fake_code
-             == markdown_h(attribute.values.first["write"]["body_md"])
-          code == attribute.keys.first
-
-        h4 Methods
-        - for method in plugin["methods"]
-          .fake_code
-             == markdown_h(method["body_md"])
-          code == method["name"]
-
-      article
-        h3 Examples
-        - for example in plugin["example_code"]
-          h4 == example["title"]
-          code
-            blockquote == example["text"].lines.join("<br>")
-
-        / TODO: Gem name
-        / h3 How to Install
-        / markdown:
-        /   Include `gem "#{plugin["gem"]["name"]}"` in your project’s Gemfile. Then run `bundle`.
-
-        /   Then inside your Dangerfile, you can access the plugin's API via `#{plugin["instance_name"]}`.
-
-        h3 Tags
-        code == plugin["tags"].join(" ")
-
-        - if plugin["see"].empty? == false
-          h3 See in Action
-          ul
-            - for link in plugin["see"]
-              li
-                a href="https://github.com/#{link}" == link
-      .clearfix
 
   section
     h2
