@@ -1,57 +1,38 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
+<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><title>Danger - Stop Saying "You Forgot To..." in Code Review</title><link href="/stylesheets/style-c0ff2a92.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.0.0.slim.min.js"></script></head><body class="index"><code class="byline">a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.</code><header class="title"><p>Danger</p><img src="/images/title-704b3238.png" class="retina" alt="Danger title image" width="980" height="236" /></header><section><h2><span>What is Danger?</span></h2><article><p>Danger runs after your CI, and gives teams the chance to automate common code review chores.</p><p>This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.</p><p>You can use Danger to codify your teams norms. Leaving humans to think about harder problems.</p></article><div class="clearfix"></div></section><section class="examples"><h2><span>For Example</span></h2><ul><li class="changelogs" data-repos="artsy/eigen, cocoapods/cocoapods, realm/jazzy"><a>Enforce Changelogs</a></li><li class="prose" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Improve your prose</a></li><li class="merge" data-repos="cocoapods/cocoapods"><a>Ensure no Merge commits</a></li><li class="focus" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Dont Focus Tests</a></li><li class="artifacts" data-repos="samdmarshall/pyconfig, artsy/eigen, fastlane/fastlane"><a>Highlight build artifacts</a></li><li class="special" data-repos="samdmarshall/pyconfig, artsy/eigen, fastlane/fastlane"><a>Special case special files</a></li></ul><div><div class="code_chunk"><div class="changelogs"><div class="highlight"><pre><span class="c1"># Add a CHANGELOG entry for app changes</span>
+<span class="k">if</span> <span class="o">!</span><span class="n">github</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;CHANGELOG.md&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">has_app_changes</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Please include a CHANGELOG entry. </span><span class="se">\n</span><span class="s2">You can find it at [CHANGELOG.md](https://github.com/realm/jazzy/blob/master/CHANGELOG.md).&quot;</span><span class="p">)</span>
+  <span class="n">message</span> <span class="s2">&quot;Note, we hard-wrap at 80 chars and use 2 spaces after the last line.&quot;</span>
+<span class="k">end</span>
+</pre></div></div><div class="prose"><div class="highlight"><pre><span class="c1"># Look for prose issues</span>
+<span class="n">prose</span><span class="o">.</span><span class="n">lint_files</span> <span class="n">markdown_files</span>
 
-    <!-- Always force latest IE rendering engine or request Chrome Frame -->
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<span class="c1"># Look for spelling issues</span>
+<span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;orta&quot;</span><span class="p">,</span> <span class="s2">&quot;artsy&quot;</span><span class="p">,</span> <span class="s2">&quot;cocoapods&quot;</span><span class="o">]</span>
+<span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span> <span class="n">markdown_files</span>
+</pre></div></div><div class="merge"><div class="highlight"><pre><span class="c1"># Ensure a clean commits history</span>
+<span class="k">if</span> <span class="n">commits</span><span class="o">.</span><span class="n">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span><span class="o">.</span><span class="n">message</span> <span class="o">=~</span> <span class="sr">/^Merge branch/</span> <span class="p">}</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s1">&#39;Please rebase to get rid of the merge commits in this PR&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div></div><div class="focus"><div class="highlight"><pre><span class="c1"># Don&#39;t let testing shortcuts get into master by accident</span>
+<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;fit left in tests&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="sb">`grep -r &quot;fit Demo/Tests/ `</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">1</span>
+</pre></div></div><div class="artifacts"><div class="highlight"><pre><span class="n">username</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_PROJECT_USERNAME&#39;</span><span class="o">]</span>
+<span class="n">project_name</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_PROJECT_REPONAME&#39;</span><span class="o">]</span>
+<span class="n">build_number</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_BUILD_NUM&#39;</span><span class="o">]</span>
+<span class="k">if</span> <span class="n">username</span> <span class="o">&amp;&amp;</span> <span class="n">project_name</span> <span class="o">&amp;&amp;</span> <span class="n">build_number</span>
+  <span class="c1"># submit message giving the coverage report that was generated by coverage.py</span>
+  <span class="n">message</span><span class="p">(</span><span class="s1">&#39;[html coverage report](https://circleci.com/api/v1/project/&#39;</span><span class="o">+</span><span class="n">username</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">project_name</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">build_number</span><span class="o">+</span><span class="s1">&#39;/artifacts/0/$CIRCLE_ARTIFACTS/htmlcov/index.html)&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div></div><div class="special"><div class="highlight"><pre><span class="c1"># Did you make analytics changes? Well you should also include a change to our analytics spec</span>
+<span class="n">made_analytics_changes</span> <span class="o">=</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;/Artsy/App/ARAppDelegate+Analytics.m&quot;</span><span class="p">)</span>
+<span class="n">made_analytics_specs_changes</span> <span class="o">=</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;/Artsy_Tests/Analytics_Tests/ARAppAnalyticsSpec.m&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">made_analytics_changes</span>
+    <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Analytics changes should have reflected specs changes&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="o">!</span><span class="n">made_analytics_specs_changes</span>
 
-    <title>Danger - Stop Saying "You Forgot To..." in Code Review</title>
-
-    <link href="/stylesheets/style-487ba2fc.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.0.0.slim.min.js"></script>
-  </head>
-
-  <body class="index">
-    <code class="byline">a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.</code><header class="title"><p>Danger</p><img src="/images/title-704b3238.png" class="retina" alt="Danger title image" width="980" height="236" /></header><section><h2><span>What is Danger?</span></h2><article><p>Danger runs after your CI, and gives teams the chance to automate common code review chores.</p><p>This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.</p><p>You can use Danger to codify your teams norms. Leaving humans to think about harder problems.</p></article><div class="clearfix"></div></section><section class="examples"><h2><span>For Example</span></h2><ul><li class="changelog" data-prs="CocoaPods/CocoaPods/pull/5413" data-repos="artsy/eigen, cocoapods/cocoapods, realm/jazzy"><a>Enforce Changelogs</a></li><li class="focus" data-prs="Moya/Moya/pull/521" data-repos="artsy/eigen, moya/moya"><a>Dont Focus Tests</a></li><li class="prose" data-prs="ashfurrow/blog/pull/218" data-repos=""><a>Lint Blog Post Prose</a></li><li class="merges" data-prs="CocoaPods/CocoaPods/pull/5413" data-repos=""><a>Ensure no Merges</a></li><li class="existing" data-prs="CocoaPods/CocoaPods/pull/5413" data-repos=""><a>Check for Existing Issues</a></li><li class="alert" data-prs="CocoaPods/CocoaPods/pull/5413" data-repos="artsy/eigen, cocoapods/cocoapods"><a>Alert File Owners</a></li><li class="build_times" data-prs="CocoaPods/CocoaPods/pull/5413" data-repos="artsy/eigen, cocoapods/cocoapods"><a>Check Build Times - ok</a></li></ul><div><code><figure class="changelog">
-  # Add a CHANGELOG entry for app changes
-  if !modified_files.include?("CHANGELOG.md") &amp;&amp; has_app_changes
-    fail("Please include a CHANGELOG entry. \nYou can find it at [CHANGELOG.md](https://github.com/realm/jazzy/blob/master/CHANGELOG.md).")
-    message "Note, we hard-wrap at 80 chars and use 2 spaces after the last line."
-  end
-</figure>
-
-<figure class="focus" style="display:none;">
-  # Don't let testing shortcuts get into master by accident
-  fail("fit left in tests") if `grep -r "fit Demo/Tests/ `.length &gt; 1
-</figure>
-
-<figure class="prose" style="display:none;">
-  def something()
-    puts “OK”
-  end
-</figure>
-<figure class="merges" style="display:none;">
-  def something()
-    puts “OK”
-  end
-</figure>
-<figure class="existing" style="display:none;">
-  def something()
-    puts “OK”
-  end
-</figure>
-<figure class="alert" style="display:none;">
-  def something()
-    puts “OK”
-  end
-</figure>
-<figure class="build_times" style="display:none;">
-  def something()
-    puts “OK”
-  end
-</figure>
-</code><ref># See artsy/eigen</ref></div><div class="clearfix"></div></section><section><h2><span>What magic is this?</span></h2><article><h3>How</h3><p>Danger is ruby gem that runs a <code>Dangerfile</code>, you set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
+    <span class="c1"># And pay extra attention anyway</span>
+    <span class="n">message</span><span class="p">(</span><span class="s1">&#39;Analytics dict changed, double check for ?: `@&quot;&quot;` on new entries&#39;</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">(</span><span class="s1">&#39;Also, double check the [Analytics Eigen schema](https://docs.google.com/spreadsheets/u/1/d/1bLbeOgVFaWzLSjxLOBDNOKs757-zBGoLSM1lIz3OPiI/edit#gid=497747862) if the changes are non-trivial.&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div></div></div><ref># See artsy/eigen</ref><div class="clearfix"></div></div></section><section><h2><span>What magic is this?</span></h2><article><h3>How</h3><p>Danger is ruby gem that runs a <code>Dangerfile</code>, you set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
 
 <p>Danger should be installed via a Gemfile. Add <code>gem "danger"</code> to your Gemfile, then run <code>bundle</code>.</p>
 
@@ -82,17 +63,17 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
 
     // Set the corresponding code
     var klass = $(this).attr("class").replace(" highlighted", "")
-    console.log(klass)
+
     // Set selection
     $("section.examples ul li").removeClass("highlighted")
     $(this).addClass("highlighted")
 
-    $("section.examples code figure").css("display", "none")
-    $("section.examples code figure." + klass).css("display", "block")
+    $("section.examples div.code_chunk > div").css("display", "none")
+    $("section.examples div.code_chunk div." + klass).css("display", "block")
 
      // Figure out the reference text
    var urls = $(this).data("repos").split(", ")
-   var prs = $(this).data("prs").split(", ")
+   var prs = "" //$(this).data("prs").split(", ")
    var toGithubLink = function(ref) {
        return "<a href='https://github.com/" + ref + "''>" + ref + "</a>"
     }
@@ -118,6 +99,4 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
 
   // Set the selection to be the first
   $("section.examples ul li:first-child").trigger('mouseenter')
-});</script>
-  </body>
-</html>
+});</script></body></html>
