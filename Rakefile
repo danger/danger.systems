@@ -3,15 +3,29 @@ require 'middleman-gh-pages'
 task :generate do
   require 'json'
   require 'bundler'
+
+  # Make sure we have a folder for json_data, it's not in git.
+  Dir.mkdir('static/json_data') unless Dir.exist?('static/json_data')
+
+  # Grab the Danger gem, pull out the file paths for the core plugins
+  danger_gem = Gem::Specification.find_by_name "danger"
+  danger_core_plugins = Dir.glob(danger_gem.gem_dir + "/lib/danger/danger_core/plugins/*.rb")
+
+  # Document them, move them into a nice JSON file
+  output = `bundle exec danger plugin lint #{danger_core_plugins.join(' ')}`
+  File.write('static/json_data/core.json', output)
+  puts 'Generated core API metadata'
+
+  # Grab our definitive plugins list
   plugins = JSON.parse(File.read('plugins.json'))
 
-  # # Generate the Website's plugin stuff
+  # Generate the Website's plugin docm, by just passing in the gem names
   output = `bundle exec danger plugin lint #{plugins.join(' ')}`
-  Dir.mkdir('static/json_data') unless Dir.exist?('static/json_data')
   File.write('static/json_data/plugins.json', output)
   puts 'Generated plugin metadata'
 
-  # Generate the search query stuff
+  # Generate the search plugin JSON file, this used by `danger plugin search`
+  # and by the re-deploy webhook system.
   Bundler.with_clean_env do
     Dir.mktmpdir do |dir|
       Dir.chdir dir do

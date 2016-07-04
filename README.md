@@ -56,3 +56,8 @@ You can run a copy of the static site via:
 bundle
 bundle exec foreman start
 ```
+
+# Deployment
+
+* The static site is deployed via Travis-CI, here's the [.travis.yml](.travis.yml).
+* The webhooks site is deployed via Heroku, it is set to automatically re-deploy when a new commit is sent to master.

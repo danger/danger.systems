@@ -4,12 +4,8 @@ title: Danger - Stop Saying "You Forgot To..." in Code Review
 
 ruby:
   require 'json'
-
-code.byline a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.
-
-header.title
-  p Danger
-  = image_tag "title.png", class: "retina", alt: "Danger title image"
+  require 'yaml'
+  example_data = YAML.load(File.read "source/examples.yml")
 
 section
   h2
@@ -25,66 +21,18 @@ section.examples
    span For Example
 
   ul
-    li.changelog data-repos="artsy/eigen, cocoapods/cocoapods, realm/jazzy" data-prs="CocoaPods/CocoaPods/pull/5413"
-      a Enforce Changelogs
-    li.focus  data-repos="artsy/eigen, moya/moya" data-prs="Moya/Moya/pull/521"
-      a Dont Focus Tests
-    li.prose data-repos="" data-prs="ashfurrow/blog/pull/218"
-      a Lint Blog Post Prose
-    li.merges data-repos="" data-prs="CocoaPods/CocoaPods/pull/5413"
-      a Ensure no Merges
-    li.existing  data-repos="" data-prs="CocoaPods/CocoaPods/pull/5413"
-      a Check for Existing Issues
-    li.alert  data-repos="artsy/eigen, cocoapods/cocoapods" data-prs="CocoaPods/CocoaPods/pull/5413"
-      a Alert File Owners
-    li.build_times  data-repos="artsy/eigen, cocoapods/cocoapods" data-prs="CocoaPods/CocoaPods/pull/5413"
-      a Check Build Times - ok
-
+    - for example in example_data
+      li class=example["id"] data-repos=example["repos"]
+        a == example["title"]
   div
-    code
-      markdown:
-        <figure class="changelog">
-          # Add a CHANGELOG entry for app changes
-          if !modified_files.include?("CHANGELOG.md") && has_app_changes
-            fail("Please include a CHANGELOG entry. \nYou can find it at [CHANGELOG.md](https://github.com/realm/jazzy/blob/master/CHANGELOG.md).")
-            message "Note, we hard-wrap at 80 chars and use 2 spaces after the last line."
-          end
-        </figure>
-
-        <figure class="focus" style="display:none;">
-          # Don't let testing shortcuts get into master by accident
-          fail("fit left in tests") if `grep -r "fit Demo/Tests/ `.length > 1
-        </figure>
-
-        <figure class="prose" style="display:none;">
-          def something()
-            puts “OK”
-          end
-        </figure>
-        <figure class="merges" style="display:none;">
-          def something()
-            puts “OK”
-          end
-        </figure>
-        <figure class="existing" style="display:none;">
-          def something()
-            puts “OK”
-          end
-        </figure>
-        <figure class="alert" style="display:none;">
-          def something()
-            puts “OK”
-          end
-        </figure>
-        <figure class="build_times" style="display:none;">
-          def something()
-            puts “OK”
-          end
-        </figure>
+    div.code_chunk
+      - for example in example_data
+        div class=example["id"]
+            == syntax_highlight example["code"]
 
     ref == "# See artsy/eigen"
 
-  .clearfix
+    .clearfix
 
 section
   h2
@@ -181,17 +129,17 @@ javascript:
 
         // Set the corresponding code
         var klass = $(this).attr("class").replace(" highlighted", "")
-        console.log(klass)
+
         // Set selection
         $("section.examples ul li").removeClass("highlighted")
         $(this).addClass("highlighted")
 
-        $("section.examples code figure").css("display", "none")
-        $("section.examples code figure." + klass).css("display", "block")
+        $("section.examples div.code_chunk > div").css("display", "none")
+        $("section.examples div.code_chunk div." + klass).css("display", "block")
 
          // Figure out the reference text
        var urls = $(this).data("repos").split(", ")
-       var prs = $(this).data("prs").split(", ")
+       var prs = "" //$(this).data("prs").split(", ")
        var toGithubLink = function(ref) {
            return "<a href='https://github.com/" + ref + "''>" + ref + "</a>"
         }
