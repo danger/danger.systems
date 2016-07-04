@@ -6,6 +6,7 @@ gem 'pry', '~> 0.10'
 
 # For Doc parsing
 gem 'yard', '~> 0.8'
+
 # For plugin generation
 gem 'danger', git: 'https://github.com/danger/danger.git', branch: 'master'
 
@@ -13,6 +14,7 @@ gem 'danger', git: 'https://github.com/danger/danger.git', branch: 'master'
 gem 'middleman'
 gem 'middleman-livereload'
 gem 'middleman-gh-pages'
+gem 'pygments.rb', '~> 0.6.3'
 
 # Static site html/css
 gem 'slim'

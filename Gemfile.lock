@@ -118,10 +118,14 @@ GEM
     padrino-support (0.13.2)
       activesupport (>= 3.1)
     parallel (1.9.0)
+    posix-spawn (0.3.11)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pygments.rb (0.6.3)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.2.0)
     rack (1.6.4)
     rack-livereload (0.3.16)
       rack
@@ -154,6 +158,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    yajl-ruby (1.2.1)
     yard (0.8.7.6)
 
 PLATFORMS
@@ -167,6 +172,7 @@ DEPENDENCIES
   middleman-gh-pages
   middleman-livereload
   pry (~> 0.10)
+  pygments.rb (~> 0.6.3)
   rack
   rake
   redcarpet
