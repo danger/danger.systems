@@ -1,4 +1,3 @@
-
 html
   head
     meta charset="utf-8"
@@ -13,10 +12,17 @@ html
 
   body class=page_classes
 
-		code.byline a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.
-		header.title
-		  p Danger
-		  = image_tag "title.png", class: "retina", alt: "Danger title image"
-
-		== yield
+    code.byline a project from <a href="http://orta.io">orta therox</a> and <a href="http://krausefx">felix krause</a>.
+    header.title
+      p Danger
+      = image_tag "title.png", class: "retina", alt: "Danger title image"
+      nav
+        ul
+          li
+            a class=(current_page.path == "index.html" ? 'highlighted' : '') href="/" home
+          li
+            a class=(current_page.path == "guides.html" ? 'highlighted' : '') href="/guides.html" Guides
+          li
+            a class=(current_page.path == "reference.html" ? 'highlighted' : '') href="/reference.html" Reference
+    == yield
 
