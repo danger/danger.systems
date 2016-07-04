@@ -20,19 +20,20 @@ section.examples
   h2
    span For Example
 
-  ul
-    - for example in example_data
-      li class=example["id"] data-repos=example["repos"]
-        a == example["title"]
-  div
-    div.code_chunk
+  .example_content
+    ul
       - for example in example_data
-        div class=example["id"]
-            == syntax_highlight example["code"]
+        li class=example["id"] data-repos=example["repos"]
+          a == example["title"]
+    div
+      div.code_chunk
+        - for example in example_data
+          div class=example["id"]
+              == syntax_highlight example["code"]
 
-    ref == "# See artsy/eigen"
+      ref == "# See artsy/eigen"
 
-    .clearfix
+      .clearfix
 
 section
   h2

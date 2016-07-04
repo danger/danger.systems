@@ -29,7 +29,27 @@ body {
         > img {
             width: 490px;
             height: 118px;
-            margin: 75px auto;
+            margin: 45px auto;
+            margin-bottom: 4px;
+        }
+
+        > nav li {
+            @include punk-text;
+            display: inline-block;
+            font-size: 42px;
+            margin:0 20px;
+
+            a {
+                text-decoration: none;
+                color: white;
+
+                &.highlighted, &:hover {
+                    color: #FFEC00;
+                }
+                &.highlighted {
+                    cursor: default;
+                }
+            }
         }
     }
 
@@ -108,12 +128,17 @@ body {
     }
 
     > section.examples {
+
+        .example_content {
+          display: -webkit-flex;
+          display: flex;
+
+
         ul {
             padding-left: 88px;
             margin-top:0;
-            float:left;
             margin-bottom: 60px;
-
+            min-width: 400px;
             a {
                 text-decoration: none;
                 color: black;
@@ -142,9 +167,13 @@ body {
         }
 
         > div {
+            -webkit-flex: 1;
+            flex: 1;
+
+            margin-right: 88px;
+            overflow-x: scroll;
+
             margin-left: 30px;
-            width: 50%;
-            float:left;
             margin-bottom: 60px;
         }
 
@@ -153,15 +182,18 @@ body {
             display: block;
             margin:0;
             padding:10px;
+            padding-left: 20px;
             white-space: pre;
             line-height: 1.5;
-            overflow-x: scroll;
             font-size: 16px;
+                        overflow-x: scroll;
+
         }
         ref {
             padding-top: 10px;
             @include code-text;
             float: left;
         }
+    }
     }
 }
