@@ -29,6 +29,8 @@ ruby:
         { name => params_values["types"][index] }
       end
 
+      return "" if params_map_array.empty?
+
       span ="("
       span += params_map_array.map do |map| 
         name = map.keys.first
