@@ -11,7 +11,7 @@ class App < Sinatra::Base
     payload_body = request.body.read
     hook = JSON.parse(payload_body)
 
-    # Gice an OK message when it's being set up
+    # Give an OK message when it's being set up
     return "OK" if hook["hook"] && hook["hook"]["type"] == "Repository"
 
     # Grab our list of plugins
@@ -20,13 +20,13 @@ class App < Sinatra::Base
     plugin_urls = plugins['plugins'].map { |plugin| plugin['url'] }
 
     # Allow new tags on Danger/Danger to trigger updates
-    plugin_urls << "https://github.com/danger/danger/"
+    plugin_urls << "https://github.com/danger/danger"
 
     # 403 if it's not a tag create
     halt 403 unless hook['ref_type'] == 'tag'
 
     # 403 if the webhook's repo isn't in the plugins search JSON
-    source = hook['html_url']
+    source = hook['repository']['html_url']
     halt 403 unless plugin_urls.include? source
 
     travis_token = ENV['TRAVIS_TOKEN']
