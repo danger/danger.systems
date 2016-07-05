@@ -69,6 +69,13 @@ body {
             margin-top: 24px;
             margin-bottom: 24px;
         }
+        > span.subtle {
+            &.return::before { 
+                content: ": "
+            }
+
+            color: #aaa;
+        }
     }
 
     > section {
@@ -110,6 +117,22 @@ body {
             padding-left: 88px;
             width: 35%;
             float:left;
+            display: block;
+
+            &.scope_code {
+                h4 {
+                    font-size: 14px;
+                    margin-bottom: 0px;
+                }
+                .highlight {
+                    max-width:100%;
+                    overflow-x: scroll;
+                    
+                    pre {
+                        margin-top:4px;    
+                    }
+                }
+            }
 
             code > blockquote {
                 margin: 0;
@@ -119,6 +142,7 @@ body {
                 @include code-text;
                 font-size: 12px;
                 color: #848684;
+                margin-bottom: 0px;
             }
         }
 

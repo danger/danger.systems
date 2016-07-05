@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/danger/danger.git
-  revision: 846a794d70e580228a94e90904e421fa3a3b972f
+  revision: b8b9f357cc35460b01c0aa07a849b7323cbbaba4
   branch: master
   specs:
     danger (0.8.4)
@@ -159,7 +159,7 @@ GEM
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
     yajl-ruby (1.2.1)
-    yard (0.8.7.6)
+    yard (0.9.0)
 
 PLATFORMS
   ruby
