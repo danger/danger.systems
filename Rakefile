@@ -43,7 +43,7 @@ task :generate do
 
         # Get the name'd gems out of bundler, then convert them into useful search metadata
         gem_paths = specs.select { |spec| spec.is_a? Bundler::EndpointSpecification }.map { |endpoint| endpoint.gem_dir + '/' + endpoint.name + '.gemspec' }
-        real_gems = gem_paths.map { |path| Gem::Specification.load path }
+        real_gems = gem_paths.flat_map { |path| Gem::Specification.load path }
         plugin_metadata = real_gems.map do |gem|
           {
             gem: gem.name,

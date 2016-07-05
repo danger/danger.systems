@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/danger/danger.git
-  revision: b8b9f357cc35460b01c0aa07a849b7323cbbaba4
+  revision: 1824f1d97009ada598c1e4ca85cedf3be6b8f972
   branch: master
   specs:
-    danger (0.8.4)
+    danger (0.8.5)
       claide (~> 1.0)
       colored (~> 1.2)
       cork (~> 0.1)
