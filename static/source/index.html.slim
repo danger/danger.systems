@@ -7,20 +7,22 @@ ruby:
   require 'yaml'
   example_data = YAML.load(File.read "source/examples.yml")
 
+h2
+  span What is Danger?
+
 section
-  h2
-    span What is Danger?
   article
-    p Danger runs after your CI, and gives teams the chance to automate common code review chores.
-    p This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.
-    p You can use Danger to codify your teams norms. Leaving humans to think about harder problems.
-  .clearfix
+    markdown: 
+      Danger runs after your CI, and gives teams the chance to automate common code review chores.
+
+      This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.
+
+      You can use Danger to codify your teams norms. Leaving humans to think about harder problems.
+
+h2
+ span For Example
 
 section.examples
-  h2
-   span For Example
-
-  .example_content
     ul
       - for example in example_data
         li class=example["id"] data-repos=example["repos"]
@@ -33,11 +35,10 @@ section.examples
 
       ref == "# See artsy/eigen"
 
-      .clearfix
+h2
+ span What magic is this?
 
 section
-  h2
-   span What magic is this?
 
   article
     h3 How
@@ -62,25 +63,24 @@ section
       fail("message") - Declares a CI blocking error
       markdown("message") - Outputs markdown
       ```
-  .clearfix
+h2
+  span Plugins
 
-  section
-    h2
-      span Plugins
-    article
-      p Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.
-    .clearfix
+section
+  article
+    markdown:
+     Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.
 
-    - for plugin in JSON.parse(File.read("json_data/plugins.json"))
-     == partial(:plugin_doc, locals: { plugin: plugin, external: true })
+section
+  - for plugin in JSON.parse(File.read("json_data/plugins.json"))
+    == partial(:plugin_doc, locals: { plugin: plugin, external: true })
 
+h2
+  span Meta
 
-  section
-    h2
-      span Meta
-    article
-      p Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.
-    .clearfix
+section
+  article
+    p Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.
 
 javascript:
     $(function() {
@@ -101,7 +101,7 @@ javascript:
        var urls = $(this).data("repos").split(", ")
        var prs = "" //$(this).data("prs").split(", ")
        var toGithubLink = function(ref) {
-           return "<a href='https://github.com/" + ref + "''>" + ref + "</a>"
+           return "<a href='https://github.com/" + ref + "/blob/master/Dangerfile'>" + ref + "</a>"
         }
         var showArray = function(array) {
           if (array.length > 1) { return true }
