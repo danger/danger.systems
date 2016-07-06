@@ -2,10 +2,13 @@
 title: Danger - Reference
 ---
 
+h2
+  span Reference
 
-section
+- for plugin in JSON.parse(File.read("json_data/core.json"))
+
   h2
-    span Reference
- 
-  - for plugin in JSON.parse(File.read("json_data/core.json"))
+    span == plugin["instance_name"]
+
+  section
      == partial(:plugin_doc, locals: { plugin: plugin, external: false })

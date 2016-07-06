@@ -77,32 +77,33 @@ body {
             color: #aaa;
         }
     }
+    h2 {
+        @include punk-text;
+        
+        margin-top: 80px;
+        font-size: 48px;
+        padding-left: 80px;
+        background-color: #FFEC00;
+        min-height: 48px;
+
+        > span {
+            padding-left: 10px;
+            padding-right: 20px;
+            padding-top: 6px;
+            padding-bottom: 4px;
+            background-color: white;
+            display: inline-block;
+        }
+    }
 
     > section {
-        clear:left;
-
-        h2 {
-            @include punk-text;
-
-            margin-top: 80px;
-            font-size: 48px;
-            padding-left: 80px;
-            background-color: #FFEC00;
-            min-height: 48px;
-
-            > span {
-                padding-left: 10px;
-                padding-right: 20px;
-                padding-top: 6px;
-                padding-bottom: 4px;
-                background-color: white;
-                display: inline-block;
-            }
-        }
+        display: -ms-flex;
+        display: -webkit-flex;
+        display: flex;
+        flex-flow: row;
 
         h3 {
             @include punk-text;
-
             font-size: 20px;
             text-transform: uppercase;
         }
@@ -112,12 +113,19 @@ body {
             font-size: 20px;
             text-transform: uppercase;
         }
+        
+        & > article:first-child {
+            margin-right: 20px;
+            margin-left: 80px;
+
+        }
 
         article {
-            padding-left: 88px;
-            width: 35%;
-            float:left;
+            width: 50%;
             display: block;
+            margin-right: 80px;
+            margin-left: 20px;
+
 
             &.scope_code {
                 h4 {
@@ -131,6 +139,11 @@ body {
                     pre {
                         margin-top:4px;    
                     }
+                }
+                ul li {
+                    @include code-text;
+                   font-size: 12px;
+                    color: #848684;
                 }
             }
 
@@ -153,16 +166,11 @@ body {
 
     > section.examples {
 
-        .example_content {
-          display: -webkit-flex;
-          display: flex;
-
 
         ul {
             padding-left: 88px;
             margin-top:0;
-            margin-bottom: 60px;
-            min-width: 400px;
+            min-width: 320px;
             a {
                 text-decoration: none;
                 color: black;
@@ -193,12 +201,9 @@ body {
         > div {
             -webkit-flex: 1;
             flex: 1;
-
             margin-right: 88px;
             overflow-x: scroll;
-
             margin-left: 30px;
-            margin-bottom: 60px;
         }
 
         .code_chunk {
@@ -210,14 +215,12 @@ body {
             white-space: pre;
             line-height: 1.5;
             font-size: 16px;
-                        overflow-x: scroll;
-
+            overflow-x: scroll;
         }
+
         ref {
             padding-top: 10px;
             @include code-text;
-            float: left;
         }
-    }
     }
 }
