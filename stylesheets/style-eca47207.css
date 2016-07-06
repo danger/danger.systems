@@ -46,23 +46,26 @@ body {
       color: #aaa; }
       body code > span.subtle.return::before {
         content: ": "; }
+  body h2 {
+    font-family: "prodotto_in_cina";
+    text-transform: uppercase;
+    margin-top: 80px;
+    font-size: 48px;
+    padding-left: 80px;
+    background-color: #FFEC00;
+    min-height: 48px; }
+    body h2 > span {
+      padding-left: 10px;
+      padding-right: 20px;
+      padding-top: 6px;
+      padding-bottom: 4px;
+      background-color: white;
+      display: inline-block; }
   body > section {
-    clear: left; }
-    body > section h2 {
-      font-family: "prodotto_in_cina";
-      text-transform: uppercase;
-      margin-top: 80px;
-      font-size: 48px;
-      padding-left: 80px;
-      background-color: #FFEC00;
-      min-height: 48px; }
-      body > section h2 > span {
-        padding-left: 10px;
-        padding-right: 20px;
-        padding-top: 6px;
-        padding-bottom: 4px;
-        background-color: white;
-        display: inline-block; }
+    display: -ms-flex;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row; }
     body > section h3 {
       font-family: "prodotto_in_cina";
       text-transform: uppercase;
@@ -72,11 +75,14 @@ body {
       font-family: "Avenir-Heavy";
       font-size: 20px;
       text-transform: uppercase; }
+    body > section > article:first-child {
+      margin-right: 20px;
+      margin-left: 80px; }
     body > section article {
-      padding-left: 88px;
-      width: 35%;
-      float: left;
-      display: block; }
+      width: 50%;
+      display: block;
+      margin-right: 80px;
+      margin-left: 20px; }
       body > section article.scope_code h4 {
         font-size: 14px;
         margin-bottom: 0px; }
@@ -85,6 +91,10 @@ body {
         overflow-x: scroll; }
         body > section article.scope_code .highlight pre {
           margin-top: 4px; }
+      body > section article.scope_code ul li {
+        font-family: "Monaco";
+        font-size: 12px;
+        color: #848684; }
       body > section article code > blockquote {
         margin: 0; }
       body > section article div.fake_code > p {
@@ -94,50 +104,44 @@ body {
         margin-bottom: 0px; }
     body > section .clearfix {
       clear: both; }
-  body > section.examples .example_content {
-    display: -webkit-flex;
-    display: flex; }
-    body > section.examples .example_content ul {
-      padding-left: 88px;
-      margin-top: 0;
-      margin-bottom: 60px;
-      min-width: 400px; }
-      body > section.examples .example_content ul a {
-        text-decoration: none;
-        color: black; }
-        body > section.examples .example_content ul a:hover {
-          color: #FFEC00; }
-      body > section.examples .example_content ul > li {
-        font-family: "prodotto_in_cina";
-        text-transform: uppercase;
-        font-size: 20px;
-        text-transform: uppercase;
-        padding-top: 6px;
-        padding-bottom: 6px;
-        list-style-type: none; }
-      body > section.examples .example_content ul > li.highlighted, body > section.examples .example_content ul > li.highlighted a {
-        color: #FFC54D;
-        list-style-type: disc; }
-        body > section.examples .example_content ul > li.highlighted:hover, body > section.examples .example_content ul > li.highlighted a:hover {
-          cursor: default; }
-    body > section.examples .example_content > div {
-      -webkit-flex: 1;
-      flex: 1;
-      margin-right: 88px;
-      overflow-x: scroll;
-      margin-left: 30px;
-      margin-bottom: 60px; }
-    body > section.examples .example_content .code_chunk {
-      border: 1px solid #D4D4D4;
-      display: block;
-      margin: 0;
-      padding: 10px;
-      padding-left: 20px;
-      white-space: pre;
-      line-height: 1.5;
-      font-size: 16px;
-      overflow-x: scroll; }
-    body > section.examples .example_content ref {
-      padding-top: 10px;
-      font-family: "Monaco";
-      float: left; }
+  body > section.examples ul {
+    padding-left: 88px;
+    margin-top: 0;
+    min-width: 320px; }
+    body > section.examples ul a {
+      text-decoration: none;
+      color: black; }
+      body > section.examples ul a:hover {
+        color: #FFEC00; }
+    body > section.examples ul > li {
+      font-family: "prodotto_in_cina";
+      text-transform: uppercase;
+      font-size: 20px;
+      text-transform: uppercase;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      list-style-type: none; }
+    body > section.examples ul > li.highlighted, body > section.examples ul > li.highlighted a {
+      color: #FFC54D;
+      list-style-type: disc; }
+      body > section.examples ul > li.highlighted:hover, body > section.examples ul > li.highlighted a:hover {
+        cursor: default; }
+  body > section.examples > div {
+    -webkit-flex: 1;
+    flex: 1;
+    margin-right: 88px;
+    overflow-x: scroll;
+    margin-left: 30px; }
+  body > section.examples .code_chunk {
+    border: 1px solid #D4D4D4;
+    display: block;
+    margin: 0;
+    padding: 10px;
+    padding-left: 20px;
+    white-space: pre;
+    line-height: 1.5;
+    font-size: 16px;
+    overflow-x: scroll; }
+  body > section.examples ref {
+    padding-top: 10px;
+    font-family: "Monaco"; }
