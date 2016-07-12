@@ -1,55 +1,26 @@
 ruby:
-  name = external ? plugin["name"] : plugin["instance_name"]
-  def method_return_span(meth)
-    if meth["tags"]
-      return_value = meth["tags"].select { |t| t["name"] == "return" && t["types"]}.first
-      return "" if return_value == nil
-      return "" if return_value["types"] == nil
-      return "" unless return_value["types"].is_a? Array
-      unless return_value.empty?
-        return "" if return_value["types"].first == "void"
-        return "<span class='subtle return'>" + return_value["types"].first  + "</span>"
-      end
-    end
-    ""
+  def span_return(meth)
+    return "" if meth["return"].empty?
+    "<span class='subtle return'>" + meth["return"] + "</span>"
   end
 
-  def method_params_span(params)
-    meth = params
+  def span_params(meth)
+    # Create the center params, `thing: OK, other: Thing`
+    params_v = meth["param_couplets"]
+    string_params = params_v.map do |param|
+      name = param.keys.first
+      param[name].nil? ? name : name + ": " + param[name]
+    end.join ", "
 
-    if meth["params"]
-
-      params_names = meth["params"].compact.flat_map { |param| param.first }
-      params_values = meth["tags"].select { |t| t["name"] == "param" }.first
-
-      return "()" if params_values == nil
-      return "()" if params_values["types"] == nil
-
-      params_map_array = params_names.map.with_index do |name, index|
-        { name => params_values["types"][index] }
-      end
-
-      return "" if params_map_array.empty?
-
-      span ="("
-      span += params_map_array.map do |map| 
-        name = map.keys.first
-        type = map[name]
-        if type
-          "<span class='subtle'>" + name + "</span><span class='subtle return'>" + type + "<span>"
-        else
-          "<span class='subtle'>" + name + "<span>"
-        end
-      end.join ", "
-      return span + ")"
-    end
-    ""
+    # Wrap it in () if there _are_ params
+    string_params = "(" + string_params + ")" unless string_params.empty?
+    string_params
   end
+
 
 article.scope_code
-
   - if external
-    h3 == name
+    h3 == plugin["name"]
 
   /  TODO: Name + version in metadata
   / h3 == plugin["gem"].gsub("danger-", "") + " <span>#{plugin["gem"]["version"]}</span>"
@@ -61,14 +32,15 @@ article.scope_code
     - for attribute in plugin["attributes"]
       .fake_code
          == markdown_h(attribute.values.first["write"]["body_md"])
-      code == attribute.keys.first + method_return_span(attribute.values.first["write"])
+      / code == attribute.keys.first + method_return_span()
+      code == attribute.keys.first + span_return(attribute.values.first["write"])
 
   - unless plugin["methods"].empty?
     h4 Methods
     - for method in plugin["methods"]
       .fake_code
          == markdown_h(method["body_md"])
-      code == method["name"] + method_params_span(method)  + method_return_span(method)
+      code == method["name"] + span_params(method) + span_return(method)
 
 article.scope_code
   h3 Examples
@@ -82,7 +54,7 @@ article.scope_code
   /   Include `gem "#{plugin["gem"]["name"]}"` in your project’s Gemfile. Then run `bundle`.
 
   /   Then inside your Dangerfile, you can access the plugin's API via `#{plugin["instance_name"]}`.
-  
+
   - if external
     h3 Tags
     code == plugin["tags"].join(" ")
