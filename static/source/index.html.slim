@@ -12,7 +12,7 @@ h2
 
 section
   article
-    markdown: 
+    markdown:
       Danger runs after your CI, and gives teams the chance to automate common code review chores.
 
       This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.
@@ -51,7 +51,7 @@ section
 
   article
     h3 Supports
-    p <strong>Can be run on</strong>: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone.
+    p <strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone, SurfCI.
     p <strong>Can chat back on</strong>: GitHub
     p <strong>Can handle diffs from</strong>: Git
 
@@ -69,7 +69,7 @@ h2
 section
   article
     markdown:
-     Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.
+     Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.
 
 section
   - for plugin in JSON.parse(File.read("json_data/plugins.json"))
@@ -80,7 +80,7 @@ h2
 
 section
   article
-    p Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugin create`.
+    p Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.
 
 javascript:
     $(function() {

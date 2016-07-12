@@ -1,55 +1,6 @@
-ruby:
-  name = external ? plugin["name"] : plugin["instance_name"]
-  def method_return_span(meth)
-    if meth["tags"]
-      return_value = meth["tags"].select { |t| t["name"] == "return" && t["types"]}.first
-      return "" if return_value == nil
-      return "" if return_value["types"] == nil
-      return "" unless return_value["types"].is_a? Array
-      unless return_value.empty?
-        return "" if return_value["types"].first == "void"
-        return "<span class='subtle return'>" + return_value["types"].first  + "</span>"
-      end
-    end
-    ""
-  end
-
-  def method_params_span(params)
-    meth = params
-
-    if meth["params"]
-
-      params_names = meth["params"].compact.flat_map { |param| param.first }
-      params_values = meth["tags"].select { |t| t["name"] == "param" }.first
-
-      return "()" if params_values == nil
-      return "()" if params_values["types"] == nil
-
-      params_map_array = params_names.map.with_index do |name, index|
-        { name => params_values["types"][index] }
-      end
-
-      return "" if params_map_array.empty?
-
-      span ="("
-      span += params_map_array.map do |map| 
-        name = map.keys.first
-        type = map[name]
-        if type
-          "<span class='subtle'>" + name + "</span><span class='subtle return'>" + type + "<span>"
-        else
-          "<span class='subtle'>" + name + "<span>"
-        end
-      end.join ", "
-      return span + ")"
-    end
-    ""
-  end
-
 article.scope_code
-
   - if external
-    h3 == name
+    h3 == plugin["name"]
 
   /  TODO: Name + version in metadata
   / h3 == plugin["gem"].gsub("danger-", "") + " <span>#{plugin["gem"]["version"]}</span>"
@@ -82,7 +33,7 @@ article.scope_code
   /   Include `gem "#{plugin["gem"]["name"]}"` in your project’s Gemfile. Then run `bundle`.
 
   /   Then inside your Dangerfile, you can access the plugin's API via `#{plugin["instance_name"]}`.
-  
+
   - if external
     h3 Tags
     code == plugin["tags"].join(" ")
