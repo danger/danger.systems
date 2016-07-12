@@ -1,1 +1,1 @@
-{"plugins":[{"gem":"danger-prose","authors":"David Grandinetti, Orta Therox","url":"https://github.com/dbgrandi/danger-prose","description":"A danger plugin for working with bodies of markdown prose.","license":"MIT","version":"1.0.0"}]}
+{"plugins":[{"gem":"danger-prose","authors":"David Grandinetti, Orta Therox","url":"https://github.com/dbgrandi/danger-prose","description":"A danger plugin for working with bodies of markdown prose.","license":"MIT","version":"2.0.0"}]}

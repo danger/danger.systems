@@ -1,3 +1,23 @@
+ruby:
+  def span_return(meth)
+    return "" if meth["return"].empty?
+    "<span class='subtle return'>" + meth["return"] + "</span>"
+  end
+
+  def span_params(meth)
+    # Create the center params, `thing: OK, other: Thing`
+    params_v = meth["param_couplets"]
+    string_params = params_v.map do |param|
+      name = param.keys.first
+      param[name].nil? ? name : name + ": " + param[name]
+    end.join ", "
+
+    # Wrap it in () if there _are_ params
+    string_params = "(" + string_params + ")" unless string_params.empty?
+    string_params
+  end
+
+
 article.scope_code
   - if external
     h3 == plugin["name"]
@@ -12,14 +32,15 @@ article.scope_code
     - for attribute in plugin["attributes"]
       .fake_code
          == markdown_h(attribute.values.first["write"]["body_md"])
-      code == attribute.keys.first + method_return_span(attribute.values.first["write"])
+      / code == attribute.keys.first + method_return_span()
+      code == attribute.keys.first + span_return(attribute.values.first["write"])
 
   - unless plugin["methods"].empty?
     h4 Methods
     - for method in plugin["methods"]
       .fake_code
          == markdown_h(method["body_md"])
-      code == method["name"] + method_params_span(method)  + method_return_span(method)
+      code == method["name"] + span_params(method) + span_return(method)
 
 article.scope_code
   h3 Examples
