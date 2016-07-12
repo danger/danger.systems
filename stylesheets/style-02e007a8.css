@@ -45,7 +45,7 @@ body {
     body code > span.subtle {
       color: #aaa; }
       body code > span.subtle.return::before {
-        content: ": "; }
+        content: " -> "; }
   body h2 {
     font-family: "prodotto_in_cina";
     text-transform: uppercase;
