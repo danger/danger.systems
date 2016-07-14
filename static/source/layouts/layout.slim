@@ -21,7 +21,7 @@ html
           li
             a class=(current_page.path == "index.html" ? 'highlighted' : '') href="/" home
           li
-            a class=(current_page.path == "guides.html" ? 'highlighted' : '') href="/guides.html" Guides
+            a class=(current_page.path.include?("guides") ? 'highlighted' : '') href="/guides.html" Guides
           li
             a class=(current_page.path == "reference.html" ? 'highlighted' : '') href="/reference.html" Reference
     == yield
