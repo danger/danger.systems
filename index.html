@@ -70,7 +70,7 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
 </pre></div><h4>Running the spell checker</h4><div class="highlight"><pre><span class="c1"># Runs a spell checker on all files in `_post`</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span> <span class="s2">&quot;_posts/*.md&quot;</span>
 </pre></div><h4>Running the spell checker, with some words whitelisted</h4><div class="highlight"><pre><span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;orta&quot;</span><span class="p">,</span> <span class="s2">&quot;artsy&quot;</span><span class="o">]</span>
-<span class="n">prose</span><span class="o">.</span><span class="n">lint_files</span>
+<span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span>
 </pre></div><h3>Tags</h3><code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><h2><span>Meta</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.</p></article></section><script>$(function() {
   $("section.examples ul li").mouseover(function(event) {
     event.preventDefault()
