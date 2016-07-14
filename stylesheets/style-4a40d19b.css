@@ -25,11 +25,32 @@ body {
       margin: 0 20px; }
       body > header > nav li a {
         text-decoration: none;
-        color: white; }
+        color: white;
+        text-shadow: 2px 2px black; }
         body > header > nav li a.highlighted, body > header > nav li a:hover {
           color: #FFEC00; }
         body > header > nav li a.highlighted {
           cursor: default; }
+    body > header.small {
+      text-align: left;
+      background-size: 67px 100%;
+      height: 67px;
+      margin-top: 20px; }
+      body > header.small img {
+        margin-left: 80px;
+        margin-top: 20px;
+        margin-bottom: -4px;
+        width: 122px;
+        height: 30px; }
+      body > header.small > nav {
+        display: inline-block; }
+        body > header.small > nav ul {
+          margin-left: 40px; }
+        body > header.small > nav li {
+          font-size: 28px;
+          margin: 0 10px; }
+          body > header.small > nav li a {
+            text-shadow: 2px 2px black; }
   body p {
     font-family: "Avenir Book";
     font-size: 17px; }
