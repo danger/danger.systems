@@ -1,3 +1,6 @@
+ruby:
+  is_home = current_page.path == "index.html"
+
 html
   head
     meta charset="utf-8"
@@ -12,8 +15,11 @@ html
 
   body class=page_classes
 
-    code.byline a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.
-    header.title
+    - if is_home
+      code.byline a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.
+
+    header class=(is_home ? 'title' : 'title small')
+
       p Danger
       = image_tag "title.png", class: "retina", alt: "Danger title image"
       nav
@@ -24,5 +30,9 @@ html
             a class=(current_page.path.include?("guides") ? 'highlighted' : '') href="/guides.html" Guides
           li
             a class=(current_page.path == "reference.html" ? 'highlighted' : '') href="/reference.html" Reference
+
+    - unless is_home
+      code.byline.small a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.
+
     == yield
 
