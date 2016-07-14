@@ -12,7 +12,7 @@ task :generate do
   danger_core_plugins = Dir.glob(danger_gem.gem_dir + "/lib/danger/danger_core/plugins/*.rb")
 
   # Document them, move them into a nice JSON file
-  output = `bundle exec danger plugins lint #{danger_core_plugins.join(' ')}`
+  output = `bundle exec danger plugins json #{danger_core_plugins.join(' ')}`
   File.write('static/json_data/core.json', output)
   puts 'Generated core API metadata'
 
@@ -20,7 +20,7 @@ task :generate do
   plugins = JSON.parse(File.read('plugins.json'))
 
   # Generate the Website's plugin docm, by just passing in the gem names
-  output = `bundle exec danger plugins lint #{plugins.join(' ')}`
+  output = `bundle exec danger plugins json #{plugins.join(' ')}`
   File.write('static/json_data/plugins.json', output)
   puts 'Generated plugin metadata'
 
