@@ -19,7 +19,7 @@ task :generate do
   # Grab our definitive plugins list
   plugins = JSON.parse(File.read('plugins.json'))
 
-  # Generate the Website's plugin docm, by just passing in the gem names
+  # Generate the Website's plugin doc, by passing in the gem names
   output = `bundle exec danger plugins json #{plugins.join(' ')}`
   File.write('static/json_data/plugins.json', output)
   puts 'Generated plugin metadata'

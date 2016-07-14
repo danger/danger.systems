@@ -2,10 +2,14 @@
 title: Danger - Getting Set Up
 ---
 
+ruby:
+  guides = sitemap.resources.select { |r| r.path.start_with? "guides/" }
+
+h2
+  span Guides
 
 section
-  h2
-    span Guides
   article
-    p Sorry Nothing Here yet
-  .clearfix
+    - for resource in guides
+      p
+        a href=resource.path == resource.data["title"]
