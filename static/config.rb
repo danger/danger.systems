@@ -8,6 +8,9 @@ configure :development do
   activate :livereload
 end
 
+require 'lib/add_links_to_headers.rb'
+activate :add_links_to_headers
+
 # Methods defined in the helpers block are available in templates
 # helpers do
 #   def some_helper

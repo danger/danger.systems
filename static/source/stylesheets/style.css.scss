@@ -122,6 +122,10 @@ body {
         background-color: #FFEC00;
         min-height: 48px;
 
+        &.reduced_top_margin {
+            margin-top: 32px;
+        }
+
         > span {
             padding-left: 10px;
             padding-right: 20px;
@@ -148,6 +152,16 @@ body {
             font-family: "Avenir-Heavy";
             font-size: 20px;
             text-transform: uppercase;
+        }
+
+        // To left align the edge, taking into account the link
+        h3, h4 {
+            margin-left: -0.7em;
+        }
+
+        .header-link {
+            @include code-text;
+            text-decoration: none;
         }
 
         & > article:first-child {
