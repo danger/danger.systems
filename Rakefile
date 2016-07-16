@@ -13,6 +13,7 @@ task :generate do
 
   # Document them, move them into a nice JSON file
   output = `bundle exec danger plugins json #{danger_core_plugins.join(' ')}`
+  abort("Could not generate the core plugin metadata") if output.empty?
   File.write('static/json_data/core.json', output)
   puts 'Generated core API metadata'
 
@@ -21,6 +22,7 @@ task :generate do
 
   # Generate the Website's plugin doc, by passing in the gem names
   output = `bundle exec danger plugins json #{plugins.join(' ')}`
+  abort("Could not generate any plugin metadata") if output.empty?
   File.write('static/json_data/plugins.json', output)
   puts 'Generated plugin metadata'
 
@@ -41,8 +43,11 @@ task :generate do
         bundler = Bundler::Definition.new(nil, deps, source, true)
         specs = bundler.resolve_remotely!
 
-        # Get the name'd gems out of bundler, then convert them into useful search metadata
-        gem_paths = specs.select { |spec| spec.is_a? Bundler::EndpointSpecification }.map { |endpoint| endpoint.gem_dir + '/' + endpoint.name + '.gemspec' }
+        # Get the name'd gems out of bundler,
+        # then convert them into useful search metadata
+        gem_paths = specs.select { |spec| spec.is_a? Bundler::EndpointSpecification }
+                         .map { |endpoint| endpoint.gem_dir + '/' + endpoint.name + '.gemspec' }
+
         real_gems = gem_paths.flat_map { |path| Gem::Specification.load path }
         plugin_metadata = real_gems.map do |gem|
           {
