@@ -17,7 +17,7 @@ module Middleman
         if (template_class.to_s.index 'Slim') != nil or (path.to_s.index 'templates') != nil
 
           doc = Nokogiri::HTML(body)
-          nodes = doc.css('section article > h3[id], section article > h4[id]')
+          nodes = doc.css('section article > h3[id], section article > h4[id], section article > h5[id]')
 
           if nodes.count > 0
             nodes.each do |header|
