@@ -99,6 +99,11 @@ body {
             margin-right: 20px;
             margin-top: 24px;
             margin-bottom: 24px;
+            &.inline {
+                display: inline-block;
+                float: right;
+                margin-top: 16px;
+            }
         }
         > span.subtle {
             &.return::before {
@@ -116,6 +121,10 @@ body {
         padding-left: 80px;
         background-color: #FFEC00;
         min-height: 48px;
+
+        &.reduced_top_margin {
+            margin-top: 32px;
+        }
 
         > span {
             padding-left: 10px;
@@ -143,6 +152,16 @@ body {
             font-family: "Avenir-Heavy";
             font-size: 20px;
             text-transform: uppercase;
+        }
+
+        // To left align the edge, taking into account the link
+        h3, h4 {
+            margin-left: -0.7em;
+        }
+
+        .header-link {
+            @include code-text;
+            text-decoration: none;
         }
 
         & > article:first-child {

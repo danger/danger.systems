@@ -23,8 +23,8 @@ gem 'sass'
 # Handling GFM markdown
 gem 'redcarpet'
 
-# not sure?
-gem 'github-markup'
+# Making linkable headers
+gem 'nokogiri'
 
 # For the webhook service
 gem 'sinatra'
