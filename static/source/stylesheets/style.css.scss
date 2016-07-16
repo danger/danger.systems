@@ -148,20 +148,29 @@ body {
             text-transform: uppercase;
         }
 
-        h4, h3 > span {
+        h4, h3 > span, h5 {
             font-family: "Avenir-Heavy";
             font-size: 20px;
             text-transform: uppercase;
         }
 
+        h5 {
+            font-size: 14px;
+        }
+
         // To left align the edge, taking into account the link
-        h3, h4 {
+        h3, h4, h5 {
             margin-left: -0.7em;
         }
 
         .header-link {
             @include code-text;
             text-decoration: none;
+            color: #FFEC00;
+
+            &:hover {
+                color: black;
+            }
         }
 
         & > article:first-child {

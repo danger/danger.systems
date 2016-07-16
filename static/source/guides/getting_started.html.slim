@@ -7,17 +7,108 @@ section
   article
     markdown:
 
-      There are 4 steps invovled in getting Danger running:
+      There are 5 steps invovled in getting Danger running:
 
-      * Creating a Dangerfile and adding a few simple rules.
-      * Creating a GitHub account for Danger to use.
-      * Setting up an access token for Danger with that account.
-      * Setting up Danger to run on your CI.
+      * [Include Danger](#including-danger)
+      * [Creating a Dangerfile](#creating-a-dangerfile) and adding a few simple rules.
+      * [Creating a GitHub account for Danger to use](#creating-a-github-account-for-danger-to-use).
+      * Setting up [an access token for Danger](#setting-up-an-access-token) with that account.
+      * Setting up [Danger to run on your CI]().
 
-      If you are installing Danger on a project yourself, then we recommend you add the
+      ### Including Danger
 
-      ### Bundler-less installation
+      We recommend you install Danger via [Bundler][bundler] + a Gemfile. This means that your version of Danger, and your plugins are all versioned correctly. You are in control of how and when your dependencies are updated then. If you'd like to learn more about Bundler, check out [this guide][cp_bundler].
 
-      If Danger is your only ruby dependency, you may not want to use [bundler][bundler]
+      If you'd like to skip use it, then jump to the bottom to [Installation Without Bundler][without_bundler].
+
+      ##### Installation
+
+      If you have an existing Gemfile, add `gem 'danger'` to it. If you don't run `bundle init` in your project root, and edit the freshly minted Gemfile.
+
+      ##### Installation Without Bundler
+
+      If Danger is your only ruby dependency, you may not want to use [Bundler][bundler], that's fine, but note that you'll always be using the latest version of all of your dependencies.
+
+      You can install Danger via `gem install danger`. This will make it available in your system, you can include plugins at the same time by running `gem install danger danger-prose [gem] [gem]`. You can run `danger --version` to check your version. Any time you see a command that recommends you use `bundle exec` - you can skip the `bundle exec` part.
+
+      ##### macOS sudo-less Installation
+
+      Create or edit a `.profile` file in your home directory and add or amend it to include these lines:
+
+      <code>
+        <pre>
+      export GEM_HOME=$HOME/.gem
+      export PATH=$GEM_HOME/bin:$PATH
+        </pre>
+      <code>
+
+      ### Easy Mode
+
+      *Easy mode* - run: `bundle exec danger init` - this will guide you through the next four steps, offering useful advice specific to your setup. If you would like to understand how all of the pieces come together, read on:
+
+
+      ### Creating a Dangerfile
+      Create an empty file, named `Dangerfile`. This is the file that contains ruby code. Your text editor won't highlight as ruby, so you may need to set the syntax highlighting. To get started, we would recommend a simple "Hello World."
+
+      <code>
+        <pre>
+      message("Hello, this worked")
+        </pre>
+      <code>
+
+      ### Creating a GitHub account for Danger to use
+
+      This is optional. Pragmatically, you want to do this though.
+
+      In order to get the most out of Danger, we recommend giving her the ability to post comments in your code review. This is a regular GitHub account, depending on whether you are working on a private or public project you will want to give different levels of access to this bot. You are allowed to have [one bot per GitHub account][github_bots].
+
+      To get started, open [https://github.com](https://github.com) in a private browser session.
+
+      ##### OSS Projects
+
+      Do not add the bot to repo, or to your organization.
+
+      ##### Closed Source Projects
+
+      Add the bot to repo, or to your organization. Note that you _should not_ re-use this bot for OSS projects.
+
+      ### Setting up an Access Token
+
+      [Here's the link][github_token], you should open this in the private session where you just created the new GitHub account. Again, the rights that you give to the token depend on the openness of your projects.
+
+      ##### Tokens for OSS Projects
+
+       We recommend giving the token the smallest scope possible. This means just `public_repo`, this scopes limits Danger's abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimalises the chance for bad actors causing chaos with it.
+
+      ##### Tokens for Closed Source Projects
+
+      We recommend giving access to the whole `repo` scope, and it's children.
+
+      ### Setting up Danger to run on your CI
+
+      _Note: more guides will be coming in time._
+
+      #### Travis CI
+
+      You need to edit your `.travis.yml` to include `bundle exec danger`. If you already have a `script:` section then we recommend adding this command at the end of the script step: `- bundle exec danger`.
+
+      Otherwise, add a `before_script` step to the root of the `.travis.yml` with `bundle exec danger`
+
+      <code>
+        <pre>
+        before_script:
+          - bundle exec danger
+        </pre>
+      <code>
+
+      Adding this to your `.travis.yml` allows Danger to fail your build, both on the TravisCI website and within your Pull Request.
 
       [bundler]: http://bundler.io
+      [cp_bundler]: https://guides.cocoapods.org/using/a-gemfile.html
+      [without_bundler]: #installation-without-bundler
+      [github_bots]: https://twitter.com/sebastiangrail/status/750844399563608065
+      [github_token]: https://github.com/settings/tokens/new
+
+section
+  article
+    p == "help improve this document  by <a href= 'https://github.com/danger/danger.systems/edit/master/static/source/#{current_resource.path}.slim'>sending PRs</a>."
