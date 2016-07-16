@@ -99,6 +99,11 @@ body {
             margin-right: 20px;
             margin-top: 24px;
             margin-bottom: 24px;
+            &.inline {
+                display: inline-block;
+                float: right;
+                margin-top: 16px;
+            }
         }
         > span.subtle {
             &.return::before {
