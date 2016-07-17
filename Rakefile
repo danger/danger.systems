@@ -31,24 +31,19 @@ task :generate do
   Bundler.with_clean_env do
     Dir.mktmpdir do |dir|
       Dir.chdir dir do
-        gem_names = plugins
-        deps = gem_names.map { |name| Bundler::Dependency.new(name, '>= 0') }
+        gemfile = File.new("Gemfile", "w")
+        gemfile.write "source 'https://rubygems.org'\n"
+        
+        plugins.each do |plugin|
+          gemfile.write "gem '#{plugin}'\n"
+        end
+        gemfile.close
 
-        # Use Gems from rubygems.org
-        source = Bundler::SourceList.new
-        source.add_rubygems_remote('https://rubygems.org')
+        sh "bundle install --path vendor/gems"
 
-        # Create a definition to bundle, make sure it always updates
-        # and uses the latest version from the server
-        bundler = Bundler::Definition.new(nil, deps, source, true)
-        specs = bundler.resolve_remotely!
+        spec_paths = plugins.flat_map { |plugin| Dir.glob("vendor/gems/ruby/*/specifications/#{plugin}*.gemspec").first }
+        real_gems = spec_paths.map { |path| Gem::Specification.load path }
 
-        # Get the name'd gems out of bundler,
-        # then convert them into useful search metadata
-        gem_paths = specs.select { |spec| spec.is_a? Bundler::EndpointSpecification }
-                         .map { |endpoint| endpoint.gem_dir + '/' + endpoint.name + '.gemspec' }
-
-        real_gems = gem_paths.flat_map { |path| Gem::Specification.load path }
         plugin_metadata = real_gems.map do |gem|
           {
             gem: gem.name,
