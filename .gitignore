@@ -4,3 +4,4 @@ _site/
 build
 static/json_data/
 .yardoc
+static/source/dangerfiles/*.html

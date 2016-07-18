@@ -26,6 +26,19 @@ task :generate do
   File.write('static/json_data/plugins.json', output)
   puts 'Generated plugin metadata'
 
+  # Grab our Dangerfile plugins list
+  dangerfile_repos = JSON.parse(File.read('example_oss_dangerfiles.json'))
+  dangerfile_repos.each do |repo|
+    require 'open-uri'
+    require 'pygments'
+    dangerfile = open("https://raw.githubusercontent.com/#{repo}/master/Dangerfile").read
+
+    path = "static/source/dangerfiles/#{repo.gsub("/", "_")}.html"
+    html = Pygments.highlight(dangerfile, lexer: 'ruby', options: { encoding: 'utf-8' })
+
+    File.write(path, html)
+  end
+
   # Generate the search plugin JSON file, this used by `danger plugins search`
   # and by the re-deploy webhook system.
   Bundler.with_clean_env do

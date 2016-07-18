@@ -176,7 +176,6 @@ body {
         & > article:first-child {
             margin-right: 20px;
             margin-left: 80px;
-
         }
 
         article {
@@ -236,6 +235,9 @@ body {
                 &:hover {
                     color: #FFEC00;
                 }
+                span {
+                     @include punk-text;
+                }
             }
 
             > li {
@@ -245,6 +247,7 @@ body {
                 padding-top: 6px;
                 padding-bottom: 6px;
                 list-style-type: none;
+                
             }
 
             > li.highlighted, > li.highlighted a  {
