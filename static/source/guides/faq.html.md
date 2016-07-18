@@ -25,8 +25,10 @@ You can work with GitHub Enterprise by setting 2 environment variables:
 - `DANGER_GITHUB_HOST` to the host that GitHub is running on.
 - `DANGER_GITHUB_API_HOST` to the host that the GitHub Enterprise API is reachable on.
 
-```sh
-DANGER_GITHUB_HOST=https://github.prettybigcompany.com DANGER_GITHUB_API_HOST=https://github.prettybigcompany.com/api bundle exec danger
+This could look like:
+
+```
+DANGER_GITHUB_API_HOST=https://git.corp.evilcorp.com/api/v3 DANGER_GITHUB_HOST=git.corp.evilcorp.com bundle exec danger
 ```
 
 #### I want to run Danger across multiple repos
