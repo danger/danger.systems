@@ -1,6 +1,6 @@
-<div class="highlight"><pre><span class="c1"># Don&#39;t let testing shortcuts get into master by accident</span>
-
-<span class="p">(</span><span class="n">modified_files</span> <span class="o">+</span> <span class="n">added_files</span> <span class="o">-</span> <span class="sx">%w(Dangerfile)</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+<div class="highlight"><pre><span class="c1"># Don&#39;t let testing shortcuts get into master by accident, </span>
+<span class="c1"># ensuring that we don&#39;t get green builds based on a subset of tests</span>
+<span class="p">(</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span> <span class="o">+</span> <span class="n">git</span><span class="o">.</span><span class="n">added_files</span> <span class="o">-</span> <span class="sx">%w(Dangerfile)</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
   <span class="k">next</span> <span class="k">unless</span> <span class="no">File</span><span class="o">.</span><span class="n">file?</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
   <span class="n">contents</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">start_with?</span><span class="p">(</span><span class="s1">&#39;spec&#39;</span><span class="p">)</span>
@@ -10,14 +10,14 @@
 <span class="k">end</span>
 
 <span class="c1"># Ensure a clean commits history</span>
-<span class="k">if</span> <span class="n">commits</span><span class="o">.</span><span class="n">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span><span class="o">.</span><span class="n">message</span> <span class="o">=~</span> <span class="sr">/^Merge branch &#39;</span><span class="si">#{</span><span class="n">branch_for_merge</span><span class="si">}</span><span class="sr">&#39;/</span> <span class="p">}</span>
+<span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">commits</span><span class="o">.</span><span class="n">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span><span class="o">.</span><span class="n">message</span> <span class="o">=~</span> <span class="sr">/^Merge branch &#39;</span><span class="si">#{</span><span class="n">github</span><span class="o">.</span><span class="n">branch_for_base</span><span class="si">}</span><span class="sr">&#39;/</span> <span class="p">}</span>
   <span class="nb">fail</span><span class="p">(</span><span class="s1">&#39;Please rebase to get rid of the merge commits in this PR&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 
 <span class="c1"># Request a CHANGELOG entry, and give an example</span>
-<span class="n">has_app_changes</span> <span class="o">=</span> <span class="o">!</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/lib/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
-<span class="k">if</span> <span class="o">!</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;CHANGELOG.md&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">has_app_changes</span>
-  <span class="nb">fail</span><span class="p">(</span><span class="s1">&#39;Please include a CHANGELOG entry to credit yourself! \nYou can find it at [CHANGELOG.md](https://github.com/CocoaPods/CocoaPods/blob/master/CHANGELOG.md).&#39;</span><span class="p">,</span> <span class="ss">:sticky</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span>
+<span class="n">has_app_changes</span> <span class="o">=</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/lib/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
+<span class="k">if</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;CHANGELOG.md&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">has_app_changes</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Please include a CHANGELOG entry to credit yourself! </span><span class="se">\n</span><span class="s2">You can find it at [CHANGELOG.md](https://github.com/CocoaPods/CocoaPods/blob/master/CHANGELOG.md).&quot;</span><span class="p">,</span> <span class="ss">:sticky</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span>
   <span class="n">markdown</span> <span class="o">&lt;&lt;-</span><span class="no">MARKDOWN</span>
 <span class="sh">Here&#39;s an example of your CHANGELOG entry:</span>
 

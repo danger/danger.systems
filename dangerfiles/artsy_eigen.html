@@ -1,29 +1,32 @@
 <div class="highlight"><pre><span class="c1"># Sometimes its a README fix, or something like that - which isn&#39;t relevant for</span>
 <span class="c1"># including in a CHANGELOG for example</span>
-<span class="n">declared_trivial</span> <span class="o">=</span> <span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;#trivial&quot;</span>
+<span class="n">declared_trivial</span> <span class="o">=</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;#trivial&quot;</span>
 
 <span class="c1"># Just to let people know</span>
-<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;PR is classed as Work in Progress&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;[WIP]&quot;</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;PR is classed as Work in Progress&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;[WIP]&quot;</span>
 
 <span class="c1"># Oi, CHANGELOGs please</span>
-<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;No CHANGELOG changes made&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;CHANGELOG.yml&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">declared_trivial</span>
+<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;No CHANGELOG changes made&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">github</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;CHANGELOG.yml&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">declared_trivial</span>
 
 <span class="c1"># Stop skipping some manual testing</span>
-<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Needs testing on a Phone if change is non-trivial&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;📱&quot;</span><span class="p">)</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Needs testing on a Phone if change is non-trivial&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;📱&quot;</span><span class="p">)</span>
 
 <span class="c1"># Don&#39;t let testing shortcuts get into master</span>
 <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;fdescribe left in tests&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="sb">`grep -r fdescribe Artsy_Tests/`</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">1</span>
+<span class="c1"># Handle Objective-C and Swift</span>
 <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;fit left in tests&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="sb">`grep -rI &quot;fit(@&quot; Artsy_Tests/`</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">1</span>
 <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;fit left in tests&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="sb">`grep -rI &quot;fit(&quot; Artsy_Tests/`</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">1</span>
 
 <span class="c1"># Devs shouldn&#39;t ship changes to this file</span>
-<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Developer Specific file shouldn&#39;t be changed&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;Artsy/View_Controllers/App_Navigation/ARTopMenuViewController+DeveloperExtras.m&quot;</span><span class="p">)</span>
-<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Developer Specific file shouldn&#39;t be changed&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;Artsy/View_Controllers/App_Navigation/ARTopMenuViewController+SwiftDeveloperExtras.swift&quot;</span><span class="p">)</span>
-<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Developer Specific file shouldn&#39;t be changed&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;Artsy.xcodeproj/xcshareddata/xcschemes/Artsy.xcscheme&quot;</span><span class="p">)</span>
+<span class="o">[</span><span class="s2">&quot;Artsy/View_Controllers/App_Navigation/ARTopMenuViewController+DeveloperExtras.m&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;Artsy/View_Controllers/App_Navigation/ARTopMenuViewController+SwiftDeveloperExtras.swift&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;Artsy.xcodeproj/xcshareddata/xcschemes/Artsy.xcscheme&quot;</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">dev_file</span><span class="o">|</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Developer Specific file shouldn&#39;t be changed&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span> <span class="n">dev_file</span>
+<span class="k">end</span>
 
 <span class="c1"># Did you make analytics changes? Well you should also include a change to our analytics spec</span>
-<span class="n">made_analytics_changes</span> <span class="o">=</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;/Artsy/App/ARAppDelegate+Analytics.m&quot;</span><span class="p">)</span>
-<span class="n">made_analytics_specs_changes</span> <span class="o">=</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;/Artsy_Tests/Analytics_Tests/ARAppAnalyticsSpec.m&quot;</span><span class="p">)</span>
+<span class="n">made_analytics_changes</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;/Artsy/App/ARAppDelegate+Analytics.m&quot;</span><span class="p">)</span>
+<span class="n">made_analytics_specs_changes</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;/Artsy_Tests/Analytics_Tests/ARAppAnalyticsSpec.m&quot;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">made_analytics_changes</span>
     <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Analytics changes should have reflected specs changes&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="o">!</span><span class="n">made_analytics_specs_changes</span>
 
@@ -32,32 +35,39 @@
     <span class="n">message</span><span class="p">(</span><span class="s1">&#39;Also, double check the [Analytics Eigen schema](https://docs.google.com/spreadsheets/u/1/d/1bLbeOgVFaWzLSjxLOBDNOKs757-zBGoLSM1lIz3OPiI/edit#gid=497747862) if the changes are non-trivial.&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 
+<span class="c1"># It&#39;s relatively common that we ship a CHANGELOG which isn&#39;t valid YAML.</span>
+<span class="c1"># While it&#39;s a bit annoying, having the structure from the YAML is nice.</span>
 
-<span class="c1"># CHANGELOG should lint</span>
 <span class="k">begin</span>
   <span class="n">readme_yaml</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">read</span> <span class="s2">&quot;CHANGELOG.yml&quot;</span>
   <span class="n">readme_data</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load</span> <span class="n">readme_yaml</span>
+
   <span class="c1"># Common error when making a new version</span>
   <span class="nb">fail</span> <span class="s2">&quot;Upcoming is an array, it should be an object&quot;</span> <span class="k">if</span> <span class="n">readme_data</span><span class="o">[</span><span class="s2">&quot;upcoming&quot;</span><span class="o">].</span><span class="n">is_a?</span> <span class="nb">Array</span>  
+
   <span class="c1"># Tie all releases to a date</span>
   <span class="k">for</span> <span class="n">release</span> <span class="k">in</span> <span class="n">readme_data</span><span class="o">[</span><span class="s2">&quot;releases&quot;</span><span class="o">]</span>
     <span class="nb">fail</span> <span class="s2">&quot;Release </span><span class="si">#{</span><span class="n">release</span><span class="o">[</span><span class="s2">&quot;version&quot;</span><span class="o">]</span><span class="si">}</span><span class="s2"> does not have a date&quot;</span> <span class="k">unless</span> <span class="n">release</span><span class="o">[</span><span class="s2">&quot;date&quot;</span><span class="o">]</span>
   <span class="k">end</span> 
 
 <span class="k">rescue</span> <span class="no">StandardError</span>
-  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;CHANGELOG isn&#39;t legit YAML&quot;</span><span class="p">)</span>
+  <span class="c1"># YAML could not be parsed, fail the build.</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;CHANGELOG isn&#39;t valid YAML&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 
+<span class="c1"># Use Circle&#39;s build artifacts feature to let Danger read the build, and test logs.</span>
+<span class="c1"># There&#39;s nothing fancy here, just a unix command chain with `tee` sending the output to a known file.</span>
+<span class="c1">#</span>
 <span class="n">build_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;CIRCLE_ARTIFACTS&quot;</span><span class="o">]</span><span class="p">,</span> <span class="s2">&quot;xcode_build_raw.log&quot;</span><span class="p">)</span>
 <span class="n">test_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;CIRCLE_ARTIFACTS&quot;</span><span class="o">]</span><span class="p">,</span> <span class="s2">&quot;xcode_test_raw.log&quot;</span><span class="p">)</span>
 
-<span class="c1"># So if there&#39;s snapshot fails, we should also fail danger, but we can make the thing clickable in a comment instead of hidden in the log</span>
-<span class="c1"># Note: this may break in a future build of Danger, I am debating sandboxing the runner from ENV vars.</span>
+<span class="c1"># If there&#39;s snapshot fails, we should also fail danger, but we can make the thing clickable in a comment instead of hidden in the log</span>
+<span class="c1"># Note: this _may_ break in a future build of Danger, I am debating sandboxing the runner from ENV vars.</span>
 <span class="n">test_log</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">read</span> <span class="n">test_file</span>
 <span class="n">snapshots_url</span> <span class="o">=</span> <span class="n">test_log</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">%r{https://eigen-ci.s3.amazonaws.com/\d+/index.html}</span><span class="p">)</span>
 <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;There were [snapshot errors](</span><span class="si">#{</span><span class="n">snapshots_url</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">snapshots_url</span>
 
-<span class="c1"># Look for unstubbed networking requests, as these can be a source of test flakiness</span>
+<span class="c1"># Look for unstubbed networking requests in the build log, as these can be a source of test flakiness.</span>
 <span class="n">unstubbed_regex</span> <span class="o">=</span> <span class="sr">/   Inside Test: -\[(\w+) (\w+)/m</span>
 <span class="k">if</span> <span class="n">test_log</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">unstubbed_regex</span><span class="p">)</span>
   <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;#### Found unstubbbed networking requests</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -69,7 +79,7 @@
   <span class="nb">warn</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 <span class="k">end</span>
 
-<span class="c1"># look at the top 1000 symbols</span>
+<span class="c1"># We want to understand how much Swift is slowing our compilation cycles by, so look at the top 1000 Swift symbols from the build log </span>
 <span class="n">most_expensive_swift_table</span> <span class="o">=</span> <span class="sb">`cat </span><span class="si">#{</span><span class="n">build_file</span><span class="si">}</span><span class="sb"> | egrep &#39;\.[0-9]ms&#39; | sort -t &quot;.&quot; -k 1 -n | tail -1000 | sort -t &quot;.&quot; -k 1 -n -r`</span>
 
 <span class="c1"># each line looks like &quot;29.2ms  /Users/distiller/eigen/Artsy/View_Controllers/Live_Auctions/LiveAuctionLotViewController.swift:50:19    @objc override func viewDidLoad()&quot;</span>
@@ -79,6 +89,7 @@
 <span class="n">require_relative</span> <span class="s2">&quot;config/enumerable_stats&quot;</span>
 <span class="n">outliers</span> <span class="o">=</span> <span class="n">time_values</span><span class="o">.</span><span class="n">outliers</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
+<span class="c1"># Take any build timeing outliers, and convert them into a useful markdown table.  </span>
 <span class="k">if</span> <span class="n">outliers</span><span class="o">.</span><span class="n">any?</span>
   <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Detected some Swift building time outliers&quot;</span><span class="p">)</span>
 
@@ -95,6 +106,7 @@
   <span class="n">markdown</span><span class="p">((</span><span class="o">[</span><span class="n">headings</span><span class="o">]</span> <span class="o">+</span> <span class="n">warnings</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">)</span>
 <span class="k">end</span>
 
+<span class="c1"># Use the `danger-swiftlint` plugin to lint our modified, and new files.</span>
 <span class="n">swiftlint</span><span class="o">.</span><span class="n">config_file</span> <span class="o">=</span> <span class="s1">&#39;Artsy/.swiftlint.yml&#39;</span>
 <span class="n">swiftlint</span><span class="o">.</span><span class="n">lint_files</span>
 

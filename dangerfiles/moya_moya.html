@@ -1,10 +1,10 @@
 <div class="highlight"><pre><span class="c1"># Sometimes it&#39;s a README fix, or something like that - which isn&#39;t relevant for</span>
 <span class="c1"># including in a project&#39;s CHANGELOG for example</span>
-<span class="n">not_declared_trivial</span> <span class="o">=</span> <span class="o">!</span><span class="p">(</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;#trivial&quot;</span><span class="p">)</span>
+<span class="n">not_declared_trivial</span> <span class="o">=</span> <span class="o">!</span><span class="p">(</span><span class="n">github</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;#trivial&quot;</span><span class="p">)</span>
 <span class="n">has_app_changes</span> <span class="o">=</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/Source/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
 
 <span class="c1"># Make it more obvious that a PR is a work in progress and shouldn&#39;t be merged yet</span>
-<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;PR is classed as Work in Progress&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;[WIP]&quot;</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;PR is classed as Work in Progress&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;[WIP]&quot;</span>
 
 <span class="c1"># Warn when there is a big PR</span>
 <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Big PR&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">500</span>
@@ -13,7 +13,7 @@
 <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;fit left in tests&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="sb">`grep -r &quot;fit Demo/Tests/ `</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">1</span>
 
 <span class="c1"># Changelog entries are required for changes to library files.</span>
-<span class="n">no_changelog_entry</span> <span class="o">=</span> <span class="o">!</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;Changelog.md&quot;</span><span class="p">)</span>
+<span class="n">no_changelog_entry</span> <span class="o">=</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;Changelog.md&quot;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">has_app_changes</span> <span class="o">&amp;&amp;</span> <span class="n">no_changelog_entry</span> <span class="o">&amp;&amp;</span> <span class="n">not_declared_trivial</span>
   <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Any changes to library code need a summary in the Changelog.&quot;</span><span class="p">)</span>
 <span class="k">end</span>
