@@ -1,0 +1,25 @@
+<div class="highlight"><pre><span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;PR is classed as Work in Progress&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;[WIP]&quot;</span>
+
+<span class="c1"># For the small PRs that are essentially README fixes etc</span>
+<span class="c1"># you don&#39;t necessarily need to include a CHANGELOG</span>
+<span class="c1"># Mark your PR as trivial!</span>
+<span class="n">declared_trivial</span> <span class="o">=</span> <span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;#trivial&quot;</span>
+
+<span class="k">if</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;docs/CHANGELOG.yml&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">declared_trivial</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;No CHANGELOG changes made&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="c1"># Stop skipping some manual testing</span>
+<span class="k">if</span> <span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;📱&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+   <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Needs testing on a Phone if change is non-trivial&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="c1"># CHANGELOG should lint</span>
+<span class="k">begin</span>
+  <span class="nb">require</span> <span class="s1">&#39;yaml&#39;</span>
+  <span class="n">readme_yaml</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">read</span> <span class="s2">&quot;docs/CHANGELOG.yml&quot;</span>
+  <span class="n">readme_data</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load</span> <span class="n">readme_yaml</span>
+<span class="k">rescue</span> <span class="no">StandardError</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;CHANGELOG isn&#39;t legit YAML&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>

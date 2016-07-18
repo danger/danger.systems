@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><title>Danger - Stop Saying "You Forgot To..." in Code Review</title><link href="/stylesheets/style-4a40d19b.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.0.0.slim.min.js"></script></head><body class="index"><code class="byline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code><header class="title"><p>Danger</p><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" width="964" height="220" /><nav><ul><li><a class="highlighted" href="/">home</a></li><li><a href="/guides.html">Guides</a></li><li><a href="/reference.html">Reference</a></li></ul></nav></header><h2><span>What is Danger?</span></h2><section><article><p>Danger runs after your CI, and gives teams the chance to automate common code review chores.</p>
+<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><title>Danger - Stop Saying "You Forgot To..." in Code Review</title><link href="/stylesheets/style-4939387e.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.1.0.min.js"></script></head><body class="index"><code class="byline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code><header class="title"><p>Danger</p><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" /><nav><ul><li><a class="highlighted" href="/">home</a></li><li><a href="/guides.html">Guides</a></li><li><a href="/reference.html">Reference</a></li></ul></nav></header><h2><span>What is Danger?</span></h2><section><article><p>Danger runs after your CI, and gives teams the chance to automate common code review chores.</p>
 
 <p>This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.</p>
 
@@ -37,7 +37,7 @@
     <span class="n">message</span><span class="p">(</span><span class="s1">&#39;Analytics dict changed, double check for ?: `@&quot;&quot;` on new entries&#39;</span><span class="p">)</span>
     <span class="n">message</span><span class="p">(</span><span class="s1">&#39;Also, double check the [Analytics Eigen schema](https://docs.google.com/spreadsheets/u/1/d/1bLbeOgVFaWzLSjxLOBDNOKs757-zBGoLSM1lIz3OPiI/edit#gid=497747862) if the changes are non-trivial.&#39;</span><span class="p">)</span>
 <span class="k">end</span>
-</pre></div></div></div><ref># See artsy/eigen</ref></div></section><h2><span>What magic is this?</span></h2><section><article><h3>How</h3><p>Danger is ruby gem that runs a <code>Dangerfile</code>, you set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
+</pre></div></div></div><ref></ref></div></section><h2><span>What magic is this?</span></h2><section><article><h3>How</h3><p>Danger is ruby gem that runs a <code>Dangerfile</code>, you set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
 
 <p>Danger should be installed via a Gemfile. Add <code>gem "danger"</code> to your Gemfile, then run <code>bundle</code>.</p>
 
@@ -71,27 +71,40 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span> <span class="s2">&quot;_posts/*.md&quot;</span>
 </pre></div><h4>Running the spell checker, with some words whitelisted</h4><div class="highlight"><pre><span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;orta&quot;</span><span class="p">,</span> <span class="s2">&quot;artsy&quot;</span><span class="o">]</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span>
-</pre></div><h3>Tags</h3><code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><h2><span>Meta</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.</p></article></section><script>$(function() {
+</pre></div><h3>Tags</h3><code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><h2><span>Show me some Dangerfiles</span></h2><section><article><p>Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.</p>
+</article></section><section class="examples"><ul><li class="moya/moya" data-url="/dangerfiles/moya_moya.html"><a>moya<span>/</span>moya</a></li><li class="artsy/artsy.github.io" data-url="/dangerfiles/artsy_artsy.github.io.html"><a>artsy<span>/</span>artsy.github.io</a></li><li class="artsy/energy" data-url="/dangerfiles/artsy_energy.html"><a>artsy<span>/</span>energy</a></li><li class="artsy/eigen" data-url="/dangerfiles/artsy_eigen.html"><a>artsy<span>/</span>eigen</a></li><li class="fastlane/fastlane" data-url="/dangerfiles/fastlane_fastlane.html"><a>fastlane<span>/</span>fastlane</a></li><li class="danger/danger" data-url="/dangerfiles/danger_danger.html"><a>danger<span>/</span>danger</a></li><li class="cocoapods/cocoapods" data-url="/dangerfiles/cocoapods_cocoapods.html"><a>cocoapods<span>/</span>cocoapods</a></li></ul><div><div class="code_chunk"></div><ref></ref></div></section><h2><span>Meta</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.</p></article></section><script>$(function() {
   $("section.examples ul li").mouseover(function(event) {
     event.preventDefault()
+    console.log($(this))
 
     // Set the corresponding code
     var klass = $(this).attr("class").replace(" highlighted", "")
 
     // Set selection
-    $("section.examples ul li").removeClass("highlighted")
+    $(this).parent().children().removeClass("scope_code").removeClass("highlighted")
     $(this).addClass("highlighted")
 
-    $("section.examples div.code_chunk > div").css("display", "none")
-    $("section.examples div.code_chunk div." + klass).css("display", "block")
+    var parent = $(this).parents("section")
+    // Is this selector for switching existing code samples?
+    if ($(this).data("repos")) {
+      $("div.code_chunk > div", parent).css("display", "none")
+      $("div.code_chunk div." + klass, parent).css("display", "block")
+    } else if( $(this).data("url") ) {
+      $.get( $(this).data("url"), function(html) {
+        console.log("OK")
+          $("div.code_chunk", parent).empty()
+          $("div.code_chunk", parent).append(html)
+      })  
+    }
 
      // Figure out the reference text
-   var urls = $(this).data("repos").split(", ")
+   var urls = $(this).data("repos") && $(this).data("repos").split(", ")
    var prs = "" //$(this).data("prs").split(", ")
    var toGithubLink = function(ref) {
        return "<a href='https://github.com/" + ref + "/blob/master/Dangerfile'>" + ref + "</a>"
     }
     var showArray = function(array) {
+      if (!array) { return false }
       if (array.length > 1) { return true }
       if (array.length == 0) { return false }
       return array[0].length > 0
@@ -108,7 +121,7 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
     if (showArray(prs)) {
       text += "@see_pr "+ prs.map(toGithubLink).join(", ")
     }
-    $("section.examples ref").html(text)
+    $("ref", parent).html(text)
   })
 
   // Set the selection to be the first

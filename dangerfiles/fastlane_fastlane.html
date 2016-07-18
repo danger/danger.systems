@@ -1,0 +1,40 @@
+<div class="highlight"><pre><span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Big PR&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">500</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">pr_body</span><span class="o">.</span><span class="n">to_s</span> <span class="o">+</span> <span class="n">pr_title</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;WIP&quot;</span><span class="p">)</span>
+  <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Pull Request is Work in Progress&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">if</span> <span class="n">pr_body</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">5</span>
+  <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Please provide a changelog summary in the Pull Request description @</span><span class="si">#{</span><span class="n">pr_author</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">if</span> <span class="o">!</span><span class="n">pr_title</span><span class="o">.</span><span class="n">downcase</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;version bump&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+   <span class="o">!</span><span class="n">pr_body</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;https://github.com/fastlane/fastlane/issues/&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+   <span class="n">pr_body</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/#\d+/</span><span class="p">)</span><span class="o">.</span><span class="n">nil?</span>
+  <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Before submitting a Pull Request, please create an issue on GitHub to discuss the change. Please add a link to the issue in the PR body.&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
+
+<span class="n">containing_dir</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;CIRCLE_ARTIFACTS&quot;</span><span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;.&quot;</span> <span class="c1"># for local testing</span>
+<span class="n">rspec_files</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">[</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">containing_dir</span><span class="p">,</span> <span class="s2">&quot;rspec_logs_*.json&quot;</span><span class="p">)</span><span class="o">]</span>
+<span class="n">rspec_files</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">current</span><span class="o">|</span>
+  <span class="n">rspec</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">current</span><span class="p">))</span>
+
+  <span class="n">rspec</span><span class="o">[</span><span class="s2">&quot;examples&quot;</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">current_test</span><span class="o">|</span>
+    <span class="k">next</span> <span class="k">if</span> <span class="n">current_test</span><span class="o">[</span><span class="s2">&quot;status&quot;</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;passed&quot;</span>
+
+    <span class="n">new_line</span> <span class="o">=</span> <span class="s2">&quot;&lt;br /&gt;&quot;</span>
+    <span class="n">border</span> <span class="o">=</span> <span class="s2">&quot;&lt;hr /&gt;&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">current_test</span><span class="o">[</span><span class="s2">&quot;exception&quot;</span><span class="o">][</span><span class="s2">&quot;message&quot;</span><span class="o">].</span><span class="n">strip</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/\n+/</span><span class="p">,</span> <span class="n">new_line</span><span class="p">)</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/\\t+/</span><span class="p">,</span> <span class="n">new_line</span><span class="p">)</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/\\n+/</span><span class="p">,</span> <span class="n">new_line</span><span class="p">)</span>
+
+    <span class="n">tool_name</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/.*rspec_logs_(.*).json/</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="c1"># e.g. &quot;rspec_logs_spaceship.json&quot;</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">current_test</span><span class="o">[</span><span class="s2">&quot;file_path&quot;</span><span class="o">].</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span>
+    <span class="n">error_message</span> <span class="o">=</span> <span class="s2">&quot;&lt;code&gt;</span><span class="si">#{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">:</span><span class="si">#{</span><span class="n">current_test</span><span class="o">[</span><span class="s2">&quot;line_number&quot;</span><span class="o">]</span><span class="si">}</span><span class="s2">&lt;/code&gt;&quot;</span>
+    <span class="n">error_message</span> <span class="o">+=</span> <span class="n">border</span>
+    <span class="n">error_message</span> <span class="o">+=</span> <span class="s2">&quot;&lt;pre&gt;</span><span class="si">#{</span><span class="n">message</span><span class="si">}</span><span class="s2">&lt;/pre&gt;&quot;</span>
+
+    <span class="nb">fail</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>

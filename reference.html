@@ -1,6 +1,6 @@
-<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><title>Danger - Reference</title><link href="/stylesheets/style-4a40d19b.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.0.0.slim.min.js"></script></head><body class="reference"><header class="title small"><p>Danger</p><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" width="964" height="220" /><nav><ul><li><a href="/">home</a></li><li><a href="/guides.html">Guides</a></li><li><a class="highlighted" href="/reference.html">Reference</a></li></ul></nav></header><code class="byline small">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code><h2><span>Reference</span></h2><h2><span>git</span></h2><section><article class="scope_code"><p>Handles interacting with git inside a Dangerfile. Providing access to files that have changed, and useful statistics. Also provides
+<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><title>Danger - Reference</title><link href="/stylesheets/style-4939387e.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.1.0.min.js"></script></head><body class="reference"><header class="title small"><p>Danger</p><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" /><nav><ul><li><a href="/">home</a></li><li><a href="/guides.html">Guides</a></li><li><a class="highlighted" href="/reference.html">Reference</a></li></ul></nav></header><h2 class="reduced_top_margin"><span>Reference</span><code class="byline inline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code></h2><h2><span>git</span></h2><section><article class="scope_code"><p>Handles interacting with git inside a Dangerfile. Providing access to files that have changed, and useful statistics. Also provides
 access to the commits in the form of <a href="https://github.com/schacon/ruby-git/blob/master/lib/git/log.rb">Git::Log</a> objects.</p>
-<h3>Reference</h3><h4>Methods</h4><div class="fake_code"></div><code>instance_name</code><div class="fake_code"><p>Paths for files that were added during the diff</p>
+<h3>Reference</h3><h4>Methods</h4><div class="fake_code"><p>Paths for files that were added during the diff</p>
 </div><code>added_files<span class='subtle return'>FileList<String></span></code><div class="fake_code"><p>Paths for files that were removed during the diff</p>
 </div><code>deleted_files<span class='subtle return'>FileList<String></span></code><div class="fake_code"><p>Paths for files that changed during the diff</p>
 </div><code>modified_files<span class='subtle return'>FileList<String></span></code><div class="fake_code"><p>The overall lines of code added/removed in the diff</p>
@@ -17,14 +17,14 @@ access to the commits in the form of <a href="https://github.com/schacon/ruby-gi
 <span class="k">end</span>
 </pre></div></article><div class="clearfix"></div></section><h2><span>github</span></h2><section><article class="scope_code"><p>Handles interacting with GitHub inside a Dangerfile. Provides a few functions which wrap <code>pr_json</code> and also
 through a few standard functions to simplify your code.</p>
-<h3>Reference</h3><h4>Methods</h4><div class="fake_code"></div><code>instance_name</code><div class="fake_code"><p>The title of the Pull Request.</p>
+<h3>Reference</h3><h4>Methods</h4><div class="fake_code"><p>The title of the Pull Request.</p>
 </div><code>pr_title<span class='subtle return'>String</span></code><div class="fake_code"><p>The body text of the Pull Request.</p>
 </div><code>pr_body<span class='subtle return'>String</span></code><div class="fake_code"><p>The username of the author of the Pull Request.</p>
 </div><code>pr_author<span class='subtle return'>String</span></code><div class="fake_code"><p>The labels assigned to the Pull Request.</p>
 </div><code>pr_labels<span class='subtle return'>String</span></code><div class="fake_code"><p>The branch to which the PR is going to be merged into.</p>
 </div><code>branch_for_base<span class='subtle return'>String</span></code><div class="fake_code"><p>The branch to which the PR is going to be merged from.</p>
 </div><code>branch_for_head<span class='subtle return'>String</span></code><div class="fake_code"><p>The base commit to which the PR is going to be merged as a parent.</p>
-</div><code>base_commit</code><div class="fake_code"><p>The head commit to which the PR is requesting to be merged from.</p>
+</div><code>base_commit<span class='subtle return'>String</span></code><div class="fake_code"><p>The head commit to which the PR is requesting to be merged from.</p>
 </div><code>head_commit<span class='subtle return'>String</span></code><div class="fake_code"><p>The hash that represents the PR&#39;s JSON. For an example of what this looks like
 see the <a href="https://raw.githubusercontent.com/danger/danger/master/spec/fixtures/pr_response.json">Danger Fixture&#39;d one</a>.</p>
 </div><code>pr_json<span class='subtle return'>Hash</span></code><div class="fake_code"><p>Provides access to the GitHub API client used inside Danger. Making
@@ -40,8 +40,10 @@ the chance to quickly iterate without the need for building rubygems. As such,
 it does not have the stringent rules around documentation expected of a public plugin.
 It&#39;s worth noting, that you can also have plugins inside <code>./danger_plugins</code> and they
 will be automatically imported into your Dangerfile at launch.</p>
-<h3>Reference</h3><h4>Methods</h4><div class="fake_code"></div><code>instance_name</code><div class="fake_code"><p>Download a local or remote plugin and use it inside the Dangerfile.</p>
-</div><code>import(path: String)</code></article><article class="scope_code"><h3>Examples</h3><h4>Import a plugin available over HTTP</h4><div class="highlight"><pre><span class="n">device_grid</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/fastlane/fastlane/master/danger-device_grid/lib/device_grid/plugin.rb&quot;</span>
+<h3>Reference</h3><h4>Methods</h4><div class="fake_code"><p>Download a local or remote plugin and use it inside the Dangerfile.</p>
+</div><code>import(path_or_url: String)</code><div class="fake_code"><p>Download a local or remote plugin or Dangerfile
+This method will not import the file for you, use plugin.import instead</p>
+</div><code>download(path_or_url: String)<span class='subtle return'>String</span></code></article><article class="scope_code"><h3>Examples</h3><h4>Import a plugin available over HTTP</h4><div class="highlight"><pre><span class="n">device_grid</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/fastlane/fastlane/master/danger-device_grid/lib/device_grid/plugin.rb&quot;</span>
 <span class="n">plugin</span><span class="o">.</span><span class="n">import</span> <span class="n">device_grid</span>
 </pre></div><h4>Import from a local file reference</h4><div class="highlight"><pre><span class="n">plugin</span><span class="o">.</span><span class="n">import</span> <span class="s2">&quot;danger/plugins/watch_plugin.rb&quot;</span>
 </pre></div><h4>Import all files inside a folder</h4><div class="highlight"><pre><span class="n">plugin</span><span class="o">.</span><span class="n">import</span> <span class="s2">&quot;danger/plugins/*.rb&quot;</span>
@@ -60,15 +62,15 @@ via the return value for the danger command.</p>
 <p>It is possible to have Danger ignore specific warnings or errors by writing <code>Danger: Ignore &quot;[warning/error text]</code>.</p>
 
 <p>Sidenote: Messaging is the only plugin which adds functions to the root of the Dangerfile.</p>
-<h3>Reference</h3><h4>Methods</h4><div class="fake_code"></div><code>instance_name</code><div class="fake_code"><p>Print markdown to below the table</p>
+<h3>Reference</h3><h4>Methods</h4><div class="fake_code"><p>Print markdown to below the table</p>
 </div><code>markdown(message: String)</code><div class="fake_code"><p>Print out a generate message on the PR</p>
 </div><code>message(message: String, sticky:)</code><div class="fake_code"><p>Specifies a problem, but not critical</p>
 </div><code>warn(message: String, sticky:)</code><div class="fake_code"><p>Declares a CI blocking error</p>
 </div><code>fail(message: String, sticky:)</code><div class="fake_code"><p>A list of all messages passed to Danger, including
 the markdowns.</p>
-</div><code>status_report</code><div class="fake_code"><p>A list of all violations passed to Danger, we don&#39;t
+</div><code>status_report<span class='subtle return'>Hash</span></code><div class="fake_code"><p>A list of all violations passed to Danger, we don&#39;t
 anticipate users of Danger needing to use this.</p>
-</div><code>violation_report</code></article><article class="scope_code"><h3>Examples</h3><h4>Failing a build</h4><div class="highlight"><pre><span class="nb">fail</span> <span class="s2">&quot;This build didn&#39;t pass tests&quot;</span>
+</div><code>violation_report<span class='subtle return'>Hash</span></code></article><article class="scope_code"><h3>Examples</h3><h4>Failing a build</h4><div class="highlight"><pre><span class="nb">fail</span> <span class="s2">&quot;This build didn&#39;t pass tests&quot;</span>
 </pre></div><h4>Failing a build, but not keeping it's value around on subsequent runs</h4><div class="highlight"><pre><span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;This build didn&#39;t pass tests&quot;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
 </pre></div><h4>Passing a warning</h4><div class="highlight"><pre><span class="nb">warn</span> <span class="s2">&quot;This build didn&#39;t pass linting&quot;</span>
 </pre></div><h4>Displaying a markdown table</h4><div class="highlight"><pre><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;### Proselint found issues</span><span class="se">\n\n</span><span class="s2">&quot;</span>

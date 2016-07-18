@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<title>What does Danger do?</title>
+<link href="/stylesheets/style-4939387e.css" rel="stylesheet">
+<link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body class="guides guides_what_does_danger_do">
+<header class="title small"><p>Danger</p>
+<img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image"><nav><ul>
+<li><a href="/">home</a></li>
+<li><a class="highlighted" href="/guides.html">Guides</a></li>
+<li><a href="/reference.html">Reference</a></li>
+</ul></nav></header><h2 class="reduced_top_margin">
+<span>Danger wot</span><code class="byline inline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code>
+</h2>
+<section><article><p>Danger makes it easy to create feedback loops in code reviews through automation. This makes it possible to move cultural norms within your team into code, as well as easily share them with the world.</p>
+
+<p>To pull that off, Danger needs to be able to run inside your continuous integration (CI) environment, and to be able to provide feedback to your code review platform. This document describes what happens when you run <code>bundle exec danger</code>.</p>
+
+<ol>
+  <li>First she sets up the core plugins for Danger, these are the classes documented in the reference. They provide the user API for Danger.</li>
+  <li>Next she determines if she's running on a CI service she recognizes.</li>
+  <li>After being sure about the environment, she checks if this is a code review build. For single commit / merge builds, Danger does not run.</li>
+  <li>With the environment set up, she generates diff information, and pulls down status information for the code review.</li>
+  <li>Danger then runs your local <code>Dangerfile</code>.</li>
+  <li>After parsing the local <code>Dangerfile</code>, she then checks for an <a href="/guides/faq.html#i-want-to-run-danger-across-multiple-repos">organisation</a> <code>Dangerfile</code> and runs that if it exists.</li>
+  <li>Danger then posts a comment into your code review page showing the results of the <code>Dangerfile</code>s.</li>
+  <li>Finally Danger either fails the build, or exits with a successful exit code.</li>
+</ol>
+
+<h3 id="plugins">
+<a class="header-link" href="#plugins">#</a>Plugins</h3>
+
+<p>Danger was built with a plugin structure in mind from day one. The core of Danger itself aims to be small, with space for others to easily build sharable plugins that extend Danger to fix common issues. All of the Danger API is built in plugins.</p>
+
+<p>To simplify the experience for consumers of plugins, Danger does very little. Each plugin adds an instance of the plugin's class into the <code>Dangerfile</code>, plugins are then free to use their own methods and store their own data in memory. One of the up-sides of this is that if you want to take some code from your <code>Dangerfile</code>, and turn it into a plugin - it would be source-compatible.</p>
+
+</article></section><section><article><p>help improve this document  by <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/what_does_danger_do.html.md">sending PRs</a>.</p></article></section>
+</body>
+</html>
