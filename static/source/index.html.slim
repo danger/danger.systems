@@ -6,6 +6,8 @@ ruby:
   require 'json'
   require 'yaml'
   example_data = YAML.load(File.read "source/examples.yml")
+  dangerfiles = JSON.parse(File.read('../example_oss_dangerfiles.json'))
+  plugins = JSON.parse(File.read("json_data/plugins.json"))
 
 h2
   span What is Danger?
@@ -33,7 +35,8 @@ section.examples
           div class=example["id"]
               == syntax_highlight example["code"]
 
-      ref == "# See artsy/eigen"
+      ref == ""
+
 
 h2
  span What magic is this?
@@ -72,8 +75,28 @@ section
      Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.
 
 section
-  - for plugin in JSON.parse(File.read("json_data/plugins.json"))
+  - for plugin in plugins
     == partial(:plugin_doc, locals: { plugin: plugin, external: true })
+
+h2
+ span Show me some Dangerfiles
+
+section
+  article
+    markdown:
+     Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.  
+
+section.examples
+  ul
+    - for repo in dangerfiles
+      li class=repo  data-url="/dangerfiles/#{repo.gsub("/", "_")}.html"
+        a == repo.gsub("/", "<span>/</span>")
+
+  div
+    div.code_chunk
+
+    ref == ""
+
 
 h2
   span Meta
@@ -86,24 +109,36 @@ javascript:
     $(function() {
       $("section.examples ul li").mouseover(function(event) {
         event.preventDefault()
+        console.log($(this))
 
         // Set the corresponding code
         var klass = $(this).attr("class").replace(" highlighted", "")
 
         // Set selection
-        $("section.examples ul li").removeClass("highlighted")
+        $(this).parent().children().removeClass("scope_code").removeClass("highlighted")
         $(this).addClass("highlighted")
 
-        $("section.examples div.code_chunk > div").css("display", "none")
-        $("section.examples div.code_chunk div." + klass).css("display", "block")
+        var parent = $(this).parents("section")
+        // Is this selector for switching existing code samples?
+        if ($(this).data("repos")) {
+          $("div.code_chunk > div", parent).css("display", "none")
+          $("div.code_chunk div." + klass, parent).css("display", "block")
+        } else if( $(this).data("url") ) {
+          $.get( $(this).data("url"), function(html) {
+            console.log("OK")
+              $("div.code_chunk", parent).empty()
+              $("div.code_chunk", parent).append(html)
+          })  
+        }
 
          // Figure out the reference text
-       var urls = $(this).data("repos").split(", ")
+       var urls = $(this).data("repos") && $(this).data("repos").split(", ")
        var prs = "" //$(this).data("prs").split(", ")
        var toGithubLink = function(ref) {
            return "<a href='https://github.com/" + ref + "/blob/master/Dangerfile'>" + ref + "</a>"
         }
         var showArray = function(array) {
+          if (!array) { return false }
           if (array.length > 1) { return true }
           if (array.length == 0) { return false }
           return array[0].length > 0
@@ -120,7 +155,7 @@ javascript:
         if (showArray(prs)) {
           text += "@see_pr "+ prs.map(toGithubLink).join(", ")
         }
-        $("section.examples ref").html(text)
+        $("ref", parent).html(text)
       })
 
       // Set the selection to be the first
