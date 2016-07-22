@@ -8,12 +8,12 @@ task :generate do
   Dir.mkdir('static/json_data') unless Dir.exist?('static/json_data')
 
   # Grab the Danger gem, pull out the file paths for the core plugins
-  danger_gem = Gem::Specification.find_by_name "danger"
-  danger_core_plugins = Dir.glob(danger_gem.gem_dir + "/lib/danger/danger_core/plugins/*.rb")
+  danger_gem = Gem::Specification.find_by_name 'danger'
+  danger_core_plugins = Dir.glob(danger_gem.gem_dir + '/lib/danger/danger_core/plugins/*.rb')
 
   # Document them, move them into a nice JSON file
   output = `bundle exec danger plugins json #{danger_core_plugins.join(' ')}`
-  abort("Could not generate the core plugin metadata") if output.empty?
+  abort('Could not generate the core plugin metadata') if output.empty?
   File.write('static/json_data/core.json', output)
   puts 'Generated core API metadata'
 
@@ -22,7 +22,7 @@ task :generate do
 
   # Generate the Website's plugin doc, by passing in the gem names
   output = `bundle exec danger plugins json #{plugins.join(' ')}`
-  abort("Could not generate any plugin metadata") if output.empty?
+  abort('Could not generate any plugin metadata') if output.empty?
   File.write('static/json_data/plugins.json', output)
   puts 'Generated plugin metadata'
 
@@ -33,7 +33,7 @@ task :generate do
     require 'pygments'
     dangerfile = open("https://raw.githubusercontent.com/#{repo}/master/Dangerfile").read
 
-    path = "static/source/dangerfiles/#{repo.gsub("/", "_")}.html"
+    path = "static/source/dangerfiles/#{repo.tr('/', '_')}.html"
     html = Pygments.highlight(dangerfile, lexer: 'ruby', options: { encoding: 'utf-8' })
 
     File.write(path, html)
@@ -44,15 +44,15 @@ task :generate do
   Bundler.with_clean_env do
     Dir.mktmpdir do |dir|
       Dir.chdir dir do
-        gemfile = File.new("Gemfile", "w")
+        gemfile = File.new('Gemfile', 'w')
         gemfile.write "source 'https://rubygems.org'\n"
-        
+
         plugins.each do |plugin|
           gemfile.write "gem '#{plugin}'\n"
         end
         gemfile.close
 
-        sh "bundle install --path vendor/gems"
+        sh 'bundle install --path vendor/gems'
 
         spec_paths = plugins.flat_map { |plugin| Dir.glob("vendor/gems/ruby/*/specifications/#{plugin}*.gemspec").first }
         real_gems = spec_paths.map { |path| Gem::Specification.load path }
