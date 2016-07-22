@@ -8,13 +8,12 @@ require 'nokogiri'
 
 module Middleman
   class AddLinksToHeaders < Middleman::Extension
-    def initialize(app, options_hash={}, &block)
+    def initialize(app, options_hash = {}, &block)
       super
-      app.after_render do |body, path, locs, template_class|
-
+      app.after_render do |body, path, _locs, template_class|
         # we get multiple render calls due to markdown / slim doing their thing
         #
-        if (template_class.to_s.index 'Slim') != nil or (path.to_s.index 'templates') != nil
+        if (template_class.to_s.index 'Slim') != nil || (path.to_s.index 'templates') != nil
 
           doc = Nokogiri::HTML(body)
           nodes = doc.css('section article > h3[id], section article > h4[id], section article > h5[id]')
@@ -40,6 +39,5 @@ module Middleman
 end
 
 ::Middleman::Extensions.register(:add_links_to_headers) do
-   Middleman::AddLinksToHeaders
+  Middleman::AddLinksToHeaders
 end
-

@@ -12,7 +12,7 @@ class App < Sinatra::Base
     hook = JSON.parse(payload_body)
 
     # Give an OK message when it's being set up
-    return "OK" if hook["hook"] && hook["hook"]["type"] == "Repository"
+    return 'OK' if hook['hook'] && hook['hook']['type'] == 'Repository'
 
     # Grab our list of plugins
     plugin_json = File.read('../plugins-search-generated.json')
@@ -20,7 +20,7 @@ class App < Sinatra::Base
     plugin_urls = plugins['plugins'].map { |plugin| plugin['url'] }
 
     # Allow new tags on Danger/Danger to trigger updates
-    plugin_urls << "https://github.com/danger/danger"
+    plugin_urls << 'https://github.com/danger/danger'
 
     # 403 if it's not a tag create
     halt 403 unless hook['ref_type'] == 'tag'
