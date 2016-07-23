@@ -24,7 +24,7 @@ We'll be checking for whether you get useful metadata when you run `danger plugi
 
 ### example_oss_.json
 
-It's hard to cover all the use cases of Danger, so rather than trying to do that, we're instead going to pull the Dangerfiles from different repos and show them in the Dangerfile guide.
+It's hard to cover all the use cases of Danger, so rather than trying to do that, we're instead going to pull the Dangerfiles from different repos and show them in the Dangerfile guide. We'd love more examples, the only thing we ask is that you aim to keep it very well commented ( ideally, over commented, non-rubyists will be reading it.)
 
 ### danger.systems
 
