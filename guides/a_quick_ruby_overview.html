@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <title>A Quick Ruby Overview</title>
-<link href="/stylesheets/style-e9015e75.css" rel="stylesheet">
+<link href="/stylesheets/style-84278eb6.css" rel="stylesheet">
 <link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
@@ -23,7 +23,14 @@
 
 <p>My assumption is that you are a programmer, with some experience. You should be familiar with the terminal. This guide aims to cover enough Ruby for you to feel somewhat productive. You don’t need to know all of the details of the language, but you should probably have some familiarity with a few of these major topics.</p>
 
-<p>Ruby has a repl, the best one by far is called pry. So if you want to have a play with the language. Run <code>gem install pry</code> then run <code>pry</code>.</p>
+<p>Ruby has a repl, the best one by far is <code>pry</code>. So, if you want to have a play with the language. Run <code>gem install pry</code> then run <code>pry</code>. If the gem does not install, you should follow <a href="https://guides.cocoapods.org/using/getting-started.html#sudo-less-installation">the instructions here</a> to do a sudo-less install.</p>
+
+<h3 id="environment">
+<a class="header-link" href="#environment">#</a>Environment</h3>
+
+<p>The <code>Dangerfile</code> is a scripting environment, this means that you can totally get by with some simple hacking. Inside the Dangerfile, you only need to understand how to manipulate the data exposed via the API. You can see the full extent of the DSL in <a href="/reference.html">the reference</a> and from the plugins overview in the <a href="/">homepage</a>.</p>
+
+<p>Realistically, the DSL is small. To be productive in your <code>Dangerfile</code> you will need to use Ruby to put the pieces together. You don’t need to be a pro at Ruby though, as you’ll mostly be doing string and array manipulation, file accessing, and executing shell commands. Which is what we’ll cover here.</p>
 
 <h3 id="variables-and-keyword-syntax">
 <a class="header-link" href="#variables-and-keyword-syntax">#</a>Variables and Keyword Syntax</h3>
@@ -78,12 +85,12 @@ name[0..3]                    # Orta
 <h3 id="arrays-closures">
 <a class="header-link" href="#arrays-closures">#</a>Arrays + Closures</h3>
 
-<p>Arrays are also mostly immutable, it’s common to iterate with <code>array.each</code> instead of <code>for thing in array</code>. Closures for functions like <code>each</code>, <code>map</code>, <code>select</code>, <code>flat_map</code> and the like can either be a single line with braces:</p>
+<p>Arrays are also mostly immutable, it’s common to iterate with <code>array.each</code> instead of <code>for thing in array</code>. Closures for functions like <code>each</code>, <code>map</code>, <code>select</code>, <code>flat_map</code>, <code>reject</code> and the like, can be executed with a single line with braces:</p>
 
 <pre><code class="ruby">paths.map { |path| File.read(path) }.select { |content| content.include? "orta" }
 </code></pre>
 
-<p>Or for longer closures, it’s common to use <code>do</code> and <code>end</code>:</p>
+<p>For longer closures, it’s common to use <code>do</code> and <code>end</code>:</p>
 
 <pre><code class="ruby">paths.each do |path|
   path.name += "Dangerfile"
@@ -91,7 +98,7 @@ name[0..3]                    # Orta
 end
 </code></pre>
 
-<p>Finally, the simplest “closure”, that only works if you want to call a function on the object in your collection is this interesting pattern: <code>lowercase_path = paths.map(:downcase)</code> - where <code>downcase</code> is a function on the strings in the array.</p>
+<p>Finally, the simplest “closure”, that only works if you want to call a function on the object in your collection is this interesting pattern: <code>lowercase_path = paths.map(&amp;:downcase)</code> - where <code>downcase</code> is a function on the strings in the array.</p>
 
 <p><code>Note:</code> In Danger, for lists of files (e.g.<code>git.modified_files</code>) we use a class called a <code>FileList</code> which is an array subclass. <a href="https://github.com/danger/danger/blob/master/spec/lib/danger/core_ext/file_list_spec.rb">This adds one extra method</a>: <code>include?</code>. This lets you use <a href="http://wiki.bash-hackers.org/syntax/expansion/globs">path globbing</a> to determine if a string is in the list:</p>
 
@@ -130,14 +137,14 @@ filelist.include? "path1/*.json"          # false
 <h3 id="json-parsing">
 <a class="header-link" href="#json-parsing">#</a>JSON Parsing</h3>
 
-<p>To work with JSON data, you <em>may</em> have to <code>require</code> the JSON library first. Note some systems are case-sensitive, so always do <code>require "JSON"</code>.</p>
+<p>To work with JSON data, you <em>may</em> have to <code>require</code> the JSON library first. Note some systems are case-sensitive, so always do <code>require "json"</code>. I keep getting this wrong, it’s always in lowercase. :D</p>
 
 <p>For example grabbing some JSON data, parsing it, then pulling something out:</p>
 
 <pre><code class="ruby">path = "path/to/file.json"
 contents = File.read path
 
-require "JSON"
+require "json"
 json = JSON.parse contents
 
 thing = json["things"][0]
@@ -146,7 +153,26 @@ thing = json["things"][0]
 <h3 id="running-a-dangerfile-inside-irb">
 <a class="header-link" href="#running-a-dangerfile-inside-irb">#</a>Running a Dangerfile inside IRB</h3>
 
-<p>There’s a great section in the troubleshooting on letting you dig around inside Danger via <code>pry</code>.</p>
-</article></section><section><article><p>help improve this document  by <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/a_quick_ruby_overview.html.md">sending PRs</a>.</p></article></section>
+<p>There’s a <a href="/guides/troubleshooting.html#i-want-to-be-a-danger-wizard">great section in the troubleshooting</a> on letting you dig around inside Danger via <code>pry</code>.</p>
+</article></section><section><article><p>help improve this document  by <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/a_quick_ruby_overview.html.md">sending PRs</a>.</p></article></section><footer><article><h3>GitHub</h3>
+<ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul>
+<h3>Twitter</h3>
+<ul>
+<li><a href="https://twitter.com/orta">@orta</a></li>
+<li><a href="https://twitter.com/krausefx">@krausefx</a></li>
+</ul></article><article><h3>Guides</h3>
+<ul>
+<li><a href="/guides/getting_started.html">Getting Set Up</a></li>
+<li><a href="/guides/dangerfile.html">The Dangerfile</a></li>
+<li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li>
+<li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li>
+<li><a href="/guides/faq.html">Frequently Asked Questions</a></li>
+<li><a href="/guides/troubleshooting.html">Troubleshooting</a></li>
+</ul></article><article><h3>Misc</h3>
+<ul>
+<li><a href="/reference.html">DSL Reference</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Code of Conduct</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Community Continuity</a></li>
+</ul></article><article><img height="110" src="/images/dm-orta-91d934f3.jpg" width="100"></article></footer>
 </body>
 </html>

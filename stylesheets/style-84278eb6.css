@@ -5,6 +5,10 @@
   font-style: normal; }
 body {
   margin: 0; }
+  body a {
+    color: #FF4D71; }
+    body a:visited {
+      color: #A53148; }
   body > header {
     background-size: 268px 100%;
     height: 268px;
@@ -27,6 +31,8 @@ body {
         text-decoration: none;
         color: white;
         text-shadow: 2px 2px black; }
+        body > header > nav li a:visited {
+          color: white; }
         body > header > nav li a.highlighted, body > header > nav li a:hover {
           color: #FFEC00; }
         body > header > nav li a.highlighted {
@@ -166,8 +172,11 @@ body {
       body > section.examples ul a:hover {
         color: #FFEC00; }
       body > section.examples ul a span {
-        font-family: "prodotto_in_cina";
-        text-transform: uppercase; }
+        font-family: "Avenir Heavy";
+        font-weight: bold;
+        color: black;
+        padding-left: 2px;
+        padding-right: 3px; }
     body > section.examples ul > li {
       font-family: "prodotto_in_cina";
       text-transform: uppercase;
@@ -200,3 +209,34 @@ body {
   body > section.examples ref {
     padding-top: 10px;
     font-family: "Monaco"; }
+  body footer {
+    margin-top: 80px;
+    background-color: #FFEC00;
+    display: -ms-flex;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row;
+    padding-top: 40px;
+    padding-bottom: 40px; }
+    body footer > article:first-child {
+      margin-right: 20px;
+      margin-left: 80px; }
+    body footer > article:last-child {
+      margin-right: 80px;
+      text-align: right; }
+    body footer article {
+      width: 25%; }
+    body footer h3 {
+      font-family: "prodotto_in_cina";
+      text-transform: uppercase; }
+    body footer ul {
+      padding-left: 0; }
+      body footer ul li {
+        font-family: "Monaco";
+        margin: 4px;
+        list-style: none; }
+        body footer ul li a, body footer ul li a:visited {
+          text-decoration: none;
+          color: black; }
+        body footer ul li a:hover {
+          color: #867C01; }
