@@ -125,7 +125,7 @@ If you want to know more about any of these, check out [this Stack Overflow](htt
 
 ### JSON Parsing
 
-To work with JSON data, you _may_ have to `require` the JSON library first. Note some systems are case-sensitive, so always do `require "JSON"`.
+To work with JSON data, you _may_ have to `require` the JSON library first. Note some systems are case-sensitive, so always do `require "json"`. I keep getting this wrong, it's always in lowercase. :D
 
 For example grabbing some JSON data, parsing it, then pulling something out:
 
@@ -133,7 +133,7 @@ For example grabbing some JSON data, parsing it, then pulling something out:
 path = "path/to/file.json"
 contents = File.read path
 
-require "JSON"
+require "json"
 json = JSON.parse contents
 
 thing = json["things"][0]

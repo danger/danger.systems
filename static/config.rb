@@ -1,4 +1,4 @@
-require 'JSON'
+require 'json'
 # Create some pages that represent the plugins
 plugins = JSON.parse(File.read('json_data/plugins.json'))
 plugins.each do |plugin|
