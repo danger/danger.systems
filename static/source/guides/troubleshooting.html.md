@@ -20,7 +20,7 @@ Here's some tips for using pry inside Danger. You will start off running the REP
 
 [Pry is special][pry] because it provides a UNIX folder-like structure for your object graph. You can use `ls` to see all the local variables, and attributes for your current `Dangerfile`. Then use `cd` to change the state to another object, and `cd ..` to go back.
 
-Inside the `Dangerfile` plugin instances are not in the default list alas, but you can get them all with `@plugins.keys.map(&:instance_name)`.
+Inside the `Dangerfile`, plugin instances are not in the default list alas, but you can get them all with `@plugins.keys.map(&:instance_name)`.
 
 For example, to look around inside your `git` state, do a `cd git` and do `ls` again. If you want an in-depth overview of the current object use `inspect`.
 

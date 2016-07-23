@@ -84,35 +84,54 @@ body {
         }
     }
 
-    p {
+    p, li {
         font-family: "Avenir Book";
         font-size: 17px;
     }
 
-    code {
+    p > code {
         @include code-text;
         font-size: 14px;
+        background-color: rgba(201, 167, 40, 0.10);
+    }
 
-        &.byline {
-            text-align: right;
-            display: block;
-            margin-right: 20px;
-            margin-top: 24px;
-            margin-bottom: 24px;
-            &.inline {
-                display: inline-block;
-                float: right;
-                margin-top: 16px;
-            }
-        }
-        > span.subtle {
-            &.return::before {
-                content: " -> "
-            }
+    .highlight > pre {
+        border-left: none;
+        padding: 0px;
+    }
+    pre {
+        border-left: solid 2px #4DFF95;
+        padding-left: 18px;
+        padding-bottom: 18px;
+        border-bottom-left-radius: 20px;
+        >  code {
+            @include code-text;
+            font-size: 14px;
+            > span.subtle {
+                &.return::before {
+                    content: " -> "
+                }
 
-            color: #aaa;
+                color: #aaa;
+            }
         }
     }
+
+    // The "created by ..." message
+    .byline {
+        text-align: right;
+        display: block;
+        margin-right: 20px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+        &.inline {
+            font-size: 16px;
+            display: inline-block;
+            float: right;
+            margin-top: 16px;
+        }
+    }
+
     h2 {
         @include punk-text;
 
@@ -134,6 +153,10 @@ body {
             background-color: white;
             display: inline-block;
         }
+    }
+
+    li {
+        margin-bottom: 10px;
     }
 
     > section {
@@ -247,7 +270,7 @@ body {
                 padding-top: 6px;
                 padding-bottom: 6px;
                 list-style-type: none;
-                
+
             }
 
             > li.highlighted, > li.highlighted a  {
