@@ -116,6 +116,22 @@ body {
             }
         }
     }
+
+    // The "created by ..." message
+    .byline {
+        text-align: right;
+        display: block;
+        margin-right: 20px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+        &.inline {
+            font-size: 16px;
+            display: inline-block;
+            float: right;
+            margin-top: 16px;
+        }
+    }
+
     h2 {
         @include punk-text;
 
@@ -128,20 +144,6 @@ body {
         &.reduced_top_margin {
             margin-top: 32px;
         }
-
-        .byline {
-                text-align: right;
-                display: block;
-                margin-right: 20px;
-                margin-top: 24px;
-                margin-bottom: 24px;
-                &.inline {
-                    font-size: 16px;
-                    display: inline-block;
-                    float: right;
-                    margin-top: 16px;
-                }
-            }
 
         > span {
             padding-left: 10px;
