@@ -59,13 +59,13 @@ section
     p <strong>Can handle diffs from</strong>: Git
 
     h3 Danger DSL
-    markdown:
-      ```
-      message("message") - Declares a CI message
-      warn("message") - Declares a CI warning
-      fail("message") - Declares a CI blocking error
-      markdown("message") - Outputs markdown
-      ```
+    pre
+      code
+        p message("message") - Declares a CI message
+        p warn("message") - Declares a CI warning
+        p fail("message") - Declares a CI blocking error
+        p markdown("message") - Outputs markdown
+
 h2
   span Plugins
 
@@ -84,7 +84,7 @@ h2
 section
   article
     markdown:
-     Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.  
+     Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.
 
 section.examples
   ul
@@ -128,7 +128,7 @@ javascript:
             console.log("OK")
               $("div.code_chunk", parent).empty()
               $("div.code_chunk", parent).append(html)
-          })  
+          })
         }
 
          // Figure out the reference text

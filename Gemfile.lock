@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/danger/danger.git
-  revision: f85ffec3727d773c2bf4d21bc4a1bf6ca74318f6
+  revision: aca22f9c8688b0927d357017acd8f8e8faaf4687
   branch: master
   specs:
-    danger (0.9.1)
+    danger (0.10.0)
       claide (~> 1.0)
       claide-plugins (~> 0.9)
       colored (~> 1.2)
@@ -173,7 +173,7 @@ GEM
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
     yajl-ruby (1.2.1)
-    yard (0.9.0)
+    yard (0.9.5)
 
 PLATFORMS
   ruby
