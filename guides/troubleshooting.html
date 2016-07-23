@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<title>Troubleshooting</title>
+<link href="/stylesheets/style-4939387e.css" rel="stylesheet">
+<link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body class="guides guides_troubleshooting">
+<header class="title small"><p>Danger</p>
+<img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image"><nav><ul>
+<li><a href="/">home</a></li>
+<li><a class="highlighted" href="/guides.html">Guides</a></li>
+<li><a href="/reference.html">Reference</a></li>
+</ul></nav></header><h2 class="reduced_top_margin">
+<span>all broken</span><code class="byline inline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code>
+</h2>
+<section><article><h3 id="i-want-to-work-locally-on-my-dangerfile">
+<a class="header-link" href="#i-want-to-work-locally-on-my-dangerfile">#</a>I want to work locally on my Dangerfile</h3>
+
+<p>OK, so, you can use <code>bundle exec danger local</code> to have Danger run the last merged PR in your commit history ( note: run <code>bundle exec  danger local--help</code> to see extra options.)</p>
+
+<p>This will run the Danger environment locally, making it possible to iterate and verify syntax etc.</p>
+
+<h3 id="i-want-to-be-a-danger-wizard">
+<a class="header-link" href="#i-want-to-be-a-danger-wizard">#</a>I want to be a Danger Wizard</h3>
+
+<p><img src="http://i.imgur.com/QCwKwKQ.gif" alt="Qcwkwkq"></p>
+
+<p>Alright, alright. So the real key to working locally, is <code>bundle exec danger local --pry</code>.</p>
+
+<p>Here’s some tips for using pry inside Danger. You will start off running the REPL <em>inside</em> the <code>Dangerfile</code>.</p>
+
+<p><a href="http://pryrepl.org">Pry is special</a> because it provides a UNIX folder-like structure for your object graph. You can use <code>ls</code> to see all the local variables, and attributes for your current <code>Dangerfile</code>. Then use <code>cd</code> to change the state to another object, and <code>cd ..</code> to go back.</p>
+
+<p>Inside the <code>Dangerfile</code> plugin instances are not in the default list alas, but you can get them all with <code>@plugins.keys.map(&amp;:instance_name)</code>.</p>
+
+<p>For example, to look around inside your <code>git</code> state, do a <code>cd git</code> and do <code>ls</code> again. If you want an in-depth overview of the current object use <code>inspect</code>.</p>
+
+<p>To check all your warnings, errors, markdowns and messages - <code>cd</code> into the <code>messaging</code> plugin, then run <code>status_report</code> to see what has happened.</p>
+
+<p>If you’re interested in more things, I strongly recommend digging into <a href="http://pryrepl.org">their docs</a>.</p>
+
+<h3 id="circle-ci-doesnt-run-my-build-consistently">
+<a class="header-link" href="#circle-ci-doesnt-run-my-build-consistently">#</a>Circle CI doesnt run my build consistently</h3>
+
+<p>Yeah… We’re struggling with that one. It’s something we keep taking stabs at improving, so <a href="https://github.com/danger/danger/search?q=circle&amp;state=open&amp;type=Issues&amp;utf8=%E2%9C%93">keep an eye on the issues</a>. Ideally this issue will get resolved and we’ll get it <a href="https://discuss.circleci.com/t/pull-requests-not-triggering-build/1213">fixed for free</a>.</p>
+</article></section><section><article><p>help improve this document  by <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/troubleshooting.html.md">sending PRs</a>.</p></article></section>
+</body>
+</html>

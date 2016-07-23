@@ -91,6 +91,8 @@ name[0..3]                    # Orta
 end
 </code></pre>
 
+<p>Finally, the simplest “closure”, that only works if you want to call a function on the object in your collection is this interesting pattern: <code>lowercase_path = paths.map(:downcase)</code> - where <code>downcase</code> is a function on the strings in the array.</p>
+
 <p><code>Note:</code> In Danger, for lists of files (e.g.<code>git.modified_files</code>) we use a class called a <code>FileList</code> which is an array subclass. <a href="https://github.com/danger/danger/blob/master/spec/lib/danger/core_ext/file_list_spec.rb">This adds one extra method</a>: <code>include?</code>. This lets you use <a href="http://wiki.bash-hackers.org/syntax/expansion/globs">path globbing</a> to determine if a string is in the list:</p>
 
 <pre><code class="ruby">paths = ["path1/file_name.txt", "path1/file_name1.txt", "path2/subfolder/example.json"]
