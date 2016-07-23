@@ -1,84 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta charset="utf-8">
-<!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-<title>Getting Set Up</title>
-<link href="/stylesheets/style-4939387e.css" rel="stylesheet">
-<link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-</head>
-<body class="guides guides_getting_started">
-<header class="title small"><p>Danger</p>
-<img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image"><nav><ul>
-<li><a href="/">home</a></li>
-<li><a class="highlighted" href="/guides.html">Guides</a></li>
-<li><a href="/reference.html">Reference</a></li>
-</ul></nav></header><h2 class="reduced_top_margin">
-<span>Getting Set Up</span><code class="byline inline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code>
-</h2>
-
-<section><article><p>There are 5 steps invovled in getting Danger running:</p>
+<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><title>Getting Set Up</title><link href="/stylesheets/style-4939387e.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.1.0.min.js"></script></head><body class="guides guides_getting_started"><header class="title small"><p>Danger</p><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" /><nav><ul><li><a href="/">home</a></li><li><a class="highlighted" href="/guides.html">Guides</a></li><li><a href="/reference.html">Reference</a></li></ul></nav></header><h2 class="reduced_top_margin"><span>Getting Set Up</span><code class="byline inline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code></h2><section><article><p>There are 5 steps invovled in getting Danger running:</p>
 
 <ul>
-  <li><a href="#including-danger">Include Danger</a></li>
-  <li>
-<a href="#creating-a-dangerfile">Creating a Dangerfile</a> and adding a few simple rules.</li>
-  <li>
-<a href="#creating-a-github-account-for-danger-to-use">Creating a GitHub account for Danger to use</a>.</li>
-  <li>Setting up <a href="#setting-up-an-access-token">an access token for Danger</a> with that account.</li>
-  <li>Setting up <a href="">Danger to run on your CI</a>.</li>
+<li><a href="#including-danger">Include Danger</a></li>
+<li><a href="#creating-a-dangerfile">Creating a Dangerfile</a> and adding a few simple rules.</li>
+<li><a href="#creating-a-github-account-for-danger-to-use">Creating a GitHub account for Danger to use</a>.</li>
+<li>Setting up <a href="#setting-up-an-access-token">an access token for Danger</a> with that account.</li>
+<li>Setting up <a href="#">Danger to run on your CI</a>.</li>
 </ul>
 
-<h3 id="including-danger">
-<a class="header-link" href="#including-danger">#</a>Including Danger</h3>
+<h3>Including Danger</h3>
 
-<p>We recommend you install Danger via <a href="http://bundler.io">Bundler</a> + a Gemfile. This means that your version of Danger, and your plugins are all versioned correctly. You are in control of how and when your dependencies are updated then. If you'd like to learn more about Bundler, check out <a href="https://guides.cocoapods.org/using/a-gemfile.html">this guide</a>.</p>
+<p>We recommend you install Danger via <a href="http://bundler.io">Bundler</a> + a Gemfile. This means that your version of Danger, and your plugins are all versioned correctly. You are in control of how and when your dependencies are updated then. If you&#39;d like to learn more about Bundler, check out <a href="https://guides.cocoapods.org/using/a-gemfile.html">this guide</a>.</p>
 
-<p>If you'd like to skip use it, then jump to the bottom to <a href="#installation-without-bundler">Installation Without Bundler</a>.</p>
+<p>If you&#39;d like to skip use it, then jump to the bottom to <a href="#installation-without-bundler">Installation Without Bundler</a>.</p>
 
-<h5 id="installation">
-<a class="header-link" href="#installation">#</a>Installation</h5>
+<h5>Installation</h5>
 
-<p>If you have an existing Gemfile, add <code>gem 'danger'</code> to it. If you don't run <code>bundle init</code> in your project root, and edit the freshly minted Gemfile.</p>
+<p>If you have an existing Gemfile, add <code>gem &#39;danger&#39;</code> to it. If you don&#39;t run <code>bundle init</code> in your project root, and edit the freshly minted Gemfile.</p>
 
-<h5 id="installation-without-bundler">
-<a class="header-link" href="#installation-without-bundler">#</a>Installation Without Bundler</h5>
+<h5>Installation Without Bundler</h5>
 
-<p>If Danger is your only ruby dependency, you may not want to use <a href="http://bundler.io">Bundler</a>, that's fine, but note that you'll always be using the latest version of all of your dependencies.</p>
+<p>If Danger is your only ruby dependency, you may not want to use <a href="http://bundler.io">Bundler</a>, that&#39;s fine, but note that you&#39;ll always be using the latest version of all of your dependencies.</p>
 
 <p>You can install Danger via <code>gem install danger</code>. This will make it available in your system, you can include plugins at the same time by running <code>gem install danger danger-prose [gem] [gem]</code>. You can run <code>danger --version</code> to check your version. Any time you see a command that recommends you use <code>bundle exec</code> - you can skip the <code>bundle exec</code> part.</p>
 
-<h5 id="macos-sudo-less-installation">
-<a class="header-link" href="#macos-sudo-less-installation">#</a>macOS sudo-less Installation</h5>
+<h5>macOS sudo-less Installation</h5>
 
 <p>Create or edit a <code>.profile</code> file in your home directory and add or amend it to include these lines:</p>
 
-<p><code></code></p>
-<pre>
-export GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$PATH
+<p><code>
+  <pre>
+export GEM<em>HOME=$HOME/.gem
+export PATH=$GEM</em>HOME/bin:$PATH
   </pre>
-<p><code></code></p>
+<code></p>
 
-<h3 id="easy-mode">
-<a class="header-link" href="#easy-mode">#</a>Easy Mode</h3>
+<h3>Easy Mode</h3>
 
 <p><em>Easy mode</em> - run: <code>bundle exec danger init</code> - this will guide you through the next four steps, offering useful advice specific to your setup. If you would like to understand how all of the pieces come together, read on:</p>
 
-<h3 id="creating-a-dangerfile">
-<a class="header-link" href="#creating-a-dangerfile">#</a>Creating a Dangerfile</h3>
-<p>Create an empty file, named <code>Dangerfile</code>. This is the file that contains ruby code. Your text editor won't highlight as ruby, so you may need to set the syntax highlighting. To get started, we would recommend a simple "Hello World."</p>
+<h3>Creating a Dangerfile</h3>
 
-<p><code></code></p>
-<pre>
-message("Hello, this worked")
+<p>Create an empty file, named <code>Dangerfile</code>. This is the file that contains ruby code. Your text editor won&#39;t highlight as ruby, so you may need to set the syntax highlighting. To get started, we would recommend a simple &quot;Hello World.&quot;</p>
+
+<p><code>
+  <pre>
+message(&quot;Hello, this worked&quot;)
   </pre>
-<p><code></code></p>
+<code></p>
 
-<h3 id="creating-a-github-account-for-danger-to-use">
-<a class="header-link" href="#creating-a-github-account-for-danger-to-use">#</a>Creating a GitHub account for Danger to use</h3>
+<h3>Creating a GitHub account for Danger to use</h3>
 
 <p>This is optional. Pragmatically, you want to do this though.</p>
 
@@ -86,64 +57,50 @@ message("Hello, this worked")
 
 <p>To get started, open <a href="https://github.com">https://github.com</a> in a private browser session.</p>
 
-<h5 id="oss-projects">
-<a class="header-link" href="#oss-projects">#</a>OSS Projects</h5>
+<h5>OSS Projects</h5>
 
 <p>Do not add the bot to repo, or to your organization.</p>
 
-<h5 id="closed-source-projects">
-<a class="header-link" href="#closed-source-projects">#</a>Closed Source Projects</h5>
+<h5>Closed Source Projects</h5>
 
 <p>Add the bot to repo, or to your organization. Note that you <em>should not</em> re-use this bot for OSS projects.</p>
 
-<h3 id="setting-up-an-access-token">
-<a class="header-link" href="#setting-up-an-access-token">#</a>Setting up an Access Token</h3>
+<h3>Setting up an Access Token</h3>
 
-<p><a href="https://github.com/settings/tokens/new">Here's the link</a>, you should open this in the private session where you just created the new GitHub account. Again, the rights that you give to the token depend on the openness of your projects.</p>
+<p><a href="https://github.com/settings/tokens/new">Here&#39;s the link</a>, you should open this in the private session where you just created the new GitHub account. Again, the rights that you give to the token depend on the openness of your projects.</p>
 
-<h5 id="tokens-for-oss-projects">
-<a class="header-link" href="#tokens-for-oss-projects">#</a>Tokens for OSS Projects</h5>
+<h5>Tokens for OSS Projects</h5>
 
-<p>We recommend giving the token the smallest scope possible. This means just <code>public_repo</code>, this scopes limits Danger's abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimalises the chance for bad actors causing chaos with it.</p>
+<p>We recommend giving the token the smallest scope possible. This means just <code>public_repo</code>, this scopes limits Danger&#39;s abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimalises the chance for bad actors causing chaos with it.</p>
 
-<h5 id="tokens-for-closed-source-projects">
-<a class="header-link" href="#tokens-for-closed-source-projects">#</a>Tokens for Closed Source Projects</h5>
+<h5>Tokens for Closed Source Projects</h5>
 
-<p>We recommend giving access to the whole <code>repo</code> scope, and it's children.</p>
+<p>We recommend giving access to the whole <code>repo</code> scope, and it&#39;s children.</p>
 
-<h3 id="setting-up-danger-to-run-on-your-ci">
-<a class="header-link" href="#setting-up-danger-to-run-on-your-ci">#</a>Setting up Danger to run on your CI</h3>
+<h3>Setting up Danger to run on your CI</h3>
 
 <p><em>Note: more guides for different CI hosts will be coming in time.</em></p>
 
-<h4 id="travis-ci">
-<a class="header-link" href="#travis-ci">#</a>Travis CI</h4>
+<h4>Travis CI</h4>
 
-<h5 id="running-danger">
-<a class="header-link" href="#running-danger">#</a>Running Danger</h5>
+<h5>Running Danger</h5>
 
 <p>You need to edit your <code>.travis.yml</code> to include <code>bundle exec danger</code>. If you already have a <code>script:</code> section then we recommend adding this command at the end of the script step: <code>- bundle exec danger</code>.</p>
 
 <p>Otherwise, add a <code>before_script</code> step to the root of the <code>.travis.yml</code> with <code>bundle exec danger</code></p>
 
-<p><code></code></p>
-<pre>
+<p><code>
+  <pre>
   before_script:
     - bundle exec danger
   </pre>
-<p><code></code></p>
+<code></p>
 
 <p>Adding this to your <code>.travis.yml</code> allows Danger to fail your build, both on the TravisCI website and within your Pull Request.</p>
 
-<h5 id="adding-the-env-var">
-<a class="header-link" href="#adding-the-env-var">#</a>Adding the ENV var</h5>
+<h5>Adding the ENV var</h5>
 
-<p>You need to add the <code>DANGER_GITHUB_API_TOKEN</code> environment variable, to do this, go to your repo's settings, which should look like: https://travis-ci.org/[user]/[repo]/settings.</p>
+<p>You need to add the <code>DANGER_GITHUB_API_TOKEN</code> environment variable, to do this, go to your repo&#39;s settings, which should look like: https://travis-ci.org/[user]/[repo]/settings.</p>
 
-<p>If you have an open source project, you should ensure "Display value in build log" enabled, so that PRs from forks work.</p>
-
-</article></section><section><article><hr>
-<p>help improve this document  by <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/getting_started.html.slim">sending PRs</a>.</p></article></section>
-
-</body>
-</html>
+<p>If you have an open source project, you should ensure &quot;Display value in build log&quot; enabled, so that PRs from forks work.</p>
+</article></section><section><article><hr /><p>help improve this document  by <a href= 'https://github.com/danger/danger.systems/edit/master/static/source/guides/getting_started.html.slim'>sending PRs</a>.</p></article></section></body></html>

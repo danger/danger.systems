@@ -39,14 +39,14 @@
 <span class="k">end</span>
 </pre></div></div></div><ref></ref></div></section><h2><span>What magic is this?</span></h2><section><article><h3>How</h3><p>Danger is ruby gem that runs a <code>Dangerfile</code>, you set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
 
-<p>Danger should be installed via a Gemfile. Add <code>gem "danger"</code> to your Gemfile, then run <code>bundle</code>.</p>
+<p>Danger should be installed via a Gemfile. Add <code>gem &quot;danger&quot;</code> to your Gemfile, then run <code>bundle</code>.</p>
 
 <p>You can integrate Danger into your own project on any available CI service. She will run through the process with you if you run  <code>danger init</code> after installation.</p>
 </article><article><h3>Supports</h3><p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone, SurfCI.</p><p><strong>Can chat back on</strong>: GitHub</p><p><strong>Can handle diffs from</strong>: Git</p><h3>Danger DSL</h3><p><code>
-message("message") - Declares a CI message
-warn("message") - Declares a CI warning
-fail("message") - Declares a CI blocking error
-markdown("message") - Outputs markdown
+message(&quot;message&quot;) - Declares a CI message
+warn(&quot;message&quot;) - Declares a CI warning
+fail(&quot;message&quot;) - Declares a CI blocking error
+markdown(&quot;message&quot;) - Outputs markdown
 </code></p>
 </article></section><h2><span>Plugins</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with <code>danger plugins create</code>.</p>
 </article></section><section><article class="scope_code"><h3>DangerProse</h3><p>Lint markdown files inside your projects.
@@ -71,7 +71,7 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span> <span class="s2">&quot;_posts/*.md&quot;</span>
 </pre></div><h4>Running the spell checker, with some words whitelisted</h4><div class="highlight"><pre><span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;orta&quot;</span><span class="p">,</span> <span class="s2">&quot;artsy&quot;</span><span class="o">]</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span>
-</pre></div><h3>Tags</h3><code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><h2><span>Show me some Dangerfiles</span></h2><section><article><p>Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.</p>
+</pre></div><h3>Tags</h3><code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><h2><span>Show me some Dangerfiles</span></h2><section><article><p>Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.  </p>
 </article></section><section class="examples"><ul><li class="moya/moya" data-url="/dangerfiles/moya_moya.html"><a>moya<span>/</span>moya</a></li><li class="artsy/artsy.github.io" data-url="/dangerfiles/artsy_artsy.github.io.html"><a>artsy<span>/</span>artsy.github.io</a></li><li class="artsy/energy" data-url="/dangerfiles/artsy_energy.html"><a>artsy<span>/</span>energy</a></li><li class="artsy/eigen" data-url="/dangerfiles/artsy_eigen.html"><a>artsy<span>/</span>eigen</a></li><li class="fastlane/fastlane" data-url="/dangerfiles/fastlane_fastlane.html"><a>fastlane<span>/</span>fastlane</a></li><li class="danger/danger" data-url="/dangerfiles/danger_danger.html"><a>danger<span>/</span>danger</a></li><li class="cocoapods/cocoapods" data-url="/dangerfiles/cocoapods_cocoapods.html"><a>cocoapods<span>/</span>cocoapods</a></li></ul><div><div class="code_chunk"></div><ref></ref></div></section><h2><span>Meta</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.</p></article></section><script>$(function() {
   $("section.examples ul li").mouseover(function(event) {
     event.preventDefault()
