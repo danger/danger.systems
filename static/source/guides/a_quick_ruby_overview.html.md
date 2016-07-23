@@ -2,7 +2,7 @@
 title: A Quick Ruby Overview
 subtitle: Ruby
 layout: guide
-order: 6
+order: 5
 ---
 
 ### Aims of this Guide

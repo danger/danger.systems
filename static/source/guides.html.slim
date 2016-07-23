@@ -4,7 +4,7 @@ subtitle: Guides
 ---
 
 ruby:
-  guides = sitemap.resources.select { |r| r.path.start_with? "guides/" }
+  guides = sitemap.resources.select { |r| r.path.start_with? "guides/" }.sort_by { |r| r.data[:order] }
 
 section
   article

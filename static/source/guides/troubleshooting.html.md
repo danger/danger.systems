@@ -2,7 +2,7 @@
 title: Troubleshooting
 subtitle: all broken
 layout: guide
-ordeR: 5
+order: 7
 ---
 
 ### I want to work locally on my Dangerfile
@@ -27,7 +27,7 @@ For example, to look around inside your `git` state, do a `cd git` and do `ls` a
 
 To check all your warnings, errors, markdowns and messages - `cd` into the `messaging` plugin, then run `status_report` to see what has happened.
 
-If you're interested in more things, I strongly recommend digging into [their docs][pry].
+If you're interested in understand pry more, I strongly recommend digging into [their docs][pry].
 
 ### Circle CI doesnt run my build consistently
 
