@@ -51,26 +51,39 @@ body {
           margin: 0 10px; }
           body > header.small > nav li a {
             text-shadow: 2px 2px black; }
-  body p {
+  body p, body li {
     font-family: "Avenir Book";
     font-size: 17px; }
-  body code {
+  body p > code {
     font-family: "Monaco";
-    font-size: 14px; }
-    body code.byline {
-      text-align: right;
-      display: block;
-      margin-right: 20px;
-      margin-top: 24px;
-      margin-bottom: 24px; }
-      body code.byline.inline {
-        display: inline-block;
-        float: right;
-        margin-top: 16px; }
-    body code > span.subtle {
-      color: #aaa; }
-      body code > span.subtle.return::before {
-        content: " -> "; }
+    font-size: 14px;
+    background-color: rgba(201, 167, 40, 0.1); }
+  body .highlight > pre {
+    border-left: none;
+    padding: 0px; }
+  body pre {
+    border-left: solid 2px #4DFF95;
+    padding-left: 18px;
+    padding-bottom: 18px;
+    border-bottom-left-radius: 20px; }
+    body pre > code {
+      font-family: "Monaco";
+      font-size: 14px; }
+      body pre > code > span.subtle {
+        color: #aaa; }
+        body pre > code > span.subtle.return::before {
+          content: " -> "; }
+  body .byline {
+    text-align: right;
+    display: block;
+    margin-right: 20px;
+    margin-top: 24px;
+    margin-bottom: 24px; }
+    body .byline.inline {
+      font-size: 16px;
+      display: inline-block;
+      float: right;
+      margin-top: 16px; }
   body h2 {
     font-family: "prodotto_in_cina";
     text-transform: uppercase;
@@ -88,6 +101,8 @@ body {
       padding-bottom: 4px;
       background-color: white;
       display: inline-block; }
+  body li {
+    margin-bottom: 10px; }
   body > section {
     display: -ms-flex;
     display: -webkit-flex;

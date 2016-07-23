@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><title>Danger - Stop Saying "You Forgot To..." in Code Review</title><link href="/stylesheets/style-4939387e.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.1.0.min.js"></script></head><body class="index"><code class="byline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code><header class="title"><p>Danger</p><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" /><nav><ul><li><a class="highlighted" href="/">home</a></li><li><a href="/guides.html">Guides</a></li><li><a href="/reference.html">Reference</a></li></ul></nav></header><h2><span>What is Danger?</span></h2><section><article><p>Danger runs after your CI, and gives teams the chance to automate common code review chores.</p>
+<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><title>Danger - Stop Saying "You Forgot To..." in Code Review</title><link href="/stylesheets/style-e9015e75.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.1.0.min.js"></script></head><body class="index"><code class="byline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code><header class="title"><p>Danger</p><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" /><nav><ul><li><a class="highlighted" href="/">home</a></li><li><a href="/guides.html">Guides</a></li><li><a href="/reference.html">Reference</a></li></ul></nav></header><h2><span>What is Danger?</span></h2><section><article><p>Danger runs after your CI, and gives teams the chance to automate common code review chores.</p>
 
 <p>This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.</p>
 
@@ -42,27 +42,21 @@
 <p>Danger should be installed via a Gemfile. Add <code>gem &quot;danger&quot;</code> to your Gemfile, then run <code>bundle</code>.</p>
 
 <p>You can integrate Danger into your own project on any available CI service. She will run through the process with you if you run  <code>danger init</code> after installation.</p>
-</article><article><h3>Supports</h3><p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone, SurfCI.</p><p><strong>Can chat back on</strong>: GitHub</p><p><strong>Can handle diffs from</strong>: Git</p><h3>Danger DSL</h3><p><code>
-message(&quot;message&quot;) - Declares a CI message
-warn(&quot;message&quot;) - Declares a CI warning
-fail(&quot;message&quot;) - Declares a CI blocking error
-markdown(&quot;message&quot;) - Outputs markdown
-</code></p>
-</article></section><h2><span>Plugins</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with <code>danger plugins create</code>.</p>
+</article><article><h3>Supports</h3><p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone, SurfCI.</p><p><strong>Can chat back on</strong>: GitHub</p><p><strong>Can handle diffs from</strong>: Git</p><h3>Danger DSL</h3><pre><code><p>message("message") - Declares a CI message</p><p>warn("message") - Declares a CI warning</p><p>fail("message") - Declares a CI blocking error</p><p>markdown("message") - Outputs markdown</p></code></pre></article></section><h2><span>Plugins</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with <code>danger plugins create</code>.</p>
 </article></section><section><article class="scope_code"><h3>DangerProse</h3><p>Lint markdown files inside your projects.
 This is done using the <a href="http://proselint.com">proselint</a> python egg.
 Results are passed out as a table in markdown.</p>
 <h3>Reference</h3><h4>Attributes</h4><div class="fake_code"><p>Allows you to disable a collection of linters from running. Doesn&#39;t work yet.
 You can get a list of <a href="https://github.com/amperser/proselint#checks">them here</a>
 defaults to <code>[&quot;misc.scare_quotes&quot;, &quot;typography.symbols&quot;]</code> when it&#39;s nil.</p>
-</div><code>disable_linters<span class='subtle return'>Array<String></span></code><div class="fake_code"><p>Allows you to add a collection of words to skip in spellchecking.
+</div><pre><code>disable_linters<span class='subtle return'>Array<String></span></code></pre><div class="fake_code"><p>Allows you to add a collection of words to skip in spellchecking.
 defaults to <code>[&quot;&quot;]</code> when it&#39;s nil.</p>
-</div><code>ignored_words<span class='subtle return'>Array<String></span></code><h4>Methods</h4><div class="fake_code"><p>Lints the globbed markdown files. Will fail if <code>proselint</code> cannot be installed correctly.
+</div><pre><code>ignored_words<span class='subtle return'>Array<String></span></code></pre><h4>Methods</h4><div class="fake_code"><p>Lints the globbed markdown files. Will fail if <code>proselint</code> cannot be installed correctly.
 Generates a <code>markdown</code> list of warnings for the prose in a corpus of .markdown and .md files.</p>
-</div><code>lint_files(files: String)</code><div class="fake_code"><p>Determine if proselint is currently installed in the system paths.</p>
-</div><code>proselint_installed?<span class='subtle return'>Bool</span></code><div class="fake_code"><p>Determine if mdspell is currently installed in the system paths.</p>
-</div><code>mdspell_installed?<span class='subtle return'>Bool</span></code><div class="fake_code"><p>Runs a markdown-specific spell checker, against a corpus of <code>.markdown</code> and <code>.md</code> files.</p>
-</div><code>check_spelling(files: String)</code></article><article class="scope_code"><h3>Examples</h3><h4>Running linter with custom disabled linters</h4><div class="highlight"><pre><span class="c1"># Runs a linter with comma style and tense present disabled</span>
+</div><pre><code>lint_files(files: String)</code></pre><div class="fake_code"><p>Determine if proselint is currently installed in the system paths.</p>
+</div><pre><code>proselint_installed?<span class='subtle return'>Bool</span></code></pre><div class="fake_code"><p>Determine if mdspell is currently installed in the system paths.</p>
+</div><pre><code>mdspell_installed?<span class='subtle return'>Bool</span></code></pre><div class="fake_code"><p>Runs a markdown-specific spell checker, against a corpus of <code>.markdown</code> and <code>.md</code> files.</p>
+</div><pre><code>check_spelling(files: String)</code></pre></article><article class="scope_code"><h3>Examples</h3><h4>Running linter with custom disabled linters</h4><div class="highlight"><pre><span class="c1"># Runs a linter with comma style and tense present disabled</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">disable_linters</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;misc.scare_quotes&quot;</span><span class="p">,</span> <span class="s2">&quot;misc.tense_present&quot;</span><span class="o">]</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">lint_files</span> <span class="s2">&quot;_posts/*.md&quot;</span>
 </pre></div><h4>Running linter with default linters</h4><div class="highlight"><pre><span class="c1"># Runs a linter with all styles, on modified and added markdown files in this PR</span>
@@ -71,7 +65,7 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span> <span class="s2">&quot;_posts/*.md&quot;</span>
 </pre></div><h4>Running the spell checker, with some words whitelisted</h4><div class="highlight"><pre><span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;orta&quot;</span><span class="p">,</span> <span class="s2">&quot;artsy&quot;</span><span class="o">]</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span>
-</pre></div><h3>Tags</h3><code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><h2><span>Show me some Dangerfiles</span></h2><section><article><p>Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.  </p>
+</pre></div><h3>Tags</h3><code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><h2><span>Show me some Dangerfiles</span></h2><section><article><p>Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.</p>
 </article></section><section class="examples"><ul><li class="moya/moya" data-url="/dangerfiles/moya_moya.html"><a>moya<span>/</span>moya</a></li><li class="artsy/artsy.github.io" data-url="/dangerfiles/artsy_artsy.github.io.html"><a>artsy<span>/</span>artsy.github.io</a></li><li class="artsy/energy" data-url="/dangerfiles/artsy_energy.html"><a>artsy<span>/</span>energy</a></li><li class="artsy/eigen" data-url="/dangerfiles/artsy_eigen.html"><a>artsy<span>/</span>eigen</a></li><li class="fastlane/fastlane" data-url="/dangerfiles/fastlane_fastlane.html"><a>fastlane<span>/</span>fastlane</a></li><li class="danger/danger" data-url="/dangerfiles/danger_danger.html"><a>danger<span>/</span>danger</a></li><li class="cocoapods/cocoapods" data-url="/dangerfiles/cocoapods_cocoapods.html"><a>cocoapods<span>/</span>cocoapods</a></li></ul><div><div class="code_chunk"></div><ref></ref></div></section><h2><span>Meta</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.</p></article></section><script>$(function() {
   $("section.examples ul li").mouseover(function(event) {
     event.preventDefault()
@@ -94,7 +88,7 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
         console.log("OK")
           $("div.code_chunk", parent).empty()
           $("div.code_chunk", parent).append(html)
-      })  
+      })
     }
 
      // Figure out the reference text
