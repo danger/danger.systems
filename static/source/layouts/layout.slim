@@ -1,5 +1,6 @@
 ruby:
   is_home = current_page.path == "index.html"
+  guides = sitemap.resources.select { |r| r.path.start_with? "guides/" }
 
 html
   head
@@ -40,10 +41,38 @@ html
     == yield
 
 
-    h2
-      span Meta
 
-    section
+    footer
       article
-        p Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.
+        h3 GitHub
+        ul
+          li
+            a href="https://github.com/danger/danger" danger/danger
 
+        h3 Twitter
+        ul
+          li
+            a href="https://twitter.com/orta" orta
+          li
+            a href="https://twitter.com/krausefx" krausefx
+
+      article
+        h3 Guides
+        ul
+          - for resource in guides
+            li
+              a href=resource.path == resource.data["title"]
+
+
+      article
+        h3 Misc
+        ul
+          li
+            a href="/reference.html" DSL Reference
+          li
+            a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct" Code of Conduct
+          li
+            a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct" Community Continuity
+
+      article
+        img src="/images/dm-orta.jpg" height=110 width=100
