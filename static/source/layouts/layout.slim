@@ -52,16 +52,16 @@ html
         h3 Twitter
         ul
           li
-            a href="https://twitter.com/orta" orta
+            a href="https://twitter.com/orta" @orta
           li
-            a href="https://twitter.com/krausefx" krausefx
+            a href="https://twitter.com/krausefx" @krausefx
 
       article
         h3 Guides
         ul
           - for resource in guides
             li
-              a href=resource.path == resource.data["title"]
+              a href=resource.url == resource.data["title"]
 
 
       article

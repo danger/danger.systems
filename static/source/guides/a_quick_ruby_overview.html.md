@@ -2,13 +2,20 @@
 title: A Quick Ruby Overview
 subtitle: Ruby
 layout: guide
+order: 6
 ---
 
 ### Aims of this Guide
 
 My assumption is that you are a programmer, with some experience. You should be familiar with the terminal. This guide aims to cover enough Ruby for you to feel somewhat productive. You don't need to know all of the details of the language, but you should probably have some familiarity with a few of these major topics.
 
-Ruby has a repl, the best one by far is called pry. So if you want to have a play with the language. Run `gem install pry` then run `pry`.
+Ruby has a repl, the best one by far is `pry`. So, if you want to have a play with the language. Run `gem install pry` then run `pry`. If the gem does not install, you should follow [the instructions here](https://guides.cocoapods.org/using/getting-started.html#sudo-less-installation) to do a sudo-less install.
+
+### Environment
+
+The `Dangerfile` is a scripting environment, this means that you can totally get by with some simple hacking. Inside the Dangerfile, you only need to understand how to manipulate the data exposed via the API. You can see the full extent of the DSL in [the reference](/reference.html) and from the plugins overview in the [homepage](/).
+
+Realistically, the DSL is small. To be productive in your `Dangerfile` you will need to use Ruby to put the pieces together. You don't need to be a pro at Ruby though, as you'll mostly be doing string and array manipulation, file accessing, and executing shell commands. Which is what we'll cover here.
 
 ### Variables and Keyword Syntax
 
@@ -63,13 +70,13 @@ That should be enough to play around with your code review data.
 
 ### Arrays + Closures
 
-Arrays are also mostly immutable, it's common to iterate with `array.each` instead of `for thing in array`. Closures for functions like `each`, `map`, `select`, `flat_map` and the like can either be a single line with braces:
+Arrays are also mostly immutable, it's common to iterate with `array.each` instead of `for thing in array`. Closures for functions like `each`, `map`, `select`, `flat_map`, `reject` and the like, can be executed with a single line with braces:
 
 ``` ruby
 paths.map { |path| File.read(path) }.select { |content| content.include? "orta" }
 ```
 
-Or for longer closures, it's common to use `do` and `end`:
+For longer closures, it's common to use `do` and `end`:
 
 ```ruby
 paths.each do |path|
@@ -78,8 +85,7 @@ paths.each do |path|
 end
 ```
 
-Finally, the simplest "closure", that only works if you want to call a function on the object in your collection is this interesting pattern: `lowercase_path = paths.map(:downcase)` - where `downcase` is a function on the strings in the array.
-
+Finally, the simplest "closure", that only works if you want to call a function on the object in your collection is this interesting pattern: `lowercase_path = paths.map(&:downcase)` - where `downcase` is a function on the strings in the array.
 
 `Note:` In Danger, for lists of files (e.g.`git.modified_files`) we use a class called a `FileList` which is an array subclass. [This adds one extra method](https://github.com/danger/danger/blob/master/spec/lib/danger/core_ext/file_list_spec.rb): `include?`. This lets you use [path globbing](http://wiki.bash-hackers.org/syntax/expansion/globs) to determine if a string is in the list:
 
@@ -135,4 +141,4 @@ thing = json["things"][0]
 
 ###  Running a Dangerfile inside IRB
 
-There's a great section in the troubleshooting on letting you dig around inside Danger via `pry`.
+There's a [great section in the troubleshooting](/guides/troubleshooting.html#i-want-to-be-a-danger-wizard) on letting you dig around inside Danger via `pry`.

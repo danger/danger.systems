@@ -2,9 +2,10 @@
 title: What does Danger do?
 subtitle: Danger wot
 layout: guide
+order: 3
 ---
 
-Danger makes it easy to create feedback loops in code reviews through automation. This makes it possible to move cultural norms within your team into code, as well as easily share them with the world. 
+Danger makes it easy to create feedback loops in code reviews through automation. This makes it possible to move cultural norms within your team into code, as well as easily share them with the world.
 
 To pull that off, Danger needs to be able to run inside your continuous integration (CI) environment, and to be able to provide feedback to your code review platform. This document describes what happens when you run `bundle exec danger`.
 
