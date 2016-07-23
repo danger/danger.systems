@@ -4,6 +4,10 @@ subtitle: FAQ
 layout: guide
 ---
 
+#### Can I run Danger on my computer to test?
+
+Yep! Use `danger local`. If you want to get into a debug REPL, use `danger local --pry`. You can find more on the [troubleshooting guide]()
+
 #### I want to ignore a fail, just this once
 
 You can tell Danger to ignore a specific warning or error by commenting on the body of your code review body:
@@ -60,7 +64,7 @@ When we were in the naming process of Danger, we went through a lot of names. In
 
 <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aortatherox%3Aplaylist%3A39vTSdxtIKzpEybyvTs3Ll" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
 
-Understandably, applying a gender to a genderless concept comes with it's own complications. To make it worse, female genders tend to be applied towards "[digital assistants][assistants]" which should raise questions on outdated-but-still-persisting gender stereotypes and patriarchical power structures. There is no answer that can completely absolve the disconnect I'm afraid. 
+Understandably, applying a gender to a genderless concept comes with it's own complications. To make it worse, female genders tend to be applied towards "[digital assistants][assistants]" which should raise questions on outdated-but-still-persisting gender stereotypes and patriarchical power structures. There is no answer that can completely absolve the disconnect I'm afraid.
 
 [hacienda]: http://www.prideofmanchester.com/music/hacienda.htm
 [assistants]: http://www.theatlantic.com/technology/archive/2016/03/why-do-so-many-digital-assistants-have-feminine-names/475884/
