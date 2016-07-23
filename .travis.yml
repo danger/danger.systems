@@ -9,7 +9,6 @@ rvm:
 notifications:
   slack: dangergem:Hhs67yNCEM0WYe5seesOkwJy
 
-
 before_install:
   - git config --global user.email "orta+dangersystems@artsy.net"
   - git config --global user.name "Danger.Systems"

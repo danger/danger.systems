@@ -9,6 +9,11 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
 
+set :markdown_engine, :redcarpet
+set :markdown, autolink: true, space_after_headers: true,
+               no_intra_emphasis: true, tables: true, with_toc_data: true,
+               fenced_code_blocks: true, smartypants: true
+
 require 'lib/html_helpers.rb'
 helpers HTMLHelpers
 
