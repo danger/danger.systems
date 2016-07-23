@@ -14,7 +14,7 @@ module HTMLHelpers
         lang ||= 'ruby'
         HTMLHelpers.syntax_highlight(code, language: lang)
       end
-    end, autolink: true, space_after_headers: true, no_intra_emphasis: true)
+    end, autolink: true, space_after_headers: true, no_intra_emphasis: true,fenced_code_blocks: true, smartypants: true)
     # TODO: experimental
     @markdown_instance.render(capitalize_first_letter(input))
   end
