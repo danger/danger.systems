@@ -18,7 +18,12 @@
 
 body {
     margin: 0;
-
+    a {
+        color: #FF4D71;
+        &:visited {
+            color: #A53148;
+        }
+    }
     > header {
         p { display: none }
         background-size: 268px 100%;
@@ -40,6 +45,10 @@ body {
             margin:0 20px;
 
             a {
+                &:visited {
+                    color: white;
+                }
+
                 text-decoration: none;
                 color: white;
                 text-shadow: 2px 2px black;
