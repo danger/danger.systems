@@ -2,6 +2,7 @@
 title: Frequently Asked Questions
 subtitle: FAQ
 layout: guide
+order: 6
 ---
 
 #### Can I run Danger on my computer to test?

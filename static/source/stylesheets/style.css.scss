@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: 'prodotto_in_cina';
     src: url('/fonts/prodotto_in_cina-webfont.woff2') format('woff2'),
@@ -18,7 +17,12 @@
 
 body {
     margin: 0;
-
+    a {
+        color: #FF4D71;
+        &:visited {
+            color: #A53148;
+        }
+    }
     > header {
         p { display: none }
         background-size: 268px 100%;
@@ -40,6 +44,10 @@ body {
             margin:0 20px;
 
             a {
+                &:visited {
+                    color: white;
+                }
+
                 text-decoration: none;
                 color: white;
                 text-shadow: 2px 2px black;
@@ -259,7 +267,11 @@ body {
                     color: #FFEC00;
                 }
                 span {
-                     @include punk-text;
+                    font-family: "Avenir Heavy";
+                    font-weight: bold;
+                     color: black;
+                     padding-left: 2px;
+                     padding-right: 3px;
                 }
             }
 
@@ -306,6 +318,47 @@ body {
         ref {
             padding-top: 10px;
             @include code-text;
+        }
+    }
+
+    footer {
+        margin-top: 80px;
+        background-color: #FFEC00;
+         display: -ms-flex;
+        display: -webkit-flex;
+        display: flex;
+        flex-flow: row;
+        padding-top:40px;
+        padding-bottom:40px;
+        & > article:first-child {
+            margin-right: 20px;
+            margin-left: 80px;
+        }
+        & > article:last-child {
+            margin-right: 80px;
+            text-align: right;
+        }
+        article {
+            width: 25%;
+        }
+        h3 {
+            @include punk-text;
+        }
+
+        ul {
+            padding-left: 0;
+            li {
+                @include code-text;
+                margin: 4px;
+                list-style: none;
+                a, a:visited {
+                    text-decoration: none;
+                    color:black;
+                }
+                a:hover {
+                    color: #867C01;
+                }
+            }
         }
     }
 }

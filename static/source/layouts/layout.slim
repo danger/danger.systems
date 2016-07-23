@@ -1,5 +1,6 @@
 ruby:
   is_home = current_page.path == "index.html"
+  guides = sitemap.resources.select { |r| r.path.start_with? "guides/" }.sort_by { |r| r.data[:order] }
 
 html
   head
@@ -39,3 +40,39 @@ html
 
     == yield
 
+
+
+    footer
+      article
+        h3 GitHub
+        ul
+          li
+            a href="https://github.com/danger/danger" danger/danger
+
+        h3 Twitter
+        ul
+          li
+            a href="https://twitter.com/orta" @orta
+          li
+            a href="https://twitter.com/krausefx" @krausefx
+
+      article
+        h3 Guides
+        ul
+          - for resource in guides
+            li
+              a href=resource.url == resource.data["title"]
+
+
+      article
+        h3 Misc
+        ul
+          li
+            a href="/reference.html" DSL Reference
+          li
+            a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct" Code of Conduct
+          li
+            a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct" Community Continuity
+
+      article
+        img src="/images/dm-orta.jpg" height=110 width=100

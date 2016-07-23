@@ -1,0 +1,6 @@
+ruby:
+  current_page.data.title = "Danger Plugin - #{ plugin["name"] }"
+  current_page.data.subtitle = plugin["instance_name"]
+
+section
+  == partial(:plugin_doc, locals: { plugin: plugin, external: true })
