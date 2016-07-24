@@ -96,7 +96,7 @@ section
 section.examples
   ul
     - for repo in dangerfiles
-      li class=repo  data-url="/dangerfiles/#{repo.gsub("/", "_")}.html"
+      li class=repo  data-url="/dangerfiles/#{repo.gsub("/", "_").split("#").first}.html"
         a == repo.gsub("/", "<span>/</span>")
 
   div
@@ -135,7 +135,6 @@ javascript:
           $("div.code_chunk div." + klass, parent).css("display", "block")
         } else if( $(this).data("url") ) {
           $.get( $(this).data("url"), function(html) {
-            console.log("OK")
               $("div.code_chunk", parent).empty()
               $("div.code_chunk", parent).append(html)
           })
