@@ -30,6 +30,17 @@
   <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Please include a CHANGELOG entry. </span><span class="se">\n</span><span class="s2">You can find it at [CHANGELOG.md](https://github.com/danger/danger/blob/master/CHANGELOG.md).&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 
+<span class="c1"># Docs are critical, so let&#39;s re-run the docs part of the specs and show any issues:</span>
+<span class="n">core_plugins_docs</span> <span class="o">=</span> <span class="sb">`bundle exec danger plugins lint lib/danger/danger_core/plugins/*.rb --warnings-as-errors`</span>
+
+<span class="c1"># If it failed, fail the build, and include markdown with the output error.</span>
+<span class="k">unless</span> <span class="vg">$?</span><span class="o">.</span><span class="n">success?</span>
+  <span class="c1"># We want to strip ANSI colors for our markdown, and make paths relative</span>
+  <span class="n">colourless_error</span> <span class="o">=</span> <span class="n">core_plugins_docs</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/\e\[(\d+)(;\d+)*m/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+  <span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;### Core Docs Errors </span><span class="se">\n\n</span><span class="si">#{</span><span class="n">colourless_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Failing due to documentation issues, see below.&quot;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
+<span class="k">end</span>
+
 <span class="c1"># Oddly enough, it&#39;s quite possible to do some testing of Danger, inside Danger</span>
 <span class="c1"># So, you can ignore these, if you&#39;re looking at the Dangerfile to get ideas.</span>
 <span class="c1">#</span>

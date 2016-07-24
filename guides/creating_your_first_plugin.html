@@ -1,2 +1,126 @@
-<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><title>Creating your first Plugin</title><link href="/stylesheets/style-6d56d8fa.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.1.0.min.js"></script></head><body class="guides guides_creating_your_first_plugin"><header class="title small"><p>Danger</p><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" /><nav><ul><li><a href="/">home</a></li><li><a class="highlighted" href="/guides.html">Guides</a></li><li><a href="/reference.html">Reference</a></li></ul></nav></header><h2 class="reduced_top_margin"><span>Plugin creation</span><code class="byline inline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code></h2><section><article><p>WIP - for now see the <a href="https://github.com/danger/danger-plugin-template">danger-plugin-template repo</a>.</p>
-</article></section><section><article><hr /><p>Got improvements? Help improve this document via <a href= 'https://github.com/danger/danger.systems/edit/master/static/source/guides/creating_your_first_plugin.html.md'>sending PRs</a>.</p></article></section><footer><article><h3>GitHub</h3><ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul><h3>Twitter</h3><ul><li><a href="https://twitter.com/orta">@orta</a></li><li><a href="https://twitter.com/krausefx">@krausefx</a></li></ul></article><article><h3>Guides</h3><ul><li><a href="/guides/getting_started.html">Getting Set Up</a></li><li><a href="/guides/dangerfile.html">The Dangerfile</a></li><li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li><li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li><li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li><li><a href="/guides/faq.html">Frequently Asked Questions</a></li><li><a href="/guides/troubleshooting.html">Troubleshooting</a></li></ul></article><article><h3>Misc</h3><ul><li><a href="/reference.html">DSL Reference</a></li><li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Code of Conduct</a></li><li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Community Continuity</a></li></ul></article><article><img height="110" src="/images/dm-orta-91d934f3.jpg" width="100" /></article></footer></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<title>Creating your first Plugin</title>
+<link href="/stylesheets/style-96cb5c37.css" rel="stylesheet">
+<link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body class="guides guides_creating_your_first_plugin">
+<header class="title small"><p>Danger</p>
+<img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image"><nav><ul>
+<li><a href="/">home</a></li>
+<li><a class="highlighted" href="/guides.html">Guides</a></li>
+<li><a href="/reference.html">Reference</a></li>
+</ul></nav></header><h2 class="reduced_top_margin">
+<span>Plugin creation</span><code class="byline inline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code>
+</h2>
+<section class="guide"><article><p>WIP - for now see the <a href="https://github.com/danger/danger-plugin-template">danger-plugin-template repo</a>.</p>
+
+<hr>
+
+<p>So, you want to make a Danger Plugin? This is <em>awesome</em>. We all have common issues, and this is a great way to share code with the world. We’ve found once a single rule becomes longer than 10-15 lines of code, converting it into a plugin </p>
+
+<p>The concept of a Plugin in Danger is very simple. It’s a subclass of <code>Danger::Plugin</code>. </p>
+
+<p>If you don’t know about Ruby modules, then don’t worry, think of it as Ruby namespacing. That’s the <code>Danger::</code> bit. You’ll have to create a class that is a subclass of <code>Plugin</code> inside a <code>Danger</code> <code>module</code>.</p>
+
+<h3 id="tech-specs">
+<a class="header-link" href="#tech-specs">#</a>Tech Specs</h3>
+
+<p>This subclass will be created automatically with a reference to the current <code>Danger::Dangerfile</code> ruby object. It will be created before the <code>Dangerfile</code>(<a href="/guides/faq.html#i-want-to-run-danger-across-multiple-repos">s</a>) are parsed by it. </p>
+
+<p>There are no ways to automatically execute code with knowledge of the current status. A plugin should get told to do some work from the user’s <code>Dangerfile</code>(s).  </p>
+
+<p>Your plugin is added as an attribute to the user’s <code>Dangerfile</code>(s), this is based on your class name, but is editable. </p>
+
+<pre><code class="ruby">def self.instance_name
+  to_s.gsub("Danger", "").danger_underscore.split("/").last
+end
+
+# e.g. removes "Danger", converts camel case to snake case, and splits if there's any /s
+
+# DangerProse -&gt; prose
+# DangerMyThing -&gt; my_thing
+# MyPlugin -&gt; my_plugin 
+</code></pre>
+
+<h4 id="same-source">
+<a class="header-link" href="#same-source">#</a>Same Source</h4>
+
+<p>One of the great things about a Danger Plugin, is that the code is exactly the same as it was in your <code>Dangerfile</code>. A plugin has access to all of the same methods and attributes as you had when it was being parsed inside a <code>Dangerfile</code>. This is because anything your plugin doesn’t understand get’s first pass to see if it’s reference to the current <code>Dangerfile</code> understands.</p>
+
+<p>This is useful mainly in two things: </p>
+
+<ul>
+<li>Low barrier to entry.</li>
+<li>You have access to all of the other plugins.</li>
+</ul>
+
+<h3 id="creating-the-plugin">
+<a class="header-link" href="#creating-the-plugin">#</a>Creating the Plugin</h3>
+
+<p>Starting is pretty simple, we have a <a href="https://github.com/danger/danger-plugin-template">template</a>. As well as a command to get you started. Your first step is the name, the <a href="http://guides.rubygems.org/name-your-gem/">Rubygems rule</a> is <code>[core_app]-[plugin]_[names]</code>. So, the first space is always a <code>-</code> then later spaces would be <code>_</code>. E.g. <code>danger-wizard_hat</code>.</p>
+
+<p>Now you know the rules, in your development folder run <code>danger plugins create [name]</code>. This will create  </p>
+
+<ul>
+<li>same source</li>
+<li>always danger-thing</li>
+<li><code>danger plugins create</code></li>
+<li>overview of structure</li>
+<li>move the code in</li>
+</ul>
+
+<h4 id="verifying-the-plugin">
+<a class="header-link" href="#verifying-the-plugin">#</a>Verifying the Plugin</h4>
+
+<ul>
+<li>running the specs</li>
+<li>Show some examples of testing with Rspec</li>
+</ul>
+
+<h4 id="adding-the-gem-to-your-project">
+<a class="header-link" href="#adding-the-gem-to-your-project">#</a>Adding the Gem to your Project</h4>
+
+<ul>
+<li>Gemfile only</li>
+</ul>
+
+<h3 id="pushing-to-rubygems">
+<a class="header-link" href="#pushing-to-rubygems">#</a>Pushing to Rubygems</h3>
+
+<ul>
+<li>registering</li>
+<li>pushing</li>
+</ul>
+
+<h3 id="getting-it-on-danger-systems">
+<a class="header-link" href="#getting-it-on-danger-systems">#</a>Getting it on Danger.Systems</h3>
+</article></section><section><article><hr>
+<p>Got improvements? Help improve this document via <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/creating_your_first_plugin.html.md">sending PRs</a>.</p></article></section><footer><article><h3>GitHub</h3>
+<ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul>
+<h3>Twitter</h3>
+<ul>
+<li><a href="https://twitter.com/orta">@orta</a></li>
+<li><a href="https://twitter.com/krausefx">@krausefx</a></li>
+</ul></article><article><h3>Guides</h3>
+<ul>
+<li><a href="/guides/getting_started.html">Getting Set Up</a></li>
+<li><a href="/guides/dangerfile.html">The Dangerfile</a></li>
+<li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li>
+<li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li>
+<li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li>
+<li><a href="/guides/faq.html">Frequently Asked Questions</a></li>
+<li><a href="/guides/troubleshooting.html">Troubleshooting</a></li>
+</ul></article><article><h3>Misc</h3>
+<ul>
+<li><a href="/reference.html">DSL Reference</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Code of Conduct</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Community Continuity</a></li>
+</ul></article><article><img height="110" src="/images/dm-orta-91d934f3.jpg" width="100"></article></footer>
+</body>
+</html>
