@@ -5,8 +5,8 @@ plugins.each do |plugin|
   html_path = "/plugins/#{plugin['instance_name']}.html"
   inline_path = "/plugins/#{plugin['instance_name']}_embed.html"
   template = '/plugins/template.html'
-  proxy html_path, template, locals: { plugin: plugin }, ignore: true
-  proxy inline_path, template, locals: { plugin: plugin }, ignore: true, layout: false
+  proxy html_path, template, locals: { plugin: plugin, external: true }, ignore: true
+  proxy inline_path, template, locals: { plugin: plugin, external: true }, ignore: true, layout: false
 end
 
 configure :development do

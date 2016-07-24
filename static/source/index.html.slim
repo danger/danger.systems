@@ -81,9 +81,16 @@ section
     markdown:
      Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with `danger plugins create`.
 
-section
-  - for plugin in plugins
-    == partial(:plugin_doc, locals: { plugin: plugin, external: true })
+section.search_info
+  article
+    ul
+      / li.search Q
+      - for plugin in plugins
+        li class=(plugin == plugins.first ? "highlighted" : "") data-key=plugin["instance_name"] == plugin["instance_name"] 
+
+.plugins_search_results
+  section
+    == partial(:plugin_doc, locals: { plugin: plugins.first, external: true })
 
 h2
  span Show me some Dangerfiles
@@ -117,9 +124,21 @@ section
 
 javascript:
     $(function() {
+      /// Generic-ish Example Highlight Code
+      $(".search_info ul li").click(function(event) {
+        var $this = $(this)
+        $this.parent().children().removeClass("highlighted")
+        $this.addClass("highlighted")
+        var url = "/plugins/" + $(this).data("key") + "_embed.html"
+        $.get(url, function(html) {
+            $(".plugins_search_results").empty()
+            $(".plugins_search_results").append(html)
+        })
+      })
+
+      /// Generic-ish Example Highlight Code
       $("section.examples ul li").mouseover(function(event) {
         event.preventDefault()
-        console.log($(this))
 
         // Set the corresponding code
         var klass = $(this).attr("class").replace(" highlighted", "")

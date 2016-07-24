@@ -3,7 +3,7 @@ require 'json'
 require 'bundler'
 
 desc 'Generates all the static resources necessary to run the site.'
-task generate: ['generator:plugins_core', 'generator:plugins_external', 'generator:grab_dangerfiles', 'generator:danger_search_plugin_json'] do
+task generate: ['generator:plugins_core', 'generator:plugins_external', 'generator:grab_dangerfiles', 'generator:danger_search_plugin_json', "generator:search_plugin_json"] do
   # Your Gemfile.lock tends to get put out of sync after some of the commands.
   puts 'Shippit'
 end
@@ -81,6 +81,7 @@ namespace :generator do
           plugin_metadata = real_gems.map do |gem|
             {
               name: gem.name,
+              gem: gem.name,
               author: gem.authors,
               url: gem.homepage,
               description: gem.summary,
@@ -92,15 +93,28 @@ namespace :generator do
           plugin_json = { plugins: plugin_metadata }
           plugins_file_path = File.join File.dirname(__FILE__), 'plugins-search-generated.json'
           File.write(plugins_file_path, plugin_json.to_json)
-          puts 'Generated search metadata'
+          puts 'Generated search metadata for `danger search`.'
         end
       end
     end
   end
 
   desc 'Generate the website plugin search JSON file, this is different from the danger gem search - as one gem can have multiple plugins'
-  task :danger_search_plugin_json do
-    # TODO
+  task :search_plugin_json do
+    plugins = JSON.parse(File.read('static/json_data/plugins.json'))
+    plugin_search_metadata = plugins.map do |plugin| 
+      {
+        name: plugin["name"],
+        gem: plugin["gem"],
+        body: plugin["body_md"],
+        instance: plugin["instance_name"],
+        tags: plugin["tags"],
+        see: plugin["see"],
+      }
+    end
+
+    File.write('static/json_data/plugin_search.json', plugin_search_metadata.to_json)
+    puts 'Generated search JSON for inline search'
   end
 end
 
