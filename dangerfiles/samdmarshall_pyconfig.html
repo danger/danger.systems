@@ -1,0 +1,45 @@
+<div class="highlight"><pre><span class="c1"># Sometimes it&#39;s a README fix, or something like that - which isn&#39;t relevant for</span>
+<span class="c1"># including in a project&#39;s CHANGELOG for example</span>
+<span class="n">declared_trivial</span> <span class="o">=</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;#trivial&quot;</span>
+
+<span class="c1"># Make it more obvious that a PR is a work in progress and shouldn&#39;t be merged yet</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;PR is classed as Work in Progress&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;[WIP]&quot;</span>
+
+<span class="c1"># Warn when there is a big PR</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Big PR&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">75</span>
+
+<span class="k">def</span> <span class="nf">didModify</span><span class="p">(</span><span class="n">files_array</span><span class="p">)</span>
+  <span class="n">did_modify_files</span> <span class="o">=</span> <span class="kp">false</span>
+  <span class="n">files_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file_name</span><span class="o">|</span>
+    <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="o">||</span> <span class="n">git</span><span class="o">.</span><span class="n">deleted_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+      <span class="n">did_modify_files</span> <span class="o">=</span> <span class="kp">true</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="k">return</span> <span class="n">did_modify_files</span>
+<span class="k">end</span>
+
+<span class="c1"># Warn when the build system files see changes</span>
+<span class="n">build_files</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Makefile&quot;</span><span class="p">,</span> <span class="s2">&quot;Gemfile&quot;</span><span class="p">,</span> <span class="s2">&quot;Dangerfile&quot;</span><span class="p">,</span> <span class="s2">&quot;circle.yml&quot;</span><span class="p">,</span> <span class="s2">&quot;.codeclimate.yml&quot;</span><span class="p">,</span> <span class="s2">&quot;tox.ini&quot;</span><span class="p">,</span> <span class="s2">&quot;pylintrc&quot;</span><span class="o">]</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Changes to build files&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">didModify</span><span class="p">(</span><span class="n">build_files</span><span class="p">)</span>
+
+<span class="c1"># Warn when changing the requirements files</span>
+<span class="n">req_files</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;requirements.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;setup.py&quot;</span><span class="o">]</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Changes to installation requirements files&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">didModify</span><span class="p">(</span><span class="n">req_files</span><span class="p">)</span>
+
+<span class="c1"># Fail if changes to License or CoC</span>
+<span class="n">special_files</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;LICENSE&quot;</span><span class="p">,</span> <span class="s2">&quot;contributing.md&quot;</span><span class="p">,</span> <span class="s2">&quot;contributing/code-of-conduct.md&quot;</span><span class="o">]</span>
+<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Do not modify the license or Code of Conduct&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">didModify</span><span class="p">(</span><span class="n">special_files</span><span class="p">)</span>
+
+<span class="c1"># put labels on PRs</span>
+<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;PR needs labels&quot;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span> <span class="k">if</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_labels</span><span class="o">.</span><span class="n">empty?</span>
+
+<span class="c1"># if we are on CI, then post the </span>
+<span class="n">username</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_PROJECT_USERNAME&#39;</span><span class="o">]</span>
+<span class="n">project_name</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_PROJECT_REPONAME&#39;</span><span class="o">]</span>
+<span class="n">build_number</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_BUILD_NUM&#39;</span><span class="o">]</span>
+<span class="n">should_display_message</span> <span class="o">=</span> <span class="n">username</span> <span class="o">&amp;&amp;</span> <span class="n">project_name</span> <span class="o">&amp;&amp;</span> <span class="n">build_number</span>
+<span class="k">if</span> <span class="n">should_display_message</span>
+  <span class="c1"># submit message giving the coverage report that was generated by coverage.py</span>
+  <span class="n">message</span><span class="p">(</span><span class="s1">&#39;[html coverage report](https://circleci.com/api/v1/project/&#39;</span><span class="o">+</span><span class="n">username</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">project_name</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">build_number</span><span class="o">+</span><span class="s1">&#39;/artifacts/0/$CIRCLE_ARTIFACTS/htmlcov/index.html)&#39;</span><span class="o">+</span><span class="s1">&#39; &amp; &#39;</span><span class="o">+</span><span class="s1">&#39;[linter report](https://circleci.com/api/v1/project/&#39;</span><span class="o">+</span><span class="n">username</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">project_name</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">build_number</span><span class="o">+</span><span class="s1">&#39;/artifacts/0/$CIRCLE_ARTIFACTS/lint_output.txt)&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>

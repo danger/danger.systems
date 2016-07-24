@@ -7,7 +7,7 @@
 <p>She does this by leaving messages inside your PRs based on rules that you create with the Ruby scripting language.</p>
 
 <p>Over time, as rules are adhered to, the message is amended to reflect the current state of the code review.</p>
-</article><article><img src="/images/danger-screenshot-b5d93f38.png" style="max-width:100%; margin-top: 15px;" /></article></section><h2><span>For Example</span></h2><section class="examples"><ul><li class="changelogs" data-repos="artsy/eigen, cocoapods/cocoapods, realm/jazzy"><a>Enforce Changelogs</a></li><li class="prose" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Improve your prose</a></li><li class="merge" data-repos="cocoapods/cocoapods"><a>Ensure no Merge commits</a></li><li class="focus" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Dont Focus Tests</a></li><li class="artifacts" data-repos="samdmarshall/pyconfig, artsy/eigen, fastlane/fastlane"><a>Highlight build artifacts</a></li><li class="special" data-repos="samdmarshall/pyconfig, artsy/eigen, fastlane/fastlane"><a>Special case special files</a></li></ul><div><div class="code_chunk"><div class="changelogs"><div class="highlight"><pre><span class="c1"># Add a CHANGELOG entry for app changes</span>
+</article><article><a href="/images/danger-screenshot-b5d93f38.png"><img src="/images/danger-screenshot-b5d93f38.png" style="max-width:100%; margin-top: 15px;" /></a></article></section><h2><span>For Example</span></h2><section class="examples"><ul><li class="changelogs" data-repos="artsy/eigen, cocoapods/cocoapods, realm/jazzy"><a>Enforce Changelogs</a></li><li class="prose" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Improve your prose</a></li><li class="merge" data-repos="cocoapods/cocoapods"><a>Ensure no Merge commits</a></li><li class="focus" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Dont Focus Tests</a></li><li class="artifacts" data-repos="samdmarshall/pyconfig#develop, artsy/eigen, fastlane/fastlane"><a>Highlight build artifacts</a></li><li class="special" data-repos="samdmarshall/pyconfig#develop, artsy/eigen, fastlane/fastlane"><a>Special case special files</a></li></ul><div><div class="code_chunk"><div class="changelogs"><div class="highlight"><pre><span class="c1"># Add a CHANGELOG entry for app changes</span>
 <span class="k">if</span> <span class="o">!</span><span class="n">github</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;CHANGELOG.md&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">has_app_changes</span>
   <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Please include a CHANGELOG entry. </span><span class="se">\n</span><span class="s2">You can find it at [CHANGELOG.md](https://github.com/realm/jazzy/blob/master/CHANGELOG.md).&quot;</span><span class="p">)</span>
   <span class="n">message</span> <span class="s2">&quot;Note, we hard-wrap at 80 chars and use 2 spaces after the last line.&quot;</span>
@@ -46,7 +46,14 @@
 <p>Danger should be installed via a Gemfile. Add <code>gem &quot;danger&quot;</code> to your Gemfile, then run <code>bundle</code>.</p>
 
 <p>You can integrate Danger into your own project on any available CI service. She will run through the process with you if you run  <code>danger init</code> after installation.</p>
-</article><article><h3>Supports</h3><p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone, SurfCI.</p><p><strong>Can chat back on</strong>: GitHub</p><p><strong>Can handle diffs from</strong>: Git</p><h3>Danger DSL</h3><pre><code><p>message("message") - Declares a CI message</p><p>warn("message") - Declares a CI warning</p><p>fail("message") - Declares a CI blocking error</p><p>markdown("message") - Outputs markdown</p></code></pre></article></section><h2><span>Plugins</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with <code>danger plugins create</code>.</p>
+</article><article><h3>Supports</h3><p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf.</p><p><strong>Can chat back on</strong>: GitHub</p><p><strong>Can handle diffs from</strong>: Git</p><h3>Messaging Options</h3><p><code>message(&quot;message&quot;)</code> - Comment a message to the table</p>
+
+<p><code>warn(&quot;message&quot;)</code> - Declares a CI warning</p>
+
+<p><code>fail(&quot;message&quot;)</code> - Declares a CI blocking error</p>
+
+<p><code>markdown(&quot;message&quot;)</code> - Outputs pure markdown under the table </p>
+</article></section><h2><span>Plugins</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with <code>danger plugins create</code>.</p>
 </article></section><section><article class="scope_code"><h3>DangerProse</h3><p>Lint markdown files inside your projects.
 This is done using the <a href="http://proselint.com">proselint</a> python egg.
 Results are passed out as a table in markdown.</p>
@@ -70,7 +77,7 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
 </pre></div><h4>Running the spell checker, with some words whitelisted</h4><div class="highlight"><pre><span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;orta&quot;</span><span class="p">,</span> <span class="s2">&quot;artsy&quot;</span><span class="o">]</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span>
 </pre></div><h3>Tags</h3><code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section><h2><span>Show me some Dangerfiles</span></h2><section><article><p>Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.</p>
-</article></section><section class="examples"><ul><li class="moya/moya" data-url="/dangerfiles/moya_moya.html"><a>moya<span>/</span>moya</a></li><li class="artsy/artsy.github.io" data-url="/dangerfiles/artsy_artsy.github.io.html"><a>artsy<span>/</span>artsy.github.io</a></li><li class="artsy/energy" data-url="/dangerfiles/artsy_energy.html"><a>artsy<span>/</span>energy</a></li><li class="artsy/eigen" data-url="/dangerfiles/artsy_eigen.html"><a>artsy<span>/</span>eigen</a></li><li class="fastlane/fastlane" data-url="/dangerfiles/fastlane_fastlane.html"><a>fastlane<span>/</span>fastlane</a></li><li class="danger/danger" data-url="/dangerfiles/danger_danger.html"><a>danger<span>/</span>danger</a></li><li class="cocoapods/cocoapods" data-url="/dangerfiles/cocoapods_cocoapods.html"><a>cocoapods<span>/</span>cocoapods</a></li></ul><div><div class="code_chunk"></div><ref></ref></div></section><h2><span>Lets do it</span></h2><section><article><p>Your first step should probably be to &quot;<a href="/guides/getting_started.html">Getting Set Up</a>&quot;, then move on to the <a href="/reference.html">API Reference</a> as you build out your Dangerfile.</p>
+</article></section><section class="examples"><ul><li class="moya/moya" data-url="/dangerfiles/moya_moya.html"><a>moya<span>/</span>moya</a></li><li class="artsy/artsy.github.io" data-url="/dangerfiles/artsy_artsy.github.io.html"><a>artsy<span>/</span>artsy.github.io</a></li><li class="artsy/energy" data-url="/dangerfiles/artsy_energy.html"><a>artsy<span>/</span>energy</a></li><li class="artsy/eigen" data-url="/dangerfiles/artsy_eigen.html"><a>artsy<span>/</span>eigen</a></li><li class="fastlane/fastlane" data-url="/dangerfiles/fastlane_fastlane.html"><a>fastlane<span>/</span>fastlane</a></li><li class="danger/danger" data-url="/dangerfiles/danger_danger.html"><a>danger<span>/</span>danger</a></li><li class="cocoapods/cocoapods" data-url="/dangerfiles/cocoapods_cocoapods.html"><a>cocoapods<span>/</span>cocoapods</a></li><li class="samdmarshall/pyconfig#develop" data-url="/dangerfiles/samdmarshall_pyconfig.html"><a>samdmarshall<span>/</span>pyconfig#develop</a></li></ul><div><div class="code_chunk"></div><ref></ref></div></section><h2><span>Lets do it</span></h2><section><article><p>Your first step should probably be to &quot;<a href="/guides/getting_started.html">Getting Set Up</a>&quot;, then move on to the <a href="/reference.html">API Reference</a> as you build out your Dangerfile.</p>
 
 <p>If you come up with any novel uses for Danger, please tweet <a href="https://twitter.com/orta">@orta</a> - and <a href="/guides/creating_your_first_plugin.html">make a plugin</a> so everyone can try it. </p>
 </article></section><script>$(function() {
@@ -92,7 +99,6 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
       $("div.code_chunk div." + klass, parent).css("display", "block")
     } else if( $(this).data("url") ) {
       $.get( $(this).data("url"), function(html) {
-        console.log("OK")
           $("div.code_chunk", parent).empty()
           $("div.code_chunk", parent).append(html)
       })
@@ -102,7 +108,9 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
    var urls = $(this).data("repos") && $(this).data("repos").split(", ")
    var prs = "" //$(this).data("prs").split(", ")
    var toGithubLink = function(ref) {
-       return "<a href='https://github.com/" + ref + "/blob/master/Dangerfile'>" + ref + "</a>"
+       var branch = (ref.indexOf("#") > -1) ? ref.split("#")[1] : "master"
+       var repo = ref.split("#")[0]
+       return "<a href='https://github.com/" + repo + "/blob/" + branch +"/Dangerfile'>" + repo + "</a>"
     }
     var showArray = function(array) {
       if (!array) { return false }
