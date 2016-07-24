@@ -80,8 +80,8 @@ namespace :generator do
 
           plugin_metadata = real_gems.map do |gem|
             {
-              gem: gem.name,
-              authors: gem.authors.join(', '),
+              name: gem.name,
+              author: gem.authors,
               url: gem.homepage,
               description: gem.summary,
               license: gem.license || 'Unknown',
