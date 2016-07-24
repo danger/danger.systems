@@ -26,7 +26,8 @@ section
       Over time, as rules are adhered to, the message is amended to reflect the current state of the code review.
 
   article
-    img src="/images/danger-screenshot.png" style="max-width:100%; margin-top: 15px;"
+    a href="/images/danger-screenshot.png"
+      img src="/images/danger-screenshot.png" style="max-width:100%; margin-top: 15px;"
 h2
  span For Example
 
@@ -58,17 +59,19 @@ section
 
   article
     h3 Supports
-    p <strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Xcode Bots, Drone, SurfCI.
+    p <strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf.
     p <strong>Can chat back on</strong>: GitHub
     p <strong>Can handle diffs from</strong>: Git
 
-    h3 Danger DSL
-    pre
-      code
-        p message("message") - Declares a CI message
-        p warn("message") - Declares a CI warning
-        p fail("message") - Declares a CI blocking error
-        p markdown("message") - Outputs markdown
+    h3 Messaging Options
+    markdown:
+      `message("message")` - Comment a message to the table
+
+      `warn("message")` - Declares a CI warning
+
+      `fail("message")` - Declares a CI blocking error
+
+      `markdown("message")` - Outputs pure markdown under the table 
 
 h2
   span Plugins
@@ -93,7 +96,7 @@ section
 section.examples
   ul
     - for repo in dangerfiles
-      li class=repo  data-url="/dangerfiles/#{repo.gsub("/", "_")}.html"
+      li class=repo  data-url="/dangerfiles/#{repo.gsub("/", "_").split("#").first}.html"
         a == repo.gsub("/", "<span>/</span>")
 
   div
@@ -132,7 +135,6 @@ javascript:
           $("div.code_chunk div." + klass, parent).css("display", "block")
         } else if( $(this).data("url") ) {
           $.get( $(this).data("url"), function(html) {
-            console.log("OK")
               $("div.code_chunk", parent).empty()
               $("div.code_chunk", parent).append(html)
           })
@@ -142,7 +144,9 @@ javascript:
        var urls = $(this).data("repos") && $(this).data("repos").split(", ")
        var prs = "" //$(this).data("prs").split(", ")
        var toGithubLink = function(ref) {
-           return "<a href='https://github.com/" + ref + "/blob/master/Dangerfile'>" + ref + "</a>"
+           var branch = (ref.indexOf("#") > -1) ? ref.split("#")[1] : "master"
+           var repo = ref.split("#")[0]
+           return "<a href='https://github.com/" + repo + "/blob/" + branch +"/Dangerfile'>" + repo + "</a>"
         }
         var showArray = function(array) {
           if (!array) { return false }

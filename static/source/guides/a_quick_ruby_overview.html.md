@@ -66,6 +66,8 @@ name.include? "Thero"         # true
 name[0..3]                    # Orta
 ```
 
+There are multiple ways to make a string, I recommend using double quotes `"` like above. If you want to do string interpolation with it, you can use `#{}` and run code inside the brackets. `"5 = ${ 2+3 }"`.
+
 That should be enough to play around with your code review data.
 
 ### Arrays + Closures

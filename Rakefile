@@ -44,7 +44,10 @@ namespace :generator do
     dangerfile_repos.each do |repo|
       require 'open-uri'
       require 'pygments'
-      dangerfile = open("https://raw.githubusercontent.com/#{repo}/master/Dangerfile").read
+      branch = repo.include?('#') ? repo.split('#').last : 'master'
+      repo = repo.split('#').first
+
+      dangerfile = open("https://raw.githubusercontent.com/#{repo}/#{branch}/Dangerfile").read
 
       path = "static/source/dangerfiles/#{repo.tr('/', '_')}.html"
       html = Pygments.highlight(dangerfile, lexer: 'ruby', options: { encoding: 'utf-8' })
@@ -56,7 +59,7 @@ namespace :generator do
 
   desc 'Generate the search plugin JSON file, this used by `danger plugins search` and by the re-deploy webhook system.'
   task :danger_search_plugin_json do
-    # Grab our definitive plugins list of 
+    # Grab our definitive plugins list of
     plugins = JSON.parse(File.read('plugins.json'))
 
     Bundler.with_clean_env do
@@ -82,7 +85,7 @@ namespace :generator do
               url: gem.homepage,
               description: gem.summary,
               license: gem.license || 'Unknown',
-              version: gem.version.to_s,
+              version: gem.version.to_s
             }
           end
 
@@ -97,7 +100,7 @@ namespace :generator do
 
   desc 'Generate the website plugin search JSON file, this is different from the danger gem search - as one gem can have multiple plugins'
   task :danger_search_plugin_json do
-      # TODO
+    # TODO
   end
 end
 
