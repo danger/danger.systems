@@ -37,7 +37,7 @@
 
 - title: "Highlight build artifacts"
   id: "artifacts"
-  repos: "samdmarshall/pyconfig, artsy/eigen, fastlane/fastlane"
+  repos: "samdmarshall/pyconfig#develop, artsy/eigen, fastlane/fastlane"
   code: |
     username = ENV['CIRCLE_PROJECT_USERNAME']
     project_name = ENV['CIRCLE_PROJECT_REPONAME']
@@ -49,7 +49,7 @@
 
 - title: "Special case special files"
   id: "special"
-  repos: "samdmarshall/pyconfig, artsy/eigen, fastlane/fastlane"
+  repos: "samdmarshall/pyconfig#develop, artsy/eigen, fastlane/fastlane"
   code: |
     # Did you make analytics changes? Well you should also include a change to our analytics spec
     made_analytics_changes = modified_files.include?("/Artsy/App/ARAppDelegate+Analytics.m")
