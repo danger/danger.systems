@@ -20,8 +20,9 @@ To pull that off, Danger needs to be able to run inside your continuous integrat
 
 ### Plugins
 
-Danger was built with a plugin structure in mind from day one. The core of Danger itself aims to be small, with space for others to easily build sharable plugins that extend Danger to fix common issues. All of the Danger API is built in plugins.
+Danger was built with a plugin structure in mind from day one. The [core of Danger itself aims to be small][vision], with space for others to easily build sharable plugins that extend Danger to fix common issues. All of the Danger API is built in plugins.
 
 To simplify the experience for consumers of plugins, Danger does very little. Each plugin adds an instance of the plugin's class into the `Dangerfile`, plugins are then free to use their own methods and store their own data in memory. One of the up-sides of this is that if you want to take some code from your `Dangerfile`, and turn it into a plugin - it would be source-compatible.
 
 [multi_repos]: /guides/faq.html#i-want-to-run-danger-across-multiple-repos
+[vision]: https://github.com/danger/danger/blob/master/VISION.md
