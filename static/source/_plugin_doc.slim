@@ -17,14 +17,16 @@ ruby:
     string_params
   end
 
+  plugins = JSON.parse(File.read("../plugins-search-generated.json"))
+  gem_for_plugin = plugins["plugins"].find { |gem_plugin| gem_plugin["gem"] == plugin["gem"] } 
 
 article.scope_code
   - if external
-    h3 == plugin["name"]
+    h3.no_hot_pink == "<a href='/plugins/#{plugin['instance_name']}.html'>#{plugin['instance_name']}</a>"
 
-  /  TODO: Name + version in metadata
-  / h3 == plugin["gem"].gsub("danger-", "") + " <span>#{plugin["gem"]["version"]}</span>"
-  == markdown_h(plugin["body_md"])
+    == markdown_h(plugin["body_md"])
+
+    p == "Created by #{ gem_for_plugin["author"].join ", " }."
 
   h3 Reference
   - unless plugin["attributes"].empty?
@@ -32,7 +34,6 @@ article.scope_code
     - for attribute in plugin["attributes"]
       .fake_code
          == markdown_h(attribute.values.first["write"]["body_md"])
-      / code == attribute.keys.first + method_return_span()
       pre
         code == attribute.keys.first + span_return(attribute.values.first["write"])
 
@@ -50,14 +51,14 @@ article.scope_code
     h4 == example["title"]
     = syntax_highlight example["text"]
 
-  / TODO: Gem name
-  / h3 How to Install
-  / markdown:
-  /   Include `gem "#{plugin["gem"]["name"]}"` in your project’s Gemfile. Then run `bundle`.
-
-  /   Then inside your Dangerfile, you can access the plugin's API via `#{plugin["instance_name"]}`.
-
   - if external
+
+    h3 How to Install
+    markdown:
+      Include `gem "#{plugin["gem"]}"` in your project’s Gemfile. Then run `bundle install`.
+
+      Then inside your Dangerfile, you can access the plugin via `#{plugin["instance_name"]}`.
+
     h3 Tags
     code == plugin["tags"].join(" ")
 

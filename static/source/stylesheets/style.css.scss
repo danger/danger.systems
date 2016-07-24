@@ -22,6 +22,9 @@ body {
         &:visited {
             color: #A53148;
         }
+        &.no_hot_pink {
+            color: black;
+        }
     }
     > header {
         p { display: none }
@@ -92,6 +95,31 @@ body {
         }
     }
 
+    section.search_info ul {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        padding: 0;
+
+        & > li:first-child {
+            margin-left: 0;
+        }
+
+        li {
+            @include punk-text;
+            font-size: 20px;
+            background-color: #FFFDD2;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 0 10px;
+            display: inline-block;
+            cursor: pointer;
+            
+            &.highlighted {
+                background-color: #FFC449;
+            }
+        }
+    }
+
     p, li {
         font-family: "Avenir Book";
         font-size: 17px;
@@ -101,6 +129,7 @@ body {
         @include code-text;
         font-size: 14px;
         background-color: rgba(201, 167, 40, 0.10);
+        word-break: break-all;
     }
 
     .highlight > pre {
@@ -166,7 +195,7 @@ body {
         margin-bottom: 10px;
     }
 
-    > section {
+    section {
         display: -ms-flex;
         display: -webkit-flex;
         display: flex;
@@ -189,7 +218,7 @@ body {
         }
 
         // To left align the edge, taking into account the link
-        h3, h4, h5 {
+        .guide h3, .guide h4, .guide h5 {
             margin-left: -0.7em;
         }
 
