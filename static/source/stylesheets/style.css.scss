@@ -140,16 +140,17 @@ body {
         border-left: solid 2px #4DFF95;
         padding-left: 18px;
         border-bottom-left-radius: 20px;
-        >  code {
-            @include code-text;
-            font-size: 14px;
-            > span.subtle {
-                &.return::before {
-                    content: " -> "
-                }
-
-                color: #aaa;
+    }
+    code {
+        @include code-text;
+        font-size: 14px;
+        > span.subtle {
+            &.return::before {
+                content: " -> "
             }
+            -webkit-user-select: none;
+            -moz-user-select: none; 
+            color: #aaa;
         }
     }
 
@@ -243,6 +244,7 @@ body {
             margin-left: 20px;
 
             &.scope_code {
+                font-size: 16px;
                 h4 {
                     font-size: 14px;
                     margin-bottom: 0px;
@@ -269,7 +271,7 @@ body {
 
             div.fake_code > p {
                 @include code-text;
-                font-size: 12px;
+                font-size: 14px;
                 color: #848684;
                 margin-bottom: 0px;
             }

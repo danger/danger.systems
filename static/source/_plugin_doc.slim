@@ -34,16 +34,14 @@ article.scope_code
     - for attribute in plugin["attributes"]
       .fake_code
          == markdown_h(attribute.values.first["write"]["body_md"])
-      pre
-        code == attribute.keys.first + span_return(attribute.values.first["write"])
+      code == attribute.keys.first + span_return(attribute.values.first["write"])
 
   - unless plugin["methods"].empty?
     h4 Methods
     - for method in plugin["methods"]
       .fake_code
          == markdown_h(method["body_md"])
-      pre
-        code == method["name"] + span_params(method) + span_return(method)
+      code == method["name"] + span_params(method) + span_return(method)
 
 article.scope_code
   h3 Examples
