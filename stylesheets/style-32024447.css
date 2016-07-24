@@ -92,13 +92,15 @@ body {
     border-left: solid 2px #4DFF95;
     padding-left: 18px;
     border-bottom-left-radius: 20px; }
-    body pre > code {
-      font-family: "Monaco";
-      font-size: 14px; }
-      body pre > code > span.subtle {
-        color: #aaa; }
-        body pre > code > span.subtle.return::before {
-          content: " -> "; }
+  body code {
+    font-family: "Monaco";
+    font-size: 14px; }
+    body code > span.subtle {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      color: #aaa; }
+      body code > span.subtle.return::before {
+        content: " -> "; }
   body .byline {
     text-align: right;
     display: block;
@@ -160,24 +162,26 @@ body {
       width: 50%;
       margin-right: 80px;
       margin-left: 20px; }
-      body section article.scope_code h4 {
-        font-size: 14px;
-        margin-bottom: 0px; }
-      body section article.scope_code .highlight {
-        max-width: 100%;
-        overflow-x: scroll; }
-        body section article.scope_code .highlight pre {
-          margin-top: 4px;
-          word-break: letter; }
-      body section article.scope_code ul li {
-        font-family: "Monaco";
-        font-size: 12px;
-        color: #848684; }
+      body section article.scope_code {
+        font-size: 16px; }
+        body section article.scope_code h4 {
+          font-size: 14px;
+          margin-bottom: 0px; }
+        body section article.scope_code .highlight {
+          max-width: 100%;
+          overflow-x: scroll; }
+          body section article.scope_code .highlight pre {
+            margin-top: 4px;
+            word-break: letter; }
+        body section article.scope_code ul li {
+          font-family: "Monaco";
+          font-size: 12px;
+          color: #848684; }
       body section article code > blockquote {
         margin: 0; }
       body section article div.fake_code > p {
         font-family: "Monaco";
-        font-size: 12px;
+        font-size: 14px;
         color: #848684;
         margin-bottom: 0px; }
     body section .clearfix {
