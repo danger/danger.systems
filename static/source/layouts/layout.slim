@@ -32,7 +32,7 @@ html
   body class=page_classes
 
     - if is_home
-      code.byline a project from <a href="http://orta.io">orta therox</a><br/>and <a href="https://krausefx.com">felix krause</a>.
+      code.byline a project from <a target="_blank" href="http://orta.io">orta therox</a><br/>and <a target="_blank" href="https://krausefx.com">felix krause</a>.
 
     header class=(is_home ? 'title' : 'title small')
 
@@ -54,7 +54,7 @@ html
 
       h2.reduced_top_margin
         span == current_page.data["subtitle"]
-        code.byline.inline a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.
+        code.byline.inline a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://krausefx.com">felix krause</a>.
 
     == yield
 
@@ -70,9 +70,9 @@ html
         h3 Twitter
         ul
           li
-            a href="https://twitter.com/orta" @orta
+            a target="_blank" href="https://twitter.com/orta" @orta
           li
-            a href="https://twitter.com/krausefx" @krausefx
+            a target="_blank" href="https://twitter.com/krausefx" @krausefx
 
       article
         h3 Guides
