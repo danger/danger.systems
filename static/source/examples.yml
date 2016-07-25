@@ -24,7 +24,7 @@
   repos: "cocoapods/cocoapods"
   code: |
     # Ensure a clean commits history
-    if commits.any? { |c| c.message =~ /^Merge branch/ }
+    if git.commits.any? { |c| c.message =~ /^Merge branch/ }
       fail('Please rebase to get rid of the merge commits in this PR')
     end
 
