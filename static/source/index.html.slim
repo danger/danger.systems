@@ -1,5 +1,5 @@
 ---
-title: Danger - Stop Saying "You Forgot To..." in Code Review
+title: Danger - Stop Saying "You Forgot To…" in Code Review
 ---
 
 ruby:
@@ -17,7 +17,7 @@ section
     markdown:
       Danger runs during your CI process, and gives teams the chance to automate common code review chores.
 
-      This provides another logical step in your process, through this Danger can help lint your rote tasks in daily code review.
+      This provides another logical step in your build, through this Danger can help lint your rote tasks in daily code review.
 
       You can use Danger to codify your teams norms. Leaving humans to think about harder problems.
 
@@ -51,27 +51,27 @@ section
   article
     h3 How
     markdown:
-      Danger is ruby gem that runs a `Dangerfile`, you set up a `Dangerfile` per-project. The `Dangerfile` contains a collection of home-grown rules specific to your project.
+      Danger is ruby gem that runs a `Dangerfile`. You set up a `Dangerfile` per-project. The `Dangerfile` contains a collection of home-grown rules specific to your project.
 
       Danger should be installed via a Gemfile. Add `gem "danger"` to your Gemfile, then run `bundle`.
 
-      You can integrate Danger into your own project on any available CI service. She will run through the process with you if you run  `danger init` after installation.
+      You can [integrate Danger](/guides/getting_started.html) into your own project on any available CI service. She will run through the process with you if you run  `danger init` after installation.
 
   article
     h3 Supports
     p <strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf.
-    p <strong>Can chat back on</strong>: GitHub
-    p <strong>Can handle diffs from</strong>: Git
+    p <strong>Can chat back on</strong>: GitHub.
+    p <strong>Can handle diffs from</strong>: Git.
 
     h3 Messaging Options
     markdown:
-      `message("message")` - Comment a message to the table
+      `message("message")` - Comment a message to the table.
 
-      `warn("message")` - Declares a CI warning
+      `warn("message")` - Declares a CI warning.
 
-      `fail("message")` - Declares a CI blocking error
+      `fail("message")` - Declares a CI blocking error.
 
-      `markdown("message")` - Outputs pure markdown under the table 
+      `markdown("message")` - Outputs pure markdown under the table. 
 
 h2
   span Plugins

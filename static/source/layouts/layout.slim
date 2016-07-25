@@ -1,7 +1,8 @@
 ruby:
   is_home = current_page.path == "index.html"
   guides = sitemap.resources.select { |r| r.path.start_with? "guides/" }.sort_by { |r| r.data[:order] }
-
+  title = current_page.data.title || "Danger"
+  url = "http://danger.systems/#{current_page.path}"
 html
   head
     meta charset="utf-8"
@@ -12,7 +13,18 @@ html
     meta name="MobileOptimized" content="480"
     meta name="viewport" content="width=480, initial-scale=0.6"
 
-    title == current_page.data.title || "Danger"
+
+    meta name="keywords" content="constant integration culture code"
+
+    meta name="author" content="Orta Therox & Felix Krause"
+    meta name="twitter:card" content="summary"
+    meta name="twitter:creator" content="@orta"
+    meta name="twitter:title" content=title.gsub('"', "'")
+    meta name="twitter:description" content="Apply cultural rules during your CI process."
+    meta name="twitter:url" content=url
+    meta property="og:image" content="/images/square.png"
+    meta property="og:url" content=url
+    title == title
 
     == stylesheet_link_tag "style", "highlight"
     == javascript_include_tag  "https://code.jquery.com/jquery-3.1.0.min.js"
