@@ -54,7 +54,7 @@ You can find the webhooks settings page at: `https://github.com/[your name]/[you
 
 ![Webhook Preview](docs/example_webhook.png)
 
-You can run a copy of the static site via:
+You can run a copy of the webhook site via:
 
 ``` sh
 bundle
