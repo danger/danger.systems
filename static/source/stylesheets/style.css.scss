@@ -17,7 +17,6 @@
 
 // Mobile stuff is at the bottom
 
-
 body {
     margin: 0;
     a {
@@ -36,7 +35,7 @@ body {
         background-image: url("/images/title-background.png");
         text-align: center;
 
-        > img {
+        > a img {
             width: 490px;
             height: 118px;
             margin: 45px auto;
@@ -120,7 +119,8 @@ body {
             background-color: #FFFDD2;
             padding: 10px 20px;
             border-radius: 8px;
-            margin: 0 10px;
+            margin-right: 20px;
+            margin-bottom: 18px;
             display: inline-block;
             cursor: pointer;
             
@@ -228,10 +228,6 @@ body {
             font-size: 14px;
         }
 
-        // To left align the edge, taking into account the link
-        .guide h3, .guide h4, .guide h5 {
-            margin-left: -0.7em;
-        }
 
         .header-link {
             @include code-text;
@@ -290,6 +286,22 @@ body {
     }
     .clearfix {
         clear: both;
+    }
+
+    > section.guide {
+        img {
+            max-width: 100%;
+        }
+
+        // To left align the edge, taking into account the link
+        h3, h4, h5 {
+            margin-left: -0.7em;
+        }
+
+        pre {
+            max-width: 100%;
+            overflow-x: scroll;
+        }
     }
 
     > section.examples {
@@ -449,8 +461,16 @@ body {
         margin-right: 20px;
         margin-left: 20px;
     }
-
+    
+    // Kill the made by x, y
     body h2.reduced_top_margin .byline {
         display: none;
+    }
+
+    // Header fits mobile now
+    body > header img {
+        width: 373px;
+        height: 90px;
+        margin-top: 60px;
     }
 }
