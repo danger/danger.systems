@@ -33,8 +33,7 @@
 	<span class="n">project_name</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_PROJECT_REPONAME&#39;</span><span class="o">]</span>
 	<span class="n">build_number</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_BUILD_NUM&#39;</span><span class="o">]</span>
 	<span class="n">node_index</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_NODE_INDEX&#39;</span><span class="o">]</span>
-	<span class="n">artifacts_path</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_ARTIFACTS&#39;</span><span class="o">]</span>
-	<span class="n">should_display_message</span> <span class="o">=</span> <span class="n">username</span> <span class="o">&amp;&amp;</span> <span class="n">project_name</span> <span class="o">&amp;&amp;</span> <span class="n">build_number</span> <span class="o">&amp;&amp;</span> <span class="n">node_index</span> <span class="o">&amp;&amp;</span> <span class="n">artifacts_path</span>
+	<span class="n">should_display_message</span> <span class="o">=</span> <span class="n">username</span> <span class="o">&amp;&amp;</span> <span class="n">project_name</span> <span class="o">&amp;&amp;</span> <span class="n">build_number</span> <span class="o">&amp;&amp;</span> <span class="n">node_index</span>
 	<span class="k">if</span> <span class="n">should_display_message</span>
 
 		<span class="c1"># build the path to where the circle CI artifacts will be uploaded to</span>
@@ -46,8 +45,7 @@
 		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="n">build_number</span>
 		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="s1">&#39;/artifacts/&#39;</span>
 		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="n">node_index</span>
-		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="n">artifacts_path</span>
-		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="s1">&#39;/$CIRCLE_ARTIFACTS/&#39;</span>
 
 		<span class="n">message_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 		<span class="vi">@SDM_DANGER_REPORT_CIRCLE_CI_ARTIFACTS</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">artifact</span><span class="o">|</span>
