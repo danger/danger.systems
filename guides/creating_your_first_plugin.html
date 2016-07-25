@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta content="True" name="HandheldFriendly">
@@ -23,11 +23,7 @@
 <span>Plugin creation</span><code class="byline inline">a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.</code>
 </h2>
 <div class="clearfix"></div>
-<section class="guide"><article><p>WIP - for now see the <a href="https://github.com/danger/danger-plugin-template">danger-plugin-template repo</a>.</p>
-
-<hr>
-
-<p>So, you want to make a Danger Plugin? This is <em>awesome</em>. We all have common issues, and this is a great way to share code with the world. We’ve found once a single rule becomes longer than 10-15 lines of code, converting it into a plugin </p>
+<section class="guide"><article><p>So, you want to make a Danger Plugin? This is <em>awesome</em>. We all have common issues, and this is a great way to share code with the world. We’ve found once a single rule becomes longer than 10-15 lines of code, converting it into a plugin </p>
 
 <p>The concept of a Plugin in Danger is very simple. It’s a subclass of <code>Danger::Plugin</code>. </p>
 
@@ -68,43 +64,122 @@ end
 <h3 id="creating-the-plugin">
 <a class="header-link" href="#creating-the-plugin">#</a>Creating the Plugin</h3>
 
-<p>Starting is pretty simple, we have a <a href="https://github.com/danger/danger-plugin-template">template</a>. As well as a command to get you started. Your first step is the name, the <a href="http://guides.rubygems.org/name-your-gem/">Rubygems rule</a> is <code>[core_app]-[plugin]_[names]</code>. So, the first space is always a <code>-</code> then later spaces would be <code>_</code>. E.g. <code>danger-wizard_hat</code>.</p>
+<p>Starting is pretty simple, we have a <a href="https://github.com/danger/danger-plugin-template">template</a>. As well as a command to get you started. Your first step is the name, the <a href="http://guides.rubygems.org/name-your-gem/">Rubygems rule</a> is <code>[core_app]-[gem]_[name]</code>. So, the first space is always a <code>-</code> then later spaces would be <code>_</code>. E.g. <code>danger-wizard_hat</code>.</p>
 
-<p>Now you know the rules, in your development folder run <code>danger plugins create [name]</code>. This will create  </p>
+<p>Now you know the rules, in your development folder run <code>danger plugins create [name]</code>. This will create a README similar to <a href="https://github.com/dbgrandi/danger-prose/tree/d80e1b54a6df859c624015895f4d5d79fd11a276">danger-proselint</a>’s</p>
+
+<pre><code>$ danger plugins create guitar_lessons
+
+-&gt; Creating `danger-guitar_lessons` plugin
+
+[!] using template 'https://github.com/danger/danger-plugin-template'
+-&gt; Configuring template
+Configuring danger-guitar_lessons
+user name:Orta Therox
+user email:orta.therox@gmail.com
+year:2016
+</code></pre>
+
+<p>This sets you up with this folder structure:</p>
+
+<pre><code>danger-guitar_lessons
+├── .travis.yml
+├── Gemfile
+├── Guardfile
+├── LICENSE.txt
+├── README.md
+├── Rakefile
+├── danger-guitar_lessons.gemspec
+├── lib
+│   ├── danger_guitar_lessons.rb
+│   ├── danger_plugin.rb
+│   └── guitar_lessons
+│       ├── gem_version.rb
+│       └── plugin.rb
+└── spec
+    ├── guitar_lessons_spec.rb
+    └── spec_helper.rb
+</code></pre>
+
+<p>Which covers a lot of the basics for you</p>
+
+<h4 id="source">
+<a class="header-link" href="#source">#</a>Source</h4>
+
+<p>The template isn’t empty, it comes as an existing simple plugin based on our work in <a href="https://github.com/dbgrandi/danger-prose/">danger-prose</a>. This is to make it easier to show how all of the plugin comes together, I’d recommend reading through these files in this order:</p>
 
 <ul>
-<li>same source</li>
-<li>always danger-thing</li>
-<li><code>danger plugins create</code></li>
-<li>overview of structure</li>
-<li>move the code in</li>
+<li><code>/lib/[NAME]/plugin.rb</code></li>
+<li><code>/spec/spec_helper.rb</code></li>
+<li><code>/spec/[NAME]_spec.rb</code></li>
 </ul>
 
-<h4 id="verifying-the-plugin">
-<a class="header-link" href="#verifying-the-plugin">#</a>Verifying the Plugin</h4>
+<p>as these are main places where you would be doing work.</p>
+
+<p>You’ll want to move your code into the file at <code>/lib/[NAME]/plugin.rb</code>. Then you can write some tests to ensure nothing will break in the future. </p>
+
+<h4 id="tests">
+<a class="header-link" href="#tests">#</a>Tests</h4>
+
+<p>The template comes with some tests for the example plugin. It already comes with infrastructure to have a <code>Danger::Dangerfile</code> instantiate your plugin. You can start off by modifying that to work with your plugin.</p>
+
+<p>To run all of the tests, you can use the command <code>bundle exec rake spec</code>. The testing infrastructure is <a href="http://rspec.info">RSpec</a>, the template also comes with a <code>Guardfile</code> for use with <a href="http://guardgem.org">guard</a> with <a href="https://github.com/guard/guard-rspec">guard-rspec</a>. This means you can run <code>bundle exec guard</code> and it will start a server which listens for test changes and re-runs your tests as you work. </p>
+
+<p>If you’re new to testing on ruby, here are some examples that you can use as a reference:</p>
 
 <ul>
-<li>running the specs</li>
-<li>Show some examples of testing with Rspec</li>
+<li><a href="https://github.com/dbgrandi/danger-prose/blob/cc2c618abafc9e9435a783ffa0ebca5beef4f897/spec/danger_plugin_spec.rb"><code>danger-proselint - danger_plugin_spec.rb</code></a></li>
+<li><a href="https://github.com/danger/danger/blob/6daa85167efff1659bbee895b3e9a9fba0b1c9ec/spec/lib/danger/request_sources/request_source_spec.rb"><code>danger - request_source_spec.rb</code></a></li>
+<li><a href="https://github.com/danger/danger/blob/master/spec/lib/danger/core_ext/string_spec.rb"><code>danger - string_spec.rb</code></a></li>
+<li><a href="https://github.com/ashfurrow/danger-rubocop/blob/bef4a28b4d542810a1aeb0d7460a80a8ab842492/spec/danger_plugin_spec.rb"><code>danger-rubocop - danger_plugin_spec.rb</code></a></li>
 </ul>
+
+<h4 id="ci">
+<a class="header-link" href="#ci">#</a>CI</h4>
+
+<p>This template comes with a <code>.travis.yml</code> file that lints your documentation, and offers advice on the syntax of your Ruby. If you want to quickly change the syntax, run <code>bundle exec rubocop -a</code> in the directory. </p>
 
 <h4 id="adding-the-gem-to-your-project">
 <a class="header-link" href="#adding-the-gem-to-your-project">#</a>Adding the Gem to your Project</h4>
 
-<ul>
-<li>Gemfile only</li>
-</ul>
+<p>To test your project back with the codebase you’ve extracted the code from, you’ll need to use a <code>Gemfile</code>. So many <code>Thingfile</code>s, right? </p>
+
+<p>You should add a <code>gem</code> using the <code>:path</code> attribute. e.g. add a new line with:</p>
+
+<pre><code class="ruby">gem "danger-guitar_lessons", :path =&gt; "../danger-guitar_lessons"
+</code></pre>
+
+<p>Then when you run <code>bundle install</code> your new gem is added to the project. You can then use <code>bundle exec danger local</code> to test inside you project. You can make changes to your plugin, then you only need to run <code>bundle exec danger local</code>.</p>
+
+<h3 id="automate-your-readme">
+<a class="header-link" href="#automate-your-readme">#</a>Automate your README</h3>
+
+<p>Danger can generate your README based on the inline documentation in your plugin. To do this, run <code>bundle exec danger plugins readme</code>. The markdown will be output into your terminal, then you can copy &amp; paste it into <code>README.md</code>.</p>
 
 <h3 id="pushing-to-rubygems">
-<a class="header-link" href="#pushing-to-rubygems">#</a>Pushing to Rubygems</h3>
+<a class="header-link" href="#pushing-to-rubygems">#</a>Pushing to RubyGems</h3>
 
-<ul>
-<li>registering</li>
-<li>pushing</li>
-</ul>
+<p>So you’re ready to ship now, you’ve got a few tests, and you’ve ran it inside your project using a <code>:path</code> <code>gem</code>. </p>
+
+<p>You’re going to want to push it to <a href="https://rubygems.org">RubyGems</a>, here’s their guide on <a href="http://guides.rubygems.org/publishing/#publishing-to-rubygemsorg">publishing a gem</a>.</p>
+
+<p>Once it’s on RubyGems, then you should change your application’s Gemfile to remove the <code>:path</code> and let it become the public gem. Awesome. That’s you ready for using your plugin in production.</p>
 
 <h3 id="getting-it-on-danger-systems">
 <a class="header-link" href="#getting-it-on-danger-systems">#</a>Getting it on Danger.Systems</h3>
+
+<p>Having a plugin available on RubyGems means anyone can use it. </p>
+
+<p>This is entirely optional, however having your gem on this site means that it will be more visible! </p>
+
+<p>In order to go on Danger.Systems you need to ensure the running <code>bundle exec danger plugins lint</code> passes. </p>
+
+<p>This means that the plugin is well documented so that the site can generate a page for it. The linter will guide you through the process, and show you examples of how to use the documentation syntax.</p>
+
+<p>Once you are all green, and ideally warning free in the linter. You should send a pull request to <a href="https://github.com/danger/danger.systems/edit/master/plugins.json">danger.systems/plugins.json</a>. Please don’t add it as the first item.</p>
+
+<h4 id="--would-plugin-again">
+<a class="header-link" href="#--would-plugin-again">#</a>10/10 WOULD PLUGIN AGAIN</h4>
 </article></section><section><article><hr>
 <p>Got improvements? Help improve this document via <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/creating_your_first_plugin.html.md">sending PRs</a>.</p></article></section><footer><article><h3>GitHub</h3>
 <ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul>
