@@ -49,10 +49,10 @@ body {
             font-size: 42px;
             margin:0 20px;
 
-            a.small {
+            &.small {
                 display: none;
             }
-            a.big {
+            &.big {
                 display: inline-block;
             }
 
@@ -287,9 +287,9 @@ body {
             }
         }
 
-        .clearfix {
-            clear: both;
-        }
+    }
+    .clearfix {
+        clear: both;
     }
 
     > section.examples {
@@ -402,6 +402,8 @@ body {
     }
 }
 
+// Think a guide should have 
+
 // Alright, so the decision is that anything under 740px is "too small" aka mobile mode
 
 @media screen and (max-width: 740px) {
@@ -422,13 +424,18 @@ body {
         font-size: 36px;
         margin: 0 10px;
 
-        a.small {
+        &.small {
             display: inline-block;
         }
-        a.big {
+        &.big {
             display: none;
         }
     }
+    // Going bold, links are in the footer.
+    body > header.small > nav {
+        display: none;
+    }
+
 
     // Danger's image is centered
     body footer > article:last-child {
@@ -436,8 +443,14 @@ body {
         width: 100%;
         text-align: center;
     }
+    
+    // Make select-y code bits most edge to edge
     body > section.examples > div {
         margin-right: 20px;
         margin-left: 20px;
+    }
+
+    body h2.reduced_top_margin .byline {
+        display: none;
     }
 }
