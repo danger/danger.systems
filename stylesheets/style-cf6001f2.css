@@ -18,7 +18,7 @@ body {
     text-align: center; }
     body > header p {
       display: none; }
-    body > header > img {
+    body > header > a img {
       width: 490px;
       height: 118px;
       margin: 45px auto;
@@ -29,6 +29,10 @@ body {
       display: inline-block;
       font-size: 42px;
       margin: 0 20px; }
+      body > header > nav li.small {
+        display: none; }
+      body > header > nav li.big {
+        display: inline-block; }
       body > header > nav li a {
         text-decoration: none;
         color: white;
@@ -72,7 +76,8 @@ body {
       background-color: #FFFDD2;
       padding: 10px 20px;
       border-radius: 8px;
-      margin: 0 10px;
+      margin-right: 20px;
+      margin-bottom: 18px;
       display: inline-block;
       cursor: pointer; }
       body section.search_info ul li.highlighted {
@@ -147,8 +152,6 @@ body {
       text-transform: uppercase; }
     body section h5 {
       font-size: 14px; }
-    body section .guide h3, body section .guide h4, body section .guide h5 {
-      margin-left: -0.7em; }
     body section .header-link {
       font-family: "Monaco";
       text-decoration: none;
@@ -184,8 +187,15 @@ body {
         font-size: 14px;
         color: #848684;
         margin-bottom: 0px; }
-    body section .clearfix {
-      clear: both; }
+  body .clearfix {
+    clear: both; }
+  body > section.guide img {
+    max-width: 100%; }
+  body > section.guide h3, body > section.guide h4, body > section.guide h5 {
+    margin-left: -0.7em; }
+  body > section.guide pre {
+    max-width: 100%;
+    overflow-x: scroll; }
   body > section.examples ul {
     padding-left: 88px;
     margin-top: 0;
@@ -264,3 +274,39 @@ body {
           color: black; }
         body footer ul li a:hover {
           color: #867C01; }
+
+@media screen and (max-width: 740px) {
+  body section, body footer {
+    flex-flow: column; }
+    body section article, body footer article {
+      width: 80%;
+      margin-right: 20px;
+      margin-left: 80px; }
+
+  body > header > nav li {
+    font-size: 36px;
+    margin: 0 10px; }
+    body > header > nav li.small {
+      display: inline-block; }
+    body > header > nav li.big {
+      display: none; }
+
+  body > header.small > nav {
+    display: none; }
+
+  body footer > article:last-child {
+    margin: 20px 0;
+    width: 100%;
+    text-align: center; }
+
+  body > section.examples > div {
+    margin-right: 20px;
+    margin-left: 20px; }
+
+  body h2.reduced_top_margin .byline {
+    display: none; }
+
+  body > header img {
+    width: 373px;
+    height: 90px;
+    margin-top: 60px; } }

@@ -1,0 +1,64 @@
+<div class="highlight"><pre><span class="c1"># Warn when there is a big PR</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s1">&#39;Big PR&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="vi">@SDM_DANGER_BIG_PR_LINES</span>
+
+<span class="c1"># Make it more obvious that a PR is a work in progress and shouldn&#39;t be merged yet</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s1">&#39;PR is classed as Work in Progress&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s1">&#39;[WIP]&#39;</span>
+
+<span class="c1"># determine if any of the files were modified</span>
+<span class="k">def</span> <span class="nf">didModify</span><span class="p">(</span><span class="n">files_array</span><span class="p">)</span>
+	<span class="n">did_modify_files</span> <span class="o">=</span> <span class="kp">false</span>
+	<span class="n">files_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file_name</span><span class="o">|</span>
+		<span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="o">||</span> <span class="n">git</span><span class="o">.</span><span class="n">deleted_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+			<span class="n">did_modify_files</span> <span class="o">=</span> <span class="kp">true</span>
+		<span class="k">end</span>
+	<span class="k">end</span>
+	<span class="k">return</span> <span class="n">did_modify_files</span>
+<span class="k">end</span>
+
+<span class="c1"># Warn when the build system files see changes</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s1">&#39;Changes to build files&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">didModify</span><span class="p">(</span><span class="vi">@SDM_DANGER_BUILD_FILES</span><span class="p">)</span>
+
+<span class="c1"># Warn when changing the requirements files</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s1">&#39;Changes to installation requirements files&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">didModify</span><span class="p">(</span><span class="vi">@SDM_DANGER_INSTALL_REQUIREMENTS_FILES</span><span class="p">)</span>
+
+<span class="c1"># Fail if changes to immutable files, such as License or CoC</span>
+<span class="nb">fail</span><span class="p">(</span><span class="s1">&#39;Do not modify the license or Code of Conduct&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">didModify</span><span class="p">(</span><span class="vi">@SDM_DANGER_IMMUTABLE_FILES</span><span class="p">)</span>
+
+<span class="c1"># put labels on PRs, this will autofail all PRs without contributor intervention (this is intentional to force someone to look at and categorize each PR before merging)</span>
+<span class="nb">fail</span><span class="p">(</span><span class="s1">&#39;PR needs labels&#39;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span> <span class="k">if</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_labels</span><span class="o">.</span><span class="n">empty?</span>
+
+<span class="c1"># look up the build artifacts for circle ci, these should be posted to the PR</span>
+<span class="k">if</span> <span class="vi">@SDM_DANGER_REPORT_CIRCLE_CI_ARTIFACTS</span>
+	<span class="n">username</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_PROJECT_USERNAME&#39;</span><span class="o">]</span>
+	<span class="n">project_name</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_PROJECT_REPONAME&#39;</span><span class="o">]</span>
+	<span class="n">build_number</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_BUILD_NUM&#39;</span><span class="o">]</span>
+	<span class="n">node_index</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_NODE_INDEX&#39;</span><span class="o">]</span>
+	<span class="n">artifacts_path</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_ARTIFACTS&#39;</span><span class="o">]</span>
+	<span class="n">should_display_message</span> <span class="o">=</span> <span class="n">username</span> <span class="o">&amp;&amp;</span> <span class="n">project_name</span> <span class="o">&amp;&amp;</span> <span class="n">build_number</span> <span class="o">&amp;&amp;</span> <span class="n">node_index</span> <span class="o">&amp;&amp;</span> <span class="n">artifacts_path</span>
+	<span class="k">if</span> <span class="n">should_display_message</span>
+
+		<span class="c1"># build the path to where the circle CI artifacts will be uploaded to</span>
+		<span class="n">circle_ci_artifact_path</span>  <span class="o">=</span> <span class="s1">&#39;https://circleci.com/api/v1/project/&#39;</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="n">username</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="n">project_name</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="n">build_number</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="s1">&#39;/artifacts/&#39;</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="n">node_index</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="n">artifacts_path</span>
+		<span class="n">circle_ci_artifact_path</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
+
+		<span class="n">message_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="vi">@SDM_DANGER_REPORT_CIRCLE_CI_ARTIFACTS</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">artifact</span><span class="o">|</span>
+			<span class="c1"># create a markdown link that uses the message text and the artifact path</span>
+			<span class="n">message_string</span> <span class="o">+=</span> <span class="s1">&#39;[&#39;</span><span class="o">+</span><span class="n">artifact</span><span class="o">[</span><span class="s1">&#39;message&#39;</span><span class="o">]+</span><span class="s1">&#39;]&#39;</span>
+			<span class="n">message_string</span> <span class="o">+=</span> <span class="s1">&#39;(&#39;</span><span class="o">+</span><span class="n">circle_ci_artifact_path</span><span class="o">+</span><span class="n">artifact</span><span class="o">[</span><span class="s1">&#39;path&#39;</span><span class="o">]+</span><span class="s1">&#39;)&#39;</span>
+
+			<span class="c1"># if this isn&#39;t the last artifact then append the &quot; &amp; &quot; string to make this one line</span>
+			<span class="n">message_string</span> <span class="o">+=</span> <span class="s1">&#39; &amp; &#39;</span> <span class="k">if</span> <span class="vi">@SDM_DANGER_REPORT_CIRCLE_CI_ARTIFACTS</span><span class="o">.</span><span class="n">last</span> <span class="o">!=</span> <span class="n">artifact</span>
+		<span class="k">end</span>
+		<span class="n">message</span><span class="p">(</span><span class="n">message_string</span><span class="p">)</span>
+	<span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
