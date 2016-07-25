@@ -15,6 +15,9 @@
     text-transform: uppercase;
 }
 
+// Mobile stuff is at the bottom
+
+
 body {
     margin: 0;
     a {
@@ -45,6 +48,13 @@ body {
             display: inline-block;
             font-size: 42px;
             margin:0 20px;
+
+            a.small {
+                display: none;
+            }
+            a.big {
+                display: inline-block;
+            }
 
             a {
                 &:visited {
@@ -389,5 +399,45 @@ body {
                 }
             }
         }
+    }
+}
+
+// Alright, so the decision is that anything under 740px is "too small" aka mobile mode
+
+@media screen and (max-width: 740px) {
+    body section, body footer {
+        // Columns of articles, not rows
+        flex-flow: column;
+        
+        // Make all of the articles align
+        article {
+            width: 80%;
+            margin-right: 20px;
+            margin-left: 80px;
+        }
+    }
+
+    // Different nav items, and smaller fonts
+    body > header > nav li {
+        font-size: 36px;
+        margin: 0 10px;
+
+        a.small {
+            display: inline-block;
+        }
+        a.big {
+            display: none;
+        }
+    }
+
+    // Danger's image is centered
+    body footer > article:last-child {
+        margin: 20px 0;
+        width: 100%;
+        text-align: center;
+    }
+    body > section.examples > div {
+        margin-right: 20px;
+        margin-left: 20px;
     }
 }
