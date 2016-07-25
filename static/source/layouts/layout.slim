@@ -8,6 +8,9 @@ html
 
     <!-- Always force latest IE rendering engine or request Chrome Frame -->
     meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"
+    meta name="HandheldFriendly" content="True"
+    meta name="MobileOptimized" content="480"
+    meta name="viewport" content="width=480, initial-scale=0.6"
 
     title == current_page.data.title || "Danger"
 
@@ -17,20 +20,23 @@ html
   body class=page_classes
 
     - if is_home
-      code.byline a project from <a href="http://orta.io">orta therox</a> and <a href="https://krausefx.com">felix krause</a>.
+      code.byline a project from <a href="http://orta.io">orta therox</a><br/>and <a href="https://krausefx.com">felix krause</a>.
 
     header class=(is_home ? 'title' : 'title small')
 
       p Danger
-      = image_tag "title.png", class: "retina", alt: "Danger title image"
+      a href ="/"
+        = image_tag "title.png", class: "retina", alt: "Danger title image"
       nav
         ul
           li
             a class=(current_page.path == "index.html" ? 'highlighted' : '') href="/" home
           li
             a class=(current_page.path.include?("guides") ? 'highlighted' : '') href="/guides.html" Guides
-          li
+          li.big
             a class=(current_page.path == "reference.html" ? 'highlighted' : '') href="/reference.html" Reference
+          li.small
+            a class=(current_page.path == "reference.html" ? 'highlighted' : '') href="/reference.html" Ref
 
     - unless is_home
 

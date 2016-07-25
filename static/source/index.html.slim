@@ -104,7 +104,7 @@ section.examples
   ul
     - for repo in dangerfiles
       li class=repo  data-url="/dangerfiles/#{repo.gsub("/", "_").split("#").first}.html"
-        a == repo.gsub("/", "<span>/</span>")
+        a == repo.gsub("/", "<span>/</span>").split("#").first
 
   div
     div.code_chunk
