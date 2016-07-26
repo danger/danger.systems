@@ -58,6 +58,9 @@ You can have each instance of Danger running on a different CI provider and even
 bundle exec danger --danger_id=unit_tests
 ```
 
+#### I use a Build Matrix on Travis, can I run Danger once?
+
+Yep, here is an example of moving to support that from [the Ruby Grape project](https://github.com/ruby-grape/grape/pull/1458).
 
 #### Danger keeps getting refered to as "her/she", what gives?
 
