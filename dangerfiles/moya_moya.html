@@ -20,11 +20,17 @@
 
 <span class="c1"># Added (or removed) library files need to be added (or removed) from the</span>
 <span class="c1"># Carthage Xcode project to avoid breaking things for our Carthage users.</span>
-<span class="n">added_swift_library_files</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/Source.*\.swift/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
+<span class="n">added_swift_library_files</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">added_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/Source.*\.swift/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
 <span class="n">deleted_swift_library_files</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">deleted_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/Source.*\.swift/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
 <span class="n">modified_carthage_xcode_project</span> <span class="o">=</span> <span class="o">!</span><span class="p">(</span><span class="n">git</span><span class="o">.</span><span class="n">deleted_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/Moya\.xcodeproj/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span><span class="p">)</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">added_swift_library_files</span> <span class="o">||</span> <span class="n">deleted_swift_library_files</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">modified_carthage_xcode_project</span>
   <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Added or removed library files require the Carthage Xcode project to be updated.&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">missing_doc_changes</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/docs/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
+<span class="n">doc_changes_recommended</span> <span class="o">=</span> <span class="n">insertions</span> <span class="o">&gt;</span> <span class="mi">15</span>
+<span class="k">if</span> <span class="n">has_app_changes</span> <span class="o">&amp;&amp;</span> <span class="n">missing_doc_changes</span> <span class="o">&amp;&amp;</span> <span class="n">doc_changes_recommended</span>
+  <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Consider adding supporting documentation to this change. Documentation can be found in the `docs` directory.&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 
 <span class="c1"># Run SwiftLint</span>
