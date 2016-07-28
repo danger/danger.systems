@@ -17,6 +17,10 @@ ruby:
     string_params
   end
 
+  def method_name(meth)
+    meth["name"] + ' '
+  end
+
   plugins = JSON.parse(File.read("../plugins-search-generated.json"))
   gem_for_plugin = plugins["plugins"].find { |gem_plugin| gem_plugin["gem"] == plugin["gem"] } 
 
@@ -41,7 +45,7 @@ article.scope_code
     - for method in plugin["methods"]
       .fake_code
          == markdown_h(method["body_md"])
-      code == method["name"] + span_params(method) + span_return(method)
+      code == method_name(method) + span_params(method) + span_return(method)
 
 article.scope_code
   h3 Examples
