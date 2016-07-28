@@ -115,7 +115,7 @@ The humble backtick ` - Takes whatever shell command you want to run, and return
 plugin_json = `bundle exec danger plugin json`
 ```
 
-`system` - Outputs the command you run in the shell, if will return `true` if the process succeeded.
+`system` - Outputs the command you run in the shell, it will return `true` if the process succeeded.
 
 ```ruby
 send_congrats if system("gem install pry")
