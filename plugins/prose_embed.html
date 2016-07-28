@@ -8,10 +8,10 @@ defaults to <code>[&quot;misc.scare_quotes&quot;, &quot;typography.symbols&quot;
 defaults to <code>[&quot;&quot;]</code> when it&#39;s nil.</p>
 </div><code>ignored_words<span class='subtle return'>Array<String></span></code><h4>Methods</h4><div class="fake_code"><p>Lints the globbed markdown files. Will fail if <code>proselint</code> cannot be installed correctly.
 Generates a <code>markdown</code> list of warnings for the prose in a corpus of .markdown and .md files.</p>
-</div><code>lint_files(files=nil: String)</code><div class="fake_code"><p>Determine if proselint is currently installed in the system paths.</p>
-</div><code>proselint_installed?<span class='subtle return'>Bool</span></code><div class="fake_code"><p>Determine if mdspell is currently installed in the system paths.</p>
-</div><code>mdspell_installed?<span class='subtle return'>Bool</span></code><div class="fake_code"><p>Runs a markdown-specific spell checker, against a corpus of <code>.markdown</code> and <code>.md</code> files.</p>
-</div><code>check_spelling(files=nil: String)</code></article><article class="scope_code"><h3>Examples</h3><h4>Running linter with custom disabled linters</h4><div class="highlight"><pre><span class="c1"># Runs a linter with comma style and tense present disabled</span>
+</div><code>lint_files (files=nil: String)</code><div class="fake_code"><p>Determine if proselint is currently installed in the system paths.</p>
+</div><code>proselint_installed? <span class='subtle return'>Bool</span></code><div class="fake_code"><p>Determine if mdspell is currently installed in the system paths.</p>
+</div><code>mdspell_installed? <span class='subtle return'>Bool</span></code><div class="fake_code"><p>Runs a markdown-specific spell checker, against a corpus of <code>.markdown</code> and <code>.md</code> files.</p>
+</div><code>check_spelling (files=nil: String)</code></article><article class="scope_code"><h3>Examples</h3><h4>Running linter with custom disabled linters</h4><div class="highlight"><pre><span class="c1"># Runs a linter with comma style and tense present disabled</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">disable_linters</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;misc.scare_quotes&quot;</span><span class="p">,</span> <span class="s2">&quot;misc.tense_present&quot;</span><span class="o">]</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">lint_files</span> <span class="s2">&quot;_posts/*.md&quot;</span>
 </pre></div><h4>Running linter with default linters</h4><div class="highlight"><pre><span class="c1"># Runs a linter with all styles, on modified and added markdown files in this PR</span>
