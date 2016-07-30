@@ -1,0 +1,38 @@
+<section><article class="scope_code"><h3 class="no_hot_pink"><a href='/plugins/junit.html'>junit</a></h3><p>Report, or inspect any JUnit XML formatted test suite report.</p>
+
+<p>Testing frameworks have standardized on the JUnit XML format for
+reporting results, this means that projects using Rspec, Jasmine, Mocha,
+XCTest and more - can all use the same Danger error reporting. Perfect.</p>
+
+<p>You can see some examples on <a href="https://circleci.com/docs/test-metadata/">this page from Circle CI</a>
+about how you can add JUnit XML output for your testing projects.</p>
+<p>Created by Orta Therox.</p><h3>Reference</h3><h4>Attributes</h4><div class="fake_code"><p>All the tests for introspection</p>
+</div><code>tests<span class='subtle return'>Array<Ox::Element></span></code><div class="fake_code"><p>An array of XML elements that represent passed tests.</p>
+</div><code>passes<span class='subtle return'>Array<Ox::Element></span></code><div class="fake_code"><p>An array of XML elements that represent failed tests.</p>
+</div><code>failures<span class='subtle return'>Array<Ox::Element></span></code><div class="fake_code"><p>An array of XML elements that represent passed tests.</p>
+</div><code>errors<span class='subtle return'>Array<Ox::Element></span></code><div class="fake_code"><p>An array of XML elements that represent skipped tests.</p>
+</div><code>skipped<span class='subtle return'>Array<Ox::Element></span></code><div class="fake_code"><p>An attribute to make the plugin show a warning on skipped tests.</p>
+</div><code>show_skipped_tests<span class='subtle return'>Bool</span></code><div class="fake_code"><p>An array of symbols that become the columns of your tests,
+if <code>nil</code>, the default, it will be all of the attributes.</p>
+</div><code>headers<span class='subtle return'>Array<Symbol></span></code><h4>Methods</h4><div class="fake_code"><p>Parses an XML file, which fills all the attributes
+will <code>raise</code> for errors</p>
+</div><code>parse </code><div class="fake_code"><p>Causes a build fail if there are test failures,
+and outputs a markdown table of the results.</p>
+</div><code>report </code></article><article class="scope_code"><h3>Examples</h3><h4>Parse the XML file, and let the plugin do your reporting</h4><div class="highlight"><pre><span class="n">junit</span><span class="o">.</span><span class="n">parse</span> <span class="s2">&quot;/path/to/output.xml&quot;</span>
+<span class="n">junit</span><span class="o">.</span><span class="n">report</span>
+</pre></div><h4>Let the plugin parse the XML file, and report yourself</h4><div class="highlight"><pre><span class="n">junit</span><span class="o">.</span><span class="n">parse</span> <span class="s2">&quot;/path/to/output.xml&quot;</span>
+<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Tests failed&quot;</span><span class="p">)</span> <span class="k">unless</span> <span class="n">junit</span><span class="o">.</span><span class="n">fails</span><span class="o">.</span><span class="n">empty?</span>
+</pre></div><h4>Warn on a report about skipped tests</h4><div class="highlight"><pre><span class="n">junit</span><span class="o">.</span><span class="n">parse</span> <span class="s2">&quot;/path/to/output.xml&quot;</span>
+<span class="n">junit</span><span class="o">.</span><span class="n">show_skipped_tests</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">junit</span><span class="o">.</span><span class="n">report</span>
+</pre></div><h4>Only show specific parts of your results</h4><div class="highlight"><pre><span class="n">junit</span><span class="o">.</span><span class="n">parse</span> <span class="s2">&quot;/path/to/output.xml&quot;</span>
+<span class="n">junit</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:file</span><span class="o">]</span>
+<span class="n">junit</span><span class="o">.</span><span class="n">report</span>
+</pre></div><h4>Only show specific parts of your results</h4><div class="highlight"><pre><span class="n">junit</span><span class="o">.</span><span class="n">parse</span> <span class="s2">&quot;/path/to/output.xml&quot;</span>
+<span class="n">all_test</span> <span class="o">=</span> <span class="n">junit</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:attributes</span><span class="p">)</span>
+<span class="n">slowest_test</span> <span class="o">=</span> <span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">attributes</span><span class="o">|</span> <span class="n">attributes</span><span class="o">[</span><span class="ss">:time</span><span class="o">].</span><span class="n">to_f</span> <span class="p">}</span><span class="o">.</span><span class="n">last</span>
+<span class="n">message</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">slowest_test</span><span class="o">[</span><span class="ss">:time</span><span class="o">]</span><span class="si">}</span><span class="s2"> took </span><span class="si">#{</span><span class="n">slowest_test</span><span class="o">[</span><span class="ss">:time</span><span class="o">]</span><span class="si">}</span><span class="s2"> seconds&quot;</span>
+</pre></div><h3>How to Install</h3><p>Include <code>gem &quot;danger-junit&quot;</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
+
+<p>Then inside your Dangerfile, you can access the plugin via <code>junit</code>.</p>
+<h3>Tags</h3><code>testing, reporting, junit, rspec, jasmine, jest, xcpretty</code><h3>See in Action</h3><ul><li><a href="https://github.com/orta/danger-junit,">orta/danger-junit,</a></li></ul></article><div class="clearfix"></div></section>
