@@ -63,13 +63,13 @@ body {
           margin: 0 10px; }
           body > header.small > nav li a {
             text-shadow: 2px 2px black; }
-  body section.search_info ul {
+  body section.search_info ul, body .ci_sources ul {
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 0; }
-    body section.search_info ul > li:first-child {
+    body section.search_info ul > li:first-child, body .ci_sources ul > li:first-child {
       margin-left: 0; }
-    body section.search_info ul li {
+    body section.search_info ul li, body .ci_sources ul li {
       font-family: "prodotto_in_cina";
       text-transform: uppercase;
       font-size: 20px;
@@ -80,7 +80,7 @@ body {
       margin-bottom: 18px;
       display: inline-block;
       cursor: pointer; }
-      body section.search_info ul li.highlighted {
+      body section.search_info ul li.highlighted, body .ci_sources ul li.highlighted {
         background-color: #FFC449; }
   body p, body li {
     font-family: "Avenir Book";
