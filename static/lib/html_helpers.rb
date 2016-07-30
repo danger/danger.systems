@@ -9,7 +9,7 @@ module HTMLHelpers
   # @return [String] HTML
   #
   def markdown_h(input)
-    @markdown_instance ||= Redcarpet::Markdown.new(Class.new(Redcarpet::Render::HTML), autolink: true, space_after_headers: true, no_intra_emphasis: true,fenced_code_blocks: true, smartypants: true)
+    @markdown_instance ||= Redcarpet::Markdown.new(Class.new(Redcarpet::Render::HTML), $md_settings)
     # TODO: experimental
     @markdown_instance.render(capitalize_first_letter(input))
   end
