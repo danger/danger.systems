@@ -3,7 +3,8 @@ require 'json'
 require 'bundler'
 
 desc 'Generates all the static resources necessary to run the site.'
-task generate: ['generator:plugins_core', 'generator:plugins_external', 'generator:grab_dangerfiles', 'generator:danger_search_plugin_json', "generator:search_plugin_json"] do
+tasks = ["plugins_core", "plugins_external", "grab_dangerfiles", "danger_search_plugin_json", "search_plugin_json", "getting_started_docs"]
+task generate: tasks.map { |task| 'generator:' + task } do
   # Your Gemfile.lock tends to get put out of sync after some of the commands.
   puts 'Shippit'
 end
@@ -102,21 +103,30 @@ namespace :generator do
   desc 'Generate the website plugin search JSON file, this is different from the danger gem search - as one gem can have multiple plugins'
   task :search_plugin_json do
     plugins = JSON.parse(File.read('static/json_data/plugins.json'))
-    plugin_search_metadata = plugins.map do |plugin| 
+    plugin_search_metadata = plugins.map do |plugin|
       {
-        name: plugin["name"],
-        gem: plugin["gem"],
-        body: plugin["body_md"],
-        instance: plugin["instance_name"],
-        tags: plugin["tags"],
-        see: plugin["see"],
+        name: plugin['name'],
+        gem: plugin['gem'],
+        body: plugin['body_md'],
+        instance: plugin['instance_name'],
+        tags: plugin['tags'],
+        see: plugin['see']
       }
     end
 
     File.write('static/json_data/plugin_search.json', plugin_search_metadata.to_json)
     puts 'Generated search JSON for inline search'
   end
+
+  desc 'Generate the getting started guides metadata from Danger'
+  task :getting_started_docs do
+    `bundle exec danger systems ci_docs > static/json_data/ci_docs.json`
+    puts 'Generated search JSON for inline search'
+  end
+
 end
+
+
 
 desc 'Runs the site locally'
 task :serve do

@@ -4,6 +4,11 @@ subtitle: Getting Set Up
 order: 1
 ---
 
+ruby:
+  require 'json'
+  ci_sources = JSON.parse(File.read('json_data/ci_docs.json'))
+  
+
 .clearfix
 section.guide
   article
@@ -88,34 +93,17 @@ section.guide
 
       _Note: more guides for different CI hosts will be coming in time._
 
-      #### Travis CI
-
-      ##### Running Danger
-
-      You need to edit your `.travis.yml` to include `bundle exec danger`. If you already have a `script:` section then we recommend adding this command at the end of the script step: `- bundle exec danger`.
-
-      Otherwise, add a `before_script` step to the root of the `.travis.yml` with `bundle exec danger`
-
-      <code>
-        <pre>
-        before_script:
-          - bundle exec danger
-        </pre>
-      <code>
-
-      Adding this to your `.travis.yml` allows Danger to fail your build, both on the TravisCI website and within your Pull Request.
-
-      ##### Adding the ENV var
-
-      You need to add the `DANGER_GITHUB_API_TOKEN` environment variable, to do this, go to your repo's settings, which should look like: `https://travis-ci.org/[user]/[repo]/settings`.
-
-      If you have an open source project, you should ensure "Display value in build log" enabled, so that PRs from forks work.
-
       [bundler]: http://bundler.io
       [cp_bundler]: https://guides.cocoapods.org/using/a-gemfile.html
       [without_bundler]: #installation-without-bundler
       [github_bots]: https://twitter.com/sebastiangrail/status/750844399563608065
       [github_token]: https://github.com/settings/tokens/new
+
+
+    - for source in ci_sources
+      h2nd
+       == source["name"]
+      == markdown_h(source["docs"]) 
 
 section
   article
