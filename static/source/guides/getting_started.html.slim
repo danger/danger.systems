@@ -8,7 +8,6 @@ order: 1
 section.guide
   article
     markdown:
-
       There are 5 steps invovled in getting Danger running:
 
       * [Include Danger](#including-danger)
@@ -25,30 +24,18 @@ section.guide
 
       If you have an existing Gemfile, add `gem 'danger'` to it. If you don't run `bundle init` in your project root, and edit the freshly minted Gemfile.
 
-      ##### Installation Without Bundler
+      ##### Bundler 101
 
-      If Danger is your only ruby dependency, you may not want to use [Bundler][bundler], that's fine, but note that you'll always be using the latest version of all of your dependencies.
-
-      You can install Danger via `gem install danger`. This will make it available in your system, you can include plugins at the same time by running `gem install danger danger-prose [gem] [gem]`. You can run `danger --version` to check your version. Any time you see a command that recommends you use `bundle exec` - you can skip the `bundle exec` part.
-
-      ##### macOS sudo-less Installation
-
-      Create or edit a `.profile` file in your home directory and add or amend it to include these lines:
-
-      <code>
-        <pre>
-      export GEM_HOME=$HOME/.gem
-      export PATH=$GEM_HOME/bin:$PATH
-        </pre>
-      <code>
+      Bundler is a dependey manager for Ruby, it uses a Gemfile to define al lof the Ruby projects you want to use. To get started type in `bundler init` in your project folder.
+      This creates your `Gemfile`. Open this up in your editor, then replace the ` #gem 'rails'` with `gem 'danger'`. Then run `bundle install` inside your project folder.
 
       ### Easy Mode
 
       *Easy mode* - run: `bundle exec danger init` - this will guide you through the next four steps, offering useful advice specific to your setup. If you would like to understand how all of the pieces come together, read on:
 
-
       ### Creating a Dangerfile
-      Create an empty file, named `Dangerfile`. This is the file that contains ruby code. Your text editor won't highlight as ruby, so you may need to set the syntax highlighting. To get started, we would recommend a simple "Hello World."
+
+      Create an empty file, named `Dangerfile`. This is the file that contains ruby code. Your text editor won't highlight as ruby, so you may need to set the syntax highlighting. Unless you're [using VS Code][vs_code]. To get started, we would recommend a simple "Hello World."
 
       <code>
         <pre>
@@ -116,6 +103,27 @@ section.guide
       [without_bundler]: #installation-without-bundler
       [github_bots]: https://twitter.com/sebastiangrail/status/750844399563608065
       [github_token]: https://github.com/settings/tokens/new
+      [vs_code]: https://marketplace.visualstudio.com/items?itemName=Orta.vscode-danger
+
+section
+  article
+    markdown:
+      ##### Installation Without Bundler
+
+      If Danger is your only ruby dependency, you may not want to use [Bundler][bundler], that's fine, but note that you'll always be using the latest version of all of your dependencies.
+
+      You can install Danger via `gem install danger`. This will make it available in your system, you can include plugins at the same time by running `gem install danger danger-prose [gem] [gem]`. You can run `danger --version` to check your version. Any time you see a command that recommends you use `bundle exec` - you can skip the `bundle exec` part.
+
+      ##### macOS sudo-less Installation
+
+      Create or edit a `.profile` file in your home directory and add or amend it to include these lines:
+
+      <code>
+        <pre>
+      export GEM_HOME=$HOME/.gem
+      export PATH=$GEM_HOME/bin:$PATH
+        </pre>
+      <code>
 
 section
   article
