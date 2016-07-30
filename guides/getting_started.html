@@ -1,41 +1,84 @@
-<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><meta content="True" name="HandheldFriendly" /><meta content="480" name="MobileOptimized" /><meta content="width=480, initial-scale=0.6" name="viewport" /><meta content="constant integration culture code" name="keywords" /><meta content="Orta Therox & Felix Krause" name="author" /><meta content="summary" name="twitter:card" /><meta content="@orta" name="twitter:creator" /><meta content="Getting Set Up" name="twitter:title" /><meta content="Apply cultural rules during your CI process." name="twitter:description" /><meta content="http://danger.systems/guides/getting_started.html" name="twitter:url" /><meta content="/images/square-ffd55d21.png" property="og:image" /><meta content="http://danger.systems/guides/getting_started.html" property="og:url" /><title>Getting Set Up</title><link href="/stylesheets/style-0eec9da9.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.1.0.min.js"></script></head><body class="guides guides_getting_started"><header class="title small"><p>Danger</p><a href="/"><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" /></a><nav><ul><li><a href="/">home</a></li><li><a class="highlighted" href="/guides.html">Guides</a></li><li class="big"><a href="/reference.html">Reference</a></li><li class="small"><a href="/reference.html">Ref</a></li></ul></nav></header><h2 class="reduced_top_margin"><span>Getting Set Up</span><code class="byline inline">a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code></h2><div class="clearfix"></div><section class="guide"><article><p>There are 5 steps invovled in getting Danger running:</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="True" name="HandheldFriendly">
+<meta content="480" name="MobileOptimized">
+<meta content="width=480, initial-scale=0.6" name="viewport">
+<meta content="constant integration culture code" name="keywords">
+<meta content="Orta Therox &amp; Felix Krause" name="author">
+<meta content="summary" name="twitter:card">
+<meta content="@orta" name="twitter:creator">
+<meta content="Getting Set Up" name="twitter:title">
+<meta content="Apply cultural rules during your CI process." name="twitter:description">
+<meta content="http://danger.systems/guides/getting_started.html" name="twitter:url">
+<meta content="/images/square-ffd55d21.png" property="og:image">
+<meta content="http://danger.systems/guides/getting_started.html" property="og:url">
+<title>Getting Set Up</title>
+<link href="/stylesheets/style-0eec9da9.css" rel="stylesheet">
+<link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body class="guides guides_getting_started">
+<header class="title small"><p>Danger</p>
+<a href="/"><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image"></a><nav><ul>
+<li><a href="/">home</a></li>
+<li><a class="highlighted" href="/guides.html">Guides</a></li>
+<li class="big"><a href="/reference.html">Reference</a></li>
+<li class="small"><a href="/reference.html">Ref</a></li>
+</ul></nav></header><h2 class="reduced_top_margin">
+<span>Getting Set Up</span><code class="byline inline">a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code>
+</h2>
+
+<div class="clearfix"></div>
+<section class="guide"><article><p>There are 5 steps invovled in getting Danger running:</p>
 
 <ul>
 <li><a href="#including-danger">Include Danger</a></li>
-<li><a href="#creating-a-dangerfile">Creating a Dangerfile</a> and adding a few simple rules.</li>
-<li><a href="#creating-a-github-account-for-danger-to-use">Creating a GitHub account for Danger to use</a>.</li>
+<li>
+<a href="#creating-a-dangerfile">Creating a Dangerfile</a> and adding a few simple rules.</li>
+<li>
+<a href="#creating-a-github-account-for-danger-to-use">Creating a GitHub account for Danger to use</a>.</li>
 <li>Setting up <a href="#setting-up-an-access-token">an access token for Danger</a> with that account.</li>
 <li>Setting up <a href="#setting-up-danger-to-run-on-your-ci">Danger to run on your CI</a>.</li>
 </ul>
 
-<h3>Including Danger</h3>
+<h3 id="including-danger">
+<a class="header-link" href="#including-danger">#</a>Including Danger</h3>
 
-<p>We recommend you install Danger via <a href="http://bundler.io">Bundler</a> + a Gemfile. This means that your version of Danger, and your plugins are all versioned correctly. You are in control of how and when your dependencies are updated then. If you&#39;d like to learn more about Bundler, check out <a href="https://guides.cocoapods.org/using/a-gemfile.html">this guide</a>.</p>
+<p>We recommend you install Danger via <a href="http://bundler.io">Bundler</a> + a Gemfile. This means that your version of Danger, and your plugins are all versioned correctly. You are in control of how and when your dependencies are updated then. If you’d like to learn more about Bundler, check out <a href="https://guides.cocoapods.org/using/a-gemfile.html">this guide</a>.</p>
 
-<h5>Installation</h5>
+<h5 id="installation">
+<a class="header-link" href="#installation">#</a>Installation</h5>
 
-<p>If you have an existing Gemfile, add <code>gem &#39;danger&#39;</code> to it. If you don&#39;t run <code>bundle init</code> in your project root, and edit the freshly minted Gemfile.</p>
+<p>If you have an existing Gemfile, add <code>gem 'danger'</code> to it. If you don’t run <code>bundle init</code> in your project root, and edit the freshly minted Gemfile.</p>
 
-<h5>Bundler 101</h5>
+<h5 id="bundler-">
+<a class="header-link" href="#bundler-">#</a>Bundler 101</h5>
 
 <p>Bundler is a dependey manager for Ruby, it uses a Gemfile to define all of the Ruby projects you want to use. To get started type in <code>bundler init</code> in your project folder.
-This creates your <code>Gemfile</code>. Open this up in your editor, then replace the <code>#gem &#39;rails&#39;</code> with <code>gem &#39;danger&#39;</code>. Then run <code>bundle install</code> inside your project folder.</p>
+This creates your <code>Gemfile</code>. Open this up in your editor, then replace the <code>#gem 'rails'</code> with <code>gem 'danger'</code>. Then run <code>bundle install</code> inside your project folder.</p>
 
-<h3>Easy Mode</h3>
+<h3 id="easy-mode">
+<a class="header-link" href="#easy-mode">#</a>Easy Mode</h3>
 
 <p><em>Easy mode</em> - run: <code>bundle exec danger init</code> - this will guide you through the next four steps, offering useful advice specific to your setup. If you would like to understand how all of the pieces come together, read on:</p>
 
-<h3>Creating a Dangerfile</h3>
+<h3 id="creating-a-dangerfile">
+<a class="header-link" href="#creating-a-dangerfile">#</a>Creating a Dangerfile</h3>
 
-<p>Create an empty file, named <code>Dangerfile</code>. This is the file that contains ruby code. Your text editor won&#39;t highlight as ruby, so you may need to set the syntax highlighting. Unless you&#39;re <a href="https://marketplace.visualstudio.com/items?itemName=Orta.vscode-danger">using VS Code</a>. To get started, we would recommend a simple &quot;Hello World.&quot;</p>
+<p>Create an empty file, named <code>Dangerfile</code>. This is the file that contains ruby code. Your text editor won’t highlight as ruby, so you may need to set the syntax highlighting. Unless you’re <a href="https://marketplace.visualstudio.com/items?itemName=Orta.vscode-danger">using VS Code</a>. To get started, we would recommend a simple “Hello World.”</p>
 
 <p><code>
   <pre>
-message(&quot;Hello, this worked&quot;)
+message("Hello, this worked")
   </pre>
-<code></p>
+<code></code></code></p>
 
-<h3>Creating a GitHub account for Danger to use</h3>
+<h3 id="creating-a-github-account-for-danger-to-use">
+<a class="header-link" href="#creating-a-github-account-for-danger-to-use">#</a>Creating a GitHub account for Danger to use</h3>
 
 <p>This is optional. Pragmatically, you want to do this though.</p>
 
@@ -43,51 +86,73 @@ message(&quot;Hello, this worked&quot;)
 
 <p>To get started, open <a href="https://github.com">https://github.com</a> in a private browser session.</p>
 
-<h5>OSS Projects</h5>
+<h5 id="oss-projects">
+<a class="header-link" href="#oss-projects">#</a>OSS Projects</h5>
 
 <p>Do not add the bot to repo, or to your organization.</p>
 
-<h5>Closed Source Projects</h5>
+<h5 id="closed-source-projects">
+<a class="header-link" href="#closed-source-projects">#</a>Closed Source Projects</h5>
 
-<p>Add the bot to repo, or to your organization. The bot requires permission level &quot;Write&quot; to be able to set a PR&#39;s status. Note that you <em>should not</em> re-use this bot for OSS projects.</p>
+<p>Add the bot to repo, or to your organization. The bot requires permission level "Write" to be able to set a PR's status. Note that you <em>should not</em> re-use this bot for OSS projects.</p>
 
-<h3>Setting up an Access Token</h3>
+<h3 id="setting-up-an-access-token">
+<a class="header-link" href="#setting-up-an-access-token">#</a>Setting up an Access Token</h3>
 
-<p><a href="https://github.com/settings/tokens/new">Here&#39;s the link</a>, you should open this in the private session where you just created the new GitHub account. Again, the rights that you give to the token depend on the openness of your projects.</p>
+<p><a href="https://github.com/settings/tokens/new">Here's the link</a>, you should open this in the private session where you just created the new GitHub account. Again, the rights that you give to the token depend on the openness of your projects.</p>
 
-<h5>Tokens for OSS Projects</h5>
+<h5 id="tokens-for-oss-projects">
+<a class="header-link" href="#tokens-for-oss-projects">#</a>Tokens for OSS Projects</h5>
 
-<p>We recommend giving the token the smallest scope possible. This means just <code>public_repo</code>, this scopes limits Danger&#39;s abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimalises the chance for bad actors causing chaos with it.</p>
+<p>We recommend giving the token the smallest scope possible. This means just <code>public_repo</code>, this scopes limits Danger’s abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimalises the chance for bad actors causing chaos with it.</p>
 
-<h5>Tokens for Closed Source Projects</h5>
+<h5 id="tokens-for-closed-source-projects">
+<a class="header-link" href="#tokens-for-closed-source-projects">#</a>Tokens for Closed Source Projects</h5>
 
-<p>We recommend giving access to the whole <code>repo</code> scope, and it&#39;s children.</p>
+<p>We recommend giving access to the whole <code>repo</code> scope, and it’s children.</p>
 
-<h4>Continuous Integration</h4>
+<h3 id="continuous-integration">
+<a class="header-link" href="#continuous-integration">#</a>Continuous Integration</h3>
 
 <p>Continuous Integration is the process of regularly running tests, and generating metrics for a project. It is where you can ensure that the code you are submitting for review is passing on all of the tests. You commonly see this as green, or red dots inside GitHub pull requests.</p>
 
 <p>Danger is built to run as a part of this process, so you will need to have this set up as a pre-requisite.</p>
 
-<h3>Setting up Danger to run on your CI</h3>
-<div class="ci_sources"><ul><li class="buildkite">Buildkite</li><li class="circleci">CircleCI</li><li class="drone">Drone</li><li class="jenkins">Jenkins</li><li class="semaphore">Semaphore</li><li class="surf">Surf</li><li class="teamcity">TeamCity</li><li class="travis">Travis</li><li class="xcodeserver">XcodeServer</li></ul><div class="buildkite" style="display:none;"><h3>CI Setup</h3>
+<h3 id="setting-up-danger-to-run-on-your-ci">
+<a class="header-link" href="#setting-up-danger-to-run-on-your-ci">#</a>Setting up Danger to run on your CI</h3>
+<div class="ci_sources">
+<ul>
+<li class="buildkite">Buildkite</li>
+<li class="circleci">CircleCI</li>
+<li class="drone">Drone</li>
+<li class="jenkins">Jenkins</li>
+<li class="semaphore">Semaphore</li>
+<li class="surf">Surf</li>
+<li class="teamcity">TeamCity</li>
+<li class="travis">Travis</li>
+<li class="xcodeserver">XcodeServer</li>
+</ul>
+<div class="buildkite" style="display:none;">
+<h3>CI Setup</h3>
 
 <p>With BuildKite you run the server yourself, so you will want to run  it as a part of your build process.
 It is common to have build steps, so we would recommend adding this to your scrip:</p>
 
-<pre><code class="shell">  echo &quot;--- Running Danger&quot;
+<pre><code class="shell">  echo "--- Running Danger"
   bundle exec danger
 </code></pre>
 
 <h3>Token Setup</h3>
 
-<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user&#39;s ENV. The alternative
-is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN=&quot;123&quot; bundle exec danger</code>.</p>
-</div><div class="circleci" style="display:none;"><h3>CI Setup</h3>
+<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user's ENV. The alternative
+is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN="123" bundle exec danger</code>.</p>
+</div>
+<div class="circleci" style="display:none;">
+<h3>CI Setup</h3>
 
-<p>For setting up Circle CI, we recommend turning on &quot;Only Build pull requests.&quot; in &quot;Advanced Setting.&quot; Without this enabled,
+<p>For setting up Circle CI, we recommend turning on "Only Build pull requests." in "Advanced Setting." Without this enabled,
 it is <em>really</em> tricky for Danger to know whether you are in a pull request or not, as the environment metadata
-isn&#39;t reliable.</p>
+isn't reliable.</p>
 
 <p>With that set up, you can you add <code>bundle exec danger</code> to your <code>circle.yml</code>. If you override the default
 <code>test:</code> section, then add it as an extra step. Otherwise add a new <code>pre</code> section to the test:</p>
@@ -100,7 +165,9 @@ isn&#39;t reliable.</p>
 <h3>Token Setup</h3>
 
 <p>There is no difference here for OSS vs Closed, add your <code>DANGER_GITHUB_API_TOKEN</code> to the Environment variable settings page.</p>
-</div><div class="drone" style="display:none;"><h3>CI Setup</h3>
+</div>
+<div class="drone" style="display:none;">
+<h3>CI Setup</h3>
 
 <p>With Drone you run the docker images yourself, so you will want to add <code>bundle exec danger</code> at the end of
 your <code>.drone.yml</code>.</p>
@@ -114,11 +181,13 @@ your <code>.drone.yml</code>.</p>
 
 <h3>Token Setup</h3>
 
-<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user&#39;s ENV. The alternative
-is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN=&quot;123&quot; bundle exec danger</code>.</p>
-</div><div class="jenkins" style="display:none;"><h3>CI Setup</h3>
+<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user's ENV. The alternative
+is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN="123" bundle exec danger</code>.</p>
+</div>
+<div class="jenkins" style="display:none;">
+<h3>CI Setup</h3>
 
-<p>Ah Jenkins, so many memories. So, if you&#39;re using Jenkins, you&#39;re hosting your own environment. You
+<p>Ah Jenkins, so many memories. So, if you're using Jenkins, you're hosting your own environment. You
 will want to be using the <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin">GitHub pull request builder plugin</a>
 in order to ensure that you have the build environment set up for PR integration.</p>
 
@@ -126,40 +195,48 @@ in order to ensure that you have the build environment set up for PR integration
 
 <h3>Token Setup</h3>
 
-<p>As you own the machine, it&#39;s up to you to add the enviroment variable for the <code>DANGER_GITHUB_API_TOKEN</code>.</p>
-</div><div class="semaphore" style="display:none;"><h3>CI Setup</h3>
+<p>As you own the machine, it's up to you to add the enviroment variable for the <code>DANGER_GITHUB_API_TOKEN</code>.</p>
+</div>
+<div class="semaphore" style="display:none;">
+<h3>CI Setup</h3>
 
-<p>For Semaphor you will want to go to the settings page of the project. Inside &quot;Build Settings&quot;
+<p>For Semaphor you will want to go to the settings page of the project. Inside "Build Settings"
 you should add <code>bundle exec danger</code> to the Setup thread.</p>
 
 <h3>Token Setup</h3>
 
-<p>You can add your <code>DANGER_GITHUB_API_TOKEN</code> inside the &quot;Environment Variables&quot; section in the settings.</p>
-</div><div class="surf" style="display:none;"><h3>CI Setup</h3>
+<p>You can add your <code>DANGER_GITHUB_API_TOKEN</code> inside the "Environment Variables" section in the settings.</p>
+</div>
+<div class="surf" style="display:none;">
+<h3>CI Setup</h3>
 
 <p>You want to add <code>bundle exec danger</code> to your <code>build.sh</code> file to run  Danger at the
 end of your build.</p>
 
 <h3>Token Setup</h3>
 
-<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user&#39;s ENV. The alternative
-is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN=&quot;123&quot; bundle exec danger</code>.</p>
-</div><div class="teamcity" style="display:none;"><h3>CI Setup</h3>
+<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user's ENV. The alternative
+is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN="123" bundle exec danger</code>.</p>
+</div>
+<div class="teamcity" style="display:none;">
+<h3>CI Setup</h3>
 
 <p>You need to go to your project settings. Then depending on the type of your build settings, you may need
 to add a new build step for Danger. You want to be able to run the command <code>bundle exec danger</code>, so
-the &quot;Simple Command Runner&quot; should be all you need to do that.</p>
+the "Simple Command Runner" should be all you need to do that.</p>
 
 <h3>Token + Environment Setup</h3>
 
-<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user&#39;s ENV. The alternative
-is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN=&quot;123&quot; bundle exec danger</code>.</p>
+<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user's ENV. The alternative
+is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN="123" bundle exec danger</code>.</p>
 
 <p>However, you will need to find a way to add the environment vars: <code>GITHUB_REPO_SLUG</code>, <code>GITHUB_PULL_REQUEST_ID</code> and
 <code>GITHUB_REPO_URL</code>. These are not added by default. You could do this via the GitHub API potentially.</p>
 
 <p>We would love some advice on improving this setup.</p>
-</div><div class="travis" style="display:none;"><h3>CI Setup</h3>
+</div>
+<div class="travis" style="display:none;">
+<h3>CI Setup</h3>
 
 <p>You need to edit your <code>.travis.yml</code> to include <code>bundle exec danger</code>. If you already have
 a <code>script:</code> section then we recommend adding this command at the end of the script step: <code>- bundle exec danger</code>.</p>
@@ -178,12 +255,14 @@ With that set up, you can edit your job to add <code>bundle exec danger</code> a
 <h3>Token Setup</h3>
 
 <p>You need to add the <code>DANGER_GITHUB_API_TOKEN</code> environment variable, to do this,
-go to your repo&#39;s settings, which should look like: <code>https://travis-ci.org/[user]/[repo]/settings</code>.</p>
+go to your repo's settings, which should look like: <code>https://travis-ci.org/[user]/[repo]/settings</code>.</p>
 
-<p>If you have an open source project, you should ensure &quot;Display value in build log&quot; enabled, so that PRs from forks work.</p>
-</div><div class="xcodeserver" style="display:none;"><h3>CI Setup</h3>
+<p>If you have an open source project, you should ensure "Display value in build log" enabled, so that PRs from forks work.</p>
+</div>
+<div class="xcodeserver" style="display:none;">
+<h3>CI Setup</h3>
 
-<p>If you&#39;re bold enough to use Xcode Bots. You will need to use <a href="https://github.com/czechboy0/Buildasaur">Buildasaur</a>
+<p>If you're bold enough to use Xcode Bots. You will need to use <a href="https://github.com/czechboy0/Buildasaur">Buildasaur</a>
 in order to work with Danger. This will set up your build environment for you, as the name of the bot contains all
 of the environment variables that Danger needs to work.</p>
 
@@ -191,25 +270,29 @@ of the environment variables that Danger needs to work.</p>
 
 <h3>Token Setup</h3>
 
-<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user&#39;s ENV. The alternative
-is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN=&quot;123&quot; bundle exec danger</code>.`.</p>
-</div></div></article></section><section><article><h5>Installation Without Bundler</h5>
+<p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user's ENV. The alternative
+is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN="123" bundle exec danger</code>.`.</p>
+</div>
+</div></article></section><section><article><h5 id="installation-without-bundler">
+<a class="header-link" href="#installation-without-bundler">#</a>Installation Without Bundler</h5>
 
-<p>If Danger is your only ruby dependency, you may not want to use [Bundler][bundler], that&#39;s fine, but note that you&#39;ll always be using the latest version of all of your dependencies.</p>
+<p>If Danger is your only ruby dependency, you may not want to use [Bundler][bundler], that’s fine, but note that you’ll always be using the latest version of all of your dependencies.</p>
 
 <p>You can install Danger via <code>gem install danger</code>. This will make it available in your system, you can include plugins at the same time by running <code>gem install danger danger-prose [gem] [gem]</code>. You can run <code>danger --version</code> to check your version. Any time you see a command that recommends you use <code>bundle exec</code> - you can skip the <code>bundle exec</code> part.</p>
 
-<h5>macOS sudo-less Installation</h5>
+<h5 id="macos-sudo-less-installation">
+<a class="header-link" href="#macos-sudo-less-installation">#</a>macOS sudo-less Installation</h5>
 
 <p>Create or edit a <code>.profile</code> file in your home directory and add or amend it to include these lines:</p>
 
 <p><code>
   <pre>
-export GEM<em>HOME=$HOME/.gem
-export PATH=$GEM</em>HOME/bin:$PATH
+export GEM_HOME=$HOME/.gem
+export PATH=$GEM_HOME/bin:$PATH
   </pre>
-<code></p>
-</article></section><section><article><hr /><p>help improve this document  by <a href= 'https://github.com/danger/danger.systems/edit/master/static/source/guides/getting_started.html.slim'>sending PRs</a>.</p></article></section><script>$(function() {
+<code></code></code></p>
+ </article></section><section><article><hr>
+<p>help improve this document  by <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/getting_started.html.slim">sending PRs</a>.</p></article></section><script>$(function() {
   /// Generic-ish Example Highlight Code
   $(".ci_sources ul li").click(function(event) {
     var $this = $(this)
@@ -223,10 +306,36 @@ export PATH=$GEM</em>HOME/bin:$PATH
   })
 
   $(".ci_sources ul li.travis").click()
-});</script><footer><article><h3>GitHub</h3><ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul><h3>Twitter</h3><ul><li><a href="https://twitter.com/orta" target="_blank">@orta</a></li><li><a href="https://twitter.com/krausefx" target="_blank">@krausefx</a></li></ul></article><article><h3>Guides</h3><ul><li><a href="/guides/getting_started.html">Getting Set Up</a></li><li><a href="/guides/dangerfile.html">The Dangerfile</a></li><li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li><li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li><li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li><li><a href="/guides/faq.html">Frequently Asked Questions</a></li><li><a href="/guides/troubleshooting.html">Troubleshooting</a></li></ul></article><article><h3>Misc</h3><ul><li><a href="/reference.html">DSL Reference</a></li><li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md">CHANGELOG.md</a></li><li><a href="https://github.com/danger/design">Media Kit</a></li><li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Code of Conduct</a></li><li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Community Continuity</a></li></ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203" /></a></article></footer></body></html><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+});</script>
+
+<footer><article><h3>GitHub</h3>
+<ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul>
+<h3>Twitter</h3>
+<ul>
+<li><a href="https://twitter.com/orta" target="_blank">@orta</a></li>
+<li><a href="https://twitter.com/krausefx" target="_blank">@krausefx</a></li>
+</ul></article><article><h3>Guides</h3>
+<ul>
+<li><a href="/guides/getting_started.html">Getting Set Up</a></li>
+<li><a href="/guides/dangerfile.html">The Dangerfile</a></li>
+<li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li>
+<li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li>
+<li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li>
+<li><a href="/guides/faq.html">Frequently Asked Questions</a></li>
+<li><a href="/guides/troubleshooting.html">Troubleshooting</a></li>
+</ul></article><article><h3>Misc</h3>
+<ul>
+<li><a href="/reference.html">DSL Reference</a></li>
+<li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md">CHANGELOG.md</a></li>
+<li><a href="https://github.com/danger/design">Media Kit</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Code of Conduct</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Community Continuity</a></li>
+</ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203"></a></article></footer>
+</body>
+</html><html><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-81285417-1', 'auto');
-ga('send', 'pageview');</script>
+ga('send', 'pageview');</script></html>
