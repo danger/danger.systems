@@ -13,7 +13,6 @@ ruby:
 section.guide
   article
     markdown:
-
       There are 5 steps invovled in getting Danger running:
 
       * [Include Danger](#including-danger)
@@ -30,30 +29,18 @@ section.guide
 
       If you have an existing Gemfile, add `gem 'danger'` to it. If you don't run `bundle init` in your project root, and edit the freshly minted Gemfile.
 
-      ##### Installation Without Bundler
+      ##### Bundler 101
 
-      If Danger is your only ruby dependency, you may not want to use [Bundler][bundler], that's fine, but note that you'll always be using the latest version of all of your dependencies.
-
-      You can install Danger via `gem install danger`. This will make it available in your system, you can include plugins at the same time by running `gem install danger danger-prose [gem] [gem]`. You can run `danger --version` to check your version. Any time you see a command that recommends you use `bundle exec` - you can skip the `bundle exec` part.
-
-      ##### macOS sudo-less Installation
-
-      Create or edit a `.profile` file in your home directory and add or amend it to include these lines:
-
-      <code>
-        <pre>
-      export GEM_HOME=$HOME/.gem
-      export PATH=$GEM_HOME/bin:$PATH
-        </pre>
-      <code>
+      Bundler is a dependey manager for Ruby, it uses a Gemfile to define all of the Ruby projects you want to use. To get started type in `bundler init` in your project folder.
+      This creates your `Gemfile`. Open this up in your editor, then replace the ` #gem 'rails'` with `gem 'danger'`. Then run `bundle install` inside your project folder.
 
       ### Easy Mode
 
       *Easy mode* - run: `bundle exec danger init` - this will guide you through the next four steps, offering useful advice specific to your setup. If you would like to understand how all of the pieces come together, read on:
 
-
       ### Creating a Dangerfile
-      Create an empty file, named `Dangerfile`. This is the file that contains ruby code. Your text editor won't highlight as ruby, so you may need to set the syntax highlighting. To get started, we would recommend a simple "Hello World."
+
+      Create an empty file, named `Dangerfile`. This is the file that contains ruby code. Your text editor won't highlight as ruby, so you may need to set the syntax highlighting. Unless you're [using VS Code][vs_code]. To get started, we would recommend a simple "Hello World."
 
       <code>
         <pre>
@@ -89,23 +76,75 @@ section.guide
 
       We recommend giving access to the whole `repo` scope, and it's children.
 
-      ### Setting up Danger to run on your CI
+      #### Continuous Integration
 
-      _Note: more guides for different CI hosts will be coming in time._
+      Continuous Integration is the process of regularly running tests, and generating metrics for a project. It is where you can ensure that the code you are submitting for review is passing on all of the tests. You commonly see this as green, or red dots inside GitHub pull requests.
+
+      Danger is built to run as a part of this process, so you will need to have this set up as a pre-requisite.
+
+      ### Setting up Danger to run on your CI
 
       [bundler]: http://bundler.io
       [cp_bundler]: https://guides.cocoapods.org/using/a-gemfile.html
       [without_bundler]: #installation-without-bundler
       [github_bots]: https://twitter.com/sebastiangrail/status/750844399563608065
       [github_token]: https://github.com/settings/tokens/new
+      [vs_code]: https://marketplace.visualstudio.com/items?itemName=Orta.vscode-danger
 
+    / These docs all come from
+    / https://github.com/danger/danger/tree/master/lib/danger/ci_source
+    / inline documentation, rather than from inside this page. 
 
-    - for source in ci_sources
-      h2nd
-       == source["name"]
-      == markdown_h(source["docs"]) 
+    .ci_sources
+      ul
+        - for source in ci_sources
+          - source_id = source["name"].downcase.gsub(" ", "_") 
+          li class=source_id == source["name"]
+      
+      - for source in ci_sources
+        - source_id = source["name"].downcase.gsub(" ", "_")
+        div class=source_id style="display:none;"
+          == markdown_h(source["docs"]) 
+
+section
+  article
+    markdown:
+      ##### Installation Without Bundler
+
+      If Danger is your only ruby dependency, you may not want to use [Bundler][bundler], that's fine, but note that you'll always be using the latest version of all of your dependencies.
+
+      You can install Danger via `gem install danger`. This will make it available in your system, you can include plugins at the same time by running `gem install danger danger-prose [gem] [gem]`. You can run `danger --version` to check your version. Any time you see a command that recommends you use `bundle exec` - you can skip the `bundle exec` part.
+
+      ##### macOS sudo-less Installation
+
+      Create or edit a `.profile` file in your home directory and add or amend it to include these lines:
+
+      <code>
+        <pre>
+      export GEM_HOME=$HOME/.gem
+      export PATH=$GEM_HOME/bin:$PATH
+        </pre>
+      <code>
+
 
 section
   article
     hr
     p == "help improve this document  by <a href= 'https://github.com/danger/danger.systems/edit/master/static/source/#{current_resource.path}.slim'>sending PRs</a>."
+
+javascript:
+  $(function() {
+    /// Generic-ish Example Highlight Code
+    $(".ci_sources ul li").click(function(event) {
+      var $this = $(this)
+
+      $this.parent().children().removeClass("highlighted")
+      var key = $this.attr("class")
+      $this.addClass("highlighted")
+      console.log(key)
+      $(".ci_sources div").css("display", "none")
+      $(".ci_sources div." + key).css("display", "block")
+    })
+
+    $(".ci_sources ul li.travis").click()
+  });

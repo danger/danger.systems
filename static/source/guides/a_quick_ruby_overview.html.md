@@ -58,12 +58,12 @@ name += " therox"             # orta therox
 name.start_with? "orta"       # true
 name.end_with? "orta"         # false
 name.gsub "orta", "Orta"      # Orta therox
-name.gsub /therox/, 'Therox'  # Orta Therox
+name.gsub /therox/, 'Therox'  # orta Therox
 # Note the !, this will mutate `name`.
-name.gsub! /therox/, 'Therox' # Orta Therox
+name.gsub! /therox/, 'Therox' # orta Therox
 name.include? "ta thero"      # false
 name.include? "Thero"         # true
-name[0..3]                    # Orta
+name[0..3]                    # orta
 ```
 
 There are multiple ways to make a string, I recommend using double quotes `"` like above. If you want to do string interpolation with it, you can use `#{}` and run code inside the brackets. `"5 = ${ 2+3 }"`.
@@ -115,7 +115,7 @@ The humble backtick ` - Takes whatever shell command you want to run, and return
 plugin_json = `bundle exec danger plugin json`
 ```
 
-`system` - Outputs the command you run in the shell, if will return `true` if the process succeeded.
+`system` - Outputs the command you run in the shell, it will return `true` if the process succeeded.
 
 ```ruby
 send_congrats if system("gem install pry")

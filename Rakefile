@@ -121,7 +121,7 @@ namespace :generator do
   desc 'Generate the getting started guides metadata from Danger'
   task :getting_started_docs do
     `bundle exec danger systems ci_docs > static/json_data/ci_docs.json`
-    puts 'Generated search JSON for inline search'
+    puts 'Generated getting started CI documentation'
   end
 
 end
