@@ -16,22 +16,10 @@
 
 <p>If you have an existing Gemfile, add <code>gem &#39;danger&#39;</code> to it. If you don&#39;t run <code>bundle init</code> in your project root, and edit the freshly minted Gemfile.</p>
 
-<h5>Installation Without Bundler</h5>
+<h5>Bundler 101</h5>
 
-<p>If Danger is your only ruby dependency, you may not want to use <a href="http://bundler.io">Bundler</a>, that&#39;s fine, but note that you&#39;ll always be using the latest version of all of your dependencies.</p>
-
-<p>You can install Danger via <code>gem install danger</code>. This will make it available in your system, you can include plugins at the same time by running <code>gem install danger danger-prose [gem] [gem]</code>. You can run <code>danger --version</code> to check your version. Any time you see a command that recommends you use <code>bundle exec</code> - you can skip the <code>bundle exec</code> part.</p>
-
-<h5>macOS sudo-less Installation</h5>
-
-<p>Create or edit a <code>.profile</code> file in your home directory and add or amend it to include these lines:</p>
-
-<p><code>
-  <pre>
-export GEM<em>HOME=$HOME/.gem
-export PATH=$GEM</em>HOME/bin:$PATH
-  </pre>
-<code></p>
+<p>Bundler is a dependey manager for Ruby, it uses a Gemfile to define al lof the Ruby projects you want to use. To get started type in <code>bundler init</code> in your project folder.
+This creates your <code>Gemfile</code>. Open this up in your editor, then replace the <code>#gem &#39;rails&#39;</code> with <code>gem &#39;danger&#39;</code>. Then run <code>bundle install</code> inside your project folder.</p>
 
 <h3>Easy Mode</h3>
 
@@ -39,7 +27,7 @@ export PATH=$GEM</em>HOME/bin:$PATH
 
 <h3>Creating a Dangerfile</h3>
 
-<p>Create an empty file, named <code>Dangerfile</code>. This is the file that contains ruby code. Your text editor won&#39;t highlight as ruby, so you may need to set the syntax highlighting. To get started, we would recommend a simple &quot;Hello World.&quot;</p>
+<p>Create an empty file, named <code>Dangerfile</code>. This is the file that contains ruby code. Your text editor won&#39;t highlight as ruby, so you may need to set the syntax highlighting. Unless you&#39;re <a href="https://marketplace.visualstudio.com/items?itemName=Orta.vscode-danger">using VS Code</a>. To get started, we would recommend a simple &quot;Hello World.&quot;</p>
 
 <p><code>
   <pre>
@@ -101,6 +89,22 @@ message(&quot;Hello, this worked&quot;)
 <p>You need to add the <code>DANGER_GITHUB_API_TOKEN</code> environment variable, to do this, go to your repo&#39;s settings, which should look like: <code>https://travis-ci.org/[user]/[repo]/settings</code>.</p>
 
 <p>If you have an open source project, you should ensure &quot;Display value in build log&quot; enabled, so that PRs from forks work.</p>
+</article></section><section><article><h5>Installation Without Bundler</h5>
+
+<p>If Danger is your only ruby dependency, you may not want to use [Bundler][bundler], that&#39;s fine, but note that you&#39;ll always be using the latest version of all of your dependencies.</p>
+
+<p>You can install Danger via <code>gem install danger</code>. This will make it available in your system, you can include plugins at the same time by running <code>gem install danger danger-prose [gem] [gem]</code>. You can run <code>danger --version</code> to check your version. Any time you see a command that recommends you use <code>bundle exec</code> - you can skip the <code>bundle exec</code> part.</p>
+
+<h5>macOS sudo-less Installation</h5>
+
+<p>Create or edit a <code>.profile</code> file in your home directory and add or amend it to include these lines:</p>
+
+<p><code>
+  <pre>
+export GEM<em>HOME=$HOME/.gem
+export PATH=$GEM</em>HOME/bin:$PATH
+  </pre>
+<code></p>
 </article></section><section><article><hr /><p>help improve this document  by <a href= 'https://github.com/danger/danger.systems/edit/master/static/source/guides/getting_started.html.slim'>sending PRs</a>.</p></article></section><footer><article><h3>GitHub</h3><ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul><h3>Twitter</h3><ul><li><a href="https://twitter.com/orta" target="_blank">@orta</a></li><li><a href="https://twitter.com/krausefx" target="_blank">@krausefx</a></li></ul></article><article><h3>Guides</h3><ul><li><a href="/guides/getting_started.html">Getting Set Up</a></li><li><a href="/guides/dangerfile.html">The Dangerfile</a></li><li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li><li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li><li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li><li><a href="/guides/faq.html">Frequently Asked Questions</a></li><li><a href="/guides/troubleshooting.html">Troubleshooting</a></li></ul></article><article><h3>Misc</h3><ul><li><a href="/reference.html">DSL Reference</a></li><li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md">CHANGELOG.md</a></li><li><a href="https://github.com/danger/design">Media Kit</a></li><li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Code of Conduct</a></li><li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">Community Continuity</a></li></ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203" /></a></article></footer></body></html><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
