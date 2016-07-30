@@ -4,6 +4,11 @@ subtitle: Getting Set Up
 order: 1
 ---
 
+ruby:
+  require 'json'
+  ci_sources = JSON.parse(File.read('json_data/ci_docs.json'))
+  
+
 .clearfix
 section.guide
   article
@@ -79,38 +84,27 @@ section.guide
 
       ### Setting up Danger to run on your CI
 
-      _Note: more guides for different CI hosts will be coming in time._
-
-
-      #### Travis CI
-
-      ##### Running Danger
-
-      You need to edit your `.travis.yml` to include `bundle exec danger`. If you already have a `script:` section then we recommend adding this command at the end of the script step: `- bundle exec danger`.
-
-      Otherwise, add a `before_script` step to the root of the `.travis.yml` with `bundle exec danger`
-
-      <code>
-        <pre>
-        before_script:
-          - bundle exec danger
-        </pre>
-      <code>
-
-      Adding this to your `.travis.yml` allows Danger to fail your build, both on the TravisCI website and within your Pull Request.
-
-      ##### Adding the ENV var
-
-      You need to add the `DANGER_GITHUB_API_TOKEN` environment variable, to do this, go to your repo's settings, which should look like: `https://travis-ci.org/[user]/[repo]/settings`.
-
-      If you have an open source project, you should ensure "Display value in build log" enabled, so that PRs from forks work.
-
       [bundler]: http://bundler.io
       [cp_bundler]: https://guides.cocoapods.org/using/a-gemfile.html
       [without_bundler]: #installation-without-bundler
       [github_bots]: https://twitter.com/sebastiangrail/status/750844399563608065
       [github_token]: https://github.com/settings/tokens/new
       [vs_code]: https://marketplace.visualstudio.com/items?itemName=Orta.vscode-danger
+
+    / These docs all come from
+    / https://github.com/danger/danger/tree/master/lib/danger/ci_source
+    / inline documentation, rather than from inside this page. 
+
+    .ci_sources
+      ul
+        - for source in ci_sources
+          - source_id = source["name"].downcase.gsub(" ", "_") 
+          li class=source_id == source["name"]
+      
+      - for source in ci_sources
+        - source_id = source["name"].downcase.gsub(" ", "_")
+        div class=source_id style="display:none;"
+          == markdown_h(source["docs"]) 
 
 section
   article
@@ -132,7 +126,25 @@ section
         </pre>
       <code>
 
+
 section
   article
     hr
     p == "help improve this document  by <a href= 'https://github.com/danger/danger.systems/edit/master/static/source/#{current_resource.path}.slim'>sending PRs</a>."
+
+javascript:
+  $(function() {
+    /// Generic-ish Example Highlight Code
+    $(".ci_sources ul li").click(function(event) {
+      var $this = $(this)
+
+      $this.parent().children().removeClass("highlighted")
+      var key = $this.attr("class")
+      $this.addClass("highlighted")
+      console.log(key)
+      $(".ci_sources div").css("display", "none")
+      $(".ci_sources div." + key).css("display", "block")
+    })
+
+    $(".ci_sources ul li.travis").click()
+  });

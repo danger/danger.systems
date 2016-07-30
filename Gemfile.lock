@@ -1,9 +1,8 @@
 GIT
   remote: https://github.com/danger/danger.git
-  revision: 8f7d2ce2af67d6390615d656230af320d110c429
-  branch: master
+  revision: 372af6e4929954f019229e2b579378598a651075
   specs:
-    danger (2.0.1)
+    danger (2.1.0)
       claide (~> 1.0)
       claide-plugins (> 0.9.0)
       colored (~> 1.2)
@@ -170,7 +169,7 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (3.0.0)
+    uglifier (3.0.1)
       execjs (>= 0.3.0, < 3)
     yajl-ruby (1.2.1)
     yard (0.9.5)
