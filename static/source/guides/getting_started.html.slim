@@ -13,9 +13,9 @@ ruby:
 section.guide
   article
     markdown:
-      There are 5 steps invovled in getting Danger running:
+      There are 5 steps involved in getting Danger running:
 
-      * [Include Danger](#including-danger)
+      * [Include Danger](#including-danger).
       * [Creating a Dangerfile](#creating-a-dangerfile) and adding a few simple rules.
       * [Creating a GitHub account for Danger to use](#creating-a-github-account-for-danger-to-use).
       * Setting up [an access token for Danger](#setting-up-an-access-token) with that account.
@@ -23,15 +23,15 @@ section.guide
 
       ### Including Danger
 
-      We recommend you install Danger via [Bundler][bundler] + a Gemfile. This means that your version of Danger, and your plugins are all versioned correctly. You are in control of how and when your dependencies are updated then. If you'd like to learn more about Bundler, check out [this guide][cp_bundler].
+      We recommend you install Danger via [Bundler][bundler] + a Gemfile. This means that your version of Danger and your plugins are all versioned correctly. You are in control of how and when your dependencies are updated. If you'd like to learn more about Bundler, check out [this guide][cp_bundler].
 
       ##### Installation
 
-      If you have an existing Gemfile, add `gem 'danger'` to it. If you don't run `bundle init` in your project root, and edit the freshly minted Gemfile.
+      If you have an existing Gemfile, add `gem 'danger'` to it. If you don't, run `bundle init` in your project root, and edit the freshly-minted Gemfile.
 
       ##### Bundler 101
 
-      Bundler is a dependey manager for Ruby, it uses a Gemfile to define all of the Ruby projects you want to use. To get started type in `bundler init` in your project folder.
+      Bundler is a dependency manager for Ruby which uses a Gemfile to define all of the Ruby projects you want to use. To get started type in `bundler init` in your project folder.
       This creates your `Gemfile`. Open this up in your editor, then replace the ` #gem 'rails'` with `gem 'danger'`. Then run `bundle install` inside your project folder.
 
       ### Easy Mode
@@ -40,7 +40,7 @@ section.guide
 
       ### Creating a Dangerfile
 
-      Create an empty file, named `Dangerfile`. This is the file that contains ruby code. Your text editor won't highlight as ruby, so you may need to set the syntax highlighting. Unless you're [using VS Code][vs_code]. To get started, we would recommend a simple "Hello World."
+      Create an empty file named `Dangerfile`. The file is written in Ruby, but your text editor might not recognize it as such, so you may need to set the syntax highlighting manually (unless you're [using VS Code][vs_code]). To get started, we would recommend a simple "Hello World."
 
       <code>
         <pre>
@@ -52,17 +52,17 @@ section.guide
 
       This is optional. Pragmatically, you want to do this though.
 
-      In order to get the most out of Danger, we recommend giving her the ability to post comments in your code review. This is a regular GitHub account, depending on whether you are working on a private or public project you will want to give different levels of access to this bot. You are allowed to have [one bot per GitHub account][github_bots].
+      In order to get the most out of Danger, we recommend giving her the ability to post comments in your code review. This is a regular GitHub account, but depending on whether you are working on a private or public project, you will want to give different levels of access to this bot. You are allowed to have [one bot per GitHub account][github_bots].
 
       To get started, open [https://github.com](https://github.com) in a private browser session.
 
       ##### OSS Projects
 
-      Do not add the bot to repo, or to your organization.
+      Do not add the bot to your repo or to your organization.
 
       ##### Closed Source Projects
 
-      Add the bot to repo, or to your organization. The bot requires permission level "Write" to be able to set a PR's status. Note that you _should not_ re-use this bot for OSS projects.
+      Add the bot to repo or to your organization. The bot requires permission level "Write" to be able to set a PR's status. Note that you _should not_ re-use this bot for OSS projects.
 
       ### Setting up an Access Token
 
@@ -70,15 +70,15 @@ section.guide
 
       ##### Tokens for OSS Projects
 
-       We recommend giving the token the smallest scope possible. This means just `public_repo`, this scopes limits Danger's abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimalises the chance for bad actors causing chaos with it.
+      We recommend giving the token the smallest scope possible. This means just `public_repo`, this scopes limits Danger's abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimizes the chance for bad actors causing chaos with it.
 
       ##### Tokens for Closed Source Projects
 
-      We recommend giving access to the whole `repo` scope, and it's children.
+      We recommend giving access to the whole `repo` scope, and its children.
 
       ### Continuous Integration
 
-      Continuous Integration is the process of regularly running tests, and generating metrics for a project. It is where you can ensure that the code you are submitting for review is passing on all of the tests. You commonly see this as green, or red dots inside GitHub pull requests.
+      Continuous Integration is the process of regularly running tests and generating metrics for a project. It is where you can ensure that the code you are submitting for review is passing on all of the tests. You commonly see this as green or red dots inside GitHub pull requests.
 
       Danger is built to run as a part of this process, so you will need to have this set up as a pre-requisite.
 
