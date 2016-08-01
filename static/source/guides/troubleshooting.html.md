@@ -7,7 +7,7 @@ order: 7
 
 ### I want to work locally on my Dangerfile
 
-OK, so, you can use `bundle exec danger local` to have Danger run the last merged PR in your commit history ( note: run `bundle exec  danger local--help` to see extra options.)
+OK, so, you can use `bundle exec danger local` to have Danger run the last merged PR in your commit history ( note: run `bundle exec  danger local --help` to see extra options.)
 
 This will run the Danger environment locally, making it possible to iterate and verify syntax etc.
 
