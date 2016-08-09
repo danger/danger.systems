@@ -70,7 +70,7 @@ There are multiple ways to make a string, I recommend using double quotes `"` li
 
 That should be enough to play around with your code review data.
 
-### Arrays + Closures
+### Arrays and Closures
 
 Arrays are also mostly immutable, it's common to iterate with `array.each` instead of `for thing in array`. Closures for functions like `each`, `map`, `select`, `flat_map`, `reject` and the like, can be executed with a single line with braces:
 
