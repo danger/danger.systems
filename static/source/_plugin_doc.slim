@@ -22,7 +22,7 @@ ruby:
   end
 
   plugins = JSON.parse(File.read("../plugins-search-generated.json"))
-  gem_for_plugin = plugins["plugins"].find { |gem_plugin| gem_plugin["gem"] == plugin["gem"] } 
+  gem_for_plugin = plugins["plugins"].find { |gem_plugin| gem_plugin["gem"] == plugin["gem"] }
 
 article.scope_code
   - if external
