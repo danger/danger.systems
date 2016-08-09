@@ -64,6 +64,11 @@ article.scope_code
     h3 Tags
     code == plugin["tags"].join(" ")
 
+    h3 Repository
+    ul
+      li
+        a target="_blank" href="#{gem_for_plugin["url"]}" == gem_for_plugin["url"]
+
     - if plugin["see"].empty? == false
       h3 See in Action
       ul
