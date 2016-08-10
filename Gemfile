@@ -8,7 +8,7 @@ gem 'pry', '~> 0.10'
 gem 'yard', '~> 0.8'
 
 # For plugin generation
-gem 'danger', git: 'https://github.com/danger/danger.git'
+gem 'danger', git: 'https://github.com/danger/danger.git', :branch => "danger_danger"
 
 # Static Site
 gem 'middleman'

@@ -1,0 +1,12 @@
+machine:
+  ruby:
+    version:
+      2.3.0
+
+compile:
+  override:
+   - echo "NOP"
+
+test:
+  override:
+    - bundle exec danger
