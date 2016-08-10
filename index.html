@@ -1,4 +1,37 @@
-<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><meta content="True" name="HandheldFriendly" /><meta content="480" name="MobileOptimized" /><meta content="width=480, initial-scale=0.6" name="viewport" /><meta content="constant integration culture code" name="keywords" /><meta content="Orta Therox & Felix Krause" name="author" /><meta content="summary" name="twitter:card" /><meta content="@orta" name="twitter:creator" /><meta content="Danger - Stop Saying 'You Forgot To…' in Code Review" name="twitter:title" /><meta content="Apply cultural rules during your CI process." name="twitter:description" /><meta content="http://danger.systems/index.html" name="twitter:url" /><meta content="/images/square-ffd55d21.png" property="og:image" /><meta content="http://danger.systems/index.html" property="og:url" /><title>Danger - Stop Saying "You Forgot To…" in Code Review</title><link href="/stylesheets/style-0eec9da9.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.1.0.min.js"></script></head><body class="index"><code class="byline">a project from <a target="_blank" href="http://orta.io">orta therox</a><br/>and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code><header class="title"><p>Danger</p><a href="/"><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" /></a><nav><ul><li><a class="highlighted" href="/">home</a></li><li><a href="/guides.html">Guides</a></li><li class="big"><a href="/reference.html">Reference</a></li><li class="small"><a href="/reference.html">Ref</a></li></ul></nav></header><h2><span>What is Danger?</span></h2><section><article><p>Danger runs during your CI process, and gives teams the chance to automate common code review chores.</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="True" name="HandheldFriendly">
+<meta content="480" name="MobileOptimized">
+<meta content="width=480, initial-scale=0.6" name="viewport">
+<meta content="constant integration culture code" name="keywords">
+<meta content="Orta Therox &amp; Felix Krause" name="author">
+<meta content="summary" name="twitter:card">
+<meta content="@orta" name="twitter:creator">
+<meta content="Danger - Stop Saying 'You Forgot To…' in Code Review" name="twitter:title">
+<meta content="Apply cultural rules during your CI process." name="twitter:description">
+<meta content="http://danger.systems/index.html" name="twitter:url">
+<meta content="/images/square-ffd55d21.png" property="og:image">
+<meta content="http://danger.systems/index.html" property="og:url">
+<title>Danger - Stop Saying "You Forgot To…" in Code Review</title>
+<link href="/stylesheets/style-0eec9da9.css" rel="stylesheet">
+<link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body class="index">
+<code class="byline">a project from <a target="_blank" href="http://orta.io">orta therox</a><br>and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code><header class="title"><p>Danger</p>
+<a href="/"><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image"></a><nav><ul>
+<li><a class="highlighted" href="/">home</a></li>
+<li><a href="/guides.html">Guides</a></li>
+<li class="big"><a href="/reference.html">Reference</a></li>
+<li class="small"><a href="/reference.html">Ref</a></li>
+</ul></nav></header>
+
+<h2><span>What is Danger?</span></h2>
+<section><article><p>Danger runs during your CI process, and gives teams the chance to automate common code review chores.</p>
 
 <p>This provides another logical step in your build, through this Danger can help lint your rote tasks in daily code review.</p>
 
@@ -7,82 +40,165 @@
 <p>She does this by leaving messages inside your PRs based on rules that you create with the Ruby scripting language.</p>
 
 <p>Over time, as rules are adhered to, the message is amended to reflect the current state of the code review.</p>
-</article><article><a href="/images/danger-screenshot-074f084c.png"><img src="/images/danger-screenshot-074f084c.png" style="max-width:100%; margin-top: 15px;" /></a></article></section><h2><span>For Example</span></h2><section class="examples"><ul><li class="changelogs" data-repos="artsy/eigen, cocoapods/cocoapods, realm/jazzy"><a>Enforce Changelogs</a></li><li class="prose" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Improve your prose</a></li><li class="merge" data-repos="cocoapods/cocoapods"><a>Ensure no Merge commits</a></li><li class="focus" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Dont Focus Tests</a></li><li class="artifacts" data-repos="samdmarshall/danger, artsy/eigen"><a>Highlight build artifacts</a></li><li class="special" data-repos="samdmarshall/danger, artsy/eigen"><a>Special case special files</a></li></ul><div><div class="code_chunk"><div class="changelogs"><div class="highlight"><pre><span class="c1"># Add a CHANGELOG entry for app changes</span>
-<span class="k">if</span> <span class="o">!</span><span class="n">github</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;CHANGELOG.md&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">has_app_changes</span>
-  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Please include a CHANGELOG entry. </span><span class="se">\n</span><span class="s2">You can find it at [CHANGELOG.md](https://github.com/realm/jazzy/blob/master/CHANGELOG.md).&quot;</span><span class="p">)</span>
-  <span class="n">message</span> <span class="s2">&quot;Note, we hard-wrap at 80 chars and use 2 spaces after the last line.&quot;</span>
+</article><article><a href="/images/danger-screenshot-074f084c.png"><img src="/images/danger-screenshot-074f084c.png" style="max-width:100%; margin-top: 15px;"></a></article></section><h2><span>For Example</span></h2>
+<section class="examples"><ul>
+<li class="changelogs" data-repos="artsy/eigen, cocoapods/cocoapods, realm/jazzy"><a>Enforce Changelogs</a></li>
+<li class="prose" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Improve your prose</a></li>
+<li class="merge" data-repos="cocoapods/cocoapods"><a>Ensure no Merge commits</a></li>
+<li class="focus" data-repos="artsy/artsy.github.io, ashfurrow/blog"><a>Dont Focus Tests</a></li>
+<li class="artifacts" data-repos="samdmarshall/danger, artsy/eigen"><a>Highlight build artifacts</a></li>
+<li class="special" data-repos="samdmarshall/danger, artsy/eigen"><a>Special case special files</a></li>
+</ul>
+<div>
+<div class="code_chunk">
+<div class="changelogs"><div class="highlight"><pre><span class="c1"># Add a CHANGELOG entry for app changes</span>
+<span class="k">if</span> <span class="o">!</span><span class="n">github</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">"CHANGELOG.md"</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">has_app_changes</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">"Please include a CHANGELOG entry. </span><span class="se">\n</span><span class="s2">You can find it at [CHANGELOG.md](https://github.com/realm/jazzy/blob/master/CHANGELOG.md)."</span><span class="p">)</span>
+  <span class="n">message</span> <span class="s2">"Note, we hard-wrap at 80 chars and use 2 spaces after the last line."</span>
 <span class="k">end</span>
-</pre></div></div><div class="prose"><div class="highlight"><pre><span class="c1"># Look for prose issues</span>
+</pre></div></div>
+<div class="prose"><div class="highlight"><pre><span class="c1"># Look for prose issues</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">lint_files</span> <span class="n">markdown_files</span>
 
 <span class="c1"># Look for spelling issues</span>
-<span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;orta&quot;</span><span class="p">,</span> <span class="s2">&quot;artsy&quot;</span><span class="p">,</span> <span class="s2">&quot;cocoapods&quot;</span><span class="o">]</span>
+<span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"orta"</span><span class="p">,</span> <span class="s2">"artsy"</span><span class="p">,</span> <span class="s2">"cocoapods"</span><span class="o">]</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span> <span class="n">markdown_files</span>
-</pre></div></div><div class="merge"><div class="highlight"><pre><span class="c1"># Ensure a clean commits history</span>
+</pre></div></div>
+<div class="merge"><div class="highlight"><pre><span class="c1"># Ensure a clean commits history</span>
 <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">commits</span><span class="o">.</span><span class="n">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span><span class="o">.</span><span class="n">message</span> <span class="o">=~</span> <span class="sr">/^Merge branch/</span> <span class="p">}</span>
-  <span class="nb">fail</span><span class="p">(</span><span class="s1">&#39;Please rebase to get rid of the merge commits in this PR&#39;</span><span class="p">)</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s1">'Please rebase to get rid of the merge commits in this PR'</span><span class="p">)</span>
 <span class="k">end</span>
-</pre></div></div><div class="focus"><div class="highlight"><pre><span class="c1"># Don&#39;t let testing shortcuts get into master by accident</span>
-<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;fit left in tests&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="sb">`grep -r &quot;fit Demo/Tests/ `</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">1</span>
-</pre></div></div><div class="artifacts"><div class="highlight"><pre><span class="n">username</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_PROJECT_USERNAME&#39;</span><span class="o">]</span>
-<span class="n">project_name</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_PROJECT_REPONAME&#39;</span><span class="o">]</span>
-<span class="n">build_number</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;CIRCLE_BUILD_NUM&#39;</span><span class="o">]</span>
+</pre></div></div>
+<div class="focus"><div class="highlight"><pre><span class="c1"># Don't let testing shortcuts get into master by accident</span>
+<span class="nb">fail</span><span class="p">(</span><span class="s2">"fit left in tests"</span><span class="p">)</span> <span class="k">if</span> <span class="sb">`grep -r "fit Demo/Tests/ `</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">1</span>
+</pre></div></div>
+<div class="artifacts"><div class="highlight"><pre><span class="n">username</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'CIRCLE_PROJECT_USERNAME'</span><span class="o">]</span>
+<span class="n">project_name</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'CIRCLE_PROJECT_REPONAME'</span><span class="o">]</span>
+<span class="n">build_number</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'CIRCLE_BUILD_NUM'</span><span class="o">]</span>
 <span class="k">if</span> <span class="n">username</span> <span class="o">&amp;&amp;</span> <span class="n">project_name</span> <span class="o">&amp;&amp;</span> <span class="n">build_number</span>
   <span class="c1"># submit message giving the coverage report that was generated by coverage.py</span>
-  <span class="n">message</span><span class="p">(</span><span class="s1">&#39;[html coverage report](https://circleci.com/api/v1/project/&#39;</span><span class="o">+</span><span class="n">username</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">project_name</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">build_number</span><span class="o">+</span><span class="s1">&#39;/artifacts/0/$CIRCLE_ARTIFACTS/htmlcov/index.html)&#39;</span><span class="p">)</span>
+  <span class="n">message</span><span class="p">(</span><span class="s1">'[html coverage report](https://circleci.com/api/v1/project/'</span><span class="o">+</span><span class="n">username</span><span class="o">+</span><span class="s1">'/'</span><span class="o">+</span><span class="n">project_name</span><span class="o">+</span><span class="s1">'/'</span><span class="o">+</span><span class="n">build_number</span><span class="o">+</span><span class="s1">'/artifacts/0/$CIRCLE_ARTIFACTS/htmlcov/index.html)'</span><span class="p">)</span>
 <span class="k">end</span>
-</pre></div></div><div class="special"><div class="highlight"><pre><span class="c1"># Did you make analytics changes? Well you should also include a change to our analytics spec</span>
-<span class="n">made_analytics_changes</span> <span class="o">=</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;/Artsy/App/ARAppDelegate+Analytics.m&quot;</span><span class="p">)</span>
-<span class="n">made_analytics_specs_changes</span> <span class="o">=</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;/Artsy_Tests/Analytics_Tests/ARAppAnalyticsSpec.m&quot;</span><span class="p">)</span>
+</pre></div></div>
+<div class="special"><div class="highlight"><pre><span class="c1"># Did you make analytics changes? Well you should also include a change to our analytics spec</span>
+<span class="n">made_analytics_changes</span> <span class="o">=</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">"/Artsy/App/ARAppDelegate+Analytics.m"</span><span class="p">)</span>
+<span class="n">made_analytics_specs_changes</span> <span class="o">=</span> <span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">"/Artsy_Tests/Analytics_Tests/ARAppAnalyticsSpec.m"</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">made_analytics_changes</span>
-    <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Analytics changes should have reflected specs changes&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="o">!</span><span class="n">made_analytics_specs_changes</span>
+    <span class="nb">fail</span><span class="p">(</span><span class="s2">"Analytics changes should have reflected specs changes"</span><span class="p">)</span> <span class="k">if</span> <span class="o">!</span><span class="n">made_analytics_specs_changes</span>
 
     <span class="c1"># And pay extra attention anyway</span>
-    <span class="n">message</span><span class="p">(</span><span class="s1">&#39;Analytics dict changed, double check for ?: `@&quot;&quot;` on new entries&#39;</span><span class="p">)</span>
-    <span class="n">message</span><span class="p">(</span><span class="s1">&#39;Also, double check the [Analytics Eigen schema](https://docs.google.com/spreadsheets/u/1/d/1bLbeOgVFaWzLSjxLOBDNOKs757-zBGoLSM1lIz3OPiI/edit#gid=497747862) if the changes are non-trivial.&#39;</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">(</span><span class="s1">'Analytics dict changed, double check for ?: `@""` on new entries'</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">(</span><span class="s1">'Also, double check the [Analytics Eigen schema](https://docs.google.com/spreadsheets/u/1/d/1bLbeOgVFaWzLSjxLOBDNOKs757-zBGoLSM1lIz3OPiI/edit#gid=497747862) if the changes are non-trivial.'</span><span class="p">)</span>
 <span class="k">end</span>
-</pre></div></div></div><ref></ref></div></section><h2><span>What magic is this?</span></h2><section><article><h3>How</h3><p>Danger is ruby gem that runs a <code>Dangerfile</code>. You set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
+</pre></div></div>
+</div>
+<ref></ref>
+</div></section><h2><span>What magic is this?</span></h2>
+<section><article><h3>How</h3>
+<p>Danger is ruby gem that runs a <code>Dangerfile</code>. You set up a <code>Dangerfile</code> per-project. The <code>Dangerfile</code> contains a collection of home-grown rules specific to your project.</p>
 
-<p>Danger should be installed via a Gemfile. Add <code>gem &quot;danger&quot;</code> to your Gemfile, then run <code>bundle</code>.</p>
+<p>Danger should be installed via a Gemfile. Add <code>gem "danger"</code> to your Gemfile, then run <code>bundle</code>.</p>
 
 <p>You can <a href="/guides/getting_started.html">integrate Danger</a> into your own project on any available CI service. She will run through the process with you if you run  <code>danger init</code> after installation.</p>
-</article><article><h3>Supports</h3><p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf.</p><p><strong>Can chat back on</strong>: GitHub.</p><p><strong>Can handle diffs from</strong>: Git.</p><h3>Messaging Options</h3><p><code>message(&quot;message&quot;)</code> - Comment a message to the table.</p>
+</article><article><h3>Supports</h3>
+<p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf.</p>
+<p><strong>Can chat back on</strong>: GitHub.</p>
+<p><strong>Can handle diffs from</strong>: Git.</p>
+<h3>Messaging Options</h3>
+<p><code>message("message")</code> - Comment a message to the table.</p>
 
-<p><code>warn(&quot;message&quot;)</code> - Declares a CI warning.</p>
+<p><code>warn("message")</code> - Declares a CI warning.</p>
 
-<p><code>fail(&quot;message&quot;)</code> - Declares a CI blocking error.</p>
+<p><code>fail("message")</code> - Declares a CI blocking error.</p>
 
-<p><code>markdown(&quot;message&quot;)</code> - Outputs pure markdown under the table. </p>
-</article></section><h2><span>Plugins</span></h2><section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with <code>danger plugins create</code>.</p>
-</article></section><section class="search_info"><article><ul><li class="highlighted" data-key="prose">prose</li><li data-key="junit">junit</li><li data-key="xcov">xcov</li><li data-key="rubocop">rubocop</li></ul></article></section><div class="plugins_search_results"><section><article class="scope_code"><h3 class="no_hot_pink"><a href='/plugins/prose.html'>prose</a></h3><p>Lint markdown files inside your projects.
-This is done using the <a href="http://proselint.com">proselint</a> python egg.
+<p><code>markdown("message")</code> - Outputs pure markdown under the table. </p>
+</article></section><h2><span>Plugins</span></h2>
+<section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with <code>danger plugins create</code>.</p>
+</article></section><section class="search_info"><article><ul>
+<li class="highlighted" data-key="prose">prose</li>
+<li data-key="junit">junit</li>
+<li data-key="xcov">xcov</li>
+<li data-key="rubocop">rubocop</li>
+</ul></article></section><div class="plugins_search_results"><section>
+
+<article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/prose.html">prose</a></h3>
+<p>Lint markdown files inside your projects.
+This is done using the <a href="http://proselint.com" target="_blank">proselint</a> python egg.
 Results are passed out as a table in markdown.</p>
-<p>Created by David Grandinetti, Orta Therox.</p><h3>Reference</h3><h4>Attributes</h4><div class="fake_code"><p>Allows you to disable a collection of linters from running. Doesn&#39;t work yet.
-You can get a list of <a href="https://github.com/amperser/proselint#checks">them here</a>
-defaults to <code>[&quot;misc.scare_quotes&quot;, &quot;typography.symbols&quot;]</code> when it&#39;s nil.</p>
-</div><code>disable_linters<span class='subtle return'>Array<String></span></code><div class="fake_code"><p>Allows you to add a collection of words to skip in spellchecking.
-defaults to <code>[&quot;&quot;]</code> when it&#39;s nil.</p>
-</div><code>ignored_words<span class='subtle return'>Array<String></span></code><h4>Methods</h4><div class="fake_code"><p>Lints the globbed markdown files. Will fail if <code>proselint</code> cannot be installed correctly.
+<p>Created by David Grandinetti, Orta Therox.</p>
+<h3>Reference</h3>
+<h4>Attributes</h4>
+<div class="fake_code">
+<p>Allows you to disable a collection of linters from running. Doesn't work yet.
+You can get a list of <a href="https://github.com/amperser/proselint#checks" target="_blank">them here</a>
+defaults to <code>["misc.scare_quotes", "typography.symbols"]</code> when it's nil.</p>
+</div>
+<code>disable_linters<span class="subtle return">Array<string></string></span></code><div class="fake_code">
+<p>Allows you to add a collection of words to skip in spellchecking.
+defaults to <code>[""]</code> when it's nil.</p>
+</div>
+<code>ignored_words<span class="subtle return">Array<string></string></span></code><h4>Methods</h4>
+<div class="fake_code">
+<p>Lints the globbed markdown files. Will fail if <code>proselint</code> cannot be installed correctly.
 Generates a <code>markdown</code> list of warnings for the prose in a corpus of .markdown and .md files.</p>
-</div><code>lint_files (files=nil: String)</code><div class="fake_code"><p>Determine if proselint is currently installed in the system paths.</p>
-</div><code>proselint_installed? <span class='subtle return'>Bool</span></code><div class="fake_code"><p>Determine if mdspell is currently installed in the system paths.</p>
-</div><code>mdspell_installed? <span class='subtle return'>Bool</span></code><div class="fake_code"><p>Runs a markdown-specific spell checker, against a corpus of <code>.markdown</code> and <code>.md</code> files.</p>
-</div><code>check_spelling (files=nil: String)</code></article><article class="scope_code"><h3>Examples</h3><h4>Running linter with custom disabled linters</h4><div class="highlight"><pre><span class="c1"># Runs a linter with comma style and tense present disabled</span>
-<span class="n">prose</span><span class="o">.</span><span class="n">disable_linters</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;misc.scare_quotes&quot;</span><span class="p">,</span> <span class="s2">&quot;misc.tense_present&quot;</span><span class="o">]</span>
-<span class="n">prose</span><span class="o">.</span><span class="n">lint_files</span> <span class="s2">&quot;_posts/*.md&quot;</span>
-</pre></div><h4>Running linter with default linters</h4><div class="highlight"><pre><span class="c1"># Runs a linter with all styles, on modified and added markdown files in this PR</span>
+</div>
+<code>lint_files (files=nil: String)</code><div class="fake_code">
+<p>Determine if proselint is currently installed in the system paths.</p>
+</div>
+<code>proselint_installed? <span class="subtle return">Bool</span></code><div class="fake_code">
+<p>Determine if mdspell is currently installed in the system paths.</p>
+</div>
+<code>mdspell_installed? <span class="subtle return">Bool</span></code><div class="fake_code">
+<p>Runs a markdown-specific spell checker, against a corpus of <code>.markdown</code> and <code>.md</code> files.</p>
+</div>
+<code>check_spelling (files=nil: String)</code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Running linter with custom disabled linters</h4>
+<div class="highlight"><pre><span class="c1"># Runs a linter with comma style and tense present disabled</span>
+<span class="n">prose</span><span class="o">.</span><span class="n">disable_linters</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"misc.scare_quotes"</span><span class="p">,</span> <span class="s2">"misc.tense_present"</span><span class="o">]</span>
+<span class="n">prose</span><span class="o">.</span><span class="n">lint_files</span> <span class="s2">"_posts/*.md"</span>
+</pre></div>
+<h4>Running linter with default linters</h4>
+<div class="highlight"><pre><span class="c1"># Runs a linter with all styles, on modified and added markdown files in this PR</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">lint_files</span>
-</pre></div><h4>Running the spell checker</h4><div class="highlight"><pre><span class="c1"># Runs a spell checker on all files in `_post`</span>
-<span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span> <span class="s2">&quot;_posts/*.md&quot;</span>
-</pre></div><h4>Running the spell checker, with some words whitelisted</h4><div class="highlight"><pre><span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;orta&quot;</span><span class="p">,</span> <span class="s2">&quot;artsy&quot;</span><span class="o">]</span>
+</pre></div>
+<h4>Running the spell checker</h4>
+<div class="highlight"><pre><span class="c1"># Runs a spell checker on all files in `_post`</span>
+<span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span> <span class="s2">"_posts/*.md"</span>
+</pre></div>
+<h4>Running the spell checker, with some words whitelisted</h4>
+<div class="highlight"><pre><span class="n">prose</span><span class="o">.</span><span class="n">ignored_words</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"orta"</span><span class="p">,</span> <span class="s2">"artsy"</span><span class="o">]</span>
 <span class="n">prose</span><span class="o">.</span><span class="n">check_spelling</span>
-</pre></div><h3>How to Install</h3><p>Include <code>gem &quot;danger-prose&quot;</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
+</pre></div>
+<h3>How to Install</h3>
+<p>Include <code>gem "danger-prose"</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
 
 <p>Then inside your Dangerfile, you can access the plugin via <code>prose</code>.</p>
-<h3>Tags</h3><code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>Repository</h3><ul><li><a href="https://github.com/dbgrandi/danger-prose" target="_blank">https://github.com/dbgrandi/danger-prose</a></li></ul><h3>See in Action</h3><ul><li><a href="https://github.com/artsy/artsy.github.io">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div></section></div><h2><span>Show me some Dangerfiles</span></h2><section><article><p>Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.</p>
-</article></section><section class="examples"><ul><li class="moya/moya" data-url="/dangerfiles/moya_moya.html"><a>moya<span>/</span>moya</a></li><li class="artsy/artsy.github.io" data-url="/dangerfiles/artsy_artsy.github.io.html"><a>artsy<span>/</span>artsy.github.io</a></li><li class="ruby-grape/danger" data-url="/dangerfiles/ruby-grape_danger.html"><a>ruby-grape<span>/</span>danger</a></li><li class="artsy/eigen" data-url="/dangerfiles/artsy_eigen.html"><a>artsy<span>/</span>eigen</a></li><li class="danger/danger" data-url="/dangerfiles/danger_danger.html"><a>danger<span>/</span>danger</a></li><li class="cocoapods/cocoapods" data-url="/dangerfiles/cocoapods_cocoapods.html"><a>cocoapods<span>/</span>cocoapods</a></li><li class="samdmarshall/pyconfig#develop" data-url="/dangerfiles/samdmarshall_pyconfig.html"><a>samdmarshall<span>/</span>pyconfig</a></li><li class="samdmarshall/danger" data-url="/dangerfiles/samdmarshall_danger.html"><a>samdmarshall<span>/</span>danger</a></li></ul><div><div class="code_chunk"></div><ref></ref></div></section><h2><span>Lets do it</span></h2><section><article><p>Your first step should probably be to &ldquo;<a href="/guides/getting_started.html">Getting Set Up</a>&rdquo;, then move on to the <a href="/reference.html">API Reference</a> as you build out your Dangerfile.</p>
+<h3>Tags</h3>
+<code>blogging, blog, writing, jekyll, middleman, hugo, metalsmith, gatsby, express</code><h3>Repository</h3>
+<ul><li><a href="https://github.com/dbgrandi/danger-prose" target="_blank">https://github.com/dbgrandi/danger-prose</a></li></ul>
+<h3>See in Action</h3>
+<ul><li><a href="https://github.com/artsy/artsy.github.io" target="_blank">artsy/artsy.github.io</a></li></ul></article><div class="clearfix"></div>
 
-<p>If you come up with any novel uses for Danger, please tweet <a href="https://twitter.com/orta">@orta</a> - and <a href="/guides/creating_your_first_plugin.html">make a plugin</a> so everyone can try it. </p>
+</section></div>
+<h2><span>Show me some Dangerfiles</span></h2>
+<section><article><p>Danger is used in all sorts of projects: ruby gems, python apps, xcode projects, blogs, npm websites and modules. You can check out some Dangerfiles from the Open Source community here.</p>
+</article></section><section class="examples"><ul>
+<li class="moya/moya" data-url="/dangerfiles/moya_moya.html"><a>moya<span>/</span>moya</a></li>
+<li class="artsy/artsy.github.io" data-url="/dangerfiles/artsy_artsy.github.io.html"><a>artsy<span>/</span>artsy.github.io</a></li>
+<li class="ruby-grape/danger" data-url="/dangerfiles/ruby-grape_danger.html"><a>ruby-grape<span>/</span>danger</a></li>
+<li class="artsy/eigen" data-url="/dangerfiles/artsy_eigen.html"><a>artsy<span>/</span>eigen</a></li>
+<li class="danger/danger" data-url="/dangerfiles/danger_danger.html"><a>danger<span>/</span>danger</a></li>
+<li class="cocoapods/cocoapods" data-url="/dangerfiles/cocoapods_cocoapods.html"><a>cocoapods<span>/</span>cocoapods</a></li>
+<li class="samdmarshall/pyconfig#develop" data-url="/dangerfiles/samdmarshall_pyconfig.html"><a>samdmarshall<span>/</span>pyconfig</a></li>
+<li class="samdmarshall/danger" data-url="/dangerfiles/samdmarshall_danger.html"><a>samdmarshall<span>/</span>danger</a></li>
+</ul>
+<div>
+<div class="code_chunk"></div>
+<ref></ref>
+</div></section><h2><span>Lets do it</span></h2>
+<section><article><p>Your first step should probably be to “<a href="/guides/getting_started.html">Getting Set Up</a>”, then move on to the <a href="/reference.html">API Reference</a> as you build out your Dangerfile.</p>
+
+<p>If you come up with any novel uses for Danger, please tweet <a href="https://twitter.com/orta" target="_blank">@orta</a> - and <a href="/guides/creating_your_first_plugin.html">make a plugin</a> so everyone can try it. </p>
 </article></section><script>$(function() {
   /// Generic-ish Example Highlight Code
   $(".search_info ul li").click(function(event) {
@@ -125,7 +241,7 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
    var toGithubLink = function(ref) {
        var branch = (ref.indexOf("#") > -1) ? ref.split("#")[1] : "master"
        var repo = ref.split("#")[0]
-       return "<a href='https://github.com/" + repo + "/blob/" + branch +"/Dangerfile'>" + repo + "</a>"
+       return "<a href='https://github.com/" + repo + "/blob/" + branch +"/Dangerfile' target='_blank'>" + repo + "</a>"
     }
     var showArray = function(array) {
       if (!array) { return false }
@@ -150,10 +266,36 @@ Generates a <code>markdown</code> list of warnings for the prose in a corpus of 
 
   // Set the selection to be the first
   $("section.examples ul li:first-child").trigger('mouseenter')
-});</script><footer><article><h3>GitHub</h3><ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul><h3>Twitter</h3><ul><li><a href="https://twitter.com/orta" target="_blank">@orta</a></li><li><a href="https://twitter.com/krausefx" target="_blank">@krausefx</a></li></ul></article><article><h3>Guides</h3><ul><li><a href="/guides/getting_started.html">Getting Set Up</a></li><li><a href="/guides/dangerfile.html">The Dangerfile</a></li><li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li><li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li><li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li><li><a href="/guides/faq.html">Frequently Asked Questions</a></li><li><a href="/guides/troubleshooting.html">Troubleshooting</a></li></ul></article><article><h3>Misc</h3><ul><li><a href="/reference.html">DSL Reference</a></li><li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md">CHANGELOG.md</a></li><li><a href="https://github.com/danger/design">Media Kit</a></li><li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">COC / Moya CC</a></li><li><a href="https://github.com/danger/danger#im-here-to-help-out">Help Out Building Danger</a></li></ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203" /></a></article></footer></body></html><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+});</script>
+
+<footer><article><h3>GitHub</h3>
+<ul><li><a href="https://github.com/danger/danger" target="_blank">danger/danger</a></li></ul>
+<h3>Twitter</h3>
+<ul>
+<li><a href="https://twitter.com/orta" target="_blank">@orta</a></li>
+<li><a href="https://twitter.com/krausefx" target="_blank">@krausefx</a></li>
+</ul></article><article><h3>Guides</h3>
+<ul>
+<li><a href="/guides/getting_started.html">Getting Set Up</a></li>
+<li><a href="/guides/dangerfile.html">The Dangerfile</a></li>
+<li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li>
+<li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li>
+<li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li>
+<li><a href="/guides/faq.html">Frequently Asked Questions</a></li>
+<li><a href="/guides/troubleshooting.html">Troubleshooting</a></li>
+</ul></article><article><h3>Misc</h3>
+<ul>
+<li><a href="/reference.html">DSL Reference</a></li>
+<li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md" target="_blank">CHANGELOG.md</a></li>
+<li><a href="https://github.com/danger/design" target="_blank">Media Kit</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct" target="_blank">COC / Moya CC</a></li>
+<li><a href="https://github.com/danger/danger#im-here-to-help-out" target="_blank">Help Out Building Danger</a></li>
+</ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203"></a></article></footer>
+</body>
+</html><html><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-81285417-1', 'auto');
-ga('send', 'pageview');</script>
+ga('send', 'pageview');</script></html>

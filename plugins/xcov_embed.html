@@ -1,21 +1,40 @@
-<section><article class="scope_code"><h3 class="no_hot_pink"><a href='/plugins/xcov.html'>xcov</a></h3><p>Validates the code coverage of the files changed within a Pull Request and
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><section>
+
+<article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/xcov.html">xcov</a></h3>
+<p>Validates the code coverage of the files changed within a Pull Request and
 generates a brief coverage report.</p>
-<p>Created by Carlos Vidal.</p><h3>Reference</h3><h4>Methods</h4><div class="fake_code"><p>Validates the code coverage of the files changed within a Pull Request.
+<p>Created by Carlos Vidal.</p>
+<h3>Reference</h3>
+<h4>Methods</h4>
+<div class="fake_code">
+<p>Validates the code coverage of the files changed within a Pull Request.
 This method accepts the same arguments allowed by the xcov gem.</p>
-</div><code>report </code></article><article class="scope_code"><h3>Examples</h3><h4>Validating code coverage for EasyPeasy (easy-peasy.io)</h4><div class="highlight"><pre><span class="c1"># Checks the coverage for the EasyPeasy scheme within the specified</span>
-<span class="c1"># workspace, ignoring the target &#39;Demo.app&#39; and setting a minimum</span>
+</div>
+<code>report </code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Validating code coverage for EasyPeasy (easy-peasy.io)</h4>
+<div class="highlight"><pre><span class="c1"># Checks the coverage for the EasyPeasy scheme within the specified</span>
+<span class="c1"># workspace, ignoring the target 'Demo.app' and setting a minimum</span>
 <span class="c1"># coverage percentage of 90%.</span>
 
 <span class="c1"># The result is sent to the pull request with a markdown format and</span>
 <span class="c1"># notifies failure if the minimum coverage threshold is not reached.</span>
 
 <span class="n">xcov</span><span class="o">.</span><span class="n">report</span><span class="p">(</span>
-  <span class="ss">scheme</span><span class="p">:</span> <span class="s1">&#39;EasyPeasy&#39;</span><span class="p">,</span>
-  <span class="ss">workspace</span><span class="p">:</span> <span class="s1">&#39;Example/EasyPeasy.xcworkspace&#39;</span><span class="p">,</span>
-  <span class="ss">exclude_targets</span><span class="p">:</span> <span class="s1">&#39;Demo.app&#39;</span><span class="p">,</span>
+  <span class="ss">scheme</span><span class="p">:</span> <span class="s1">'EasyPeasy'</span><span class="p">,</span>
+  <span class="ss">workspace</span><span class="p">:</span> <span class="s1">'Example/EasyPeasy.xcworkspace'</span><span class="p">,</span>
+  <span class="ss">exclude_targets</span><span class="p">:</span> <span class="s1">'Demo.app'</span><span class="p">,</span>
   <span class="ss">minimum_coverage_percentage</span><span class="p">:</span> <span class="mi">90</span>
 <span class="p">)</span>
-</pre></div><h3>How to Install</h3><p>Include <code>gem &quot;danger-xcov&quot;</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
+</pre></div>
+<h3>How to Install</h3>
+<p>Include <code>gem "danger-xcov"</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
 
 <p>Then inside your Dangerfile, you can access the plugin via <code>xcov</code>.</p>
-<h3>Tags</h3><code>xcode, coverage, xccoverage, tests, ios, xcov</code><h3>Repository</h3><ul><li><a href="https://github.com/nakiostudio/danger-xcov" target="_blank">https://github.com/nakiostudio/danger-xcov</a></li></ul><h3>See in Action</h3><ul><li><a href="https://github.com/nakiostudio/danger-xcov">nakiostudio/danger-xcov</a></li></ul></article><div class="clearfix"></div></section>
+<h3>Tags</h3>
+<code>xcode, coverage, xccoverage, tests, ios, xcov</code><h3>Repository</h3>
+<ul><li><a href="https://github.com/nakiostudio/danger-xcov" target="_blank">https://github.com/nakiostudio/danger-xcov</a></li></ul>
+<h3>See in Action</h3>
+<ul><li><a href="https://github.com/nakiostudio/danger-xcov" target="_blank">nakiostudio/danger-xcov</a></li></ul></article><div class="clearfix"></div>
+
+</section></body></html>

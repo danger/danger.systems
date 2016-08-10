@@ -1,10 +1,70 @@
-<html><head><meta charset="utf-8" /><!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><meta content="True" name="HandheldFriendly" /><meta content="480" name="MobileOptimized" /><meta content="width=480, initial-scale=0.6" name="viewport" /><meta content="constant integration culture code" name="keywords" /><meta content="Orta Therox & Felix Krause" name="author" /><meta content="summary" name="twitter:card" /><meta content="@orta" name="twitter:creator" /><meta content="The Dangerfile" name="twitter:title" /><meta content="Apply cultural rules during your CI process." name="twitter:description" /><meta content="http://danger.systems/guides/dangerfile.html" name="twitter:url" /><meta content="/images/square-ffd55d21.png" property="og:image" /><meta content="http://danger.systems/guides/dangerfile.html" property="og:url" /><title>The Dangerfile</title><link href="/stylesheets/style-0eec9da9.css" rel="stylesheet" /><link href="/stylesheets/highlight-53578f94.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.1.0.min.js"></script></head><body class="guides guides_dangerfile"><header class="title small"><p>Danger</p><a href="/"><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image" /></a><nav><ul><li><a href="/">home</a></li><li><a class="highlighted" href="/guides.html">Guides</a></li><li class="big"><a href="/reference.html">Reference</a></li><li class="small"><a href="/reference.html">Ref</a></li></ul></nav></header><h2 class="reduced_top_margin"><span>The Dangerfile</span><code class="byline inline">a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code></h2><div class="clearfix"></div><section class="guide"><article><p>A <code>Dangerfile</code> is a <a href="https://www.infoq.com/news/2007/06/dsl-or-not">Ruby DSL</a>. Before the ruby code inside your <code>Dangerfile</code> is executed, she grabs useful bits of data about: the CI environment, the git diff, and the code review details. There is a full writeup of what happens in <a href="/guides/what_does_danger_do.html">&ldquo;What does Danger do?&rdquo;</a>. For now that&rsquo;s enough.</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="True" name="HandheldFriendly">
+<meta content="480" name="MobileOptimized">
+<meta content="width=480, initial-scale=0.6" name="viewport">
+<meta content="constant integration culture code" name="keywords">
+<meta content="Orta Therox &amp; Felix Krause" name="author">
+<meta content="summary" name="twitter:card">
+<meta content="@orta" name="twitter:creator">
+<meta content="The Dangerfile" name="twitter:title">
+<meta content="Apply cultural rules during your CI process." name="twitter:description">
+<meta content="http://danger.systems/guides/dangerfile.html" name="twitter:url">
+<meta content="/images/square-ffd55d21.png" property="og:image">
+<meta content="http://danger.systems/guides/dangerfile.html" property="og:url">
+<title>The Dangerfile</title>
+<link href="/stylesheets/style-0eec9da9.css" rel="stylesheet">
+<link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body class="guides guides_dangerfile">
+<header class="title small"><p>Danger</p>
+<a href="/"><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image"></a><nav><ul>
+<li><a href="/">home</a></li>
+<li><a class="highlighted" href="/guides.html">Guides</a></li>
+<li class="big"><a href="/reference.html">Reference</a></li>
+<li class="small"><a href="/reference.html">Ref</a></li>
+</ul></nav></header><h2 class="reduced_top_margin">
+<span>The Dangerfile</span><code class="byline inline">a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code>
+</h2>
+<div class="clearfix"></div>
+<section class="guide"><article><p>A <code>Dangerfile</code> is a <a href="https://www.infoq.com/news/2007/06/dsl-or-not" target="_blank">Ruby DSL</a>. Before the ruby code inside your <code>Dangerfile</code> is executed, she grabs useful bits of data about: the CI environment, the git diff, and the code review details. There is a full writeup of what happens in <a href="/guides/what_does_danger_do.html">“What does Danger do?”</a>. For now that’s enough.</p>
 
-<p>The <code>Dangerfile</code> is where you create your rules, there are no hard and things to recommend here I&rsquo;m afraid.</p>
-</article></section><section><article><hr /><p>Got improvements? Help improve this document via <a href= 'https://github.com/danger/danger.systems/edit/master/static/source/guides/dangerfile.html.md'>sending PRs</a>.</p></article></section><footer><article><h3>GitHub</h3><ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul><h3>Twitter</h3><ul><li><a href="https://twitter.com/orta" target="_blank">@orta</a></li><li><a href="https://twitter.com/krausefx" target="_blank">@krausefx</a></li></ul></article><article><h3>Guides</h3><ul><li><a href="/guides/getting_started.html">Getting Set Up</a></li><li><a href="/guides/dangerfile.html">The Dangerfile</a></li><li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li><li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li><li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li><li><a href="/guides/faq.html">Frequently Asked Questions</a></li><li><a href="/guides/troubleshooting.html">Troubleshooting</a></li></ul></article><article><h3>Misc</h3><ul><li><a href="/reference.html">DSL Reference</a></li><li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md">CHANGELOG.md</a></li><li><a href="https://github.com/danger/design">Media Kit</a></li><li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">COC / Moya CC</a></li><li><a href="https://github.com/danger/danger#im-here-to-help-out">Help Out Building Danger</a></li></ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203" /></a></article></footer></body></html><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+<p>The <code>Dangerfile</code> is where you create your rules, there are no hard and things to recommend here I’m afraid.</p>
+</article></section><section><article><hr>
+<p>Got improvements? Help improve this document via <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/dangerfile.html.md" target="_blank">sending PRs</a>.</p></article></section><footer><article><h3>GitHub</h3>
+<ul><li><a href="https://github.com/danger/danger" target="_blank">danger/danger</a></li></ul>
+<h3>Twitter</h3>
+<ul>
+<li><a href="https://twitter.com/orta" target="_blank">@orta</a></li>
+<li><a href="https://twitter.com/krausefx" target="_blank">@krausefx</a></li>
+</ul></article><article><h3>Guides</h3>
+<ul>
+<li><a href="/guides/getting_started.html">Getting Set Up</a></li>
+<li><a href="/guides/dangerfile.html">The Dangerfile</a></li>
+<li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li>
+<li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li>
+<li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li>
+<li><a href="/guides/faq.html">Frequently Asked Questions</a></li>
+<li><a href="/guides/troubleshooting.html">Troubleshooting</a></li>
+</ul></article><article><h3>Misc</h3>
+<ul>
+<li><a href="/reference.html">DSL Reference</a></li>
+<li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md" target="_blank">CHANGELOG.md</a></li>
+<li><a href="https://github.com/danger/design" target="_blank">Media Kit</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct" target="_blank">COC / Moya CC</a></li>
+<li><a href="https://github.com/danger/danger#im-here-to-help-out" target="_blank">Help Out Building Danger</a></li>
+</ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203"></a></article></footer>
+</body>
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-81285417-1', 'auto');
 ga('send', 'pageview');</script>
+</html>

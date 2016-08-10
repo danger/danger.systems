@@ -37,7 +37,7 @@
 
 <p>My assumption is that you are a programmer, with some experience. You should be familiar with the terminal. This guide aims to cover enough Ruby for you to feel somewhat productive. You don’t need to know all of the details of the language, but you should probably have some familiarity with a few of these major topics.</p>
 
-<p>Ruby has a repl, the best one by far is <code>pry</code>. So, if you want to have a play with the language. Run <code>gem install pry</code> then run <code>pry</code>. If the gem does not install, you should follow <a href="https://guides.cocoapods.org/using/getting-started.html#sudo-less-installation">the instructions here</a> to do a sudo-less install.</p>
+<p>Ruby has a repl, the best one by far is <code>pry</code>. So, if you want to have a play with the language. Run <code>gem install pry</code> then run <code>pry</code>. If the gem does not install, you should follow <a href="https://guides.cocoapods.org/using/getting-started.html#sudo-less-installation" target="_blank">the instructions here</a> to do a sudo-less install.</p>
 
 <h3 id="environment">
 <a class="header-link" href="#environment">#</a>Environment</h3>
@@ -116,7 +116,7 @@ end
 
 <p>Finally, the simplest “closure”, that only works if you want to call a function on the object in your collection is this interesting pattern: <code>lowercase_path = paths.map(&amp;:downcase)</code> - where <code>downcase</code> is a function on the strings in the array.</p>
 
-<p><code>Note:</code> In Danger, for lists of files (e.g.<code>git.modified_files</code>) we use a class called a <code>FileList</code> which is an array subclass. <a href="https://github.com/danger/danger/blob/master/spec/lib/danger/core_ext/file_list_spec.rb">This adds one extra method</a>: <code>include?</code>. This lets you use <a href="http://wiki.bash-hackers.org/syntax/expansion/globs">path globbing</a> to determine if a string is in the list:</p>
+<p><code>Note:</code> In Danger, for lists of files (e.g.<code>git.modified_files</code>) we use a class called a <code>FileList</code> which is an array subclass. <a href="https://github.com/danger/danger/blob/master/spec/lib/danger/core_ext/file_list_spec.rb" target="_blank">This adds one extra method</a>: <code>include?</code>. This lets you use <a href="http://wiki.bash-hackers.org/syntax/expansion/globs" target="_blank">path globbing</a> to determine if a string is in the list:</p>
 
 <pre><code class="ruby">paths = ["path1/file_name.txt", "path1/file_name1.txt", "path2/subfolder/example.json"]
 filelist = Danger::FileList.new(paths)
@@ -148,7 +148,7 @@ filelist.include? "path1/*.json"          # false
 
 <p><code>exec</code> - Replaces the current process with another, you probably won’t be needing this for Danger.</p>
 
-<p>If you want to know more about any of these, check out <a href="http://stackoverflow.com/questions/6338908/ruby-difference-between-exec-system-and-x-or-backticks">this Stack Overflow</a>.</p>
+<p>If you want to know more about any of these, check out <a href="http://stackoverflow.com/questions/6338908/ruby-difference-between-exec-system-and-x-or-backticks" target="_blank">this Stack Overflow</a>.</p>
 
 <h3 id="json-parsing">
 <a class="header-link" href="#json-parsing">#</a>JSON Parsing</h3>
@@ -171,8 +171,8 @@ thing = json["things"][0]
 
 <p>There’s a <a href="/guides/troubleshooting.html#i-want-to-be-a-danger-wizard">great section in the troubleshooting</a> on letting you dig around inside Danger via <code>pry</code>.</p>
 </article></section><section><article><hr>
-<p>Got improvements? Help improve this document via <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/a_quick_ruby_overview.html.md">sending PRs</a>.</p></article></section><footer><article><h3>GitHub</h3>
-<ul><li><a href="https://github.com/danger/danger">danger/danger</a></li></ul>
+<p>Got improvements? Help improve this document via <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/a_quick_ruby_overview.html.md" target="_blank">sending PRs</a>.</p></article></section><footer><article><h3>GitHub</h3>
+<ul><li><a href="https://github.com/danger/danger" target="_blank">danger/danger</a></li></ul>
 <h3>Twitter</h3>
 <ul>
 <li><a href="https://twitter.com/orta" target="_blank">@orta</a></li>
@@ -189,10 +189,10 @@ thing = json["things"][0]
 </ul></article><article><h3>Misc</h3>
 <ul>
 <li><a href="/reference.html">DSL Reference</a></li>
-<li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md">CHANGELOG.md</a></li>
-<li><a href="https://github.com/danger/design">Media Kit</a></li>
-<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct">COC / Moya CC</a></li>
-<li><a href="https://github.com/danger/danger#im-here-to-help-out">Help Out Building Danger</a></li>
+<li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md" target="_blank">CHANGELOG.md</a></li>
+<li><a href="https://github.com/danger/design" target="_blank">Media Kit</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct" target="_blank">COC / Moya CC</a></li>
+<li><a href="https://github.com/danger/danger#im-here-to-help-out" target="_blank">Help Out Building Danger</a></li>
 </ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203"></a></article></footer>
 </body>
 <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
