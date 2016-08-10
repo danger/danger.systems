@@ -165,7 +165,7 @@ javascript:
        var toGithubLink = function(ref) {
            var branch = (ref.indexOf("#") > -1) ? ref.split("#")[1] : "master"
            var repo = ref.split("#")[0]
-           return "<a href='https://github.com/" + repo + "/blob/" + branch +"/Dangerfile'>" + repo + "</a>"
+           return "<a href='https://github.com/" + repo + "/blob/" + branch +"/Dangerfile' target='_blank'>" + repo + "</a>"
         }
         var showArray = function(array) {
           if (!array) { return false }

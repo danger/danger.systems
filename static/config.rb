@@ -16,6 +16,9 @@ end
 require 'lib/add_links_to_headers.rb'
 activate :add_links_to_headers
 
+require 'lib/add_target_to_links.rb'
+activate :add_target_to_links
+
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
