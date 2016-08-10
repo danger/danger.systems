@@ -65,3 +65,7 @@ bundle exec foreman start
 
 * The static site is deployed via Travis-CI, here's the [.travis.yml](.travis.yml).
 * The webhooks site is deployed via Heroku, it is set to automatically re-deploy when a new commit is sent to master.
+
+## Danger
+
+Sidenote: Danger is ran from Circle CI, while deployment is done via TravisCI. This is done to protect the deployment environment variables from being exposed.
