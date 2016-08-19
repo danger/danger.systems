@@ -39,7 +39,17 @@
 
 <p>This will run the Danger environment locally, making it possible to iterate and verify syntax etc.</p>
 
-<p>Make sure to setup the <code>DANGER_GITHUB_API_TOKEN</code> environment variable before attempting to run <code>local</code>. If you are trying to access an Enterprise Github instance, <code>DANGER_GITHUB_HOST</code> and <code>DANGER_GITHUB_API_HOST</code> must be set.</p>
+<p>For closed source projects, make sure to setup the <code>DANGER_GITHUB_API_TOKEN</code> environment variable before attempting to run <code>local</code>.  If you are trying to access an Enterprise Github instance, <code>DANGER_GITHUB_HOST</code> and <code>DANGER_GITHUB_API_HOST</code> must be set.</p>
+
+<h3 id="i-want-to-only-run-danger-for-internal-branches">
+<a class="header-link" href="#i-want-to-only-run-danger-for-internal-branches">#</a>I want to only run Danger for internal branches</h3>
+
+<p>Let’s say you run Danger on the same CI service that deploys your code. If that’s open source, you don’t want to be letting a fork pull out your private env vars. The work around for this is to not simply call Danger on every test run:</p>
+
+<pre><code class="sh">'[ ! -z $DANGER_GITHUB_API_TOKEN ] &amp;&amp; bundle exec danger || echo "Skipping Danger for External Contributor"'
+</code></pre>
+
+<p>This ensures that Danger only runs when you have the environment variables for her to use.</p>
 
 <h3 id="i-want-to-be-a-danger-wizard">
 <a class="header-link" href="#i-want-to-be-a-danger-wizard">#</a>I want to be a Danger Wizard</h3>
