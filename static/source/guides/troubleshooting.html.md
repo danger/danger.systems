@@ -11,6 +11,8 @@ OK, so, you can use `bundle exec danger local` to have Danger run the last merge
 
 This will run the Danger environment locally, making it possible to iterate and verify syntax etc.
 
+Make sure to setup the `DANGER_GITHUB_API_TOKEN` environment variable before attempting to run `local`. If you are trying to access an Enterprise Github instance, `DANGER_GITHUB_HOST` and `DANGER_GITHUB_API_HOST` must be set.
+
 ### I want to be a Danger Wizard
 
 ![](http://i.imgur.com/QCwKwKQ.gif)
