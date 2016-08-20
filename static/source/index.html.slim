@@ -40,7 +40,7 @@ section.examples
       div.code_chunk
         - for example in example_data
           div class=example["id"]
-              == syntax_highlight example["code"]
+              == syntax_highlight(example["code"]).strip
 
       ref == ""
 
