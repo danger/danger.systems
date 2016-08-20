@@ -17,7 +17,7 @@
 <meta content="/images/square-ffd55d21.png" property="og:image">
 <meta content="http://danger.systems/reference.html" property="og:url">
 <title>Danger - Reference</title>
-<link href="/stylesheets/style-0eec9da9.css" rel="stylesheet">
+<link href="/stylesheets/style-48c64d04.css" rel="stylesheet">
 <link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
@@ -32,7 +32,26 @@
 <span>Reference</span><code class="byline inline">a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code>
 </h2>
 
-<h2><span>git</span></h2>
+<h2><span>danger</span></h2>
+<section><article class="scope_code"><h3>Reference</h3>
+<h4>Methods</h4>
+<div class="fake_code">
+<p>Download a local or remote plugin and make it usable inside the Dangerfile.</p>
+</div>
+<code>import_plugin (path_or_url: String)</code><div class="fake_code">
+<p>Download and execute a remote Dangerfile.</p>
+</div>
+<code>import_dangerfile (slug: String)</code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Import a plugin available over HTTP</h4>
+<div class="highlight"><pre><span class="n">device_grid</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/fastlane/fastlane/master/danger-device_grid/lib/device_grid/plugin.rb"</span>
+<span class="n">danger</span><span class="o">.</span><span class="n">import_plugin</span><span class="p">(</span><span class="n">device_grid</span><span class="p">)</span>
+</pre></div>
+<h4>Import from a local file reference</h4>
+<div class="highlight"><pre><span class="n">danger</span><span class="o">.</span><span class="n">import_plugin</span><span class="p">(</span><span class="s2">"danger/plugins/watch_plugin.rb"</span><span class="p">)</span>
+</pre></div>
+<h4>Import all files inside a folder</h4>
+<div class="highlight"><pre><span class="n">danger</span><span class="o">.</span><span class="n">import_plugin</span><span class="p">(</span><span class="s2">"danger/plugins/*.rb"</span><span class="p">)</span>
+</pre></div></article><div class="clearfix"></div></section><h2><span>git</span></h2>
 <section><article class="scope_code"><h3>Reference</h3>
 <h4>Methods</h4>
 <div class="fake_code">
@@ -112,7 +131,7 @@
 </div>
 <code>head_commit <span class="subtle return">String</span></code><div class="fake_code">
 <p>The hash that represents the PR's JSON. For an example of what this looks like
-see the <a href="https://raw.githubusercontent.com/danger/danger/master/spec/fixtures/pr_response.json" target="_blank">Danger Fixture'd one</a>.</p>
+see the <a href="https://raw.githubusercontent.com/danger/danger/master/spec/fixtures/github_api/pr_response.json" target="_blank">Danger Fixture'd one</a>.</p>
 </div>
 <code>pr_json <span class="subtle return">Hash</span></code><div class="fake_code">
 <p>Provides access to the GitHub API client used inside Danger. Making
@@ -179,27 +198,7 @@ see <a href="https://en.wikipedia.org/wiki/Diff_utility#Unified_format" target="
 <span class="k">end</span>
 </pre></div></article><div class="clearfix"></div>
 
-</section><h2><span>plugin</span></h2>
-<section><article class="scope_code"><h3>Reference</h3>
-<h4>Methods</h4>
-<div class="fake_code">
-<p>Download a local or remote plugin and use it inside the Dangerfile.</p>
-</div>
-<code>import (path_or_url: String)</code><div class="fake_code">
-<p>Download a local or remote plugin or Dangerfile
-This method will not import the file for you, use plugin.import instead</p>
-</div>
-<code>download (path_or_url: String)<span class="subtle return">String</span></code></article><article class="scope_code"><h3>Examples</h3>
-<h4>Import a plugin available over HTTP</h4>
-<div class="highlight"><pre><span class="n">device_grid</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/fastlane/fastlane/master/danger-device_grid/lib/device_grid/plugin.rb"</span>
-<span class="n">plugin</span><span class="o">.</span><span class="n">import</span> <span class="n">device_grid</span>
-</pre></div>
-<h4>Import from a local file reference</h4>
-<div class="highlight"><pre><span class="n">plugin</span><span class="o">.</span><span class="n">import</span> <span class="s2">"danger/plugins/watch_plugin.rb"</span>
-</pre></div>
-<h4>Import all files inside a folder</h4>
-<div class="highlight"><pre><span class="n">plugin</span><span class="o">.</span><span class="n">import</span> <span class="s2">"danger/plugins/*.rb"</span>
-</pre></div></article><div class="clearfix"></div></section><h2><span>messaging</span></h2>
+</section><h2><span>messaging</span></h2>
 <section><article class="scope_code"><h3>Reference</h3>
 <h4>Methods</h4>
 <div class="fake_code">
@@ -226,7 +225,7 @@ anticipate users of Danger needing to use this.</p>
 <h4>Failing a build</h4>
 <div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"This build didn't pass tests"</span>
 </pre></div>
-<h4>Failing a build, but not keeping it's value around on subsequent runs</h4>
+<h4>Failing a build, but not keeping its value around on subsequent runs</h4>
 <div class="highlight"><pre><span class="nb">fail</span><span class="p">(</span><span class="s2">"This build didn't pass tests"</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
 </pre></div>
 <h4>Passing a warning</h4>

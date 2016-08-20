@@ -17,7 +17,7 @@
 <meta content="/images/square-ffd55d21.png" property="og:image">
 <meta content="http://danger.systems/guides/getting_started.html" property="og:url">
 <title>Getting Set Up</title>
-<link href="/stylesheets/style-0eec9da9.css" rel="stylesheet">
+<link href="/stylesheets/style-48c64d04.css" rel="stylesheet">
 <link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
@@ -166,6 +166,13 @@ isn't reliable.</p>
 <h3>Token Setup</h3>
 
 <p>There is no difference here for OSS vs Closed, add your <code>DANGER_GITHUB_API_TOKEN</code> to the Environment variable settings page.</p>
+
+<h3>I still want to run commit builds</h3>
+
+<p>OK, alright. So, if you add a <code>DANGER_CIRCLE_CI_API_TOKEN</code> then Danger will use the Circle API to look up
+the status of whether a commit is inside a PR or not. You can generate a token from inside the project set_trace_func
+then go to Permissions &gt; "API Permissions" and generate a token with access to Status. Take that token and add
+it to Build Settings &gt; "Environment Variables".</p>
 </div>
 <div class="drone" style="display:none;">
 <h3>CI Setup</h3>
