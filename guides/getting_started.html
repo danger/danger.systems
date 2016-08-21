@@ -17,7 +17,7 @@
 <meta content="/images/square-ffd55d21.png" property="og:image">
 <meta content="http://danger.systems/guides/getting_started.html" property="og:url">
 <title>Getting Set Up</title>
-<link href="/stylesheets/style-48c64d04.css" rel="stylesheet">
+<link href="/stylesheets/style-f19f9fed.css" rel="stylesheet">
 <link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
@@ -41,7 +41,7 @@
 <li>
 <a href="#creating-a-dangerfile">Creating a Dangerfile</a> and adding a few simple rules.</li>
 <li>
-<a href="#creating-a-github-account-for-danger-to-use">Creating a GitHub account for Danger to use</a>.</li>
+<a href="#creating-a-bot-account-for-danger-to-use">Creating an account account for Danger to use</a>.</li>
 <li>Setting up <a href="#setting-up-an-access-token">an access token for Danger</a> with that account.</li>
 <li>Setting up <a href="#setting-up-danger-to-run-on-your-ci">Danger to run on your CI</a>.</li>
 </ul>
@@ -72,17 +72,19 @@ This creates your <code>Gemfile</code>. Open this up in your editor, then replac
 
 <p>Create an empty file named <code>Dangerfile</code>. The file is written in Ruby, but your text editor might not recognize it as such, so you may need to set the syntax highlighting manually (unless you’re <a href="https://marketplace.visualstudio.com/items?itemName=Orta.vscode-danger" target="_blank">using VS Code</a>). To get started, we would recommend a simple “Hello World.”</p>
 
-<p><code>
-  <pre>
-message("Hello, this worked")
-  </pre>
-<code></code></code></p>
+<pre><code>message("Hello, this worked")
+</code></pre>
 
-<h3 id="creating-a-github-account-for-danger-to-use">
-<a class="header-link" href="#creating-a-github-account-for-danger-to-use">#</a>Creating a GitHub account for Danger to use</h3>
+<h3 id="creating-a-bot-account-for-danger-to-use">
+<a class="header-link" href="#creating-a-bot-account-for-danger-to-use">#</a>Creating a bot account for Danger to use</h3>
 
 <p>This is optional. Pragmatically, you want to do this though.</p>
-
+<div class="request_sources selectors">
+<ul>
+<li class="github highlighted">GitHub</li>
+<li class="gitlab">GitLab</li>
+</ul>
+<div class="github">
 <p>In order to get the most out of Danger, we recommend giving her the ability to post comments in your code review. This is a regular GitHub account, but depending on whether you are working on a private or public project, you will want to give different levels of access to this bot. You are allowed to have <a href="https://twitter.com/sebastiangrail/status/750844399563608065" target="_blank">one bot per GitHub account</a>.</p>
 
 <p>To get started, open <a href="https://github.com" target="_blank">https://github.com</a> in a private browser session.</p>
@@ -95,33 +97,85 @@ message("Hello, this worked")
 <h5 id="closed-source-projects">
 <a class="header-link" href="#closed-source-projects">#</a>Closed Source Projects</h5>
 
-<p>Add the bot to repo or to your organization. The bot requires permission level "Write" to be able to set a PR's status. Note that you <em>should not</em> re-use this bot for OSS projects.</p>
+<p>Add the bot to your repo or to your organization. The bot requires permission level “Write” to be able to set a PR’s status. Note that you <em>should not</em> re-use this bot for OSS projects.</p>
 
 <h3 id="setting-up-an-access-token">
 <a class="header-link" href="#setting-up-an-access-token">#</a>Setting up an Access Token</h3>
 
-<p><a href="https://github.com/settings/tokens/new" target="_blank">Here's the link</a>, you should open this in the private session where you just created the new GitHub account. Again, the rights that you give to the token depend on the openness of your projects.</p>
+<p><a href="https://github.com/settings/tokens/new" target="_blank">Here’s the link</a>, you should open this in the private session where you just created the new GitHub account. Again, the rights that you give to the token depend on the openness of your projects. You’ll want to save for later, when you add a <code>DANGER_GITHUB_API_TOKEN</code> to your CI.</p>
 
 <h5 id="tokens-for-oss-projects">
 <a class="header-link" href="#tokens-for-oss-projects">#</a>Tokens for OSS Projects</h5>
 
-<p>We recommend giving the token the smallest scope possible. This means just <code>public_repo</code>, this scopes limits Danger’s abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimizes the chance for bad actors causing chaos with it.</p>
+<p>We recommend giving the token the smallest scope possible. This means just <code>public_repo</code>, this scopes limits Danger’s abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimizes the chance for bad actors to cause chaos with it.</p>
 
 <h5 id="tokens-for-closed-source-projects">
 <a class="header-link" href="#tokens-for-closed-source-projects">#</a>Tokens for Closed Source Projects</h5>
 
 <p>We recommend giving access to the whole <code>repo</code> scope, and its children.</p>
 
+<h3 id="enterprise-github">
+<a class="header-link" href="#enterprise-github">#</a>Enterprise GitHub</h3>
+
+<p>You can work with GitHub Enterprise by setting 2 environment variables:</p>
+
+<p><code>DANGER_GITHUB_HOST</code> to the host that GitHub is running on.</p>
+
+<p><code>DANGER_GITHUB_API_BASE_URL</code> to the host that the GitHub Enterprise API is reachable on.</p>
+
+<p>For example:</p>
+
+<pre><code>DANGER_GITHUB_HOST=git.corp.evilcorp.com
+DANGER_GITHUB_API_BASE_URL=https://git.corp.evilcorp.com/api/v3
+</code></pre>
+</div>
+<div class="gitlab">
+<p>To get the most out of Danger, we recommend giving her the ability to post comments in your code review. This is a regular GitLab account, but depending on whether you are working on a private or public project, you will want to give different levels of access to this bot.</p>
+
+<p>To get started, open <a href="https://gitlab.com" target="_blank">https://gitlab.com</a> (or your GitLab instance) in a private browser session.</p>
+
+<h5 id="oss-projects">
+<a class="header-link" href="#oss-projects">#</a>OSS Projects</h5>
+
+<p>Do not add the bot to your project or to your group.</p>
+
+<h5 id="closed-source-projects">
+<a class="header-link" href="#closed-source-projects">#</a>Closed Source Projects</h5>
+
+<p>Add the bot to your private project or to your private group with the “Guest” permission level. Note that you <em>should not</em> re-use this bot for OSS projects. As the access token you use could be extracted and would give access to your closed source projects.</p>
+
+<h3 id="setting-up-an-access-token">
+<a class="header-link" href="#setting-up-an-access-token">#</a>Setting up an Access Token</h3>
+
+<p><a href="https://gitlab.com/profile/personal_access_tokens" target="_blank">Here’s the link</a>, you should open this in the private session where you have just created the new GitLab account. You’ll want to copy the token for later, when you add a <code>DANGER_GITLAB_API_TOKEN</code> to your CI.</p>
+
+<h3 id="self-hosted-gitlab">
+<a class="header-link" href="#self-hosted-gitlab">#</a>Self-hosted GitLab</h3>
+
+<p>To let Danger know the API details around your custom setup, you need to
+set two env variables:</p>
+
+<p><code>DANGER_GITLAB_HOST</code> to the host that GitLab is running on.</p>
+
+<p><code>DANGER_GITLAB_API_BASE_URL</code> to the host that the GitLab API is reachable on.</p>
+
+<p>For example:</p>
+
+<pre><code>DANGER_GITLAB_HOST=git.corp.evilcorp.com
+DANGER_GITLAB_API_BASE_URL=https://git.corp.evilcorp.com/api/v3
+</code></pre>
+</div>
+</div>
 <h3 id="continuous-integration">
 <a class="header-link" href="#continuous-integration">#</a>Continuous Integration</h3>
 
-<p>Continuous Integration is the process of regularly running tests and generating metrics for a project. It is where you can ensure that the code you are submitting for review is passing on all of the tests. You commonly see this as green or red dots inside GitHub pull requests.</p>
+<p>Continuous Integration is the process of regularly running tests and generating metrics for a project. It is where you can ensure that the code you are submitting for review is passing on all of the tests. You commonly see this as green or red dots next to commits.</p>
 
 <p>Danger is built to run as a part of this process, so you will need to have this set up as a pre-requisite.</p>
 
 <h3 id="setting-up-danger-to-run-on-your-ci">
 <a class="header-link" href="#setting-up-danger-to-run-on-your-ci">#</a>Setting up Danger to run on your CI</h3>
-<div class="ci_sources">
+<div class="ci_sources selectors">
 <ul>
 <li class="buildkite">Buildkite</li>
 <li class="circleci">CircleCI</li>
@@ -319,39 +373,54 @@ of the environment variables that Danger needs to work.</p>
 <p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user's ENV. The alternative
 is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN="123" bundle exec danger</code>.`.</p>
 </div>
-</div></article></section><section><article><h5 id="installation-without-bundler">
-<a class="header-link" href="#installation-without-bundler">#</a>Installation Without Bundler</h5>
+</div></article></section><section><article><h5 id="installation-without-bundler">Installation Without Bundler</h5>
 
-<p>If Danger is your only ruby dependency, you may not want to use [Bundler][bundler], that’s fine, but note that you’ll always be using the latest version of all of your dependencies.</p>
+<p>If Danger is your only ruby dependency, you may not want to use <a href="http://bundler.io" target="_blank">Bundler</a>, that’s fine, but note that you’ll always be using the latest version of all of your dependencies.</p>
 
 <p>You can install Danger via <code>gem install danger</code>. This will make it available in your system, you can include plugins at the same time by running <code>gem install danger danger-prose [gem] [gem]</code>. You can run <code>danger --version</code> to check your version. Any time you see a command that recommends you use <code>bundle exec</code> - you can skip the <code>bundle exec</code> part.</p>
 
-<h5 id="macos-sudo-less-installation">
-<a class="header-link" href="#macos-sudo-less-installation">#</a>macOS sudo-less Installation</h5>
+<h5 id="macos-sudo-less-installation">macOS sudo-less Installation</h5>
 
 <p>Create or edit a <code>.profile</code> file in your home directory and add or amend it to include these lines:</p>
 
-<p><code>
-  <pre>
-export GEM_HOME=$HOME/.gem
+<pre><code class="sh">export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
-  </pre>
-<code></code></code></p>
- </article></section><section><article><hr>
+</code></pre>
+</article></section><section><article><hr>
 <p>help improve this document  by <a href="https://github.com/danger/danger.systems/edit/master/static/source/guides/getting_started.html.slim" target="_blank">sending PRs</a>.</p></article></section><script>$(function() {
-  /// Generic-ish Example Highlight Code
-  $(".ci_sources ul li").click(function(event) {
+  /// Generic Example Highlight Code
+  $("div.selectors ul li").click(function(event) {
     var $this = $(this)
 
-    $this.parent().children().removeClass("highlighted")
+    $this.parents("ul").children().removeClass("highlighted")
     var key = $this.attr("class")
     $this.addClass("highlighted")
-    console.log(key)
-    $(".ci_sources div").css("display", "none")
-    $(".ci_sources div." + key).css("display", "block")
+
+    var content = $this.parents("div")
+    console.log(content)
+    $("div", $(content)).css("display", "none")
+    $("div." + key, content).css("display", "block")
   })
 
-  $(".ci_sources ul li.travis").click()
+  // Replace the API token's name in all the CI sources
+  $("div.request_sources ul li").click(function(event) {
+    var github = $(this).hasClass("github")
+    var gh_token = "DANGER_GITHUB_API_TOKEN"
+    var gl_token = "DANGER_GITLAB_API_TOKEN"
+
+    $("div.ci_sources p code").each(function() {
+      var text = $(this).text();
+      if (github) {
+        text = text.replace(gl_token, gh_token);
+      } else {
+        text = text.replace(gh_token, gl_token);
+      }
+      $(this).text(text);
+    })
+  });
+
+  $(".selectors ul li.travis").click()
+  $(".selectors ul li.github").click()
 });</script>
 
 <footer><article><h3>GitHub</h3>

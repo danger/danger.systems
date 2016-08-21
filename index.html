@@ -17,7 +17,7 @@
 <meta content="/images/square-ffd55d21.png" property="og:image">
 <meta content="http://danger.systems/index.html" property="og:url">
 <title>Danger - Stop Saying "You Forgot To…" in Code Review</title>
-<link href="/stylesheets/style-48c64d04.css" rel="stylesheet">
+<link href="/stylesheets/style-f19f9fed.css" rel="stylesheet">
 <link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
@@ -52,7 +52,7 @@
 <div>
 <div class="code_chunk">
 <div class="changelogs"><div class="highlight"><pre><span class="c1"># Add a CHANGELOG entry for app changes</span>
-<span class="k">if</span> <span class="o">!</span><span class="n">github</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">"CHANGELOG.md"</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">has_app_changes</span>
+<span class="k">if</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">"CHANGELOG.md"</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">has_app_changes</span>
   <span class="nb">fail</span><span class="p">(</span><span class="s2">"Please include a CHANGELOG entry. </span><span class="se">\n</span><span class="s2">You can find it at [CHANGELOG.md](https://github.com/realm/jazzy/blob/master/CHANGELOG.md)."</span><span class="p">)</span>
   <span class="n">message</span> <span class="s2">"Note, we hard-wrap at 80 chars and use 2 spaces after the last line."</span>
 <span class="k">end</span>
@@ -102,7 +102,7 @@
 <p>You can <a href="/guides/getting_started.html">integrate Danger</a> into your own project on any available CI service. She will run through the process with you if you run  <code>danger init</code> after installation.</p>
 </article><article><h3>Supports</h3>
 <p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf.</p>
-<p><strong>Can chat back on</strong>: GitHub.</p>
+<p><strong>Can chat back on</strong>: GitHub, GitLab.</p>
 <p><strong>Can handle diffs from</strong>: Git.</p>
 <h3>Messaging Options</h3>
 <p><code>message("message")</code> - Comment a message to the table.</p>

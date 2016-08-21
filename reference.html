@@ -17,7 +17,7 @@
 <meta content="/images/square-ffd55d21.png" property="og:image">
 <meta content="http://danger.systems/reference.html" property="og:url">
 <title>Danger - Reference</title>
-<link href="/stylesheets/style-48c64d04.css" rel="stylesheet">
+<link href="/stylesheets/style-f19f9fed.css" rel="stylesheet">
 <link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
@@ -33,7 +33,12 @@
 </h2>
 
 <h2><span>danger</span></h2>
-<section><article class="scope_code"><h3>Reference</h3>
+<section><article class="scope_code"><p>One way to support internal plugins is via <code>plugin.import</code> this gives you
+the chance to quickly iterate without the need for building rubygems. As such,
+it does not have the stringent rules around documentation expected of a public plugin.
+It's worth noting, that you can also have plugins inside <code>./danger_plugins</code> and they
+will be automatically imported into your Dangerfile at launch.</p>
+<h3>Reference</h3>
 <h4>Methods</h4>
 <div class="fake_code">
 <p>Download a local or remote plugin and make it usable inside the Dangerfile.</p>
@@ -52,7 +57,11 @@
 <h4>Import all files inside a folder</h4>
 <div class="highlight"><pre><span class="n">danger</span><span class="o">.</span><span class="n">import_plugin</span><span class="p">(</span><span class="s2">"danger/plugins/*.rb"</span><span class="p">)</span>
 </pre></div></article><div class="clearfix"></div></section><h2><span>git</span></h2>
-<section><article class="scope_code"><h3>Reference</h3>
+<section>
+
+<article class="scope_code"><p>Handles interacting with git inside a Dangerfile. Providing access to files that have changed, and useful statistics. Also provides
+access to the commits in the form of <a href="https://github.com/schacon/ruby-git/blob/master/lib/git/log.rb" target="_blank">Git::Log</a> objects.</p>
+<h3>Reference</h3>
 <h4>Methods</h4>
 <div class="fake_code">
 <p>Paths for files that were added during the diff</p>
@@ -100,10 +109,14 @@
 <span class="k">if</span> <span class="n">diff</span> <span class="o">&amp;&amp;</span> <span class="n">diff</span><span class="o">.</span><span class="n">patch</span> <span class="o">=~</span> <span class="s2">"nokogiri"</span>
   <span class="nb">warn</span> <span class="s1">'Please do not add nokogiri to the project. Thank you.'</span>
 <span class="k">end</span>
-</pre></div></article><div class="clearfix"></div></section><h2><span>github</span></h2>
+</pre></div></article><div class="clearfix"></div>
+
+</section><h2><span>github</span></h2>
 <section>
 
-<article class="scope_code"><h3>Reference</h3>
+<article class="scope_code"><p>Handles interacting with GitHub inside a Dangerfile. Provides a few functions which wrap <code>pr_json</code> and also
+through a few standard functions to simplify your code.</p>
+<h3>Reference</h3>
 <h4>Methods</h4>
 <div class="fake_code">
 <p>The title of the Pull Request.</p>
@@ -201,7 +214,9 @@ see <a href="https://en.wikipedia.org/wiki/Diff_utility#Unified_format" target="
 </section><h2><span>gitlab</span></h2>
 <section>
 
-<article class="scope_code"><h3>Reference</h3>
+<article class="scope_code"><p>Handles interacting with GitLab inside a Dangerfile. Provides a few functions which wrap <code>mr_json</code> and also
+through a few standard functions to simplify your code.</p>
+<h3>Reference</h3>
 <h4>Methods</h4>
 <div class="fake_code">
 <p>The title of the Merge Request</p>
@@ -277,7 +292,22 @@ it easy to use the GitLab API inside a Dangerfile.</p>
 </pre></div></article><div class="clearfix"></div>
 
 </section><h2><span>messaging</span></h2>
-<section><article class="scope_code"><h3>Reference</h3>
+<section><article class="scope_code"><p>Provides the feedback mechanism for Danger. Danger can keep track of
+messages, warnings, failure and post arbitrary markdown into a comment.</p>
+
+<p>The message within which Danger communicates back is amended on each run in a session.</p>
+
+<p>Each of <code>message</code>, <code>warn</code> and <code>fail</code> have a <code>sticky</code> flag, <code>true</code> by default, which
+means that the message will be crossed out instead of being removed. If it's not use on
+subsequent runs.</p>
+
+<p>By default, using <code>fail</code> would fail the corresponding build. Either via an API call, or
+via the return value for the danger command.</p>
+
+<p>It is possible to have Danger ignore specific warnings or errors by writing <code>Danger: Ignore "[warning/error text]</code>.</p>
+
+<p>Sidenote: Messaging is the only plugin which adds functions to the root of the Dangerfile.</p>
+<h3>Reference</h3>
 <h4>Methods</h4>
 <div class="fake_code">
 <p>Print markdown to below the table</p>

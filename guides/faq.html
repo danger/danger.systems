@@ -17,7 +17,7 @@
 <meta content="/images/square-ffd55d21.png" property="og:image">
 <meta content="http://danger.systems/guides/faq.html" property="og:url">
 <title>Frequently Asked Questions</title>
-<link href="/stylesheets/style-48c64d04.css" rel="stylesheet">
+<link href="/stylesheets/style-f19f9fed.css" rel="stylesheet">
 <link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
@@ -47,32 +47,10 @@
 
 <p>Then Danger would not show that message, and would not fail the build if it were the only <code>fail</code>.</p>
 
-<h4 id="i-use-gitlab">
-<a class="header-link" href="#i-use-gitlab">#</a>I use GitLab</h4>
-
-<p>There’s a <a href="https://github.com/danger/danger/pull/299" target="_blank">Work in Progress PR</a> - the blockers are a bit out of our control though.</p>
-
-<h4 id="i-have-to-use-github-enterprise-which-is-always-outdated">
-<a class="header-link" href="#i-have-to-use-github-enterprise-which-is-always-outdated">#</a>I have to use GitHub Enterprise, which is always outdated :(</h4>
-
-<p>You can work with GitHub Enterprise by setting 2 environment variables:</p>
-
-<ul>
-<li>
-<code>DANGER_GITHUB_HOST</code> to the host that GitHub is running on.</li>
-<li>
-<code>DANGER_GITHUB_API_HOST</code> to the host that the GitHub Enterprise API is reachable on.</li>
-</ul>
-
-<p>This could look like:</p>
-
-<pre><code>DANGER_GITHUB_API_HOST=https://git.corp.evilcorp.com/api/v3 DANGER_GITHUB_HOST=git.corp.evilcorp.com bundle exec danger
-</code></pre>
-
 <h4 id="i-want-to-run-danger-across-multiple-repos">
 <a class="header-link" href="#i-want-to-run-danger-across-multiple-repos">#</a>I want to run Danger across multiple repos</h4>
 
-<p>To have consistent rules across the repos in your organisation, you can use a shared <code>Dangerfile</code>:</p>
+<p>To have consistent rules across the repos in your organisation, you can use a shared <code>danger.import_dangerfile "[repo]"</code>:</p>
 
 <ol>
 <li>create a repo on your GitHub organization called <code>danger</code> (or <code>Danger</code>)</li>
@@ -81,7 +59,8 @@
 </li>
 </ol>
 
-<p>The org <code>Dangerfile</code> will have access to all of the same plugins, and metadata as your current . For an example, see <a href="https://github.com/Themoji/danger" target="_blank">themoji/danger</a>.</p>
+<p>Then, assuming Danger can reach the other repo, she will download the Dangerfile from that
+repo and parse it in-place. This gives access to the same local and other environment variables.</p>
 
 <h4 id="multiple-dangers">
 <a class="header-link" href="#multiple-dangers">#</a>Multiple Dangers</h4>
