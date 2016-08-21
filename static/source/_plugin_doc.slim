@@ -32,6 +32,10 @@ article.scope_code
 
     p == "Created by #{ gem_for_plugin["author"].join ", " }."
 
+  - else
+
+    == markdown_h(plugin["body_md"])
+
   h3 Reference
   - unless plugin["attributes"].empty?
     h4 Attributes
