@@ -19,32 +19,17 @@ You can tell Danger to ignore a specific warning or error by commenting on the b
 
 Then Danger would not show that message, and would not fail the build if it were the only `fail`.
 
-#### I use GitLab
-
-There's a [Work in Progress PR](https://github.com/danger/danger/pull/299) - the blockers are a bit out of our control though.
-
-#### I have to use GitHub Enterprise, which is always outdated :(
-
-You can work with GitHub Enterprise by setting 2 environment variables:
-
-- `DANGER_GITHUB_HOST` to the host that GitHub is running on.
-- `DANGER_GITHUB_API_HOST` to the host that the GitHub Enterprise API is reachable on.
-
-This could look like:
-
-```
-DANGER_GITHUB_API_HOST=https://git.corp.evilcorp.com/api/v3 DANGER_GITHUB_HOST=git.corp.evilcorp.com bundle exec danger
-```
 
 #### I want to run Danger across multiple repos
 
-To have consistent rules across the repos in your organisation, you can use a shared `Dangerfile`:
+To have consistent rules across the repos in your organisation, you can use a shared `danger.import_dangerfile "[repo]"`:
 
 1. create a repo on your GitHub organization called `danger` (or `Danger`)
 1. Add a `Dangerfile` to the root of that repo
 1. The new `Dangerfile` is ran after the current repo's `Dangerfile`
 
-The org `Dangerfile` will have access to all of the same plugins, and metadata as your current . For an example, see [themoji/danger](https://github.com/Themoji/danger).
+Then, assuming Danger can reach the other repo, she will download the Dangerfile from that
+repo and parse it in-place. This gives access to the same local and other environment variables.
 
 #### Multiple Dangers
 
