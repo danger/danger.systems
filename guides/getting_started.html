@@ -126,6 +126,7 @@ message("Hello, this worked")
 <li class="buildkite">Buildkite</li>
 <li class="circleci">CircleCI</li>
 <li class="drone">Drone</li>
+<li class="gitlabci">GitLabCI</li>
 <li class="jenkins">Jenkins</li>
 <li class="semaphore">Semaphore</li>
 <li class="surf">Surf</li>
@@ -145,8 +146,15 @@ It is common to have build steps, so we would recommend adding this to your scri
 
 <h3>Token Setup</h3>
 
+<h4>GitHub</h4>
+
 <p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user's ENV. The alternative
 is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN="123" bundle exec danger</code>.</p>
+
+<h4>GitLab</h4>
+
+<p>As this is self-hosted, you will need to add the <code>DANGER_GITLAB_API_TOKEN</code> to your build user's ENV. The alternative
+is to pass in the token as a prefix to the command <code>DANGER_GITLAB_API_TOKEN="123" bundle exec danger</code>.</p>
 </div>
 <div class="circleci" style="display:none;">
 <h3>CI Setup</h3>
@@ -192,11 +200,31 @@ your <code>.drone.yml</code>.</p>
 <p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user's ENV. The alternative
 is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN="123" bundle exec danger</code>.</p>
 </div>
+<div class="gitlabci" style="display:none;">
+<h3>CI Setup</h3>
+
+<p>GitLab CI is currently not supported because GitLab's runners don't expose
+the required values in the environment. Namely CI_MERGE_REQUEST_ID does not
+exist as of yet, however there is an
+<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5698" target="_blank">MR</a> fixing this.
+If that has been merged and you are using either gitlab.com or a release
+with that change this CISource will wokr.</p>
+</div>
 <div class="jenkins" style="display:none;">
 <h3>CI Setup</h3>
 
-<p>Ah Jenkins, so many memories. So, if you're using Jenkins, you're hosting your own environment. You
-will want to be using the <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin" target="_blank">GitHub pull request builder plugin</a>
+<p>Ah Jenkins, so many memories. So, if you're using Jenkins, you're hosting your own environment. You</p>
+
+<h4>GitHub</h4>
+
+<p>You will want to be using the <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin" target="_blank">GitHub pull request builder plugin</a>
+in order to ensure that you have the build environment set up for PR integration.</p>
+
+<p>With that set up, you can edit your job to add <code>bundle exec danger</code> at the build action.</p>
+
+<h3>GitLab</h3>
+
+<p>You will want to be using the <a href="https://github.com/jenkinsci/gitlab-plugin" target="_blank">GitLabe Plugin</a>
 in order to ensure that you have the build environment set up for PR integration.</p>
 
 <p>With that set up, you can edit your job to add <code>bundle exec danger</code> at the build action.</p>
@@ -235,11 +263,21 @@ the "Simple Command Runner" should be all you need to do that.</p>
 
 <h3>Token + Environment Setup</h3>
 
+<h4>GitHub</h4>
+
 <p>As this is self-hosted, you will need to add the <code>DANGER_GITHUB_API_TOKEN</code> to your build user's ENV. The alternative
 is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN="123" bundle exec danger</code>.</p>
 
 <p>However, you will need to find a way to add the environment vars: <code>GITHUB_REPO_SLUG</code>, <code>GITHUB_PULL_REQUEST_ID</code> and
 <code>GITHUB_REPO_URL</code>. These are not added by default. You could do this via the GitHub API potentially.</p>
+
+<h4>GitLab</h4>
+
+<p>As this is self-hosted, you will need to add the <code>DANGER_GITLAB_API_TOKEN</code> to your build user's ENV. The alternative
+is to pass in the token as a prefix to the command <code>DANGER_GITLAB_API_TOKEN="123" bundle exec danger</code>.</p>
+
+<p>However, you will need to find a way to add the environment vars: <code>GITLAB_REPO_SLUG</code>, <code>GITLAB_PULL_REQUEST_ID</code> and
+<code>GITLAB_REPO_URL</code>. These are not added by default. You could do this via the GitLab API potentially.</p>
 
 <p>We would love some advice on improving this setup.</p>
 </div>
