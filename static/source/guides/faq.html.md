@@ -28,12 +28,20 @@ There's a [Work in Progress PR](https://github.com/danger/danger/pull/299) - the
 You can work with GitHub Enterprise by setting 2 environment variables:
 
 - `DANGER_GITHUB_HOST` to the host that GitHub is running on.
-- `DANGER_GITHUB_API_HOST` to the host that the GitHub Enterprise API is reachable on.
+- `DANGER_GITHUB_API_HOST` to the host that the GitHub Enterprise API is reachable on. After 3.0
+  the preferred name for this variable is `DANGER_GITHUB_API_BASE_URL`, however `DANGER_GITHUB_API_HOST`
+  will still work.
 
 This could look like:
 
 ```
 DANGER_GITHUB_API_HOST=https://git.corp.evilcorp.com/api/v3 DANGER_GITHUB_HOST=git.corp.evilcorp.com bundle exec danger
+```
+
+and after 3.0:
+
+```
+DANGER_GITHUB_API_BASE_URL=https://git.corp.evilcorp.com/api/v3 DANGER_GITHUB_HOST=git.corp.evilcorp.com bundle exec danger
 ```
 
 #### I want to run Danger across multiple repos

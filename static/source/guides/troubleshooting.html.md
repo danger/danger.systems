@@ -11,7 +11,7 @@ OK, so, you can use `bundle exec danger local` to have Danger run the last merge
 
 This will run the Danger environment locally, making it possible to iterate and verify syntax etc.
 
-For closed source projects, make sure to setup the `DANGER_GITHUB_API_TOKEN` environment variable before attempting to run `local`.  If you are trying to access an Enterprise Github instance, `DANGER_GITHUB_HOST` and `DANGER_GITHUB_API_HOST` must be set.
+For closed source projects, make sure to setup the `DANGER_GITHUB_API_TOKEN` environment variable before attempting to run `local`.  If you are trying to access an Enterprise Github instance, `DANGER_GITHUB_HOST` and `DANGER_GITHUB_API_HOST`(`DANGER_GITHUB_API_BASE_URL` after 3.0)  must be set.
 
 ### I want to only run Danger for internal branches
 
