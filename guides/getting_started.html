@@ -267,7 +267,7 @@ with that change this CISource will wokr.</p>
 <div class="jenkins" style="display:none;">
 <h3>CI Setup</h3>
 
-<p>Ah Jenkins, so many memories. So, if you're using Jenkins, you're hosting your own environment. You</p>
+<p>Ah Jenkins, so many memories. So, if you're using Jenkins, you're hosting your own environment.</p>
 
 <h4>GitHub</h4>
 
@@ -276,16 +276,22 @@ in order to ensure that you have the build environment set up for PR integration
 
 <p>With that set up, you can edit your job to add <code>bundle exec danger</code> at the build action.</p>
 
-<h3>GitLab</h3>
+<h4>GitLab</h4>
 
-<p>You will want to be using the <a href="https://github.com/jenkinsci/gitlab-plugin" target="_blank">GitLabe Plugin</a>
-in order to ensure that you have the build environment set up for PR integration.</p>
+<p>You will want to be using the <a href="https://github.com/jenkinsci/gitlab-plugin" target="_blank">GitLab Plugin</a>
+in order to ensure that you have the build environment set up for MR integration.</p>
 
 <p>With that set up, you can edit your job to add <code>bundle exec danger</code> at the build action.</p>
 
 <h3>Token Setup</h3>
 
-<p>As you own the machine, it's up to you to add the enviroment variable for the <code>DANGER_GITHUB_API_TOKEN</code>.</p>
+<h4>GitHub</h4>
+
+<p>As you own the machine, it's up to you to add the environment variable for the <code>DANGER_GITHUB_API_TOKEN</code>.</p>
+
+<h4>GitLab</h4>
+
+<p>As you own the machine, it's up to you to add the environment variable for the <code>DANGER_GITLAB_API_TOKEN</code>.</p>
 </div>
 <div class="semaphore" style="display:none;">
 <h3>CI Setup</h3>
