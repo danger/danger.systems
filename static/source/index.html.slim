@@ -40,7 +40,7 @@ section.examples
       div.code_chunk
         - for example in example_data
           div class=example["id"]
-              == syntax_highlight example["code"]
+              == syntax_highlight(example["code"]).strip
 
       ref == ""
 
@@ -60,7 +60,7 @@ section
   article
     h3 Supports
     p <strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf.
-    p <strong>Can chat back on</strong>: GitHub.
+    p <strong>Can chat back on</strong>: GitHub, GitLab.
     p <strong>Can handle diffs from</strong>: Git.
 
     h3 Messaging Options
@@ -165,7 +165,7 @@ javascript:
        var toGithubLink = function(ref) {
            var branch = (ref.indexOf("#") > -1) ? ref.split("#")[1] : "master"
            var repo = ref.split("#")[0]
-           return "<a href='https://github.com/" + repo + "/blob/" + branch +"/Dangerfile'>" + repo + "</a>"
+           return "<a href='https://github.com/" + repo + "/blob/" + branch +"/Dangerfile' target='_blank'>" + repo + "</a>"
         }
         var showArray = function(array) {
           if (!array) { return false }

@@ -104,7 +104,7 @@ body {
         }
     }
 
-    section.search_info ul, .ci_sources ul {
+    section.search_info ul, .selectors ul {
         margin-top: 10px;
         margin-bottom: 20px;
         padding: 0;
@@ -360,7 +360,6 @@ body {
             margin:0;
             padding:10px;
             padding-left: 20px;
-            white-space: pre;
             line-height: 1.5;
             font-size: 16px;
             overflow-x: scroll;

@@ -19,7 +19,7 @@ module HTMLHelpers
   # @return [String]
   #
   def capitalize_first_letter(input)
-    (input.slice(0, 1).capitalize || '') + (input.slice(1..-1) || '')
+    (input.slice(0, 1).capitalize || "") + (input.slice(1..-1) || "")
   end
 
   # Highlights the given string with Pygments.
@@ -34,11 +34,11 @@ module HTMLHelpers
   end
 
   def self.syntax_highlight(code, opts = {})
-    lexer = opts[:language] || 'ruby'
-    py_options = { encoding: 'utf-8' }
+    lexer = opts[:language] || "ruby"
+    py_options = { encoding: "utf-8" }
 
     if line = opts[:line]
-      py_options[:linenos] = 'inline'
+      py_options[:linenos] = "inline"
       py_options[:linenostart] = line
     end
 

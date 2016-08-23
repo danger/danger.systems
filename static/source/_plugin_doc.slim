@@ -22,7 +22,7 @@ ruby:
   end
 
   plugins = JSON.parse(File.read("../plugins-search-generated.json"))
-  gem_for_plugin = plugins["plugins"].find { |gem_plugin| gem_plugin["gem"] == plugin["gem"] } 
+  gem_for_plugin = plugins["plugins"].find { |gem_plugin| gem_plugin["gem"] == plugin["gem"] }
 
 article.scope_code
   - if external
@@ -31,6 +31,10 @@ article.scope_code
     == markdown_h(plugin["body_md"])
 
     p == "Created by #{ gem_for_plugin["author"].join ", " }."
+
+  - else
+
+    == markdown_h(plugin["body_md"])
 
   h3 Reference
   - unless plugin["attributes"].empty?
@@ -63,6 +67,11 @@ article.scope_code
 
     h3 Tags
     code == plugin["tags"].join(" ")
+
+    h3 Repository
+    ul
+      li
+        a target="_blank" href="#{gem_for_plugin["url"]}" == gem_for_plugin["url"]
 
     - if plugin["see"].empty? == false
       h3 See in Action

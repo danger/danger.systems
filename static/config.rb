@@ -1,10 +1,10 @@
-require 'json'
+require "json"
 # Create some pages that represent the plugins
-plugins = JSON.parse(File.read('json_data/plugins.json'))
+plugins = JSON.parse(File.read("json_data/plugins.json"))
 plugins.each do |plugin|
   html_path = "/plugins/#{plugin['instance_name']}.html"
   inline_path = "/plugins/#{plugin['instance_name']}_embed.html"
-  template = '/plugins/template.html'
+  template = "/plugins/template.html"
   proxy html_path, template, locals: { plugin: plugin, external: true }, ignore: true
   proxy inline_path, template, locals: { plugin: plugin, external: true }, ignore: true, layout: false
 end
@@ -13,12 +13,15 @@ configure :development do
   activate :livereload
 end
 
-require 'lib/add_links_to_headers.rb'
+require "lib/add_links_to_headers.rb"
 activate :add_links_to_headers
 
-set :css_dir, 'stylesheets'
-set :js_dir, 'javascripts'
-set :images_dir, 'images'
+require "lib/add_target_to_links.rb"
+activate :add_target_to_links
+
+set :css_dir, "stylesheets"
+set :js_dir, "javascripts"
+set :images_dir, "images"
 
 $md_settings = {
   autolink: true,
@@ -33,7 +36,7 @@ Slim::Embedded.options[:markdown] = $md_settings
 set :markdown_engine, :redcarpet
 set :markdown, $md_settings
 
-require 'lib/html_helpers.rb'
+require "lib/html_helpers.rb"
 helpers HTMLHelpers
 
 # Build-specific configuration
