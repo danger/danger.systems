@@ -5,7 +5,6 @@
    "danger-rubocop",
    "danger-the_coding_love",
    "danger-xcodebuild",
-   "danger-junit_results",
    "danger-podliblint",
    "danger-simplecov_json",
    "danger-commit_lint",

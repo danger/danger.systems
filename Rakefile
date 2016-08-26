@@ -3,7 +3,7 @@ require "json"
 require "bundler"
 
 desc "Generates all the static resources necessary to run the site."
-tasks = ["plugins_core", "plugins_external", "grab_dangerfiles", "danger_search_plugin_json", "search_plugin_json", "getting_started_docs"]
+tasks = ["plugins_core", "plugins_external", "grab_dangerfiles", "search_plugin_json", "getting_started_docs"]
 task generate: tasks.map { |task| "generator:" + task } do
   # Your Gemfile.lock tends to get put out of sync after some of the commands.
   puts "Shippit"
@@ -30,12 +30,26 @@ namespace :generator do
   desc "Generates a JSON file that represents the external plugins documentation"
   task :plugins_external do
     plugins = JSON.parse(File.read("plugins.json"))
+    # plugins = ["danger-xcodebuild"]
+    plugin_objects = []
+    plugin_search_objects = []
 
-    # Generate the Website's plugin doc, by passing in the gem names
-    output = `bundle exec danger plugins json #{plugins.join(" ")}`
-    abort("Could not generate any plugin metadata") if output.empty?
-    File.write("static/json_data/plugins.json", output)
+    plugins.each do |plugin|
+      puts "Generating docs for #{plugin}"
+      # Generate the Website's plugin doc, by passing in the gem names
+      plugin_json = `bundle exec danger plugins json #{plugin}`
+      next unless $?.success?
+      plugin_objects << JSON.parse(plugin_json)
+    end
+
+    File.write("static/json_data/plugins.json", plugin_objects.flatten.to_json)
     puts "Generated plugin metadata"
+
+    plugins_file_path = File.join File.dirname(__FILE__), "plugins-search-generated.json"
+    gem_metadata = plugin_objects.flatten.map { |p| p["gem_metadata"] }
+
+    File.write(plugins_file_path, { plugins: gem_metadata }.to_json)
+    puts "Generated search metadata for `danger search`."
   end
 
   desc "Generates a JSON file that represents the external plugins documentation"
@@ -56,48 +70,6 @@ namespace :generator do
       File.write(path, html)
     end
     puts "Downloaded Dangerfiles to `static/source/dangerfiles`"
-  end
-
-  desc "Generate the search plugin JSON file, this used by `danger plugins search` and by the re-deploy webhook system."
-  task :danger_search_plugin_json do
-    # Grab our definitive plugins list of
-    plugins = JSON.parse(File.read("plugins.json"))
-
-    Bundler.with_clean_env do
-      Dir.mktmpdir do |dir|
-        Dir.chdir dir do
-          gemfile = File.new("Gemfile", "w")
-          gemfile.write "source 'https://rubygems.org'\n"
-
-          plugins.each do |plugin|
-            gemfile.write "gem '#{plugin}'\n"
-          end
-          gemfile.close
-
-          `bundle install --path vendor/gems`
-
-          spec_paths = plugins.flat_map { |plugin| Dir.glob("vendor/gems/ruby/*/specifications/#{plugin}*.gemspec").first }
-          real_gems = spec_paths.map { |path| Gem::Specification.load path }
-
-          plugin_metadata = real_gems.map do |gem|
-            {
-              name: gem.name,
-              gem: gem.name,
-              author: gem.authors,
-              url: gem.homepage,
-              description: gem.summary,
-              license: gem.license || "Unknown",
-              version: gem.version.to_s
-            }
-          end
-
-          plugin_json = { plugins: plugin_metadata }
-          plugins_file_path = File.join File.dirname(__FILE__), "plugins-search-generated.json"
-          File.write(plugins_file_path, plugin_json.to_json)
-          puts "Generated search metadata for `danger search`."
-        end
-      end
-    end
   end
 
   desc "Generate the website plugin search JSON file, this is different from the danger gem search - as one gem can have multiple plugins"

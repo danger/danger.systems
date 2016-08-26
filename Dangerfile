@@ -13,7 +13,7 @@ if diff
   new_plugins = current_plugins - pr_plugins
   new_plugins.each do |plugin|
     overview = `bundle exec danger plugins readme #{plugin}`
-    markdown "### Failed to parse #{plugin}" unless $?.success?
+    markdown "### Failed to parse #{plugin} showing error:" unless $?.success?
     markdown overview
     markdown "\n\n ---\n"
   end
