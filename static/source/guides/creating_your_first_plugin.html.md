@@ -44,11 +44,11 @@ end
 
 #### Same Source
 
-One of the great things about a Danger Plugin, is that the code is exactly the
+One of the great things about a Danger Plugin is that the code is exactly the
 same as it was in your `Dangerfile`. A plugin has access to all of the same
 methods and attributes as you had when it was being parsed inside a
-`Dangerfile`. This is because anything your plugin doesn't understand get's
-first pass to see if it's reference to the current `Dangerfile` understands.
+`Dangerfile`. This is because anything your plugin doesn't understand gets
+passed to the current `Dangerfile` for it to have a chance to act.
 
 This is useful mainly in two things:
 
@@ -58,12 +58,13 @@ This is useful mainly in two things:
 ### Creating the Plugin
 
 Starting is pretty simple, we have a [template][template]. As well as a command
-to get you started. Your first step is the name, the [Rubygems rule][gem_rules]
+to get you started. Your first step is the name: the [Rubygems rule][gem_rules]
 is `[core_app]-[gem]_[name]`. So, the first space is always a `-` then later
 spaces would be `_`. E.g. `danger-wizard_hat`.
 
-Now you know the rules, in your development folder run `danger plugins create
-[name]`. This will create a README similar to [danger-proselint][prose_readme]'s
+Now that you know the rules, in your development folder run `danger plugins
+create [name]`. This will create a README similar to the one for
+[danger-proselint][prose_readme].
 
 ```
 $ danger plugins create guitar_lessons
