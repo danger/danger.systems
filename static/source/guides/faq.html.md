@@ -57,3 +57,7 @@ Understandably, applying a gender to a genderless concept comes with it's own co
 
 [hacienda]: http://www.prideofmanchester.com/music/hacienda.htm
 [assistants]: http://www.theatlantic.com/technology/archive/2016/03/why-do-so-many-digital-assistants-have-feminine-names/475884/
+
+#### Danger is not posting to GitHub PRs, but everything looks fine?
+
+Try logging in to your account that is writing the messages, it's possible that your account has triggered the bot detection algorithm on GitHub. This means that messages are sent correctly, but do not show up for anyone except the sender. This makes it more or less impossible to detect.
