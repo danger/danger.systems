@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="True" name="HandheldFriendly">
+<meta content="480" name="MobileOptimized">
+<meta content="width=480, initial-scale=0.6" name="viewport">
+<meta content="constant integration culture code" name="keywords">
+<meta content="Orta Therox &amp; Felix Krause" name="author">
+<meta content="summary" name="twitter:card">
+<meta content="@orta" name="twitter:creator">
+<meta content="Danger Plugin - DangerXcodebuild" name="twitter:title">
+<meta content="Apply cultural rules during your CI process." name="twitter:description">
+<meta content="http://danger.systems/plugins/xcodebuild.html" name="twitter:url">
+<meta content="/images/square-ffd55d21.png" property="og:image">
+<meta content="http://danger.systems/plugins/xcodebuild.html" property="og:url">
+<title>Danger Plugin - DangerXcodebuild</title>
+<link href="/stylesheets/style-f19f9fed.css" rel="stylesheet">
+<link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body class="plugins plugins_xcodebuild">
+<header class="title small"><p>Danger</p>
+<a href="/"><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image"></a><nav><ul>
+<li><a href="/">home</a></li>
+<li><a href="/guides.html">Guides</a></li>
+<li class="big"><a href="/reference.html">Reference</a></li>
+<li class="small"><a href="/reference.html">Ref</a></li>
+</ul></nav></header><h2 class="reduced_top_margin">
+<span>xcodebuild</span><code class="byline inline">a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code>
+</h2>
+<section>
+
+<article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/xcodebuild.html">xcodebuild</a></h3>
+<p>Exposes warnings, errors and test results.
+It requires a JSON generated using <a href="https://github.com/marcelofabri/xcpretty-json-formatter" target="_blank">xcpretty-json-formatter</a>,
+to be passed as an argument for it to work.</p>
+<p>Created by Valerio Mazzeo.</p>
+<h3>Reference</h3>
+<h4>Attributes</h4>
+<div class="fake_code">
+<p>Allows you to specify an xcodebuild JSON file location to parse.</p>
+</div>
+<code>json_file</code><h4>Methods</h4>
+<div class="fake_code">
+<p>Parses and exposes eventual warnings.</p>
+</div>
+<code>parse_warnings <span class="subtle return">warning_count</span></code><div class="fake_code">
+<p>Parses and expose eventual errors.</p>
+</div>
+<code>parse_errors <span class="subtle return">error_count</span></code><div class="fake_code">
+<p>Parses and exposes eventual test failures.</p>
+</div>
+<code>parse_tests <span class="subtle return">test_failures</span></code><div class="fake_code">
+<p>Prints "Perfect build 👍🏻" if everything is ok after parsing.</p>
+</div>
+<code>perfect_build <span class="subtle return">is_perfect_build</span></code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Ensure the project compiles without warnings, errors and all tests are executed correctly</h4>
+<div class="highlight"><pre><span class="n">xcodebuild</span><span class="o">.</span><span class="n">parse_warnings</span>
+<span class="n">xcodebuild</span><span class="o">.</span><span class="n">parse_errors</span>
+<span class="n">xcodebuild</span><span class="o">.</span><span class="n">parse_tests</span>
+<span class="n">xcodebuild</span><span class="o">.</span><span class="n">perfect_build</span>
+</pre></div>
+<h3>How to Install</h3>
+<p>Include <code>gem "danger-xcodebuild"</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
+
+<p>Then inside your Dangerfile, you can access the plugin via <code>xcodebuild</code>.</p>
+<h3>Tags</h3>
+<code>xcode, xcodebuild, errors, warnings, tests, xcpretty-json-formatter</code><h3>Repository</h3>
+<ul><li><a href="https://github.com/valeriomazzeo/danger-xcodebuild" target="_blank">https://github.com/valeriomazzeo/danger-xcodebuild</a></li></ul>
+<h3>See in Action</h3>
+<ul><li><a href="https://github.com/valeriomazzeo/danger-xcodebuild" target="_blank">valeriomazzeo/danger-xcodebuild</a></li></ul></article><div class="clearfix"></div>
+
+</section>
+<footer><article><h3>GitHub</h3>
+<ul><li><a href="https://github.com/danger/danger" target="_blank">danger/danger</a></li></ul>
+<h3>Twitter</h3>
+<ul>
+<li><a href="https://twitter.com/orta" target="_blank">@orta</a></li>
+<li><a href="https://twitter.com/krausefx" target="_blank">@krausefx</a></li>
+</ul></article><article><h3>Guides</h3>
+<ul>
+<li><a href="/guides/getting_started.html">Getting Set Up</a></li>
+<li><a href="/guides/dangerfile.html">The Dangerfile</a></li>
+<li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li>
+<li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li>
+<li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li>
+<li><a href="/guides/faq.html">Frequently Asked Questions</a></li>
+<li><a href="/guides/troubleshooting.html">Troubleshooting</a></li>
+</ul></article><article><h3>Misc</h3>
+<ul>
+<li><a href="/reference.html">DSL Reference</a></li>
+<li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md" target="_blank">CHANGELOG.md</a></li>
+<li><a href="https://github.com/danger/design" target="_blank">Media Kit</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct" target="_blank">COC / Moya CC</a></li>
+<li><a href="https://github.com/danger/danger#im-here-to-help-out" target="_blank">Help Out Building Danger</a></li>
+</ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203"></a></article></footer>
+</body>
+</html><html><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-81285417-1', 'auto');
+ga('send', 'pageview');</script></html>

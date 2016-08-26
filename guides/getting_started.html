@@ -262,7 +262,7 @@ the required values in the environment. Namely CI_MERGE_REQUEST_ID does not
 exist as of yet, however there is an
 <a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5698" target="_blank">MR</a> fixing this.
 If that has been merged and you are using either gitlab.com or a release
-with that change this CISource will wokr.</p>
+with that change this CISource will work.</p>
 </div>
 <div class="jenkins" style="display:none;">
 <h3>CI Setup</h3>
@@ -297,7 +297,8 @@ in order to ensure that you have the build environment set up for MR integration
 <h3>CI Setup</h3>
 
 <p>For Semaphor you will want to go to the settings page of the project. Inside "Build Settings"
-you should add <code>bundle exec danger</code> to the Setup thread.</p>
+you should add <code>bundle exec danger</code> to the Setup thread. Note that Semaphore only provides
+the build environment variables necessary for Danger on PRs across forks.</p>
 
 <h3>Token Setup</h3>
 

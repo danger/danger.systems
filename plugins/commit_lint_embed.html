@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><section>
+
+<article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/commit_lint.html">commit_lint</a></h3>
+<p>Run each commit in the PR through a message linting.</p>
+<p>Created by Jon Allured.</p>
+<h3>Reference</h3>
+<h4>Methods</h4>
+<div class="fake_code">
+<p>Checks the commits with whatever config the user passes.</p>
+</div>
+<code>check (config={}: Hash)</code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Lint all commits using defaults</h4>
+<div class="highlight"><pre><span class="n">commit_lint</span><span class="o">.</span><span class="n">check</span>
+</pre></div>
+<h4>Warn instead of fail</h4>
+<div class="highlight"><pre><span class="n">commit_lint</span><span class="o">.</span><span class="n">check</span> <span class="nb">warn</span><span class="p">:</span> <span class="ss">:all</span>
+</pre></div>
+<h4>Disable a particular check</h4>
+<div class="highlight"><pre><span class="n">commit_lint</span><span class="o">.</span><span class="n">check</span> <span class="ss">disable</span><span class="p">:</span> <span class="o">[</span><span class="ss">:subject_period</span><span class="o">]</span>
+</pre></div>
+<h3>How to Install</h3>
+<p>Include <code>gem "danger-commit_lint"</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
+
+<p>Then inside your Dangerfile, you can access the plugin via <code>commit_lint</code>.</p>
+<h3>Tags</h3>
+<code>commit linting</code><h3>Repository</h3>
+<ul><li><a href="https://github.com/jonallured/danger-commit_lint" target="_blank">https://github.com/jonallured/danger-commit_lint</a></li></ul>
+<h3>See in Action</h3>
+<ul><li><a href="https://github.com/danger/danger" target="_blank">danger/danger</a></li></ul></article><div class="clearfix"></div>
+
+</section></body></html>

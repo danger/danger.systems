@@ -231,6 +231,10 @@ through a few standard functions to simplify your code.</p>
 <p>The labels assigned to the Merge Request</p>
 </div>
 <code>mr_labels <span class="subtle return">String</span></code><div class="fake_code">
+<p>The unified diff produced by GitLab for this PR
+see <a href="https://en.wikipedia.org/wiki/Diff_utility#Unified_format" target="_blank">Unified diff</a></p>
+</div>
+<code>mr_diff <span class="subtle return">String</span></code><div class="fake_code">
 <p>The branch to which the MR is going to be merged into</p>
 </div>
 <code>branch_for_merge <span class="subtle return">String</span></code><div class="fake_code">
@@ -268,7 +272,7 @@ it easy to use the GitLab API inside a Dangerfile.</p>
 <div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please provide a summary in the Pull Request description"</span> <span class="k">if</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_body</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">5</span>
 </pre></div>
 <h4>Only accept MRs to the develop branch</h4>
-<div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please re-submit this MR to develop, we may have already fixed your issue."</span> <span class="k">if</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">branch_for_base</span> <span class="o">!=</span> <span class="s2">"develop"</span>
+<div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please re-submit this MR to develop, we may have already fixed your issue."</span> <span class="k">if</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">branch_for_merge</span> <span class="o">!=</span> <span class="s2">"develop"</span>
 </pre></div>
 <h4>Note when MRs don't reference a milestone, which goes away when it does</h4>
 <div class="highlight"><pre><span class="n">has_milestone</span> <span class="o">=</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_json</span><span class="o">[</span><span class="s2">"milestone"</span><span class="o">]</span> <span class="o">!=</span> <span class="kp">nil</span>

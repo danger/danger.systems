@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><section>
+
+<article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/xcodebuild.html">xcodebuild</a></h3>
+<p>Exposes warnings, errors and test results.
+It requires a JSON generated using <a href="https://github.com/marcelofabri/xcpretty-json-formatter" target="_blank">xcpretty-json-formatter</a>,
+to be passed as an argument for it to work.</p>
+<p>Created by Valerio Mazzeo.</p>
+<h3>Reference</h3>
+<h4>Attributes</h4>
+<div class="fake_code">
+<p>Allows you to specify an xcodebuild JSON file location to parse.</p>
+</div>
+<code>json_file</code><h4>Methods</h4>
+<div class="fake_code">
+<p>Parses and exposes eventual warnings.</p>
+</div>
+<code>parse_warnings <span class="subtle return">warning_count</span></code><div class="fake_code">
+<p>Parses and expose eventual errors.</p>
+</div>
+<code>parse_errors <span class="subtle return">error_count</span></code><div class="fake_code">
+<p>Parses and exposes eventual test failures.</p>
+</div>
+<code>parse_tests <span class="subtle return">test_failures</span></code><div class="fake_code">
+<p>Prints "Perfect build 👍🏻" if everything is ok after parsing.</p>
+</div>
+<code>perfect_build <span class="subtle return">is_perfect_build</span></code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Ensure the project compiles without warnings, errors and all tests are executed correctly</h4>
+<div class="highlight"><pre><span class="n">xcodebuild</span><span class="o">.</span><span class="n">parse_warnings</span>
+<span class="n">xcodebuild</span><span class="o">.</span><span class="n">parse_errors</span>
+<span class="n">xcodebuild</span><span class="o">.</span><span class="n">parse_tests</span>
+<span class="n">xcodebuild</span><span class="o">.</span><span class="n">perfect_build</span>
+</pre></div>
+<h3>How to Install</h3>
+<p>Include <code>gem "danger-xcodebuild"</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
+
+<p>Then inside your Dangerfile, you can access the plugin via <code>xcodebuild</code>.</p>
+<h3>Tags</h3>
+<code>xcode, xcodebuild, errors, warnings, tests, xcpretty-json-formatter</code><h3>Repository</h3>
+<ul><li><a href="https://github.com/valeriomazzeo/danger-xcodebuild" target="_blank">https://github.com/valeriomazzeo/danger-xcodebuild</a></li></ul>
+<h3>See in Action</h3>
+<ul><li><a href="https://github.com/valeriomazzeo/danger-xcodebuild" target="_blank">valeriomazzeo/danger-xcodebuild</a></li></ul></article><div class="clearfix"></div>
+
+</section></body></html>

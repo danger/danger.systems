@@ -32,20 +32,31 @@
 <span>Plugin creation</span><code class="byline inline">a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code>
 </h2>
 <div class="clearfix"></div>
-<section class="guide"><article><p>So, you want to make a Danger Plugin? This is <em>awesome</em>. We all have common issues, and this is a great way to share code with the world. We’ve found once a single rule becomes longer than 10-15 lines of code, converting it into a plugin </p>
+<section class="guide"><article><p>So, you want to make a Danger Plugin? This is <em>awesome</em>. We all have common
+issues, and this is a great way to share code with the world. We’ve found once a
+single rule becomes longer than 10-15 lines of code, converting it into a plugin
+makes a lot of sense.</p>
 
-<p>The concept of a Plugin in Danger is very simple. It’s a subclass of <code>Danger::Plugin</code>. </p>
+<p>The concept of a Plugin in Danger is very simple. It’s a subclass of
+<code>Danger::Plugin</code>.</p>
 
-<p>If you don’t know about Ruby modules, then don’t worry, think of it as Ruby namespacing. That’s the <code>Danger::</code> bit. You’ll have to create a class that is a subclass of <code>Plugin</code> inside a <code>Danger</code> <code>module</code>.</p>
+<p>If you don’t know about Ruby modules, then don’t worry, think of it as Ruby
+namespacing. That’s the <code>Danger::</code> bit. You’ll have to create a class that is a
+subclass of <code>Plugin</code> inside a <code>Danger</code> <code>module</code>.</p>
 
 <h3 id="tech-specs">
 <a class="header-link" href="#tech-specs">#</a>Tech Specs</h3>
 
-<p>This subclass will be created automatically with a reference to the current <code>Danger::Dangerfile</code> ruby object. It will be created before the <code>Dangerfile</code>(<a href="/guides/faq.html#i-want-to-run-danger-across-multiple-repos">s</a>) are parsed by it. </p>
+<p>This subclass will be created automatically with a reference to the current
+<code>Danger::Dangerfile</code> ruby object. It will be created before the
+<code>Dangerfile</code>(<a href="/guides/faq.html#i-want-to-run-danger-across-multiple-repos">s</a>) are parsed by it.</p>
 
-<p>There are no ways to automatically execute code with knowledge of the current status. A plugin should get told to do some work from the user’s <code>Dangerfile</code>(s).  </p>
+<p>There are no ways to automatically execute code with knowledge of the current
+status. A plugin should get told to do some work from the user’s
+<code>Dangerfile</code>(s).</p>
 
-<p>Your plugin is added as an attribute to the user’s <code>Dangerfile</code>(s), this is based on your class name, but is editable. </p>
+<p>Your plugin is added as an attribute to the user’s <code>Dangerfile</code>(s), this is
+based on your class name, but is editable.</p>
 
 <pre><code class="ruby">def self.instance_name
   to_s.gsub("Danger", "").danger_underscore.split("/").last
@@ -55,15 +66,19 @@ end
 
 # DangerProse -&gt; prose
 # DangerMyThing -&gt; my_thing
-# MyPlugin -&gt; my_plugin 
+# MyPlugin -&gt; my_plugin
 </code></pre>
 
 <h4 id="same-source">
 <a class="header-link" href="#same-source">#</a>Same Source</h4>
 
-<p>One of the great things about a Danger Plugin, is that the code is exactly the same as it was in your <code>Dangerfile</code>. A plugin has access to all of the same methods and attributes as you had when it was being parsed inside a <code>Dangerfile</code>. This is because anything your plugin doesn’t understand get’s first pass to see if it’s reference to the current <code>Dangerfile</code> understands.</p>
+<p>One of the great things about a Danger Plugin is that the code is exactly the
+same as it was in your <code>Dangerfile</code>. A plugin has access to all of the same
+methods and attributes as you had when it was being parsed inside a
+<code>Dangerfile</code>. This is because anything your plugin doesn’t understand gets
+passed to the current <code>Dangerfile</code> for it to have a chance to act.</p>
 
-<p>This is useful mainly in two things: </p>
+<p>This is useful mainly in two things:</p>
 
 <ul>
 <li>Low barrier to entry.</li>
@@ -73,9 +88,14 @@ end
 <h3 id="creating-the-plugin">
 <a class="header-link" href="#creating-the-plugin">#</a>Creating the Plugin</h3>
 
-<p>Starting is pretty simple, we have a <a href="https://github.com/danger/danger-plugin-template" target="_blank">template</a>. As well as a command to get you started. Your first step is the name, the <a href="http://guides.rubygems.org/name-your-gem/" target="_blank">Rubygems rule</a> is <code>[core_app]-[gem]_[name]</code>. So, the first space is always a <code>-</code> then later spaces would be <code>_</code>. E.g. <code>danger-wizard_hat</code>.</p>
+<p>Starting is pretty simple, we have a <a href="https://github.com/danger/danger-plugin-template" target="_blank">template</a>. As well as a command
+to get you started. Your first step is the name: the <a href="http://guides.rubygems.org/name-your-gem/" target="_blank">Rubygems rule</a>
+is <code>[core_app]-[gem]_[name]</code>. So, the first space is always a <code>-</code> then later
+spaces would be <code>_</code>. E.g. <code>danger-wizard_hat</code>.</p>
 
-<p>Now you know the rules, in your development folder run <code>danger plugins create [name]</code>. This will create a README similar to <a href="https://github.com/dbgrandi/danger-prose/tree/d80e1b54a6df859c624015895f4d5d79fd11a276" target="_blank">danger-proselint</a>’s</p>
+<p>Now that you know the rules, in your development folder run <code>danger plugins
+create [name]</code>. This will create a README similar to the one for
+<a href="https://github.com/dbgrandi/danger-prose/tree/d80e1b54a6df859c624015895f4d5d79fd11a276" target="_blank">danger-proselint</a>.</p>
 
 <pre><code>$ danger plugins create guitar_lessons
 
@@ -100,22 +120,24 @@ year:2016
 ├── Rakefile
 ├── danger-guitar_lessons.gemspec
 ├── lib
-│   ├── danger_guitar_lessons.rb
-│   ├── danger_plugin.rb
-│   └── guitar_lessons
-│       ├── gem_version.rb
-│       └── plugin.rb
-└── spec
+│   ├── danger_guitar_lessons.rb
+│   ├── danger_plugin.rb
+│   └── guitar_lessons
+│       ├── gem_version.rb
+│       └── plugin.rb
+└─  spec
     ├── guitar_lessons_spec.rb
     └── spec_helper.rb
 </code></pre>
 
-<p>Which covers a lot of the basics for you</p>
+<p>Which covers a lot of the basics for you.</p>
 
 <h4 id="source">
 <a class="header-link" href="#source">#</a>Source</h4>
 
-<p>The template isn’t empty, it comes as an existing simple plugin based on our work in <a href="https://github.com/dbgrandi/danger-prose/" target="_blank">danger-prose</a>. This is to make it easier to show how all of the plugin comes together, I’d recommend reading through these files in this order:</p>
+<p>The template isn’t empty, it comes as an existing simple plugin based on our
+work in <a href="https://github.com/dbgrandi/danger-prose/" target="_blank">danger-prose</a>. This is to make it easier to show how all of the
+plugin comes together, I’d recommend reading through these files in this order:</p>
 
 <ul>
 <li><code>/lib/[NAME]/plugin.rb</code></li>
@@ -123,18 +145,26 @@ year:2016
 <li><code>/spec/[NAME]_spec.rb</code></li>
 </ul>
 
-<p>as these are main places where you would be doing work.</p>
+<p>These are main places where you would be doing work.</p>
 
-<p>You’ll want to move your code into the file at <code>/lib/[NAME]/plugin.rb</code>. Then you can write some tests to ensure nothing will break in the future. </p>
+<p>You’ll want to move your code into the file at <code>/lib/[NAME]/plugin.rb</code>. Then you
+can write some tests to ensure nothing will break in the future.</p>
 
 <h4 id="tests">
 <a class="header-link" href="#tests">#</a>Tests</h4>
 
-<p>The template comes with some tests for the example plugin. It already comes with infrastructure to have a <code>Danger::Dangerfile</code> instantiate your plugin. You can start off by modifying that to work with your plugin.</p>
+<p>The template comes with some tests for the example plugin. It already comes with
+infrastructure to have a <code>Danger::Dangerfile</code> instantiate your plugin. You can
+start off by modifying that to work with your plugin.</p>
 
-<p>To run all of the tests, you can use the command <code>bundle exec rake spec</code>. The testing infrastructure is <a href="http://rspec.info" target="_blank">RSpec</a>, the template also comes with a <code>Guardfile</code> for use with <a href="http://guardgem.org" target="_blank">guard</a> with <a href="https://github.com/guard/guard-rspec" target="_blank">guard-rspec</a>. This means you can run <code>bundle exec guard</code> and it will start a server which listens for test changes and re-runs your tests as you work. </p>
+<p>To run all of the tests, you can use the command <code>bundle exec rake spec</code>. The
+testing infrastructure is <a href="http://rspec.info" target="_blank">RSpec</a>, the template also comes with a
+<code>Guardfile</code> for use with <a href="http://guardgem.org" target="_blank">guard</a> with <a href="https://github.com/guard/guard-rspec" target="_blank">guard-rspec</a>. This
+means you can run <code>bundle exec guard</code> and it will start a server which listens
+for test changes and re-runs your tests as you work.</p>
 
-<p>If you’re new to testing on ruby, here are some examples that you can use as a reference:</p>
+<p>If you’re new to testing on ruby, here are some examples that you can use as a
+reference:</p>
 
 <ul>
 <li><a href="https://github.com/dbgrandi/danger-prose/blob/cc2c618abafc9e9435a783ffa0ebca5beef4f897/spec/danger_plugin_spec.rb" target="_blank"><code>danger-proselint - danger_plugin_spec.rb</code></a></li>
@@ -146,46 +176,63 @@ year:2016
 <h4 id="ci">
 <a class="header-link" href="#ci">#</a>CI</h4>
 
-<p>This template comes with a <code>.travis.yml</code> file that lints your documentation, and offers advice on the syntax of your Ruby. If you want to quickly change the syntax, run <code>bundle exec rubocop -a</code> in the directory. </p>
+<p>This template comes with a <code>.travis.yml</code> file that lints your documentation, and
+offers advice on the syntax of your Ruby. If you want to quickly change the
+syntax, run <code>bundle exec rubocop -a</code> in the directory.</p>
 
 <h4 id="adding-the-gem-to-your-project">
 <a class="header-link" href="#adding-the-gem-to-your-project">#</a>Adding the Gem to your Project</h4>
 
-<p>To test your project back with the codebase you’ve extracted the code from, you’ll need to use a <code>Gemfile</code>. So many <code>Thingfile</code>s, right? </p>
+<p>To test your project back with the codebase you’ve extracted the code from,
+you’ll need to use a <code>Gemfile</code>. So many <code>Thingfile</code>s, right?</p>
 
 <p>You should add a <code>gem</code> using the <code>:path</code> attribute. e.g. add a new line with:</p>
 
 <pre><code class="ruby">gem "danger-guitar_lessons", :path =&gt; "../danger-guitar_lessons"
 </code></pre>
 
-<p>Then when you run <code>bundle install</code> your new gem is added to the project. You can then use <code>bundle exec danger local</code> to test inside you project. You can make changes to your plugin, then you only need to run <code>bundle exec danger local</code>.</p>
+<p>Then when you run <code>bundle install</code> your new gem is added to the project. You can
+then use <code>bundle exec danger local</code> to test inside you project. You can make
+changes to your plugin, then you only need to run <code>bundle exec danger local</code>.</p>
 
 <h3 id="automate-your-readme">
 <a class="header-link" href="#automate-your-readme">#</a>Automate your README</h3>
 
-<p>Danger can generate your README based on the inline documentation in your plugin. To do this, run <code>bundle exec danger plugins readme</code>. The markdown will be output into your terminal, then you can copy &amp; paste it into <code>README.md</code>.</p>
+<p>Danger can generate your README based on the inline documentation in your
+plugin. To do this, run <code>bundle exec danger plugins readme</code>. The markdown will
+be output into your terminal, then you can copy &amp; paste it into <code>README.md</code>.</p>
 
 <h3 id="pushing-to-rubygems">
 <a class="header-link" href="#pushing-to-rubygems">#</a>Pushing to RubyGems</h3>
 
-<p>So you’re ready to ship now, you’ve got a few tests, and you’ve ran it inside your project using a <code>:path</code> <code>gem</code>. </p>
+<p>So you’re ready to ship now, you’ve got a few tests, and you’ve ran it inside
+your project using a <code>:path</code> <code>gem</code>.</p>
 
-<p>You’re going to want to push it to <a href="https://rubygems.org" target="_blank">RubyGems</a>, here’s their guide on <a href="http://guides.rubygems.org/publishing/#publishing-to-rubygemsorg" target="_blank">publishing a gem</a>.</p>
+<p>You’re going to want to push it to <a href="https://rubygems.org" target="_blank">RubyGems</a>, here’s their guide on
+<a href="http://guides.rubygems.org/publishing/#publishing-to-rubygemsorg" target="_blank">publishing a gem</a>.</p>
 
-<p>Once it’s on RubyGems, then you should change your application’s Gemfile to remove the <code>:path</code> and let it become the public gem. Awesome. That’s you ready for using your plugin in production.</p>
+<p>Once it’s on RubyGems, then you should change your application’s Gemfile to
+remove the <code>:path</code> and let it become the public gem. Awesome. That’s you ready
+for using your plugin in production.</p>
 
 <h3 id="getting-it-on-danger-systems">
 <a class="header-link" href="#getting-it-on-danger-systems">#</a>Getting it on Danger.Systems</h3>
 
-<p>Having a plugin available on RubyGems means anyone can use it. </p>
+<p>Having a plugin available on RubyGems means anyone can use it.</p>
 
-<p>This is entirely optional, however having your gem on this site means that it will be more visible! </p>
+<p>This is entirely optional, however having your gem on this site means that it
+will be more visible!</p>
 
-<p>In order to go on Danger.Systems you need to ensure the running <code>bundle exec danger plugins lint</code> passes. </p>
+<p>In order to go on Danger.Systems you need to ensure the running <code>bundle exec
+danger plugins lint</code> passes.</p>
 
-<p>This means that the plugin is well documented so that the site can generate a page for it. The linter will guide you through the process, and show you examples of how to use the documentation syntax.</p>
+<p>This means that the plugin is well documented so that the site can generate a
+page for it. The linter will guide you through the process, and show you
+examples of how to use the documentation syntax.</p>
 
-<p>Once you are all green, and ideally warning free in the linter. You should send a pull request to <a href="https://github.com/danger/danger.systems/edit/master/plugins.json" target="_blank">danger.systems/plugins.json</a>. Please don’t add it as the first item.</p>
+<p>Once you are all green, and ideally warning free in the linter. You should send
+a pull request to <a href="https://github.com/danger/danger.systems/edit/master/plugins.json" target="_blank">danger.systems/plugins.json</a>. Please don’t add
+it as the first item.</p>
 
 <h4 id="--would-plugin-again">
 <a class="header-link" href="#--would-plugin-again">#</a>10/10 WOULD PLUGIN AGAIN</h4>
