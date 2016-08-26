@@ -8,5 +8,6 @@
    "danger-junit_results",
    "danger-podliblint",
    "danger-simplecov_json",
-   "danger-commit_lint"
+   "danger-commit_lint",
+   "danger-changelog"
 ]
