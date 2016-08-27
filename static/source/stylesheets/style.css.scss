@@ -415,8 +415,13 @@ body {
     }
 }
 
-// Think a guide should have 
+// Make sure that the titles are always on one line
 
+@media screen and (max-width: 960px) {
+    body > header > nav li {
+        font-size: 30px;
+    }
+}
 // Alright, so the decision is that anything under 740px is "too small" aka mobile mode
 
 @media screen and (max-width: 740px) {
