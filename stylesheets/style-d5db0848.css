@@ -275,6 +275,9 @@ body {
         body footer ul li a:hover {
           color: #867C01; }
 
+@media screen and (max-width: 960px) {
+  body > header > nav li {
+    font-size: 30px; } }
 @media screen and (max-width: 740px) {
   body section, body footer {
     flex-flow: column; }
