@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><section>
+
+<article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/mention.html">mention</a></h3>
+<p>Automatically mention potential reviewers on pull requests.
+It downloads and parses the blame information of changed files
+to figure out who may be a good reviewer.</p>
+<p>Created by Wojtek Lukaszuk.</p>
+<h3>Reference</h3>
+<h4>Methods</h4>
+<div class="fake_code">
+<p>Mention potential reviewers.</p>
+</div>
+<code>run (max_reviewers=3: Integer, file_blacklist=[]: Array<string>, user_blacklist=[]: Array<string>)</string></string></code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Running plugin with reviewers count specified</h4>
+<div class="highlight"><pre><span class="c1"># Find maximum two reviewers</span>
+<span class="n">mention</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">[]</span><span class="p">,</span> <span class="o">[]</span><span class="p">)</span>
+</pre></div>
+<h4>Running plugin with some files blacklisted</h4>
+<div class="highlight"><pre><span class="c1"># Find reviewers without parsing blame information</span>
+<span class="c1"># from files matching to 'Pods/*'</span>
+<span class="n">mention</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">[</span><span class="s2">"Pods/*"</span><span class="o">]</span><span class="p">,</span> <span class="o">[]</span><span class="p">)</span>
+</pre></div>
+<h4>Running plugin with some users blacklisted</h4>
+<div class="highlight"><pre><span class="c1"># Find reviewers ignoring users 'wojteklu' and 'danger'</span>
+<span class="n">mention</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">[]</span><span class="p">,</span> <span class="o">[</span><span class="s2">"wojteklu"</span><span class="p">,</span> <span class="s2">"danger"</span><span class="o">]</span><span class="p">)</span>
+</pre></div>
+<h3>How to Install</h3>
+<p>Include <code>gem "danger-mention"</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
+
+<p>Then inside your Dangerfile, you can access the plugin via <code>mention</code>.</p>
+<h3>Tags</h3>
+<code>github, review, mention, blame</code><h3>Repository</h3>
+<ul><li><a href="https://github.com/wojteklu/danger-mention" target="_blank">https://github.com/wojteklu/danger-mention</a></li></ul></article><div class="clearfix"></div>
+
+</section></body></html>

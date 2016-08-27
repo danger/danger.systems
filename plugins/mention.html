@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine or request Chrome Frame --><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="True" name="HandheldFriendly">
+<meta content="480" name="MobileOptimized">
+<meta content="width=480, initial-scale=0.6" name="viewport">
+<meta content="constant integration culture code" name="keywords">
+<meta content="Orta Therox &amp; Felix Krause" name="author">
+<meta content="summary" name="twitter:card">
+<meta content="@orta" name="twitter:creator">
+<meta content="Danger Plugin - DangerMention" name="twitter:title">
+<meta content="Apply cultural rules during your CI process." name="twitter:description">
+<meta content="http://danger.systems/plugins/mention.html" name="twitter:url">
+<meta content="/images/square-ffd55d21.png" property="og:image">
+<meta content="http://danger.systems/plugins/mention.html" property="og:url">
+<title>Danger Plugin - DangerMention</title>
+<link href="/stylesheets/style-f19f9fed.css" rel="stylesheet">
+<link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body class="plugins plugins_mention">
+<header class="title small"><p>Danger</p>
+<a href="/"><img src="/images/title-88a50ec1.png" class="retina" alt="Danger title image"></a><nav><ul>
+<li><a href="/">home</a></li>
+<li><a href="/guides.html">Guides</a></li>
+<li class="big"><a href="/reference.html">Reference</a></li>
+<li class="small"><a href="/reference.html">Ref</a></li>
+</ul></nav></header><h2 class="reduced_top_margin">
+<span>mention</span><code class="byline inline">a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://krausefx.com">felix krause</a>.</code>
+</h2>
+<section>
+
+<article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/mention.html">mention</a></h3>
+<p>Automatically mention potential reviewers on pull requests.
+It downloads and parses the blame information of changed files
+to figure out who may be a good reviewer.</p>
+<p>Created by Wojtek Lukaszuk.</p>
+<h3>Reference</h3>
+<h4>Methods</h4>
+<div class="fake_code">
+<p>Mention potential reviewers.</p>
+</div>
+<code>run (max_reviewers=3: Integer, file_blacklist=[]: Array<string>, user_blacklist=[]: Array<string>)</string></string></code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Running plugin with reviewers count specified</h4>
+<div class="highlight"><pre><span class="c1"># Find maximum two reviewers</span>
+<span class="n">mention</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">[]</span><span class="p">,</span> <span class="o">[]</span><span class="p">)</span>
+</pre></div>
+<h4>Running plugin with some files blacklisted</h4>
+<div class="highlight"><pre><span class="c1"># Find reviewers without parsing blame information</span>
+<span class="c1"># from files matching to 'Pods/*'</span>
+<span class="n">mention</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">[</span><span class="s2">"Pods/*"</span><span class="o">]</span><span class="p">,</span> <span class="o">[]</span><span class="p">)</span>
+</pre></div>
+<h4>Running plugin with some users blacklisted</h4>
+<div class="highlight"><pre><span class="c1"># Find reviewers ignoring users 'wojteklu' and 'danger'</span>
+<span class="n">mention</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">[]</span><span class="p">,</span> <span class="o">[</span><span class="s2">"wojteklu"</span><span class="p">,</span> <span class="s2">"danger"</span><span class="o">]</span><span class="p">)</span>
+</pre></div>
+<h3>How to Install</h3>
+<p>Include <code>gem "danger-mention"</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
+
+<p>Then inside your Dangerfile, you can access the plugin via <code>mention</code>.</p>
+<h3>Tags</h3>
+<code>github, review, mention, blame</code><h3>Repository</h3>
+<ul><li><a href="https://github.com/wojteklu/danger-mention" target="_blank">https://github.com/wojteklu/danger-mention</a></li></ul></article><div class="clearfix"></div>
+
+</section>
+<footer><article><h3>GitHub</h3>
+<ul><li><a href="https://github.com/danger/danger" target="_blank">danger/danger</a></li></ul>
+<h3>Twitter</h3>
+<ul>
+<li><a href="https://twitter.com/orta" target="_blank">@orta</a></li>
+<li><a href="https://twitter.com/krausefx" target="_blank">@krausefx</a></li>
+</ul></article><article><h3>Guides</h3>
+<ul>
+<li><a href="/guides/getting_started.html">Getting Set Up</a></li>
+<li><a href="/guides/dangerfile.html">The Dangerfile</a></li>
+<li><a href="/guides/what_does_danger_do.html">What does Danger do?</a></li>
+<li><a href="/guides/creating_your_first_plugin.html">Creating your first Plugin</a></li>
+<li><a href="/guides/a_quick_ruby_overview.html">A Quick Ruby Overview</a></li>
+<li><a href="/guides/faq.html">Frequently Asked Questions</a></li>
+<li><a href="/guides/troubleshooting.html">Troubleshooting</a></li>
+</ul></article><article><h3>Misc</h3>
+<ul>
+<li><a href="/reference.html">DSL Reference</a></li>
+<li><a href="https://github.com/danger/danger/blob/master/CHANGELOG.md" target="_blank">CHANGELOG.md</a></li>
+<li><a href="https://github.com/danger/design" target="_blank">Media Kit</a></li>
+<li><a href="https://github.com/danger/danger#license-contributors-guidelines-and-code-of-conduct" target="_blank">COC / Moya CC</a></li>
+<li><a href="https://github.com/danger/danger#im-here-to-help-out" target="_blank">Help Out Building Danger</a></li>
+</ul></article><article><a href="/images/dm-opinions-316f5af1.png"><img height="244" src="/images/dm-opinions-316f5af1.png" width="203"></a></article></footer>
+</body>
+</html><html><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-81285417-1', 'auto');
+ga('send', 'pageview');</script></html>
