@@ -39,7 +39,7 @@
 
 <ol>
 <li>First she sets up the core plugins for Danger, these are the classes documented in the reference. They provide the user API for Danger.</li>
-<li>Next she determines if she’s running on a CI service she recognizes.</li>
+<li>Next she determines if she’s running on a CI service she recognizes. She does this by <a href="https://github.com/danger/danger/blob/e98dc7156268adcd132d114d02d7935375f42452/lib/danger/ci_source/bitrise.rb" target="_blank">looking</a> at the environment variables in your console.</li>
 <li>After being sure about the environment, she checks if this is a code review build. For single commit / merge builds, Danger does not run.</li>
 <li>With the environment set up, she generates diff information, and pulls down status information for the code review.</li>
 <li>Danger then runs your local <code>Dangerfile</code>.</li>
