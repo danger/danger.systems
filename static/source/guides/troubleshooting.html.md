@@ -23,6 +23,12 @@ Let's say you run Danger on the same CI service that deploys your code. If that'
 
 This ensures that Danger only runs when you have the environment variables for her to use.
 
+### My CI uses Ruby 1.9.x by default, and I'm not a Ruby project
+
+Worry not. Most CIs come with either [rvm][rvm] or [rbenv][rbenv] which support multiple versions of Ruby. You can use that to change the Ruby version before running Danger.
+
+If you're not a Ruby project, you might want to also [skip the Gemfile][skip_gemfile].
+
 ### I want to be a Danger Wizard
 
 ![](http://i.imgur.com/QCwKwKQ.gif)
@@ -49,3 +55,6 @@ Yeah... We're struggling with that one. It's something we keep taking stabs at i
 [circle_issues]: https://github.com/danger/danger/search?q=circle&state=open&type=Issues&utf8=✓
 [circle_pr]: https://discuss.circleci.com/t/pull-requests-not-triggering-build/1213
 [pry]: http://pryrepl.org
+[rmv]: http://rvm.io
+[rbenv]: https://github.com/rbenv/rbenv
+[skip_gemfile]: /guides/getting_started.html#installation-without-bundler
