@@ -10,7 +10,7 @@ Danger makes it easy to create feedback loops in code reviews through automation
 To pull that off, Danger needs to be able to run inside your continuous integration (CI) environment, and to be able to provide feedback to your code review platform. This document describes what happens when you run `bundle exec danger`.
 
 1. First she sets up the core plugins for Danger, these are the classes documented in the reference. They provide the user API for Danger.
-1. Next she determines if she's running on a CI service she recognizes.
+1. Next she determines if she's running on a CI service she recognizes. She does this by [looking][bitrise_example] at the environment variables in your console.
 1. After being sure about the environment, she checks if this is a code review build. For single commit / merge builds, Danger does not run.
 1. With the environment set up, she generates diff information, and pulls down status information for the code review.
 1. Danger then runs your local `Dangerfile`.
@@ -26,3 +26,4 @@ To simplify the experience for consumers of plugins, Danger does very little. Ea
 
 [multi_repos]: /guides/faq.html#i-want-to-run-danger-across-multiple-repos
 [vision]: https://github.com/danger/danger/blob/master/VISION.md
+[bitrise_example]: https://github.com/danger/danger/blob/e98dc7156268adcd132d114d02d7935375f42452/lib/danger/ci_source/bitrise.rb
