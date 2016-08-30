@@ -178,6 +178,7 @@ DANGER_GITLAB_API_BASE_URL=https://git.corp.evilcorp.com/api/v3
 <a class="header-link" href="#setting-up-danger-to-run-on-your-ci">#</a>Setting up Danger to run on your CI</h3>
 <div class="ci_sources selectors">
 <ul>
+<li class="bitrise">Bitrise</li>
 <li class="buildkite">Buildkite</li>
 <li class="circleci">CircleCI</li>
 <li class="drone">Drone</li>
@@ -189,6 +190,22 @@ DANGER_GITLAB_API_BASE_URL=https://git.corp.evilcorp.com/api/v3
 <li class="travis">Travis</li>
 <li class="xcodeserver">XcodeServer</li>
 </ul>
+<div class="bitrise" style="display:none;">
+<h3>CI Setup</h3>
+
+<p>Add a script step to your workflow:
+<code>yml
+- script@1.1.2:
+    inputs:
+   - content: |-
+       bundle install
+       bundle exec danger
+</code></p>
+
+<h3>Token Setup</h3>
+
+<p>Add the <code>DANGER_GITHUB_API_TOKEN</code> to your workflow's Secret Env Vars</p>
+</div>
 <div class="buildkite" style="display:none;">
 <h3>CI Setup</h3>
 
@@ -383,9 +400,14 @@ is to pass in the token as a prefix to the command <code>DANGER_GITHUB_API_TOKEN
 </div>
 </div></article></section><section><article><h5 id="installation-without-bundler">Installation Without Bundler</h5>
 
-<p>If Danger is your only ruby dependency, you may not want to use <a href="http://bundler.io" target="_blank">Bundler</a>, that’s fine, but note that you’ll always be using the latest version of all of your dependencies.</p>
+<p>If Danger is your only ruby dependency, you may not want to use <a href="http://bundler.io" target="_blank">Bundler</a>, and that’s fine. You can use the <code>~&gt;</code> operator in the <code>gem install</code> step work with SemVer. For example here is a one-liner used in the CI for <a href="https://github.com/artsy/force" target="_blank">artsy/force</a>:</p>
 
-<p>You can install Danger via <code>gem install danger</code>. This will make it available in your system, you can include plugins at the same time by running <code>gem install danger danger-prose [gem] [gem]</code>. You can run <code>danger --version</code> to check your version. Any time you see a command that recommends you use <code>bundle exec</code> - you can skip the <code>bundle exec</code> part.</p>
+<pre><code class="sh">rbenv global 2.3.1 &amp;&amp; gem install danger --version '~&gt; 3.0' &amp;&amp; danger
+</code></pre>
+
+<p>This sets the Ruby version, installs install Danger via <code>gem install danger</code> but only a version <code>3.x</code> build, then runs Danger. This methods makes Danger globally available in the system, you can include plugins at the same time by running <code>gem install danger danger-prose [gem] [gem]</code>.</p>
+
+<p>You can run <code>danger --version</code> to check your version. Any time you see a command that recommends you use <code>bundle exec</code> - you can skip the <code>bundle exec</code> part.</p>
 
 <h5 id="macos-sudo-less-installation">macOS sudo-less Installation</h5>
 
