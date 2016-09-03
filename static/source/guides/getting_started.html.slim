@@ -59,11 +59,12 @@ section.guide
       ul
         li.github.highlighted GitHub
         li.gitlab GitLab
+        li.bitbucket Bitbucket Server
 
       div.github
         markdown:
 
-          In order to get the most out of Danger, we recommend giving her the ability to post comments in your code review. This is a regular GitHub account, but depending on whether you are working on a private or public project, you will want to give different levels of access to this bot. You are allowed to have [one bot per GitHub account][github_bots].
+          In order to get the most out of Danger, we recommend giving her the ability to post comments in your Pull Requests. This is a regular GitHub account, but depending on whether you are working on a private or public project, you will want to give different levels of access to this bot. You are allowed to have [one bot per GitHub account][github_bots].
 
           To get started, open [https://github.com](https://github.com) in a private browser session.
 
@@ -108,7 +109,7 @@ section.guide
       div.gitlab
         markdown:
 
-          To get the most out of Danger, we recommend giving her the ability to post comments in your code review. This is a regular GitLab account, but depending on whether you are working on a private or public project, you will want to give different levels of access to this bot.
+          To get the most out of Danger, we recommend giving her the ability to post comments in your Merge Requests. This is a regular GitLab account, but depending on whether you are working on a private or public project, you will want to give different levels of access to this bot.
 
           To get started, open [https://gitlab.com](https://gitlab.com) (or your GitLab instance) in a private browser session.
 
@@ -141,6 +142,20 @@ section.guide
           ```
 
           [gitlab_token]: https://gitlab.com/profile/personal_access_tokens
+
+      div.bitbucket
+        markdown:
+
+          To get the most out of Danger, we recommend giving her the ability to post comments in your Pull Requests. This is a regular Bitbucket account, that exists just for Danger.
+
+          ### Setting up the Environment Variables
+
+          To get set up, you will need to provide `DANGER_BITBUCKETSERVER_USERNAME`, `DANGER_BITBUCKETSERVER_PASSWORD` and your `DANGER_BITBUCKETSERVER_HOST` into the environment. 
+
+          You will also want to ensure that `ghprbPullId` is added into the environment with the Pull Request
+          id so that Danger can use your Bitbucket Server's API. As of right now, only Jenkins is supported for Bitbucket Server, we're open to improvements there, for sure.
+
+          With your ENV vars set up, you can edit your job to add `bundle exec danger` at the build action. 
 
     markdown:
 

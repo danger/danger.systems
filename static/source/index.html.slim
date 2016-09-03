@@ -60,18 +60,25 @@ section
   article
     h3 Supports
     p <strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf and Bitrise.
-    p <strong>Can chat back on</strong>: GitHub and GitLab.
+    p <strong>Can chat back on</strong>: GitHub, GitLab and Bitbucket.
     p <strong>Can handle diffs from</strong>: Git.
 
     h3 Messaging Options
     markdown:
-      `message("message")` - Comment a message to the table.
+       Comment a message to the table:<br/>
+       `message("You have added 3 more gems to the app.")`
 
-      `warn("message")` - Declares a CI warning.
+        Declares a CI warning:<br/>
+        `warn("You have not included a CHANGELOG entry.")`
 
-      `fail("message")` - Declares a CI blocking error.
-
-      `markdown("message")` - Outputs pure markdown under the table. 
+        Declares a CI blocking error:<br/>
+        `fail("Our linter has failed.")`
+        
+        Outputs markdown under the table:<br/>
+        `markdown("## ")`
+        
+        Outputs markdown at a line in the diff:<br/>
+        `warn("Please add your name", file: "CHANGELOG.md", line: 4)` 
 
 h2
   span Plugins
