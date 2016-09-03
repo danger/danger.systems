@@ -51,17 +51,13 @@
 <h4 id="i-want-to-run-danger-across-multiple-repos">
 <a class="header-link" href="#i-want-to-run-danger-across-multiple-repos">#</a>I want to run Danger across multiple repos</h4>
 
-<p>To have consistent rules across the repos in your organisation, you can use a shared <code>danger.import_dangerfile "[repo]"</code>:</p>
+<p>For any significant number of repos we recommend you package your Dangerfile in a gem, release it and use it via <code>danger.import_dangerfile(gem: "name")</code>. This allows you to specify versioned plugin dependencies and share rules.</p>
 
-<ol>
-<li>create a repo on your GitHub organization called <code>danger</code> (or <code>Danger</code>)</li>
-<li>Add a <code>Dangerfile</code> to the root of that repo</li>
-<li>The new <code>Dangerfile</code> is ran after the current repo’s <code>Dangerfile</code>
-</li>
-</ol>
+<p>See <a href="https://github.com/ruby-grape/danger" target="_blank">ruby-grape/danger</a> for an example.</p>
 
-<p>Then, assuming Danger can reach the other repo, she will download the Dangerfile from that
-repo and parse it in-place. This gives access to the same local and other environment variables.</p>
+<p>Alternatively you can also use a shared Dangerfile and import it via <code>danger.import_dangerfile(github: "org/repo")</code>. Assuming Danger can reach the other repo, she will download the Dangerfile from that repo and parse it in-place.</p>
+
+<p>This gives access to the same local and other environment variables.</p>
 
 <h4 id="multiple-dangers">
 <a class="header-link" href="#multiple-dangers">#</a>Multiple Dangers</h4>

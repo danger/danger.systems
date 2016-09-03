@@ -45,9 +45,9 @@ will be automatically imported into your Dangerfile at launch.</p>
 <p>Download a local or remote plugin and make it usable inside the Dangerfile.</p>
 </div>
 <code>import_plugin (path_or_url: String)</code><div class="fake_code">
-<p>Download and execute a remote Dangerfile.</p>
+<p>Import a Dangerfile.</p>
 </div>
-<code>import_dangerfile (slug: String)</code></article><article class="scope_code"><h3>Examples</h3>
+<code>import_dangerfile (opts: Hash)</code></article><article class="scope_code"><h3>Examples</h3>
 <h4>Import a plugin available over HTTP</h4>
 <div class="highlight"><pre><span class="n">device_grid</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/fastlane/fastlane/master/danger-device_grid/lib/device_grid/plugin.rb"</span>
 <span class="n">danger</span><span class="o">.</span><span class="n">import_plugin</span><span class="p">(</span><span class="n">device_grid</span><span class="p">)</span>
