@@ -22,14 +22,13 @@ Then Danger would not show that message, and would not fail the build if it were
 
 #### I want to run Danger across multiple repos
 
-To have consistent rules across the repos in your organisation, you can use a shared `danger.import_dangerfile "[repo]"`:
+For any significant number of repos we recommend you package your Dangerfile in a gem, release it and use it via `danger.import_dangerfile(gem: "name")`. This allows you to specify versioned plugin dependencies and share rules.
 
-1. create a repo on your GitHub organization called `danger` (or `Danger`)
-1. Add a `Dangerfile` to the root of that repo
-1. The new `Dangerfile` is ran after the current repo's `Dangerfile`
+See [ruby-grape/danger](https://github.com/ruby-grape/danger) for an example.
 
-Then, assuming Danger can reach the other repo, she will download the Dangerfile from that
-repo and parse it in-place. This gives access to the same local and other environment variables.
+Alternatively you can also use a shared Dangerfile and import it via `danger.import_dangerfile(github: "org/repo")`. Assuming Danger can reach the other repo, she will download the Dangerfile from that repo and parse it in-place.
+
+This gives access to the same local and other environment variables.
 
 #### Multiple Dangers
 
