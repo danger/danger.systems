@@ -103,16 +103,23 @@
 <p>You can <a href="/guides/getting_started.html">integrate Danger</a> into your own project on any available CI service. She will run through the process with you if you run  <code>danger init</code> after installation.</p>
 </article><article><h3>Supports</h3>
 <p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf and Bitrise.</p>
-<p><strong>Can chat back on</strong>: GitHub and GitLab.</p>
+<p><strong>Can chat back on</strong>: GitHub, GitLab and Bitbucket.</p>
 <p><strong>Can handle diffs from</strong>: Git.</p>
 <h3>Messaging Options</h3>
-<p><code>message("message")</code> - Comment a message to the table.</p>
+<p>Comment a message to the table:<br>
+<code>message("You have added 3 more gems to the app.")</code></p>
 
-<p><code>warn("message")</code> - Declares a CI warning.</p>
+<p>Declares a CI warning:<br>
+ <code>warn("You have not included a CHANGELOG entry.")</code></p>
 
-<p><code>fail("message")</code> - Declares a CI blocking error.</p>
+<p>Declares a CI blocking error:<br>
+ <code>fail("Our linter has failed.")</code></p>
 
-<p><code>markdown("message")</code> - Outputs pure markdown under the table. </p>
+<p>Outputs markdown under the table:<br>
+ <code>markdown("## ")</code></p>
+
+<p>Outputs markdown at a line in the diff:<br>
+ <code>warn("Please add your name", file: "CHANGELOG.md", line: 4)</code> </p>
 </article></section><h2><span>Plugins</span></h2>
 <section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with <code>danger plugins create</code>.</p>
 </article></section><section class="search_info"><article><ul>
