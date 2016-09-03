@@ -4,7 +4,7 @@
 <span class="n">has_test_changes</span> <span class="o">=</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/spec/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
 
 <span class="k">if</span> <span class="n">has_app_changes</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">has_test_changes</span>
-  <span class="nb">warn</span> <span class="s2">&quot;Tests were not updated&quot;</span>
+  <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Tests were not updated&quot;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
 <span class="k">end</span>
 
 <span class="c1"># Make a note about contributors not in the organization</span>
@@ -27,7 +27,7 @@
 <span class="n">declared_trivial</span> <span class="o">=</span> <span class="p">(</span><span class="n">github</span><span class="o">.</span><span class="n">pr_title</span> <span class="o">+</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_body</span><span class="p">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;#trivial&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">has_app_changes</span>
 
 <span class="k">if</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;CHANGELOG.md&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">declared_trivial</span>
-  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Please include a CHANGELOG entry. </span><span class="se">\n</span><span class="s2">You can find it at [CHANGELOG.md](https://github.com/danger/danger/blob/master/CHANGELOG.md).&quot;</span><span class="p">)</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;Please include a CHANGELOG entry. </span><span class="se">\n</span><span class="s2">You can find it at [CHANGELOG.md](https://github.com/danger/danger/blob/master/CHANGELOG.md).&quot;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
 <span class="k">end</span>
 
 <span class="c1"># Docs are critical, so let&#39;s re-run the docs part of the specs and show any issues:</span>
