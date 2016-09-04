@@ -18,9 +18,9 @@ pages:
   - git config --global user.name "Danger.Systems"
   - apt-get update -yqqq
   - apt-get install -y nodejs
-  - bundle install --path vendor
+  - bundle install
   - bundle exec rake generate
-  - bundle install --path vendor
+  - bundle install
   - cd static
   - bundle exec middleman build
   artifacts:
