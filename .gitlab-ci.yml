@@ -21,6 +21,7 @@ pages:
   - bundle install
   - cd static
   - bundle exec middleman build
+  - bundle exec middleman build
   - cd ..
   - mv static/build public
   artifacts:
