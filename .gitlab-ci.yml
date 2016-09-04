@@ -16,12 +16,14 @@ pages:
   script:
   - git config --global user.email "orta+dangersystems@artsy.net"
   - git config --global user.name "Danger.Systems"
+  - apt-get update -yqqq
+  - apt-get install -y nodejs
+  - bundle install --path vendor
   - bundle update danger
   - bundle exec rake generate
-  - bundle install
+  - bundle install --path vendor
   - cd static
   - bundle exec middleman build
-
   artifacts:
     paths:
     - static/build
