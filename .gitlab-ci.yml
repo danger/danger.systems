@@ -19,10 +19,11 @@ pages:
   - bundle update danger
   - bundle exec rake generate
   - bundle install
-  - bundle exec rake publish PROJECT_ROOT='static' BUILD_DIR='static/build' ALLOW_DIRTY=true
+  - cd static
+  - bundle exec middleman build
 
   artifacts:
     paths:
-    - public
+    - static/build
   only:
   - master
