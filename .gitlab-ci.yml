@@ -19,7 +19,6 @@ pages:
   - apt-get update -yqqq
   - apt-get install -y nodejs
   - bundle install --path vendor
-  - bundle update danger
   - bundle exec rake generate
   - bundle install --path vendor
   - cd static
