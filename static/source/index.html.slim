@@ -57,12 +57,6 @@ section
 
       You can [integrate Danger](/guides/getting_started.html) into your own project on any available CI service. She will run through the process with you if you run  `danger init` after installation.
 
-  article
-    h3 Supports
-    p <strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf and Bitrise.
-    p <strong>Can chat back on</strong>: GitHub, GitLab and Bitbucket.
-    p <strong>Can handle diffs from</strong>: Git.
-
     h3 Messaging Options
     markdown:
        Comment a message to the table:<br/>
@@ -79,6 +73,26 @@ section
         
         Outputs markdown at a line in the diff:<br/>
         `warn("Please add your name", file: "CHANGELOG.md", line: 4)` 
+
+  article
+    h3 Supports
+    p <strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf and Bitrise.
+    p <strong>Can chat back on</strong>: GitHub, GitLab and Bitbucket.
+    p <strong>Can handle diffs from</strong>: Git.
+    
+    h3 Features
+
+    markdown:
+      SCM    | Feedback | Inline<br>Comments | API<br>Access |
+      ------------ | -------------- | ----------------- | ----------- |
+      GitHub | ✅ | ✅ | ✅ 
+      GitHub Enterprise | ✅ | ✅ | ✅ 
+      GitLab.com | ✅ | 🚫 | ✅ 
+      GitLab CE | ✅ | 🚫 | ✅ 
+      GitLab EE | ✅ | 🚫 | ✅ 
+      Bitbucket.org | 🚫 | 🚫 | 🚫
+      Bitbucket Server | ✅ | 🚫 | 🚫
+
 
 h2
   span Plugins

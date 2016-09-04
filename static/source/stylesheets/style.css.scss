@@ -284,8 +284,25 @@ body {
                 margin-bottom: 0px;
             }
         }
-
     }
+
+    table {
+        font-family: "Avenir Book";
+        font-size: 17px;
+        width: 100%;
+        thead tr th {
+            border-bottom: 1px solid black;
+        }
+        tr td {
+            text-align: center;
+            padding: 10px 10px;
+            border-bottom: 1px solid lightgrey;
+        }
+        tr td:first-child {
+            text-align: left;
+        }
+    }
+    
     .clearfix {
         clear: both;
     }
