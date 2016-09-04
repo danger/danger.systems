@@ -16,6 +16,7 @@ pages:
   - apt-get install -y nodejs
   - gem install bundler
   - bundle install
+  - export RUBYOPT='-E utf-8'
   - bundle exec rake generate
   - bundle install
   - cd static
