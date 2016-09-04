@@ -85,11 +85,6 @@ It returns a string of multiple anchors if passed an array.</p>
 <h4>Ensure that labels have been used on the PR</h4>
 <div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please add labels to this PR"</span> <span class="k">if</span> <span class="n">bitbucket_server</span><span class="o">.</span><span class="n">pr_labels</span><span class="o">.</span><span class="n">empty?</span>
 </pre></div>
-<h4>Check if a user is in a specific bitbucket_server org, and message them if so</h4>
-<div class="highlight"><pre><span class="k">unless</span> <span class="n">bitbucket_server</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">organization_member?</span><span class="p">(</span><span class="s1">'danger'</span><span class="p">,</span> <span class="n">bitbucket_server</span><span class="o">.</span><span class="n">pr_author</span><span class="p">)</span>
-  <span class="n">message</span> <span class="s2">"@</span><span class="si">#{</span><span class="n">bitbucket_server</span><span class="o">.</span><span class="n">pr_author</span><span class="si">}</span><span class="s2"> is not a contributor yet, would you like to join the Danger org?"</span>
-<span class="k">end</span>
-</pre></div>
 <h4>Ensure there is a summary for a PR</h4>
 <div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please provide a summary in the Pull Request description"</span> <span class="k">if</span> <span class="n">bitbucket_server</span><span class="o">.</span><span class="n">pr_body</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">5</span>
 </pre></div>
@@ -113,11 +108,8 @@ It returns a string of multiple anchors if passed an array.</p>
 </pre></div></article><div class="clearfix"></div>
 
 </section><h2><span>danger</span></h2>
-<section><article class="scope_code"><p>One way to support internal plugins is via <code>plugin.import</code> this gives you
-the chance to quickly iterate without the need for building rubygems. As such,
-it does not have the stringent rules around documentation expected of a public plugin.
-It's worth noting, that you can also have plugins inside <code>./danger_plugins</code> and they
-will be automatically imported into your Dangerfile at launch.</p>
+<section><article class="scope_code"><p>A way to interact with Danger herself. Offering APIs to import plugins,
+and Dangerfiles from muliple sources.</p>
 <h3>Reference</h3>
 <h4>Methods</h4>
 <div class="fake_code">
@@ -126,7 +118,10 @@ will be automatically imported into your Dangerfile at launch.</p>
 <code>import_plugin (path_or_url: String)</code><div class="fake_code">
 <p>Import a Dangerfile.</p>
 </div>
-<code>import_dangerfile (opts: Hash)</code></article><article class="scope_code"><h3>Examples</h3>
+<code>import_dangerfile (opts: Hash)</code><div class="fake_code">
+<p>Returns the name of the current SCM Provider being used.</p>
+</div>
+<code>scm_provider <span class="subtle return">Symbol</span></code></article><article class="scope_code"><h3>Examples</h3>
 <h4>Import a plugin available over HTTP</h4>
 <div class="highlight"><pre><span class="n">device_grid</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/fastlane/fastlane/master/danger-device_grid/lib/device_grid/plugin.rb"</span>
 <span class="n">danger</span><span class="o">.</span><span class="n">import_plugin</span><span class="p">(</span><span class="n">device_grid</span><span class="p">)</span>
@@ -136,6 +131,15 @@ will be automatically imported into your Dangerfile at launch.</p>
 </pre></div>
 <h4>Import all files inside a folder</h4>
 <div class="highlight"><pre><span class="n">danger</span><span class="o">.</span><span class="n">import_plugin</span><span class="p">(</span><span class="s2">"danger/plugins/*.rb"</span><span class="p">)</span>
+</pre></div>
+<h4>Run a Dangerfile from inside a sub-folder</h4>
+<div class="highlight"><pre><span class="n">danger</span><span class="o">.</span><span class="n">import_dangerfile</span><span class="p">(</span><span class="ss">file</span><span class="p">:</span> <span class="s2">"danger/Dangerfile.private"</span><span class="p">)</span>
+</pre></div>
+<h4>Run a Dangerfile from inside a gem</h4>
+<div class="highlight"><pre><span class="n">danger</span><span class="o">.</span><span class="n">import_dangerfile</span><span class="p">(</span><span class="ss">gem</span><span class="p">:</span> <span class="s2">"ruby-grape-danger"</span><span class="p">)</span>
+</pre></div>
+<h4>Run a Dangerfile from inside a repo</h4>
+<div class="highlight"><pre><span class="n">danger</span><span class="o">.</span><span class="n">import_dangerfile</span><span class="p">(</span><span class="ss">gitlab</span><span class="p">:</span> <span class="s2">"ruby-grape/danger"</span><span class="p">)</span>
 </pre></div></article><div class="clearfix"></div></section><h2><span>git</span></h2>
 <section>
 
@@ -311,13 +315,19 @@ through a few standard functions to simplify your code.</p>
 <p>The labels assigned to the Merge Request</p>
 </div>
 <code>mr_labels <span class="subtle return">String</span></code><div class="fake_code">
-<p>The unified diff produced by GitLab for this PR
+<p>The unified diff produced by GitLab for this MR
 see <a href="https://en.wikipedia.org/wiki/Diff_utility#Unified_format" target="_blank">Unified diff</a></p>
 </div>
 <code>mr_diff <span class="subtle return">String</span></code><div class="fake_code">
 <p>The branch to which the MR is going to be merged into</p>
 </div>
 <code>branch_for_merge <span class="subtle return">String</span></code><div class="fake_code">
+<p>The branch to which the MR is going to be merged into.</p>
+</div>
+<code>branch_for_base <span class="subtle return">String</span></code><div class="fake_code">
+<p>The branch to which the MR is going to be merged from.</p>
+</div>
+<code>branch_for_head <span class="subtle return">String</span></code><div class="fake_code">
 <p>The base commit to which the MR is going to be merged as a parent</p>
 </div>
 <code>base_commit <span class="subtle return">String</span></code><div class="fake_code">
@@ -329,49 +339,51 @@ structure <a href="http://docs.gitlab.com/ce/api/merge_requests.html#get-single-
 </div>
 <code>mr_json <span class="subtle return">Hash</span></code><div class="fake_code">
 <p>Provides access to the GitLab API client used inside Danger. Making
-it easy to use the GitLab API inside a Dangerfile.</p>
+it easy to use the GitLab API inside a Dangerfile. See the gitlab
+gem's <a href="http://www.rubydoc.info/gems/gitlab/Gitlab/Client" target="_blank">documentation</a>
+for accessible methods.</p>
 </div>
 <code>api <span class="subtle return">GitLab::Client</span></code><div class="fake_code">
 <p>Returns a list of HTML anchors for a file, or files in the head repository. An example would be:
 <code>&lt;a href='https://gitlab.com/artsy/eigen/blob/561827e46167077b5e53515b4b7349b8ae04610b/file.txt'&gt;file.txt&lt;/a&gt;</code>. It returns a string of multiple anchors if passed an array.</p>
 </div>
 <code>html_link (paths: String or Array<string>, full_path=true: Bool)<span class="subtle return">String</span></string></code></article><article class="scope_code"><h3>Examples</h3>
-<h4>Warn when an MR is classed as work in progress</h4>
+<h4>Warn when an MR is classed as work in progress.</h4>
 <div class="highlight"><pre><span class="nb">warn</span> <span class="s2">"MR is classed as Work in Progress"</span> <span class="k">if</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">"[WIP]"</span>
 </pre></div>
-<h4>Declare a MR to be simple to avoid specific Danger rules</h4>
+<h4>Declare a MR to be simple to avoid specific Danger rules.</h4>
 <div class="highlight"><pre><span class="n">declared_trivial</span> <span class="o">=</span> <span class="p">(</span><span class="n">gitlab</span><span class="o">.</span><span class="n">mr_title</span> <span class="o">+</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_body</span><span class="p">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">"#trivial"</span><span class="p">)</span>
 </pre></div>
-<h4>Ensure that labels have been applied to the MR</h4>
+<h4>Ensure that labels have been applied to the MR.</h4>
 <div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please add labels to this MR"</span> <span class="k">if</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_labels</span><span class="o">.</span><span class="n">empty?</span>
 </pre></div>
-<h4>Ensure that all MRs have an assignee</h4>
+<h4>Ensure that all MRs have an assignee.</h4>
 <div class="highlight"><pre><span class="nb">warn</span> <span class="s2">"This MR does not have any assignees yet."</span> <span class="k">unless</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_json</span><span class="o">[</span><span class="s2">"assignee"</span><span class="o">]</span>
 </pre></div>
-<h4>Ensure there is a summary for a MR</h4>
-<div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please provide a summary in the Pull Request description"</span> <span class="k">if</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_body</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">5</span>
+<h4>Ensure there is a summary for a MR.</h4>
+<div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please provide a summary in the Merge Request description"</span> <span class="k">if</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_body</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">5</span>
 </pre></div>
-<h4>Only accept MRs to the develop branch</h4>
+<h4>Only accept MRs to the develop branch.</h4>
 <div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please re-submit this MR to develop, we may have already fixed your issue."</span> <span class="k">if</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">branch_for_merge</span> <span class="o">!=</span> <span class="s2">"develop"</span>
 </pre></div>
-<h4>Note when MRs don't reference a milestone, which goes away when it does</h4>
+<h4>Note when MRs don't reference a milestone, which goes away when it does.</h4>
 <div class="highlight"><pre><span class="n">has_milestone</span> <span class="o">=</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_json</span><span class="o">[</span><span class="s2">"milestone"</span><span class="o">]</span> <span class="o">!=</span> <span class="kp">nil</span>
 <span class="nb">warn</span><span class="p">(</span><span class="s2">"This MR does not refer to an existing milestone"</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span> <span class="k">unless</span> <span class="n">has_milestone</span>
 </pre></div>
-<h4>Note when a MR cannot be manually merged, which goes away when you can</h4>
+<h4>Note when a MR cannot be manually merged, which goes away when you can.</h4>
 <div class="highlight"><pre><span class="n">can_merge</span> <span class="o">=</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_json</span><span class="o">[</span><span class="s2">"mergeable"</span><span class="o">]</span>
 <span class="nb">warn</span><span class="p">(</span><span class="s2">"This MR cannot be merged yet."</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span> <span class="k">unless</span> <span class="n">can_merge</span>
 </pre></div>
-<h4>Highlight when a celebrity makes a pull request</h4>
+<h4>Highlight when a celebrity makes a merge request.</h4>
 <div class="highlight"><pre><span class="n">message</span> <span class="s2">"Welcome, Danger."</span> <span class="k">if</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">mr_author</span> <span class="o">==</span> <span class="s2">"dangermcshane"</span>
 </pre></div>
-<h4>Send a message with links to a collection of specific files</h4>
+<h4>Send a message with links to a collection of specific files.</h4>
 <div class="highlight"><pre><span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span> <span class="s2">"config/*.js"</span>
   <span class="n">config_files</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">path</span><span class="o">|</span> <span class="n">path</span><span class="o">.</span><span class="n">include?</span> <span class="s2">"config/"</span> <span class="p">}</span>
   <span class="n">message</span> <span class="s2">"This MR changes </span><span class="si">#{</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">html_link</span><span class="p">(</span><span class="n">config_files</span><span class="p">)</span> <span class="si">}</span><span class="s2">"</span>
 <span class="k">end</span>
 </pre></div>
-<h4>Highlight with a clickable link if a Package.json is changed</h4>
+<h4>Highlight with a clickable link if a Package.json is changed.</h4>
 <div class="highlight"><pre><span class="nb">warn</span> <span class="s2">"</span><span class="si">#{</span><span class="n">gitlab</span><span class="o">.</span><span class="n">html_link</span><span class="p">(</span><span class="s2">"Package.json"</span><span class="p">)</span><span class="si">}</span><span class="s2"> was edited."</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span> <span class="s2">"Package.json"</span>
 </pre></div></article><div class="clearfix"></div>
 

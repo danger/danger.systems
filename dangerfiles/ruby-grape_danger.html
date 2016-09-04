@@ -3,10 +3,6 @@
 <span class="c1"># --------------------------------------------------------------------------------------------------------------------</span>
 <span class="n">has_app_changes</span> <span class="o">=</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/lib/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
 <span class="n">has_spec_changes</span> <span class="o">=</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/spec/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
-<span class="n">has_changelog_changes</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;CHANGELOG.md&#39;</span><span class="p">)</span>
-<span class="n">has_dangerfile_changes</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;Dangerfile&#39;</span><span class="p">)</span>
-<span class="n">has_rakefile_changes</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;Rakefile&#39;</span><span class="p">)</span>
-<span class="n">has_code_changes</span> <span class="o">=</span> <span class="n">has_app_changes</span> <span class="o">||</span> <span class="n">has_dangerfile_changes</span> <span class="o">||</span> <span class="n">has_rakefile_changes</span>
 
 <span class="c1"># --------------------------------------------------------------------------------------------------------------------</span>
 <span class="c1"># You&#39;ve made changes to lib, but didn&#39;t write any tests?</span>
@@ -25,44 +21,7 @@
 <span class="c1"># --------------------------------------------------------------------------------------------------------------------</span>
 <span class="c1"># Have you updated CHANGELOG.md?</span>
 <span class="c1"># --------------------------------------------------------------------------------------------------------------------</span>
-<span class="k">if</span> <span class="o">!</span><span class="n">has_changelog_changes</span> <span class="o">&amp;&amp;</span> <span class="n">has_code_changes</span>
-  <span class="n">pr_number</span> <span class="o">=</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_json</span><span class="o">[</span><span class="s1">&#39;number&#39;</span><span class="o">]</span>
-  <span class="n">markdown</span> <span class="o">&lt;&lt;-</span><span class="no">MARKDOWN</span>
-<span class="sh">Here&#39;s an example of a CHANGELOG.md entry:</span>
-
-<span class="sh">```markdown</span>
-<span class="sh">* [##{pr_number}](https://github.com/ruby-grape/grape/pull/#{pr_number}): #{github.pr_title} - [@#{github.pr_author}](https://github.com/#{github.pr_author}).</span>
-<span class="sh">```</span>
-<span class="no">MARKDOWN</span>
-  <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Unless you&#39;re refactoring existing code, please update CHANGELOG.md.&quot;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
-<span class="k">end</span>
-
-<span class="c1"># --------------------------------------------------------------------------------------------------------------------</span>
-<span class="c1"># Is the CHANGELOG.md format correct?</span>
-<span class="c1"># --------------------------------------------------------------------------------------------------------------------</span>
-
-<span class="n">your_contribution_here</span> <span class="o">=</span> <span class="kp">false</span>
-<span class="n">errors</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;CHANGELOG.md&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">each_line</span> <span class="k">do</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
-  <span class="c1"># ignore lines that aren&#39;t changes</span>
-  <span class="k">next</span> <span class="k">unless</span> <span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span>
-  <span class="c1"># notice your contribution here</span>
-  <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;* Your contribution here.</span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="n">your_contribution_here</span> <span class="o">=</span> <span class="kp">true</span>
-    <span class="k">next</span>
-  <span class="k">end</span>
-  <span class="c1"># match the PR format, with or without PR number</span>
-  <span class="k">next</span> <span class="k">if</span> <span class="n">line</span> <span class="o">=~</span> <span class="sr">%r{^\*\s[\`[:upper:]].* \- \[\@[\w\d\-\_]+\]\(https:\/\/github\.com\/.*[\w\d\-\_]+\)\.$}</span>
-  <span class="k">next</span> <span class="k">if</span> <span class="n">line</span> <span class="o">=~</span> <span class="sr">%r{^\*\s\[\#\d+\]\(https:\/\/github\.com\/.*\d+\)\: [\`[:upper:]].* \- \[\@[\w\d\-\_]+\]\(https:\/\/github\.com\/.*[\w\d\-\_]+\)\.$}</span>
-  <span class="n">errors</span> <span class="o">+=</span> <span class="mi">1</span>
-  <span class="n">markdown</span> <span class="o">&lt;&lt;-</span><span class="no">MARKDOWN</span>
-<span class="sh">```markdown</span>
-<span class="sh">#{line}```</span>
-<span class="no">  MARKDOWN</span>
-<span class="k">end</span>
-
-<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;One of the lines below found in CHANGELOG.md doesn&#39;t match the expected format. Please make it look like the other lines, pay attention to periods and spaces.&quot;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span> <span class="k">if</span> <span class="n">errors</span> <span class="o">&gt;</span> <span class="mi">0</span>
-<span class="nb">fail</span><span class="p">(</span><span class="s1">&#39;Please put back the `* Your contribution here.` line into CHANGELOG.md.&#39;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span> <span class="k">unless</span> <span class="n">your_contribution_here</span>
+<span class="n">changelog</span><span class="o">.</span><span class="n">check</span>
 
 <span class="c1"># --------------------------------------------------------------------------------------------------------------------</span>
 <span class="c1"># Don&#39;t let testing shortcuts get into master by accident,</span>
