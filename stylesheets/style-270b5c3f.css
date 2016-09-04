@@ -188,6 +188,18 @@ body {
         font-size: 14px;
         color: #848684;
         margin-bottom: 0px; }
+  body table {
+    font-family: "Avenir Book";
+    font-size: 17px;
+    width: 100%; }
+    body table thead tr th {
+      border-bottom: 1px solid black; }
+    body table tr td {
+      text-align: center;
+      padding: 10px 10px;
+      border-bottom: 1px solid lightgrey; }
+    body table tr td:first-child {
+      text-align: left; }
   body .clearfix {
     clear: both; }
   body > section.guide img {

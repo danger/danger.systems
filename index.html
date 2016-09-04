@@ -17,7 +17,7 @@
 <meta content="/images/square-ffd55d21.png" property="og:image">
 <meta content="http://danger.systems/index.html" property="og:url">
 <title>Danger - Stop Saying "You Forgot To…" in Code Review</title>
-<link href="/stylesheets/style-d5db0848.css" rel="stylesheet">
+<link href="/stylesheets/style-270b5c3f.css" rel="stylesheet">
 <link href="/stylesheets/highlight-53578f94.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
@@ -101,10 +101,6 @@
 <p>Danger should be installed via a Gemfile. Add <code>gem "danger"</code> to your Gemfile, then run <code>bundle</code>.</p>
 
 <p>You can <a href="/guides/getting_started.html">integrate Danger</a> into your own project on any available CI service. She will run through the process with you if you run  <code>danger init</code> after installation.</p>
-</article><article><h3>Supports</h3>
-<p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf and Bitrise.</p>
-<p><strong>Can chat back on</strong>: GitHub, GitLab and Bitbucket.</p>
-<p><strong>Can handle diffs from</strong>: Git.</p>
 <h3>Messaging Options</h3>
 <p>Comment a message to the table:<br>
 <code>message("You have added 3 more gems to the app.")</code></p>
@@ -120,6 +116,65 @@
 
 <p>Outputs markdown at a line in the diff:<br>
  <code>warn("Please add your name", file: "CHANGELOG.md", line: 4)</code> </p>
+</article><article><h3>Supports</h3>
+<p><strong>Can run on</strong>: Circle, Travis, Jenkins, Buildkite, Semaphore, TeamCity, Xcode Bots, Drone, Surf and Bitrise.</p>
+<p><strong>Can chat back on</strong>: GitHub, GitLab and Bitbucket.</p>
+<p><strong>Can handle diffs from</strong>: Git.</p>
+<h3>Features</h3>
+<table>
+<thead>
+<tr>
+<th>SCM</th>
+<th>Feedback</th>
+<th>Inline<br>Comments</th>
+<th>API<br>Access</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>GitHub Enterprise</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>GitLab.com</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>GitLab CE</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>GitLab EE</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Bitbucket.org</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+</tr>
+<tr>
+<td>Bitbucket Server</td>
+<td>✅</td>
+<td>🚫</td>
+<td>🚫</td>
+</tr>
+</tbody>
+</table>
 </article></section><h2><span>Plugins</span></h2>
 <section><article><p>Danger was built to be a small core, which allows others to extend her DSL via gems as plugins. You can create a new one with <code>danger plugins create</code>.</p>
 </article></section><section class="search_info"><article><ul>
