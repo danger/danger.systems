@@ -1,0 +1,30 @@
+# This file is a template, and might need editing before it works on your project.
+# Full project: https://gitlab.com/pages/middleman
+image: ruby:2.2
+
+test:
+  script:
+  - echo "Hi"
+  except:
+    - master
+
+pages:
+  script:
+  - git config --global user.email "orta+dangersystems@artsy.net"
+  - git config --global user.name "Danger.Systems"
+  - apt-get update -yqqq
+  - apt-get install -y nodejs
+  - gem install bundler
+  - bundle install
+  - export RUBYOPT='-E utf-8'
+  - bundle exec rake generate
+  - bundle install
+  - cd static
+  - bundle exec middleman build --clean
+  - cd ..
+  - mv static/build public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
