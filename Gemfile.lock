@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/danger/danger.git
-  revision: ca4e9a377bac1ce04f8ccd6f343d151e2c190bc3
+  revision: d0905e98fab2b4e8db415f2a9d22b5d982bdbfaa
   specs:
-    danger (3.2.0)
+    danger (3.2.1)
       claide (~> 1.0)
       claide-plugins (> 0.9.0)
       colored (~> 1.2)
