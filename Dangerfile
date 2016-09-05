@@ -18,3 +18,7 @@ if diff
     markdown "\n\n ---\n"
   end
 end
+
+if danger.scm_provider == :github
+  warn("danger.systems has moved📦. The repo is now on [GitLab](https://gitlab.com/danger-systems/danger.systems). Please open an MR for that repo")
+end
