@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><section>
+
+<article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/duplicate_localizable_strings.html">duplicate_localizable_strings</a></h3>
+<p>Simple plugin that checks for duplicate entries in changed
+Localizable.strings files</p>
+<p>Created by AirHelp.</p>
+<h3>Reference</h3>
+<h4>Methods</h4>
+<div class="fake_code">
+<p>Returns an array of all detected duplicate entries. An entry is
+represented by a has with file path under 'file' key and the
+Localizable.strings key under 'key' key.</p>
+</div>
+<code>localizable_duplicate_entries <span class="subtle return">Array of duplicate Localizable.strings entries</span></code><div class="fake_code">
+<p>Prints passed duplicated entries.</p>
+</div>
+<code>print_duplicate_entries </code><div class="fake_code">
+<p>Checks whether there are any duplicated entries in all Localizable.strings
+files and prints out any found duplicates.</p>
+</div>
+<code>check_localizable_duplicates </code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Checks whether there are duplicate entries in Localizable.strings</h4>
+<div class="highlight"><pre><span class="n">check_localizable_duplicates</span>
+</pre></div>
+<h3>How to Install</h3>
+<p>Include <code>gem "danger-duplicate_localizable_strings"</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
+
+<p>Then inside your Dangerfile, you can access the plugin via <code>duplicate_localizable_strings</code>.</p>
+<h3>Tags</h3>
+<code>localization</code><h3>Repository</h3>
+<ul><li><a href="https://github.com/AirHelp/danger-duplicate_localizable_strings" target="_blank">https://github.com/AirHelp/danger-duplicate_localizable_strings</a></li></ul></article><div class="clearfix"></div>
+
+</section></body></html>
