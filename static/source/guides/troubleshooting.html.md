@@ -55,6 +55,6 @@ Yeah... We're struggling with that one. It's something we keep taking stabs at i
 [circle_issues]: https://github.com/danger/danger/search?q=circle&state=open&type=Issues&utf8=✓
 [circle_pr]: https://discuss.circleci.com/t/pull-requests-not-triggering-build/1213
 [pry]: http://pryrepl.org
-[rmv]: http://rvm.io
+[rvm]: http://rvm.io
 [rbenv]: https://github.com/rbenv/rbenv
 [skip_gemfile]: /guides/getting_started.html#installation-without-bundler
