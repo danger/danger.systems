@@ -218,7 +218,8 @@ id so that Danger can use your Bitbucket Server’s API. As of right now, only J
 
 <h3>Token Setup</h3>
 
-<p>Add the <code>DANGER_GITHUB_API_TOKEN</code> to your workflow's Secret Env Vars</p>
+<p>Add the <code>DANGER_GITHUB_API_TOKEN</code> to your workflow's App Env Vars.
+Warning: adding the token as a Secret Env Var will not work for PR builds, as <a href="https://bitrise.uservoice.com/forums/235233-general/suggestions/11701587-make-secret-env-variables-available-for-prs-from-t" target="_blank">Bitrise does not expose secret vars to PRs</a>.</p>
 </div>
 <div class="buildkite" style="display:none;">
 <h3>CI Setup</h3>

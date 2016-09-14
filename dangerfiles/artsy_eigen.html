@@ -6,10 +6,10 @@
 <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;PR is classed as Work in Progress&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;[WIP]&quot;</span>
 
 <span class="c1"># Oi, CHANGELOGs please</span>
-<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;No CHANGELOG changes made&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">github</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;CHANGELOG.yml&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">declared_trivial</span>
+<span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;No CHANGELOG changes made&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;CHANGELOG.yml&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">declared_trivial</span>
 
 <span class="c1"># Stop skipping some manual testing</span>
-<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Needs testing on a Phone if change is non-trivial&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;📱&quot;</span><span class="p">)</span>
+<span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Needs testing on a Phone if change is non-trivial&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">lines_of_code</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">github</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;📱&quot;</span><span class="p">)</span>
 
 <span class="c1"># Don&#39;t let testing shortcuts get into master</span>
 <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;fdescribe left in tests&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="sb">`grep -r fdescribe Artsy_Tests/`</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">1</span>
@@ -43,12 +43,12 @@
   <span class="n">readme_data</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load</span> <span class="n">readme_yaml</span>
 
   <span class="c1"># Common error when making a new version</span>
-  <span class="nb">fail</span> <span class="s2">&quot;Upcoming is an array, it should be an object&quot;</span> <span class="k">if</span> <span class="n">readme_data</span><span class="o">[</span><span class="s2">&quot;upcoming&quot;</span><span class="o">].</span><span class="n">is_a?</span> <span class="nb">Array</span>  
+  <span class="nb">fail</span> <span class="s2">&quot;Upcoming is an array, it should be an object&quot;</span> <span class="k">if</span> <span class="n">readme_data</span><span class="o">[</span><span class="s2">&quot;upcoming&quot;</span><span class="o">].</span><span class="n">is_a?</span> <span class="nb">Array</span>
 
   <span class="c1"># Tie all releases to a date</span>
   <span class="k">for</span> <span class="n">release</span> <span class="k">in</span> <span class="n">readme_data</span><span class="o">[</span><span class="s2">&quot;releases&quot;</span><span class="o">]</span>
-    <span class="nb">fail</span> <span class="s2">&quot;Release </span><span class="si">#{</span><span class="n">release</span><span class="o">[</span><span class="s2">&quot;version&quot;</span><span class="o">]</span><span class="si">}</span><span class="s2"> does not have a date&quot;</span> <span class="k">unless</span> <span class="n">release</span><span class="o">[</span><span class="s2">&quot;date&quot;</span><span class="o">]</span>
-  <span class="k">end</span> 
+    <span class="nb">fail</span> <span class="s2">&quot;Release </span><span class="si">#{</span><span class="n">release</span><span class="o">[</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> does not have a date&quot;</span> <span class="k">unless</span> <span class="n">release</span><span class="o">[</span><span class="s2">&quot;date&quot;</span><span class="o">]</span>
+  <span class="k">end</span>
 
 <span class="k">rescue</span> <span class="no">StandardError</span>
   <span class="c1"># YAML could not be parsed, fail the build.</span>
@@ -105,4 +105,9 @@
 
   <span class="n">markdown</span><span class="p">((</span><span class="o">[</span><span class="n">headings</span><span class="o">]</span> <span class="o">+</span> <span class="n">warnings</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">)</span>
 <span class="k">end</span>
+
+<span class="c1"># Give inline test fail reports</span>
+<span class="n">results_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;CIRCLE_TEST_REPORTS&quot;</span><span class="o">]</span><span class="p">,</span> <span class="s2">&quot;/xcode/results.xml&quot;</span><span class="p">)</span>
+<span class="n">junit</span><span class="o">.</span><span class="n">parse</span> <span class="n">results_file</span>
+<span class="n">junit</span><span class="o">.</span><span class="n">report</span>
 </pre></div>

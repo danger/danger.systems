@@ -75,7 +75,11 @@ see the <a href="https://raw.githubusercontent.com/danger/danger/master/spec/fix
 <p>Returns a list of HTML anchors for a file, or files in the head repository.
 It returns a string of multiple anchors if passed an array.</p>
 </div>
-<code>html_link (paths: String or Array<string>, full_path=true: Bool)<span class="subtle return">String</span></string></code></article><article class="scope_code"><h3>Examples</h3>
+<code>html_link (paths: String or Array<string>, full_path=true: Bool)<span class="subtle return">String</span></string></code><div class="fake_code">
+<p>Returns a list of Markdown links for a file, or files in the head repository.
+It returns a string of multiple links if passed an array.</p>
+</div>
+<code>markdown_link (paths: String or Array<string>, full_path=true: Bool)<span class="subtle return">String</span></string></code></article><article class="scope_code"><h3>Examples</h3>
 <h4>Warn when a PR is classed as work in progress</h4>
 <div class="highlight"><pre><span class="nb">warn</span> <span class="s2">"PR is classed as Work in Progress"</span> <span class="k">if</span> <span class="n">bitbucket_server</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">"[WIP]"</span>
 </pre></div>
