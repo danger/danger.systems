@@ -33,7 +33,85 @@
 <span>Reference</span><code class="byline inline">a project from <a target="_blank" href="http://orta.io">orta therox</a> and <a target="_blank" href="https://github.com/danger/danger/graphs/contributors">other core contributors</a>.</code>
 </h2>
 
-<h2><span>bitbucket_server</span></h2>
+<h2><span>bitbucket_cloud</span></h2>
+<section>
+
+<article class="scope_code"><p>Handles interacting with Bitbucket Cloud inside a Dangerfile. Provides a few functions which wrap <code>pr_json</code> and also
+through a few standard functions to simplify your code.</p>
+<h3>Reference</h3>
+<h4>Methods</h4>
+<div class="fake_code">
+<p>The hash that represents the PR's JSON. For an example of what this looks like
+see the <a href="https://raw.githubusercontent.com/danger/danger/master/spec/fixtures/bitbucket_cloud_api/pr_response.json" target="_blank">Danger Fixture'd one</a>.</p>
+</div>
+<code>pr_json <span class="subtle return">Hash</span></code><div class="fake_code">
+<p>The title of the Pull Request.</p>
+</div>
+<code>pr_title <span class="subtle return">String</span></code><div class="fake_code">
+<p>The body text of the Pull Request.</p>
+</div>
+<code>pr_description <span class="subtle return">String</span></code><div class="fake_code">
+<p>The body text of the Pull Request.</p>
+</div>
+<code>pr_body <span class="subtle return">String</span></code><div class="fake_code">
+<p>The username of the author of the Pull Request.</p>
+</div>
+<code>pr_author <span class="subtle return">String</span></code><div class="fake_code">
+<p>The branch to which the PR is going to be merged into.</p>
+</div>
+<code>branch_for_base <span class="subtle return">String</span></code><div class="fake_code">
+<p>A href that represents the current PR</p>
+</div>
+<code>pr_link <span class="subtle return">String</span></code><div class="fake_code">
+<p>The branch to which the PR is going to be merged from.</p>
+</div>
+<code>branch_for_head <span class="subtle return">String</span></code><div class="fake_code">
+<p>The base commit to which the PR is going to be merged as a parent.</p>
+</div>
+<code>base_commit <span class="subtle return">String</span></code><div class="fake_code">
+<p>The head commit to which the PR is requesting to be merged from.</p>
+</div>
+<code>head_commit <span class="subtle return">String</span></code><div class="fake_code">
+<p>Returns a list of HTML anchors for a file, or files in the head repository.
+It returns a string of multiple anchors if passed an array.</p>
+</div>
+<code>html_link (paths: String or Array<string>, full_path=true: Bool)<span class="subtle return">String</span></string></code><div class="fake_code">
+<p>Returns a list of Markdown links for a file, or files in the head repository.
+It returns a string of multiple links if passed an array.</p>
+</div>
+<code>markdown_link (paths: String or Array<string>, full_path=true: Bool)<span class="subtle return">String</span></string></code></article><article class="scope_code"><h3>Examples</h3>
+<h4>Warn when a PR is classed as work in progress</h4>
+<div class="highlight"><pre><span class="nb">warn</span> <span class="s2">"PR is classed as Work in Progress"</span> <span class="k">if</span> <span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">pr_title</span><span class="o">.</span><span class="n">include?</span> <span class="s2">"[WIP]"</span>
+</pre></div>
+<h4>Declare a PR to be simple to avoid specific Danger rules</h4>
+<div class="highlight"><pre><span class="n">declared_trivial</span> <span class="o">=</span> <span class="p">(</span><span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">pr_title</span> <span class="o">+</span> <span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">pr_body</span><span class="p">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">"#trivial"</span><span class="p">)</span>
+</pre></div>
+<h4>Ensure that labels have been used on the PR</h4>
+<div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please add labels to this PR"</span> <span class="k">if</span> <span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">pr_labels</span><span class="o">.</span><span class="n">empty?</span>
+</pre></div>
+<h4>Ensure there is a summary for a PR</h4>
+<div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please provide a summary in the Pull Request description"</span> <span class="k">if</span> <span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">pr_body</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">5</span>
+</pre></div>
+<h4>Only accept PRs to the develop branch</h4>
+<div class="highlight"><pre><span class="nb">fail</span> <span class="s2">"Please re-submit this PR to develop, we may have already fixed your issue."</span> <span class="k">if</span> <span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">branch_for_base</span> <span class="o">!=</span> <span class="s2">"develop"</span>
+</pre></div>
+<h4>Highlight when a celebrity makes a pull request</h4>
+<div class="highlight"><pre><span class="n">message</span> <span class="s2">"Welcome, Danger."</span> <span class="k">if</span> <span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">pr_author</span> <span class="o">==</span> <span class="s2">"dangermcshane"</span>
+</pre></div>
+<h4>Ensure that all PRs have an assignee</h4>
+<div class="highlight"><pre><span class="nb">warn</span> <span class="s2">"This PR does not have any assignees yet."</span> <span class="k">unless</span> <span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">pr_json</span><span class="o">[</span><span class="s2">"reviewers"</span><span class="o">].</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+<h4>Send a message with links to a collection of specific files</h4>
+<div class="highlight"><pre><span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span> <span class="s2">"config/*.js"</span>
+  <span class="n">config_files</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">path</span><span class="o">|</span> <span class="n">path</span><span class="o">.</span><span class="n">include?</span> <span class="s2">"config/"</span> <span class="p">}</span>
+  <span class="n">message</span> <span class="s2">"This PR changes </span><span class="si">#{</span> <span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">html_link</span><span class="p">(</span><span class="n">config_files</span><span class="p">)</span> <span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+</pre></div>
+<h4>Highlight with a clickable link if a Package.json is changed</h4>
+<div class="highlight"><pre><span class="nb">warn</span> <span class="s2">"</span><span class="si">#{</span><span class="n">bitbucket_cloud</span><span class="o">.</span><span class="n">html_link</span><span class="p">(</span><span class="s2">"Package.json"</span><span class="p">)</span><span class="si">}</span><span class="s2"> was edited."</span> <span class="k">if</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">include?</span> <span class="s2">"Package.json"</span>
+</pre></div></article><div class="clearfix"></div>
+
+</section><h2><span>bitbucket_server</span></h2>
 <section>
 
 <article class="scope_code"><p>Handles interacting with Bitbucket Server inside a Dangerfile. Provides a few functions which wrap <code>pr_json</code> and also
