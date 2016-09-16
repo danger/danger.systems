@@ -175,7 +175,10 @@ access to the commits in the form of <a href="https://github.com/schacon/ruby-gi
 <code>commits <span class="subtle return">Git::Log</span></code><div class="fake_code">
 <p>Details for a specific file in this diff</p>
 </div>
-<code>diff_for_file <span class="subtle return">Git::Diff::DiffFile</span></code></article><article class="scope_code"><h3>Examples</h3>
+<code>diff_for_file <span class="subtle return">Git::Diff::DiffFile</span></code><div class="fake_code">
+<p>Statistics for a specific file in this diff</p>
+</div>
+<code>info_for_file <span class="subtle return">Hash</span></code></article><article class="scope_code"><h3>Examples</h3>
 <h4>Do something to all new and edited markdown files</h4>
 <div class="highlight"><pre><span class="n">markdowns</span> <span class="o">=</span> <span class="p">(</span><span class="n">git</span><span class="o">.</span><span class="n">added_files</span> <span class="o">+</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="p">)</span>
 <span class="n">do_something</span> <span class="n">markdowns</span><span class="o">.</span><span class="n">select</span><span class="p">{</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span> <span class="n">file</span><span class="o">.</span><span class="n">end_with?</span> <span class="s2">"md"</span> <span class="p">}</span>
