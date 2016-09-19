@@ -2,10 +2,14 @@
 <span class="c1"># including in a CHANGELOG for example</span>
 <span class="n">has_app_changes</span> <span class="o">=</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/lib/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
 <span class="n">has_test_changes</span> <span class="o">=</span> <span class="o">!</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/spec/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
+<span class="n">is_version_bump</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">sort</span> <span class="o">==</span> <span class="o">[</span><span class="s2">&quot;danger.gemspec&quot;</span><span class="p">,</span> <span class="s2">&quot;lib/danger/version.rb&quot;</span><span class="o">].</span><span class="n">sort</span>
 
-<span class="k">if</span> <span class="n">has_app_changes</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">has_test_changes</span>
+<span class="k">if</span> <span class="n">has_app_changes</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">has_test_changes</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">is_version_bump</span>
   <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Tests were not updated&quot;</span><span class="p">,</span> <span class="ss">sticky</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
 <span class="k">end</span>
+
+<span class="c1"># Thanks other people!</span>
+<span class="n">message</span><span class="p">(</span><span class="s2">&quot;:tada:&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_version_bump</span> <span class="o">&amp;&amp;</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_author</span> <span class="o">!=</span> <span class="s2">&quot;orta&quot;</span>
 
 <span class="c1"># Make a note about contributors not in the organization</span>
 <span class="k">unless</span> <span class="n">github</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">organization_member?</span><span class="p">(</span><span class="s1">&#39;danger&#39;</span><span class="p">,</span> <span class="n">github</span><span class="o">.</span><span class="n">pr_author</span><span class="p">)</span>
