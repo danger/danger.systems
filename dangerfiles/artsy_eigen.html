@@ -50,6 +50,11 @@
     <span class="nb">fail</span> <span class="s2">&quot;Release </span><span class="si">#{</span><span class="n">release</span><span class="o">[</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> does not have a date&quot;</span> <span class="k">unless</span> <span class="n">release</span><span class="o">[</span><span class="s2">&quot;date&quot;</span><span class="o">]</span>
   <span class="k">end</span>
 
+  <span class="c1"># Ensure that our version number is consistent with the upcoming version</span>
+  <span class="n">upcoming_version</span> <span class="o">=</span> <span class="n">readme_data</span><span class="o">[</span><span class="s2">&quot;upcoming&quot;</span><span class="o">][</span><span class="s2">&quot;version&quot;</span><span class="o">]</span>
+  <span class="n">current_version</span> <span class="o">=</span> <span class="sb">`/usr/libexec/PlistBuddy -c &quot;Print CFBundleShortVersionString&quot; Artsy/App_Resources/Artsy-Info.plist`</span><span class="o">.</span><span class="n">strip</span>
+  <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;You need to set the App&#39;s plist version to </span><span class="si">#{</span><span class="n">upcoming_version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">current_version</span> <span class="o">!=</span> <span class="n">upcoming_version</span>
+
 <span class="k">rescue</span> <span class="no">StandardError</span>
   <span class="c1"># YAML could not be parsed, fail the build.</span>
   <span class="nb">fail</span><span class="p">(</span><span class="s2">&quot;CHANGELOG isn&#39;t valid YAML&quot;</span><span class="p">)</span>

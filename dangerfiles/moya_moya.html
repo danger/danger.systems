@@ -28,7 +28,7 @@
 <span class="k">end</span>
 
 <span class="n">missing_doc_changes</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">modified_files</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/docs/</span><span class="p">)</span><span class="o">.</span><span class="n">empty?</span>
-<span class="n">doc_changes_recommended</span> <span class="o">=</span> <span class="n">insertions</span> <span class="o">&gt;</span> <span class="mi">15</span>
+<span class="n">doc_changes_recommended</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">insertions</span> <span class="o">&gt;</span> <span class="mi">15</span>
 <span class="k">if</span> <span class="n">has_app_changes</span> <span class="o">&amp;&amp;</span> <span class="n">missing_doc_changes</span> <span class="o">&amp;&amp;</span> <span class="n">doc_changes_recommended</span>
   <span class="nb">warn</span><span class="p">(</span><span class="s2">&quot;Consider adding supporting documentation to this change. Documentation can be found in the `docs` directory.&quot;</span><span class="p">)</span>
 <span class="k">end</span>
