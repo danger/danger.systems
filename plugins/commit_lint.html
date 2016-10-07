@@ -36,11 +36,45 @@
 
 <article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/commit_lint.html">commit_lint</a></h3>
 <p>Run each commit in the PR through a message linting.</p>
+
+<p>Commit lint will check each commit in the PR to ensure the following is
+ true:</p>
+
+<ul>
+<li>Commit subject begins with a capital letter (<code>subject_cap</code>)</li>
+<li>Commit subject is no longer than 50 characters (<code>subject_length</code>)</li>
+<li>Commit subject does not end in a period (<code>subject_period</code>)</li>
+<li>Commit subject and body are separated by an empty line (<code>empty_line</code>)</li>
+</ul>
+
+<p>By default, Commit Lint fails, but you can configure this behavior.</p>
 <p>Created by Jon Allured.</p>
 <h3>Reference</h3>
 <h4>Methods</h4>
 <div class="fake_code">
 <p>Checks the commits with whatever config the user passes.</p>
+
+<p>Passing in a hash which contain the following keys:</p>
+
+<ul>
+<li>
+<code>disable</code> - array of checks to skip</li>
+<li>
+<code>fail</code> - array of checks to fail on</li>
+<li>
+<code>warn</code> - array of checks to warn on</li>
+</ul>
+
+<p>The current check types are:</p>
+
+<ul>
+<li><code>subject_cap</code></li>
+<li><code>subject_length</code></li>
+<li><code>subject_period</code></li>
+<li><code>empty_line</code></li>
+</ul>
+
+<p>Note: you can pass :all instead of an array to target all checks.</p>
 </div>
 <code>check (config={}: Hash)</code></article><article class="scope_code"><h3>Examples</h3>
 <h4>Lint all commits using defaults</h4>
