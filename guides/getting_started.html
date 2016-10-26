@@ -309,6 +309,13 @@ in order to ensure that you have the build environment set up for PR integration
 
 <p>With that set up, you can edit your job to add <code>bundle exec danger</code> at the build action.</p>
 
+<h5>Pipeline</h5>
+
+<p>If your're using <a href="https://jenkins.io/solutions/pipeline/" target="_blank">pipelines</a> you should be using the <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+Branch+Source+Plugin" target="_blank">GitHub branch source plugin</a>
+for easy setup and handling of PRs.</p>
+
+<p>After you've set up the plugin, add a <code>sh 'bundle exec danger'</code> line in your pipeline script and make sure that build PRs is enabled.</p>
+
 <h4>GitLab</h4>
 
 <p>You will want to be using the <a href="https://github.com/jenkinsci/gitlab-plugin" target="_blank">GitLab Plugin</a>
