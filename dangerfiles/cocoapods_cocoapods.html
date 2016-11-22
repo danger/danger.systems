@@ -1,4 +1,4 @@
-<div class="highlight"><pre><span class="c1"># Don&#39;t let testing shortcuts get into master by accident, </span>
+<div class="highlight"><pre><span class="c1"># Don&#39;t let testing shortcuts get into master by accident,</span>
 <span class="c1"># ensuring that we don&#39;t get green builds based on a subset of tests</span>
 <span class="p">(</span><span class="n">git</span><span class="o">.</span><span class="n">modified_files</span> <span class="o">+</span> <span class="n">git</span><span class="o">.</span><span class="n">added_files</span> <span class="o">-</span> <span class="sx">%w(Dangerfile)</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
   <span class="k">next</span> <span class="k">unless</span> <span class="no">File</span><span class="o">.</span><span class="n">file?</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>

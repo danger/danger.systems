@@ -2,30 +2,35 @@
 <html><body><section>
 
 <article class="scope_code"><h3 class="no_hot_pink"><a href="/plugins/changelog.html">changelog</a></h3>
-<p>CHANGELOG OCD in your projects.</p>
+<p>Enforce CHANGELOG.md O.C.D. in your projects.</p>
+
+<p>This plugin can, for example, make sure the changes are attributes properly and that they are always terminated with a period.</p>
 <p>Created by dblock.</p>
 <h3>Reference</h3>
 <h4>Attributes</h4>
 <div class="fake_code">
-<p>Sets the CHANGELOG file name.
-defaults to <code>CHANGELOG.md</code>.</p>
+<p>The changelog file name, defaults to <code>CHANGELOG.md</code>.</p>
 </div>
 <code>filename<span class="subtle return">String</span></code><h4>Methods</h4>
 <div class="fake_code">
+<p>Run all checks.</p>
+</div>
+<code>check </code><div class="fake_code">
 <p>Has the CHANGELOG file been modified?</p>
 </div>
 <code>changelog_changes? <span class="subtle return">boolean</span></code><div class="fake_code">
-<p>Runs all checks.</p>
-</div>
-<code>check </code><div class="fake_code">
 <p>Have you updated CHANGELOG.md?</p>
 </div>
 <code>have_you_updated_changelog? <span class="subtle return">boolean</span></code><div class="fake_code">
 <p>Is the CHANGELOG.md format correct?</p>
 </div>
 <code>is_changelog_format_correct? <span class="subtle return">Boolean</span></code></article><article class="scope_code"><h3>Examples</h3>
-<h4>Checking for everuthing</h4>
+<h4>Run all checks on the default CHANGELOG.md.</h4>
 <div class="highlight"><pre><span class="n">changelog</span><span class="o">.</span><span class="n">check</span>
+</pre></div>
+<h4>Customize the CHANGELOG file name and remind the requester to update it when necessary.</h4>
+<div class="highlight"><pre><span class="n">changelog</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">'CHANGES.md'</span>
+<span class="n">changelog</span><span class="o">.</span><span class="n">have_you_updated_changelog?</span>
 </pre></div>
 <h3>How to Install</h3>
 <p>Include <code>gem "danger-changelog"</code> in your project’s Gemfile. Then run <code>bundle install</code>.</p>
