@@ -4,7 +4,7 @@ The website generator for danger.systems, which was staticly generated to gh-pag
 ---
 
 So, check it out, as Danger supports things like Github, GitLab and BitBucket, we felt
-like it was a good move to start separating out our repos across the platforms.
+like it was a good move to start separating out our repos(repositories) across the platforms.
 
 Especially as GitLab repos seems well oriented towards building static sites. 
 
